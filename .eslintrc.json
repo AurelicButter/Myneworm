@@ -22,6 +22,8 @@
 		"comma-dangle": "warn",
 		"no-var": "error",
 		"camelcase": "warn",
-		"curly": "warn"
+		"curly": "warn",
+		"no-empty-function": "warn",
+		"@typescript-eslint/no-empty-function": "warn"
 	}
 }
