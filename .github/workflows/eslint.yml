@@ -1,9 +1,9 @@
 name: ESLint Check
 on:
   push:
-    branches: [stable, development]
+    branches: [master, development]
   pull_request:
-    branches: [stable, development]
+    branches: [master, development]
 
 jobs:
   lint-files:
