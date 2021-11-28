@@ -1,0 +1,5 @@
+.github/
+*.md
+node_modules/
+*.html
+*.css

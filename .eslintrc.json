@@ -1,0 +1,27 @@
+{
+	"env": {
+		"commonjs": true,
+		"es6": true,
+		"node": true
+	},
+	"parser": "@typescript-eslint/parser",
+	"plugins": ["@typescript-eslint"],
+	"extends": [
+		"eslint:recommended",
+		"plugin:@typescript-eslint/eslint-recommended",
+		"plugin:@typescript-eslint/recommended"
+	],
+	"parserOptions": {
+		"ecmaVersion": 6,
+		"sourceType": "module"
+	},
+	"rules": {
+		"no-extra-parens": "error",
+		"eqeqeq": "warn",
+		"no-else-return": "error",
+		"comma-dangle": "warn",
+		"no-var": "error",
+		"camelcase": "warn",
+		"curly": "warn"
+	}
+}
