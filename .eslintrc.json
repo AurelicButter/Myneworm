@@ -23,7 +23,6 @@
 		"no-var": "error",
 		"camelcase": "warn",
 		"curly": "warn",
-		"no-empty-function": "warn",
 		"@typescript-eslint/no-empty-function": "warn"
 	}
 }
