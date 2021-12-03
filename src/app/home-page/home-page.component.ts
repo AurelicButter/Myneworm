@@ -8,7 +8,19 @@ import { CalendarOptions } from "@fullcalendar/angular";
 })
 export class HomePageComponent implements OnInit {
 	calendarOptions: CalendarOptions = {
-		initialView: "dayGridMonth"
+		height: "calc(100vh - 190px)",
+		initialView: "dayGridMonth",
+		editable: false,
+		buttonText: {
+			list: "schedule"
+		},
+		showNonCurrentDates: false,
+		fixedWeekCount: false,
+		headerToolbar: {
+			left: "today",
+			center: "title",
+			right: "prev,dayGridWeek,dayGridMonth,listMonth,next"
+		}
 	};
 
 	constructor() {}

@@ -1,7 +1,9 @@
 .main-container {
     width: 100%;
-    min-height: calc(100vh - 150px); /* Header + Footer height ignored */
+    min-height: calc(100vh - 190px); /* Header + Footer height ignored */
     overflow-y: hidden;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .nav-list {
