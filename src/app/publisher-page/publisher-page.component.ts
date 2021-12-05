@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { MynewormAPIService } from "../services/myneworm-api.service";
 
 @Component({
 	selector: "app-publisher-page",
@@ -6,7 +8,7 @@ import { Component, OnInit } from "@angular/core";
 	styleUrls: ["./publisher-page.component.css"]
 })
 export class PublisherPageComponent implements OnInit {
-	constructor() {}
+	constructor(private route: ActivatedRoute, private service: MynewormAPIService) {}
 
 	ngOnInit(): void {}
 }
