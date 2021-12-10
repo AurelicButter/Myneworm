@@ -20,6 +20,7 @@
 		]
 	},
 	"private": true,
+	"license": "GPLv3",
 	"dependencies": {
 		"@angular/animations": "~11.2.6",
 		"@angular/common": "~11.2.6",
