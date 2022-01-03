@@ -5,7 +5,6 @@
 		"align": {
 			"options": ["parameters", "statements"]
 		},
-		"array-type": false,
 		"arrow-return-shorthand": true,
 		"deprecation": {
 			"severity": "warning"
@@ -25,7 +24,6 @@
 			}
 		],
 		"no-console": [true, "debug", "info", "time", "timeEnd", "trace"],
-		"no-empty": false,
 		"no-inferrable-types": [true, "ignore-params"],
 		"no-non-null-assertion": true,
 		"no-redundant-jsdoc": true,
@@ -66,16 +64,6 @@
 		},
 		"variable-name": {
 			"options": ["ban-keywords", "check-format", "allow-pascal-case"]
-		},
-		"whitespace": {
-			"options": [
-				"check-branch",
-				"check-decl",
-				"check-operator",
-				"check-separator",
-				"check-type",
-				"check-typecast"
-			]
 		},
 		"component-class-suffix": true,
 		"contextual-lifecycle": true,
