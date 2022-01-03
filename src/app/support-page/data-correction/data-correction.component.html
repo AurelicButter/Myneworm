@@ -1,0 +1,48 @@
+<div class="form-container">
+    <h2 class="form-header">Data Correction Form</h2>
+    <form class="form-display" #dataCorrection="ngForm" (ngSubmit)="submit(dataCorrection)">
+        <div class="form-row">
+            <label for="isbn"><strong>ISBN</strong></label>
+            <input type="text" class="form-input" name="isbn" ngModel />
+        </div>
+
+        <div class="form-row">
+            <label for="title"><strong>Title</strong></label>
+            <input type="text" class="form-input" name="title" ngModel />
+        </div>
+
+        <div class="form-row">
+            <label for="coverURL"><strong>Cover</strong></label>
+            <input type="url" class="form-input" name="coverURL" ngModel />
+        </div>
+
+        <div class="form-row">
+            <label for="digitalRelease"><strong>Digital Release</strong></label>
+            <input type="text" class="form-input" name="digitalRelease" ngModel />
+        </div>
+
+        <div class="form-row">
+            <label for="physicalRelease"><strong>Physical Release</strong></label>
+            <input type="text" class="form-input" name="physicalRelease" ngModel />
+        </div>
+
+        <div class="form-row">
+            <label for="bookType"><strong>Book Type</strong></label>
+            <input type="text" class="form-input" name="bookType" ngModel />
+        </div>
+
+        <p><em>Please state the vendor and url, one per text line.</em></p>
+        <div class="form-row">
+            <label for="storeURL"><strong>Store URLs</strong></label>
+            <textarea class="form-textbox" name="storeURL" ngModel></textarea>
+        </div>
+
+        <div class="form-row">
+            <label for="extraNote"><strong>Source/Additional Comments</strong></label>
+            <textarea class="form-textbox" name="extraNote" ngModel></textarea>
+        </div>
+
+        <button type="button" (click)="returnMenu()">Return to Selection</button>
+        <button type="submit">Submit</button>
+    </form>
+</div>

@@ -1,0 +1,22 @@
+<div class="form-container">
+    <h2 class="form-header">User Contact Form</h2>
+    <form class="form-display" #userContact="ngForm" (ngSubmit)="submit(userContact)">
+        <div class="form-row">
+            <label for="name"><strong>Name</strong></label>
+            <input type="text" class="form-input" name="name" ngModel />
+        </div>
+
+        <div class="form-row">
+            <label for="email"><strong>Email</strong></label>
+            <input type="text" class="form-input" name="email" ngModel />
+        </div>
+
+        <div class="form-row">
+            <label for="message"><strong>Message</strong></label>
+            <textarea class="form-textbox" name="message" ngModel></textarea>
+        </div>        
+
+        <button type="button" (click)="returnMenu()">Return to Selection</button>
+        <button type="submit">Submit</button>
+    </form>
+</div>
