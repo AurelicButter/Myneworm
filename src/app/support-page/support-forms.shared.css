@@ -21,7 +21,13 @@
 }
 
 .form-row > label + * {
-  flex: 1 0 220px;
+  flex: 1 0 230px;
+  margin-right: 10px;
+  min-width: 230px;
+}
+
+.form-feedback {
+    flex: 0 0 250px;
 }
 
 button {

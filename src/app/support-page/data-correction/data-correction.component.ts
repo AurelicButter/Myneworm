@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output } from "@angular/core";
+import { Component, EventEmitter, Output, ViewChild } from "@angular/core";
+import { dataCorrectionForm } from "src/app/models/dataCorrectionForm";
 
 @Component({
 	selector: "data-correction",
@@ -7,14 +8,20 @@ import { Component, EventEmitter, Output } from "@angular/core";
 })
 export class DataCorrectionComponent {
 	@Output() isReturned = new EventEmitter<void>();
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	@ViewChild("dataCorrection") dataForm: any;
+	correction = new dataCorrectionForm();
 
 	returnMenu() {
 		this.isReturned.emit();
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	submit(form: any) {
-		console.log(form.value);
-		return;
+	resetForm() {
+		this.dataForm.reset();
+	}
+
+	submit() {
+		// Implement form submission
+		this.resetForm();
 	}
 }
