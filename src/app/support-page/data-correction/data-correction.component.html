@@ -25,19 +25,11 @@
         </div>
 
         <div class="form-row">
-            <label for="digitalRelease"><strong>Digital Release</strong></label>
-            <input type="date" class="form-input" name="digitalRelease" [(ngModel)]="correction.digitalRelease" #digitalRelease="ngModel" pattern="^\d{4}-\d{2}-\d{2}$" />
+            <label for="release"><strong>Release Date</strong></label>
+            <input type="date" class="form-input" name="release" [(ngModel)]="correction.release" #release="ngModel" pattern="^\d{4}-\d{2}-\d{2}$" />
         </div>
-        <div class="form-row form-feedback" *ngIf="digitalRelease.errors && (digitalRelease.dirty || digitalRelease.touched)">
-            <p *ngIf="digitalRelease.errors.pattern">Date must be mm/dd/yyyy.</p>
-        </div>
-
-        <div class="form-row">
-            <label for="physicalRelease"><strong>Physical Release</strong></label>
-            <input type="date" class="form-input" name="physicalRelease" [(ngModel)]="correction.physicalRelease" #physicalRelease="ngModel" pattern="^\d{4}-\d{2}-\d{2}$" />
-        </div>
-        <div class="form-row form-feedback" *ngIf="physicalRelease.errors && (physicalRelease.dirty || physicalRelease.touched)">
-            <p *ngIf="physicalRelease.errors.pattern">Date must be mm/dd/yyyy.</p>
+        <div class="form-row form-feedback" *ngIf="release.errors && (release.dirty || release.touched)">
+            <p *ngIf="release.errors.pattern">Date must be mm/dd/yyyy.</p>
         </div>
 
         <div class="form-row">
