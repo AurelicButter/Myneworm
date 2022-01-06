@@ -9,7 +9,7 @@ import { BookPageModule } from "./book-page/book-page.module";
 import { PublisherPageModule } from "./publisher-page/publisher-page.module";
 import { HttpClientModule } from "@angular/common/http";
 import { SupportPageModule } from "./support-page/support-page.module";
-
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 @NgModule({
 	declarations: [AppComponent],
 	imports: [
@@ -20,7 +20,8 @@ import { SupportPageModule } from "./support-page/support-page.module";
 		HomePageModule,
 		BookPageModule,
 		PublisherPageModule,
-		SupportPageModule
+		SupportPageModule,
+		BrowserAnimationsModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]
