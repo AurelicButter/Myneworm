@@ -23,6 +23,8 @@
 		"no-var": "error",
 		"camelcase": "warn",
 		"curly": "warn",
+		"func-call-spacing": "warn",
+		"default-case-last": "warn",
 		"@typescript-eslint/no-empty-function": "warn"
 	}
 }
