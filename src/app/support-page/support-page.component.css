@@ -1,0 +1,20 @@
+.support-component {
+    width: 98%;
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+.support-notice {
+    width: 25%;
+    float: left;
+    gap: 10px;
+}
+
+.form-selection {
+    width: 74%;
+    float: left;
+}
+
+button {
+    margin-right: 10px;
+}
