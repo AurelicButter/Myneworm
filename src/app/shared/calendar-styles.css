@@ -1,0 +1,6 @@
+/*
+* Image icon override
+*/
+.fc-icon-calendar {
+    content: url("../../assets/fa-calendar.svg");
+}
