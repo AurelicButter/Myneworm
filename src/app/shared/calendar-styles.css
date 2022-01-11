@@ -4,3 +4,8 @@
 .fc-icon-calendar {
     content: url("../../assets/fa-calendar.svg");
 }
+
+.fc-button:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
