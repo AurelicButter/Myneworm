@@ -34,7 +34,7 @@ pipeline {
         stage('Build: Development') {
             when { not { branch 'stable' } }
             steps {
-                sh 'npm run build'
+                sh 'npm run build:test'
             }
         }
         stage('Create Artifact') { 

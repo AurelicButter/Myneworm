@@ -5,6 +5,7 @@
 		"ng": "ng",
 		"start": "ng serve",
 		"build": "ng build",
+		"build:test": "ng build --configuration testing",
 		"build:prod": "ng build --configuration production",
 		"lint": "eslint .",
 		"test": "ng test",
