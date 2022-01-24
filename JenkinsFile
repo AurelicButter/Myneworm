@@ -1,0 +1,50 @@
+pipeline {
+    agent any
+
+    tools { nodejs "Node 16" }
+
+    options {
+        buildDiscarder(logRotator(artifactNumToKeepStr: "5"))
+        copyArtifactPermission('/*-Myneworm');
+    }
+
+    stages {
+        stage('Prepare') {
+            environment {
+                projVersion = sh(script: 'npm pkg get version | sed "s/^.//g" | sed "s/.$//"', , returnStdout: true).trim()
+                gitRevision = '${GIT_REVISION,length=6}'
+                buildCount = '${BUILD_NUMBER}'
+            }
+            steps {
+                buildName "${projVersion}.${buildCount}.${gitRevision}"              
+                sh 'npm install'
+            }
+        }
+        stage('Test') { 
+            steps {
+                sh 'npm run eslint'
+            }
+        }
+        stage ('Build: Stable') {
+            when { branch 'stable' }
+            steps { 
+                sh 'npm run build:prod'
+            }
+        }
+        stage('Build: Development') {
+            when { not { branch 'stable' } }
+            steps {
+                sh 'npm run build:test'
+            }
+        }
+        stage('Create Artifact') { 
+            steps {
+                script {
+                    zip zipFile: "myneworm-built-${BUILD_NUMBER}.zip", archive: false, dir: 'dist/Myneworm'
+                }
+
+                archiveArtifacts artifacts: "myneworm-built-${BUILD_NUMBER}.zip", fingerprint: true, followSymlinks: false, onlyIfSuccessful: true
+            }
+        }
+    }
+}
