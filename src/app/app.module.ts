@@ -10,6 +10,7 @@ import { PublisherPageModule } from "./publisher-page/publisher-page.module";
 import { HttpClientModule } from "@angular/common/http";
 import { SupportPageModule } from "./support-page/support-page.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { ImprintIndexModule } from "./imprint-index/imprint-index.module";
 @NgModule({
 	declarations: [AppComponent],
 	imports: [
@@ -21,7 +22,8 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 		BookPageModule,
 		PublisherPageModule,
 		SupportPageModule,
-		BrowserAnimationsModule
+		BrowserAnimationsModule,
+		ImprintIndexModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]
