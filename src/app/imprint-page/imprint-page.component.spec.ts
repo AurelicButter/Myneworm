@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { PublisherPageComponent } from "./publisher-page.component";
+import { ImprintPageComponent } from "./imprint-page.component";
 
-describe("PublisherPageComponent", () => {
-	let component: PublisherPageComponent;
-	let fixture: ComponentFixture<PublisherPageComponent>;
+describe("ImprintPageComponent", () => {
+	let component: ImprintPageComponent;
+	let fixture: ComponentFixture<ImprintPageComponent>;
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [PublisherPageComponent]
+			declarations: [ImprintPageComponent]
 		}).compileComponents();
 	});
 
 	beforeEach(() => {
-		fixture = TestBed.createComponent(PublisherPageComponent);
+		fixture = TestBed.createComponent(ImprintPageComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});

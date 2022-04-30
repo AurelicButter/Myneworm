@@ -9,3 +9,12 @@
     outline: none !important;
     box-shadow: none !important;
 }
+
+.imprint-calendar .fc-toolbar {
+    justify-content: inherit;
+}
+
+.imprint-calendar .fc-toolbar-title {
+    margin-left: 2em;
+    font-size: 1.5em;
+}

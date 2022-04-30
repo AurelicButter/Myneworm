@@ -1,0 +1,44 @@
+.imprint-left {
+    width: 20%;
+    float: left;
+    margin-left: 2em;
+}
+
+.imprint-left-header {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.imprint-header {
+    text-align: center;
+}
+
+.imprint-content {
+    width: 75%;
+    float: left;
+    margin-right: 2em;
+}
+
+.imprint-info {
+    margin-top: 2em;
+}
+
+.info-URL {
+    background-color: #333;
+    color: #fff;
+    flex-basis: auto;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    text-align: center;
+}
+
+.info-link, .info-link:visited, .info-link:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+.info-container {
+    margin-left: 2em;
+    margin-right: 2em;
+}
