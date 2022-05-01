@@ -1,0 +1,18 @@
+.imprint-index {
+    width: 98%;
+    margin-left: 1%;
+    margin-right: 1%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.imprint-item {
+    float: left;
+    margin-right: 5em;
+    margin-bottom: 0.75em;
+}
+
+.imprint-link {
+    text-align: center;
+}

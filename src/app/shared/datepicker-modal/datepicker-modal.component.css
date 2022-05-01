@@ -1,0 +1,24 @@
+#modal-container {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: repeat(1fr, 3);
+}
+
+.modal-header {
+    font-size: 20px;
+}
+
+.modal-footer {
+    justify-self: right;
+    align-self: center;
+}
+
+.modal-footer button {
+    background-color: #2c3e50;
+    color: #fff;
+}
+
+.modal-action {
+    margin-right: 30px;
+}

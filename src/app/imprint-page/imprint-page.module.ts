@@ -1,12 +1,11 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
-import { HomePageComponent } from "./home-page.component";
-
 import { SharedModule } from "../shared/shared.module";
+import { ImprintPageComponent } from "./imprint-page.component";
 
 @NgModule({
-	declarations: [HomePageComponent],
+	declarations: [ImprintPageComponent],
 	imports: [BrowserModule, SharedModule],
-	exports: [HomePageComponent]
+	exports: [ImprintPageComponent]
 })
-export class HomePageModule {}
+export class ImprintPageModule {}

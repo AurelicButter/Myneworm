@@ -1,17 +1,17 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { CalendarOptions } from "@fullcalendar/angular";
 import { MynewormAPIService } from "../services/myneworm-api.service";
+import { CalendarOptions } from "@fullcalendar/angular";
 import { CalendarManagerComponent } from "../shared/calendar-manager/calendar-manager.component";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { DatepickerModalComponent } from "../shared/datepicker-modal/datepicker-modal.component";
 
 @Component({
-	selector: "app-home-page",
-	templateUrl: "./home-page.component.html",
-	styleUrls: ["./home-page.component.css"]
+	selector: "app-imprint-page",
+	templateUrl: "./imprint-page.component.html",
+	styleUrls: ["./imprint-page.component.css"]
 })
-export class HomePageComponent implements OnInit {
+export class ImprintPageComponent implements OnInit {
 	calendarVisible = false;
 	calendarOptions: CalendarOptions | undefined;
 
@@ -23,17 +23,14 @@ export class HomePageComponent implements OnInit {
 		this.calendarOptions = {
 			themeSystem: "standard",
 			height: "calc(100vh - 190px)",
-			initialView: "dayGridMonth",
+			initialView: "listMonth",
 			editable: false,
-			buttonText: {
-				list: "schedule"
-			},
 			showNonCurrentDates: false,
 			fixedWeekCount: false,
 			headerToolbar: {
-				left: "today,dateSelector",
+				left: "prev,today,dateSelector,next",
 				center: "title",
-				right: "prev,dayGridWeek,dayGridMonth,listMonth,next"
+				right: ""
 			},
 			customButtons: {
 				dateSelector: {

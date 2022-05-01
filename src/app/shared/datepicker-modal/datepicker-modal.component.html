@@ -1,0 +1,16 @@
+<div class="modal-container">
+    <header class="modal-header">
+        <h1>Select a date</h1>
+    </header>
+    <div class="modal-content">
+        <mat-form-field>
+            <input matInput [matDatepicker]="basicDatepicker" (dateInput)="updateDate($event.value)">
+            <mat-datepicker-toggle matSuffix [for]="basicDatepicker"></mat-datepicker-toggle>
+            <mat-datepicker #basicDatepicker></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <footer class="modal-footer">
+        <button mat-raised-button class="modal-action" (click)="submit()">OK</button>
+        <button mat-raised-button class="modal-cancel" (click)="close()">Cancel</button>
+    </footer>
+</div>

@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { PublisherPageComponent } from "./publisher-page.component";
+import { DatepickerModalComponent } from "./datepicker-modal.component";
 
-describe("PublisherPageComponent", () => {
-	let component: PublisherPageComponent;
-	let fixture: ComponentFixture<PublisherPageComponent>;
+describe("DatepickerModalComponent", () => {
+	let component: DatepickerModalComponent;
+	let fixture: ComponentFixture<DatepickerModalComponent>;
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [PublisherPageComponent]
+			declarations: [DatepickerModalComponent]
 		}).compileComponents();
 	});
 
 	beforeEach(() => {
-		fixture = TestBed.createComponent(PublisherPageComponent);
+		fixture = TestBed.createComponent(DatepickerModalComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});
