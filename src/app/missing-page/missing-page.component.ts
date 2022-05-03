@@ -5,6 +5,4 @@ import { Component } from "@angular/core";
 	templateUrl: "./missing-page.component.html",
 	styleUrls: ["./missing-page.component.css"]
 })
-export class MissingPageComponent {
-	constructor() {}
-}
+export class MissingPageComponent {}

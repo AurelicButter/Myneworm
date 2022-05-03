@@ -1,6 +1,7 @@
 {
 	"name": "myneworm",
 	"version": "0.2.0",
+	"main": "dist/Myneworm",
 	"scripts": {
 		"ng": "ng",
 		"start": "ng serve",
@@ -10,15 +11,15 @@
 		"lint": "eslint .",
 		"test": "ng test",
 		"e2e": "ng e2e",
-		"eslint": "eslint .",
-		"eslint:fix": "eslint . --fix",
+		"eslint": "eslint ./src",
+		"eslint:fix": "eslint ./src --fix",
 		"prettier": "prettier --write .",
 		"prepare": "husky install"
 	},
 	"lint-staged": {
 		"*.{js,json,jsx,ts,tsx}": [
 			"prettier --write",
-			"eslint --fix --quiet"
+			"eslint ./src --fix --quiet"
 		]
 	},
 	"private": true,
