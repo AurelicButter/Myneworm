@@ -25,17 +25,10 @@
 }
 
 .info-URL {
-    background-color: #333;
-    color: #fff;
     flex-basis: auto;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
     text-align: center;
-}
-
-.info-link, .info-link:visited, .info-link:hover {
-    color: #fff;
-    text-decoration: none;
 }
 
 .info-container {
