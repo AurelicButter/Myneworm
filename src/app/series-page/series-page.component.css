@@ -1,0 +1,24 @@
+.series-left {
+    width: 20%;
+    float: left;
+    margin-left: 2em;
+}
+
+.series-left-header {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.series-header {
+    text-align: center;
+}
+
+.series-info {
+    margin-top: 2em;
+}
+
+.series-content {
+    margin-left: 2em;
+    margin-right: 2em;
+}
