@@ -6,6 +6,7 @@ import { HomePageComponent } from "./home-page/home-page.component";
 import { ImprintPageComponent } from "./imprint-page/imprint-page.component";
 import { ImprintIndexComponent } from "./imprint-index/imprint-index.component";
 import { MissingPageComponent } from "./missing-page/missing-page.component";
+import { SeriesPageComponent } from "./series-page/series-page.component";
 
 const routes: Routes = [
 	{ path: "", component: HomePageComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
 	{ path: "publisher", component: ImprintIndexComponent },
 	{ path: "publisher/:id", component: ImprintPageComponent },
 	{ path: "support", component: SupportPageComponent },
+	{ path: "series/:id", component: SeriesPageComponent },
 	{ path: "**", pathMatch: "full", component: MissingPageComponent }
 ];
 
