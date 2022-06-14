@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
 import { HttpClient } from "@angular/common/http";
+import { ImprintData } from "../models/imprintData";
 
 @Injectable({
 	providedIn: "root"
@@ -28,7 +29,15 @@ export class MynewormAPIService {
 		return this.http.get(`${environment.API_ADDRESS}/book/byType/${type}/${page || ""}`);
 	}
 
-	getPublisherInfo(mynewormId: string) {
-		return this.http.get(`${environment.API_ADDRESS}/publisher/${mynewormId}`);
+	getImprints() {
+		return this.http.get<ImprintData[]>(`${environment.API_ADDRESS}/publisher/`);
+	}
+
+	getImprintInfo(mynewormId: string) {
+		return this.http.get<ImprintData>(`${environment.API_ADDRESS}/publisher/${mynewormId}`);
+	}
+
+	getAsset(localPath: string) {
+		return this.http.get<string>(`${environment.API_ADDRESS}/asset/${localPath}`);
 	}
 }
