@@ -1,8 +1,8 @@
 <div class="imprint-index">
     <div *ngFor="let item of imprints; let i = index">
         <div class="imprint-item">
-            <img class="imprint-logo" src='{{getImprintAsset(item.imprintID)}}'>
-            <h3 class="imprint-link"><a href="/publisher/{{item.imprintID}}">{{item.name}}</a></h3>
+            <img class="imprint-logo" src='{{getImprintAsset(item.publisher_id)}}'>
+            <h3 class="imprint-link"><a href="/publisher/{{item.publisher_id}}">{{item.name}}</a></h3>
         </div>
     </div>
 </div>

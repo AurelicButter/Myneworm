@@ -38,6 +38,6 @@ export class MynewormAPIService {
 	}
 
 	getAsset(localPath: string) {
-		return this.http.get<string>(`${environment.API_ADDRESS}/asset/${localPath}`);
+		return `${environment.API_ADDRESS}/asset/${localPath}`;
 	}
 }

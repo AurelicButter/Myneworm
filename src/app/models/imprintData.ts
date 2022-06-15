@@ -1,5 +1,5 @@
 export interface ImprintData {
-	imprintID: number;
+	publisher_id: number;
 	name: string;
 	official_site: string;
 	create_date: string;
