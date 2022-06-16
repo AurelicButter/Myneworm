@@ -1,10 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-
-class imprintData {
-	publisherId: number;
-	name: string;
-	logoURL: string;
-}
+import { ActivatedRoute } from "@angular/router";
+import { MynewormAPIService } from "../services/myneworm-api.service";
+import { ImprintData } from "../models/imprintData";
 
 @Component({
 	selector: "app-imprint-index",
@@ -12,15 +9,17 @@ class imprintData {
 	styleUrls: ["./imprint-index.component.css"]
 })
 export class ImprintIndexComponent implements OnInit {
-	imprints: imprintData[] = [];
+	imprints: ImprintData[];
+
+	constructor(private route: ActivatedRoute, private service: MynewormAPIService) {}
 
 	ngOnInit() {
-		for (let i = 0; i < 9; i++) {
-			this.imprints.push({
-				publisherId: 1,
-				name: "Lorum Ipsum",
-				logoURL: "./assets\\9781638580645.jpg"
-			});
-		}
+		this.service.getImprints().subscribe((data: ImprintData[]) => {
+			this.imprints = data;
+		});
+	}
+
+	getImprintAsset(id: number) {
+		return this.service.getAsset(`imprint/${id}`);
 	}
 }
