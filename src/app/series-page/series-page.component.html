@@ -1,14 +1,22 @@
 <div class="series-page">
-    <div class="series-left">
-        <div class="series-left-header">
-            <h1 class="series-header">SERIES</h1>
-            <img class="series-logo" src='./assets\\9781638580645.jpg'> 
-        </div>
-        <div class="series-info">
-            <p>Some text goes here</p>
-        </div>
+    <div class="series-header">
+        <img class="series-logo" src='./assets\\9781638580645.jpg'>
+        <h2 class="series-label">SERIES</h2>
     </div>
     <div class="series-content">
-        <p>Something goes here too....</p>
+        <div *ngFor="let seriesType of seriesCollection | keyvalue" class="series-collection">
+            <h3 class="collection-header">{{capitalizeKeys(seriesType.key)}}</h3>
+            <div class="series-shelf">
+                <div class="recent-release">
+                    <img class="release-cover" src="./assets\\9781638580645.jpg">
+                    <p class="release-title"><a href="/book/1"></a></p>
+                </div>
+                <div *ngFor="let item of seriesType.value; let i = index">
+                    <div class="series-item">
+                        <p>Something goes here!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

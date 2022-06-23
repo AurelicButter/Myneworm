@@ -1,24 +1,35 @@
-.series-left {
-    width: 20%;
-    float: left;
-    margin-left: 2em;
-}
-
-.series-left-header {
+.series-header {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    box-sizing: border-box;
 }
 
-.series-header {
+.series-label {
     text-align: center;
-}
-
-.series-info {
-    margin-top: 2em;
+    margin-left: 1em;
 }
 
 .series-content {
     margin-left: 2em;
     margin-right: 2em;
+}
+
+.series-collection {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+}
+
+.collection-header {
+    width: 100%;
+}
+
+.series-shelf {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.series-item, .recent-release {
+    margin-right: 1em;
 }
