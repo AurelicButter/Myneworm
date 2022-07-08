@@ -1,1 +1,9 @@
-<p>faq-page works!</p>
+<div class="faq-page">
+    <div *ngFor="let section of faqData | keyvalue" class="faq-section">
+        <h2 class="faq-header">{{section.key}}</h2>
+        <div *ngFor="let question of section.value; let i = index">
+            <h3 class="faq-question">Q: {{question[0]}}</h3>
+            <p class="faq-answer">A: {{question[1]}}</p>
+        </div>
+    </div>
+</div>
