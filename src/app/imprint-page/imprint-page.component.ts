@@ -5,6 +5,7 @@ import { CalendarOptions } from "@fullcalendar/angular";
 import { CalendarManagerComponent } from "../shared/calendar-manager/calendar-manager.component";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { DatepickerModalComponent } from "../shared/datepicker-modal/datepicker-modal.component";
+import { ImprintData } from "../models/imprintData";
 
 @Component({
 	selector: "app-imprint-page",
@@ -14,6 +15,7 @@ import { DatepickerModalComponent } from "../shared/datepicker-modal/datepicker-
 export class ImprintPageComponent implements OnInit {
 	calendarVisible = false;
 	calendarOptions: CalendarOptions | undefined;
+	imprint: ImprintData;
 
 	@ViewChild("calendar", { static: false }) calendarManager!: CalendarManagerComponent;
 
@@ -44,6 +46,12 @@ export class ImprintPageComponent implements OnInit {
 		};
 
 		this.calendarVisible = true;
+
+		this.route.params.subscribe((data) => {
+			this.service.getImprintInfo(data.id).subscribe((data: ImprintData) => {
+				this.imprint = data;
+			});
+		});
 	}
 
 	selectDate(): void {
@@ -60,5 +68,9 @@ export class ImprintPageComponent implements OnInit {
 				this.calendarManager.updateDate(result);
 			}
 		});
+	}
+
+	getLogo(id: number) {
+		return this.service.getAsset(`imprint/${id}`);
 	}
 }
