@@ -2,6 +2,7 @@
     width: 20%;
     float: left;
     margin-left: 2em;
+    margin-right: 1em;
 }
 
 .imprint-left-header {
@@ -12,6 +13,7 @@
 
 .imprint-header {
     text-align: center;
+    width: 100%;
 }
 
 .imprint-content {
@@ -25,20 +27,18 @@
 }
 
 .info-URL {
-    background-color: #333;
-    color: #fff;
     flex-basis: auto;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
     text-align: center;
 }
 
-.info-link, .info-link:visited, .info-link:hover {
-    color: #fff;
-    text-decoration: none;
-}
-
 .info-container {
     margin-left: 2em;
     margin-right: 2em;
+}
+
+.imprint-logo {
+    max-width: 98%;
+    max-height: 300px;
 }

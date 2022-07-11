@@ -2,3 +2,23 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/*
+ * Buttons
+ */
+.button-link {
+    color: #fff;
+    text-decoration: none;
+}
+
+.button-div {
+    background-color: #333;
+}
+
+.button-div:hover {
+    background-color: #111;
+}
+
+.button-text {
+    padding: 0.75em;
+}
