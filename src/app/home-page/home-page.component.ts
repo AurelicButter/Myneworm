@@ -5,6 +5,7 @@ import { MynewormAPIService } from "../services/myneworm-api.service";
 import { CalendarManagerComponent } from "../shared/calendar-manager/calendar-manager.component";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { DatepickerModalComponent } from "../shared/datepicker-modal/datepicker-modal.component";
+import { Title } from "@angular/platform-browser";
 
 @Component({
 	selector: "app-home-page",
@@ -17,7 +18,14 @@ export class HomePageComponent implements OnInit {
 
 	@ViewChild("calendar", { static: false }) calendarManager!: CalendarManagerComponent;
 
-	constructor(private route: ActivatedRoute, private service: MynewormAPIService, public matDialog: MatDialog) {}
+	constructor(
+		private route: ActivatedRoute,
+		private service: MynewormAPIService,
+		public matDialog: MatDialog,
+		private titleService: Title
+	) {
+		this.titleService.setTitle("Myneworm - Home");
+	}
 
 	ngOnInit(): void {
 		this.calendarOptions = {

@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { Title } from "@angular/platform-browser";
 
 @Component({
 	selector: "app-support-page",
@@ -9,6 +10,10 @@ export class SupportPageComponent {
 	isSelecting = true;
 	dataCorrection = false;
 	userContact = false;
+
+	constructor(private titleService: Title) {
+		this.titleService.setTitle("Myneworm - Support");
+	}
 
 	selectCorrection() {
 		this.isSelecting = false;
