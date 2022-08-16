@@ -6,6 +6,7 @@ import { CalendarManagerComponent } from "../shared/calendar-manager/calendar-ma
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { DatepickerModalComponent } from "../shared/datepicker-modal/datepicker-modal.component";
 import { ImprintData } from "../models/imprintData";
+import { Title } from "@angular/platform-browser";
 
 @Component({
 	selector: "app-imprint-page",
@@ -19,7 +20,12 @@ export class ImprintPageComponent implements OnInit {
 
 	@ViewChild("calendar", { static: false }) calendarManager!: CalendarManagerComponent;
 
-	constructor(private route: ActivatedRoute, private service: MynewormAPIService, public matDialog: MatDialog) {}
+	constructor(
+		private route: ActivatedRoute,
+		private service: MynewormAPIService,
+		public matDialog: MatDialog,
+		private titleService: Title
+	) {}
 
 	ngOnInit(): void {
 		this.calendarOptions = {
@@ -50,6 +56,7 @@ export class ImprintPageComponent implements OnInit {
 		this.route.params.subscribe((data) => {
 			this.service.getImprintInfo(data.id).subscribe((data: ImprintData) => {
 				this.imprint = data;
+				this.titleService.setTitle(`Myneworm - ${this.imprint.name}`);
 			});
 		});
 	}

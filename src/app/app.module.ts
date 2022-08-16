@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { BrowserModule } from "@angular/platform-browser";
+import { BrowserModule, Title } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 
 import { AppRoutingModule } from "./app-routing.module";
@@ -29,7 +29,7 @@ import { FaqPageComponent } from "./faq-page/faq-page.component";
 		ImprintIndexModule,
 		SeriesPageModule
 	],
-	providers: [],
+	providers: [Title],
 	bootstrap: [AppComponent]
 })
 export class AppModule {}
