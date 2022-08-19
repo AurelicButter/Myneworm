@@ -14,8 +14,9 @@ import { ImprintIndexModule } from "./imprint-index/imprint-index.module";
 import { MissingPageComponent } from "./missing-page/missing-page.component";
 import { SeriesPageModule } from "./series-page/series-page.module";
 import { FaqPageComponent } from "./faq-page/faq-page.component";
+import { AboutPageComponent } from "./about-page/about-page.component";
 @NgModule({
-	declarations: [AppComponent, MissingPageComponent, FaqPageComponent],
+	declarations: [AppComponent, MissingPageComponent, FaqPageComponent, AboutPageComponent],
 	imports: [
 		BrowserModule,
 		HttpClientModule,
