@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { ImprintData } from "../models/imprintData";
+import { MonthReleaseData } from "../models/monthReleaseData";
 
 @Injectable({
 	providedIn: "root"
@@ -22,7 +23,7 @@ export class MynewormAPIService {
 	}
 
 	getMonthData(month: string) {
-		return this.http.get(`${environment.API_ADDRESS}/book/date/${month}`);
+		return this.http.get<MonthReleaseData[]>(`${environment.API_ADDRESS}/book/date/${month}`);
 	}
 
 	getByType(type: string, page?: string) {

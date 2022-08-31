@@ -18,3 +18,79 @@
     margin-left: 2em;
     font-size: 1.5em;
 }
+
+.fc-list-event-time {
+    display: none;
+}
+
+.fc-list-day-cushion {
+    display: flex;
+}
+
+.fc-list-day-text {
+    order: 2;
+}
+
+.fc-list-day-side-text {
+    order: 1;
+    margin-right: 4px;
+}
+
+.fc-list-day-side-text:after {
+    content: ",";
+}
+
+.fc-list-event-graphic {
+    display: none;
+}
+
+/**
+ * SCHEDULE TAGS
+ **/
+
+.schedule-tag {
+    display: flex;
+    float: left;
+    margin-right: 4px;
+    background-color: #04d5fd;
+    width: 100px;
+    height: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.schedule-tag a {
+    text-decoration: none;
+}
+
+.light-novel {
+    background-color: aquamarine;
+}
+
+.manga {
+    background-color: aquamarine;
+}
+
+.yen-press {
+    background-color: #7C8F3D;
+}
+
+.yen-on {
+    background-color: #93A849;
+}
+
+.j-novel-club {
+    background-color: #0C5CB5;
+}
+
+.j-novel-heart {
+    background-color: #ED1941;
+}
+
+.tentai-books {
+    background-color: #FE0000;
+}
+
+.steamship {
+    background-color: #AE1649;    
+}
