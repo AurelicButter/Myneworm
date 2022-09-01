@@ -44,6 +44,10 @@
     display: none;
 }
 
+tr.fc-list-event {
+    background-color: inherit;
+}
+
 /**
  * SCHEDULE TAGS
  **/
@@ -61,6 +65,10 @@
 
 .schedule-tag a {
     text-decoration: none;
+}
+
+.default-imprint-colour {
+    background-color: #04d5fd;
 }
 
 .light-novel {

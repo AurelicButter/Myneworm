@@ -6,11 +6,16 @@ import { CalendarManagerComponent } from "../shared/calendar-manager/calendar-ma
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { DatepickerModalComponent } from "../shared/datepicker-modal/datepicker-modal.component";
 import { Title } from "@angular/platform-browser";
-import { ImprintColours } from "../enums/ImprintColours";
 import { UtilitiesService } from "../services/utilities.service";
+import { MonthDateFetcher } from "../classes/MonthDateFetcher.class";
 
+/*
+ * Global file values as CalendarOptions does not accept `this` keyword
+ * like every other function in the component would.
+ */
 let formatCSS: (arg0: string) => string;
 let formatText: (arg0: string) => string;
+let dateFetcher: MonthDateFetcher;
 
 @Component({
 	selector: "app-home-page",
@@ -20,7 +25,6 @@ let formatText: (arg0: string) => string;
 export class HomePageComponent implements OnInit {
 	calendarVisible = false;
 	calendarOptions: CalendarOptions | undefined;
-	monthCache: string[] = [];
 
 	@ViewChild("calendar", { static: false }) calendarManager!: CalendarManagerComponent;
 
@@ -32,12 +36,13 @@ export class HomePageComponent implements OnInit {
 		private utilities: UtilitiesService
 	) {
 		this.titleService.setTitle("Myneworm - Home");
+		dateFetcher = new MonthDateFetcher(this.service, this.utilities);
+
+		formatCSS = this.utilities.formatCSSClass;
+		formatText = this.utilities.formatReadable;
 	}
 
 	ngOnInit(): void {
-		formatCSS = this.utilities.formatCSSClass;
-		formatText = this.utilities.formatReadable;
-
 		this.calendarOptions = {
 			themeSystem: "standard",
 			height: "calc(100vh - 190px)",
@@ -79,6 +84,9 @@ export class HomePageComponent implements OnInit {
 					}
 				}
 			},
+			datesSet: function (dateInfo) {
+				dateFetcher.getDates(dateInfo.view.calendar, dateInfo.start);
+			},
 			customButtons: {
 				dateSelector: {
 					icon: "calendar",
@@ -89,8 +97,6 @@ export class HomePageComponent implements OnInit {
 				}
 			}
 		};
-
-		this.getDates(this.utilities.dateFormater(new Date().getFullYear(), new Date().getMonth() + 1));
 
 		this.calendarVisible = true;
 	}
@@ -108,33 +114,6 @@ export class HomePageComponent implements OnInit {
 			if (result) {
 				this.calendarManager.updateDate(result);
 			}
-		});
-	}
-
-	getDates(date: string): void {
-		if (this.monthCache.includes(date)) {
-			return;
-		}
-
-		this.service.getMonthData(date).subscribe((monthInput) => {
-			this.monthCache.push(date);
-
-			monthInput.forEach((entry) => {
-				this.calendarManager.myCalendar?.getApi().addEvent({
-					id: entry.isbn,
-					title: entry.title,
-					backgroundColor:
-						ImprintColours[entry.name as keyof typeof ImprintColours] || ImprintColours.default,
-					start: entry.release_date,
-					allDay: true,
-					url: `./book/${entry.isbn}`,
-					extendedProps: {
-						format: entry.format_name,
-						imprint: entry.name,
-						bookType: entry.book_type_name
-					}
-				});
-			});
 		});
 	}
 }

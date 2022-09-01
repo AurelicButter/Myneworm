@@ -4,8 +4,6 @@ import { Injectable } from "@angular/core";
 	providedIn: "root"
 })
 export class UtilitiesService {
-	constructor() {}
-
 	dateFormater(year: number, month: number) {
 		let result = `${year}`;
 		if (month < 10) {
