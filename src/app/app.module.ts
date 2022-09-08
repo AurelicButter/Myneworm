@@ -12,6 +12,7 @@ import { SupportPageModule } from "./support-page/support-page.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ImprintIndexModule } from "./imprint-index/imprint-index.module";
 import { MissingPageComponent } from "./missing-page/missing-page.component";
+import { SearchBarModule } from "./search-bar/search-bar.module";
 @NgModule({
 	declarations: [AppComponent, MissingPageComponent],
 	imports: [
@@ -24,7 +25,8 @@ import { MissingPageComponent } from "./missing-page/missing-page.component";
 		ImprintPageModule,
 		SupportPageModule,
 		BrowserAnimationsModule,
-		ImprintIndexModule
+		ImprintIndexModule,
+		SearchBarModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]
