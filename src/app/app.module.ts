@@ -15,6 +15,8 @@ import { MissingPageComponent } from "./missing-page/missing-page.component";
 import { SeriesPageModule } from "./series-page/series-page.module";
 import { FaqPageComponent } from "./faq-page/faq-page.component";
 import { AboutPageComponent } from "./about-page/about-page.component";
+import { SearchBarModule } from "./search-bar/search-bar.module";
+
 @NgModule({
 	declarations: [AppComponent, MissingPageComponent, FaqPageComponent, AboutPageComponent],
 	imports: [
@@ -28,7 +30,8 @@ import { AboutPageComponent } from "./about-page/about-page.component";
 		SupportPageModule,
 		BrowserAnimationsModule,
 		ImprintIndexModule,
-		SeriesPageModule
+		SeriesPageModule,
+		SearchBarModule
 	],
 	providers: [Title],
 	bootstrap: [AppComponent]
