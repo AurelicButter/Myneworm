@@ -1,4 +1,4 @@
 export const environment = {
 	production: true,
-	API_ADDRESS: "api.myneworm.katsurin.com"
+	API_ADDRESS: "https://myneworm.katsurin.com/api"
 };
