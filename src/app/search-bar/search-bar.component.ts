@@ -1,5 +1,4 @@
-import { Component } from "@angular/core";
-import { MatFormField } from "@angular/material/form-field";
+import { Component, ViewChild } from "@angular/core";
 
 @Component({
 	selector: "search-bar",
@@ -7,7 +6,11 @@ import { MatFormField } from "@angular/material/form-field";
 	styleUrls: ["./search-bar.component.css"]
 })
 export class SearchBarComponent {
-	searchInput: string;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	@ViewChild("searchInput") userInput: any;
+	searchTerm = "";
 
-	constructor(public searchForm: MatFormField) {}
+	submit() {
+		return null;
+	}
 }

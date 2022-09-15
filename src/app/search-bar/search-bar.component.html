@@ -1,4 +1,6 @@
-<mat-form-field>
-    <span>Hello world!</span>
-    <input type="text" matInput placeholder="Search" [(ngModel)]= "searchInput">
-</mat-form-field>
+<div class="search-bar">
+    <form #searchInput="ngForm" (ngSubmit)="submit()">
+        <input type="text" placeholder="Search" [(ngModel)]= "searchTerm" #userInput="ngModel"/>
+        <!-- Button To Click and Search Here -->
+    </form>
+</div>
