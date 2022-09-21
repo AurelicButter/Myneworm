@@ -1,4 +1,5 @@
 import { Component, ViewChild } from "@angular/core";
+import { MynewormAPIService } from "../services/myneworm-api.service";
 
 @Component({
 	selector: "search-bar",
@@ -10,7 +11,10 @@ export class SearchBarComponent {
 	@ViewChild("searchInput") userInput: any;
 	searchTerm = "";
 
+	constructor(private service: MynewormAPIService) {}
+
 	submit() {
+		console.log(this.searchTerm);
 		return null;
 	}
 }
