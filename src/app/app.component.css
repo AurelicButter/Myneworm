@@ -27,6 +27,12 @@
     display: block;
     font-size: x-large;
     margin: 0;
+    max-height: 30px;
+}
+
+.nav-search {
+    padding-top: 22.5px;
+    padding-bottom: 22.5px;
 }
 
 .nav-item:first-child {
