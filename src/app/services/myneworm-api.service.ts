@@ -3,6 +3,7 @@ import { environment } from "src/environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { ImprintData } from "../models/imprintData";
 import { MonthReleaseData } from "../models/monthReleaseData";
+import { BookData } from "../models/bookData";
 
 @Injectable({
 	providedIn: "root"
@@ -11,7 +12,7 @@ export class MynewormAPIService {
 	constructor(private http: HttpClient) {}
 
 	getByISBN(isbn: string) {
-		return this.http.get(`${environment.API_ADDRESS}/book/byISBN/${isbn}`);
+		return this.http.get<BookData>(`${environment.API_ADDRESS}/book/byISBN/${isbn}`);
 	}
 
 	getByPublisher(publisherId: string, page?: string) {
