@@ -20,7 +20,7 @@ export class MynewormAPIService {
 	}
 
 	getById(mynewormId: string) {
-		return this.http.get(`${environment.API_ADDRESS}/book/byId/${mynewormId}`);
+		return this.http.get<BookData>(`${environment.API_ADDRESS}/book/byId/${mynewormId}`);
 	}
 
 	getMonthData(month: string) {
