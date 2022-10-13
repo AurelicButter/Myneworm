@@ -27,4 +27,11 @@ export class UtilitiesService {
 			.map((word) => word.charAt(0).toUpperCase() + word.substring(1))
 			.join(" ");
 	}
+
+	dateReadable(dateInput: string) {
+		const dateObj = new Date(dateInput);
+		const months = [...Array(12).keys()].map((key) => new Date(0, key).toLocaleString("en", { month: "long" }));
+
+		return `${dateObj.getDate()} ${months[dateObj.getMonth()]}, ${dateObj.getFullYear()}`;
+	}
 }

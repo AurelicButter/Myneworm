@@ -4,6 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { ImprintData } from "../models/imprintData";
 import { MonthReleaseData } from "../models/monthReleaseData";
 import { BookData } from "../models/bookData";
+import { PublisherData } from "../models/publisherData";
 
 @Injectable({
 	providedIn: "root"
@@ -41,5 +42,9 @@ export class MynewormAPIService {
 
 	getAsset(localPath: string) {
 		return `${environment.API_ADDRESS}/asset/${localPath}`;
+	}
+
+	getPublisher(publisherID: string) {
+		return this.http.get<PublisherData>(`${environment.API_ADDRESS}/publisher/${publisherID}`);
 	}
 }
