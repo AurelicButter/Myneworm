@@ -1,1 +1,19 @@
-<p>book-page works!</p>
+<div class="book-page" *ngIf="book != undefined">
+    <aside class="book-info">
+        <h2 class="book-title">{{book.title}}</h2>
+        <img src='{{getCover(book.isbn)}}'>
+        <div class="book-tags">
+            <p><strong>Format:</strong> {{this.utilities.formatReadable(book.format_name)}}</p>
+            <p><strong>Type:</strong> {{this.utilities.formatReadable(book.book_type_name)}}</p>
+            <p><strong>Release:</strong> {{this.utilities.dateReadable(book.release_date)}}</p>
+            <p *ngIf="publisher != undefined"><strong>Imprint:</strong> {{publisher.name}}</p>
+        </div>
+        <div class="book-links button-div">
+            <a class="button-link" href="."><div class="button-text">EXAMPLE LINK</div></a>
+        </div>
+    </aside>
+    <div class="book-description">
+        <p *ngIf="book.description != null" [innerHTML]="book.description"></p>
+        <p *ngIf="book.description === null">No description available.</p>
+    </div>
+</div>

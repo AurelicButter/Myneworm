@@ -21,4 +21,5 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .button-text {
     padding: 0.75em;
+    text-align: center;
 }
