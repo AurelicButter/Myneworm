@@ -5,4 +5,5 @@ export interface MonthReleaseData {
 	title: string;
 	book_type_name: string;
 	format_name: string;
+	publisher_id: number;
 }
