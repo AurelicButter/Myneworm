@@ -75,7 +75,9 @@ export class HomePageComponent implements OnInit {
 						bookTitle.className = "book-title";
 
 						formatTag.innerHTML = formatText(arg.event.extendedProps.format);
-						imprintTag.innerHTML = arg.event.extendedProps.imprint.replace("Entertainment", "");
+						imprintTag.innerHTML = `<a href="./publisher/${
+							arg.event.extendedProps.imprintID
+						}">${arg.event.extendedProps.imprint.replace("Entertainment", "")}</a>`;
 						typeTag.innerHTML = formatText(arg.event.extendedProps.bookType);
 						bookTitle.innerHTML = `<a href="${arg.event.url}">${arg.event.title}</a>`;
 

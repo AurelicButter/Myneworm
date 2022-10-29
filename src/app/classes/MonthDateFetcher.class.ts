@@ -28,7 +28,8 @@ export class MonthDateFetcher {
 					extendedProps: {
 						format: entry.format_name,
 						imprint: entry.name,
-						bookType: entry.book_type_name
+						bookType: entry.book_type_name,
+						imprintID: entry.publisher_id
 					}
 				});
 			});
