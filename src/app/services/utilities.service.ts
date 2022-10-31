@@ -34,4 +34,25 @@ export class UtilitiesService {
 
 		return `${dateObj.getDate()} ${months[dateObj.getMonth()]}, ${dateObj.getFullYear()}`;
 	}
+
+	/*
+	 * Formats the date into YYYY-MM-DD for Myneworm API usage
+	 */
+	APIDateFormatter(dateInput: Date): string {
+		let currDate = `${dateInput.getFullYear()}-`;
+
+		const month = dateInput.getMonth() + 1;
+		if (month < 10) {
+			currDate += "0";
+		}
+		currDate += `${month}-`;
+
+		const date = dateInput.getDate();
+		if (date < 10) {
+			currDate += "0";
+		}
+		currDate += `${date}-`;
+
+		return currDate;
+	}
 }

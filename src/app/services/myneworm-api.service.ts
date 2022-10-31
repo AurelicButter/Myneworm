@@ -47,4 +47,32 @@ export class MynewormAPIService {
 	getPublisher(publisherID: string) {
 		return this.http.get<PublisherData>(`${environment.API_ADDRESS}/publisher/${publisherID}`);
 	}
+
+	searchBooks(publisherID?: string, startDate?: string, endDate?: string) {
+		let params = "";
+		let multipleParams = false;
+
+		if (publisherID) {
+			params += `publisher=${publisherID}`;
+			multipleParams = true;
+		}
+
+		if (startDate) {
+			if (multipleParams) {
+				params += "&";
+			}
+			params += `start=${startDate}`;
+			multipleParams = true;
+		}
+
+		if (endDate) {
+			if (multipleParams) {
+				params += "&";
+			}
+			params += `end=${endDate}`;
+			multipleParams = true;
+		}
+
+		return this.http.get<BookData[]>(`${environment.API_ADDRESS}/book/search?${params}`);
+	}
 }
