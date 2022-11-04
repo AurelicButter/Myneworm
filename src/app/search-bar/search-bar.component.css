@@ -1,0 +1,22 @@
+.search-bar > form {
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    outline-width: 0;
+    height: 30px;
+}
+
+.search-btn-icon {
+    height: 30px;
+}
+
+.search-submit {
+    margin: 0;
+    padding: 0;
+    margin-left: 6px;
+    background-color: transparent;
+    border: none;
+    height: 30px;
+}

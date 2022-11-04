@@ -5,6 +5,17 @@ import { MynewormAPIService } from "../services/myneworm-api.service";
 import { CalendarManagerComponent } from "../shared/calendar-manager/calendar-manager.component";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { DatepickerModalComponent } from "../shared/datepicker-modal/datepicker-modal.component";
+import { Title } from "@angular/platform-browser";
+import { UtilitiesService } from "../services/utilities.service";
+import { MonthDateFetcher } from "../classes/MonthDateFetcher.class";
+
+/*
+ * Global file values as CalendarOptions does not accept `this` keyword
+ * like every other function in the component would.
+ */
+let formatCSS: (arg0: string) => string;
+let formatText: (arg0: string) => string;
+let dateFetcher: MonthDateFetcher;
 
 @Component({
 	selector: "app-home-page",
@@ -17,14 +28,26 @@ export class HomePageComponent implements OnInit {
 
 	@ViewChild("calendar", { static: false }) calendarManager!: CalendarManagerComponent;
 
-	constructor(private route: ActivatedRoute, private service: MynewormAPIService, public matDialog: MatDialog) {}
+	constructor(
+		private route: ActivatedRoute,
+		private service: MynewormAPIService,
+		public matDialog: MatDialog,
+		private titleService: Title,
+		private utilities: UtilitiesService
+	) {
+		this.titleService.setTitle("Myneworm - Home");
+		dateFetcher = new MonthDateFetcher(this.service, this.utilities);
+
+		formatCSS = this.utilities.formatCSSClass;
+		formatText = this.utilities.formatReadable;
+	}
 
 	ngOnInit(): void {
 		this.calendarOptions = {
 			themeSystem: "standard",
 			height: "calc(100vh - 190px)",
 			initialView: "dayGridMonth",
-			editable: false,
+			dayMaxEventRows: 5,
 			buttonText: {
 				list: "schedule"
 			},
@@ -34,6 +57,37 @@ export class HomePageComponent implements OnInit {
 				left: "today,dateSelector",
 				center: "title",
 				right: "prev,dayGridWeek,dayGridMonth,listMonth,next"
+			},
+			views: {
+				dayGridWeek: {
+					dayMaxEventRows: false
+				},
+				listMonth: {
+					eventContent: function (arg) {
+						const formatTag = document.createElement("div");
+						const imprintTag = document.createElement("div");
+						const typeTag = document.createElement("div");
+						const bookTitle = document.createElement("div");
+
+						formatTag.className = `${formatCSS(arg.event.extendedProps.format)} schedule-tag`;
+						imprintTag.className = `${formatCSS(arg.event.extendedProps.imprint)} schedule-tag`;
+						typeTag.className = `${formatCSS(arg.event.extendedProps.bookType)} schedule-tag`;
+						bookTitle.className = "book-title";
+
+						formatTag.innerHTML = formatText(arg.event.extendedProps.format);
+						imprintTag.innerHTML = `<a href="./publisher/${
+							arg.event.extendedProps.imprintID
+						}">${arg.event.extendedProps.imprint.replace("Entertainment", "")}</a>`;
+						typeTag.innerHTML = formatText(arg.event.extendedProps.bookType);
+						bookTitle.innerHTML = `<a href="${arg.event.url}">${arg.event.title}</a>`;
+
+						const arrayOfDomNodes = [formatTag, imprintTag, typeTag, bookTitle];
+						return { domNodes: arrayOfDomNodes };
+					}
+				}
+			},
+			datesSet: function (dateInfo) {
+				dateFetcher.getDates(dateInfo.view.calendar, dateInfo.start);
 			},
 			customButtons: {
 				dateSelector: {

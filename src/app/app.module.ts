@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { BrowserModule } from "@angular/platform-browser";
+import { BrowserModule, Title } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 
 import { AppRoutingModule } from "./app-routing.module";
@@ -14,8 +14,11 @@ import { ImprintIndexModule } from "./imprint-index/imprint-index.module";
 import { MissingPageComponent } from "./missing-page/missing-page.component";
 import { SeriesPageModule } from "./series-page/series-page.module";
 import { FaqPageComponent } from "./faq-page/faq-page.component";
+import { AboutPageComponent } from "./about-page/about-page.component";
+import { SearchBarModule } from "./search-bar/search-bar.module";
+
 @NgModule({
-	declarations: [AppComponent, MissingPageComponent, FaqPageComponent],
+	declarations: [AppComponent, MissingPageComponent, FaqPageComponent, AboutPageComponent],
 	imports: [
 		BrowserModule,
 		HttpClientModule,
@@ -27,9 +30,10 @@ import { FaqPageComponent } from "./faq-page/faq-page.component";
 		SupportPageModule,
 		BrowserAnimationsModule,
 		ImprintIndexModule,
-		SeriesPageModule
+		SeriesPageModule,
+		SearchBarModule
 	],
-	providers: [],
+	providers: [Title],
 	bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -1,0 +1,21 @@
+.book-info {
+    float: left;
+    width: 300px;
+    margin-left: 2%;
+    margin-right: 1%;
+}
+
+.book-info img {
+    max-width: 300px;
+}
+
+.book-title {
+    text-align: center;
+}
+
+.book-description {
+    float: left;
+    margin-top: 2%;
+    margin-left: 2%; 
+    width: 60%;  
+}
