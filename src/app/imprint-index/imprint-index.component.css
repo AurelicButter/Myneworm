@@ -19,18 +19,14 @@
 
 .imprint-text-header {
     text-align: center;
+    padding: .5em;
+    border-radius: 6px;
 }
 
 .imprint-link {
-    color: blue;
-    text-decoration: none;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.imprint-link:visited {
-    color: blue;
 }
 
 .imprint-logo {
