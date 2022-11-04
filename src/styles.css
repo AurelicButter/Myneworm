@@ -11,6 +11,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     text-decoration: none;
 }
 
+.button-link:visited {
+    color: #fff;
+}
+
 .button-div {
     background-color: #333;
 }
