@@ -48,6 +48,10 @@ export class MynewormAPIService {
 		return this.http.get<PublisherData>(`${environment.API_ADDRESS}/publisher/${publisherID}`);
 	}
 
+	searchBookByTerm(term: string) {
+		return this.http.get<BookData[]>(`${environment.API_ADDRESS}/book/search?term=${term}`);
+	}
+
 	searchBooks(publisherID?: string, startDate?: string, endDate?: string) {
 		let params = "";
 		let multipleParams = false;

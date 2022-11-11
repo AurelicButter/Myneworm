@@ -1,25 +1,25 @@
 <!--
     Top navigation bar
 -->
-<div>
-    <nav>
-        <ul class="nav-list">
-            <li class="nav-item nav-link"><a [routerLink]="'.'">Myneworm</a></li>
-            <li class="nav-item nav-link"><a [routerLink]="'/home'">Home</a></li>
-            <li class="nav-item nav-link"><a [routerLink]="'/publisher'">Imprints</a></li>
-            <li class="nav-item nav-link"><a [routerLink]="'/support'">Support</a></li>
-            <li class="nav-item nav-link"><a [routerLink]="'/about'">About</a></li>
-            <li class="nav-item nav-link"><a [routerLink]="'/faq'">FAQ</a></li>
-            <li class="nav-item nav-search"><search-bar></search-bar></li>
-        </ul>
-    </nav>
-</div>
+<nav class="nav-list">
+    <ul class="nav-list-ul">
+        <li class="nav-item nav-link"><a [routerLink]="'.'">Myneworm</a></li>
+        <li class="nav-item nav-link"><a [routerLink]="'/home'">Home</a></li>
+        <li class="nav-item nav-link"><a [routerLink]="'/publisher'">Imprints</a></li>
+        <li class="nav-item nav-link"><a [routerLink]="'/support'">Support</a></li>
+        <li class="nav-item nav-link"><a [routerLink]="'/about'">About</a></li>
+        <li class="nav-item nav-link"><a [routerLink]="'/faq'">FAQ</a></li>
+        <li class="nav-item nav-search">
+            <search-bar></search-bar>
+        </li>
+    </ul>
+</nav>
 
 <div class="main-content">
-	<div class="main-container">
-		<router-outlet></router-outlet>
-	</div>
-	<footer>
-		<span>Myneworm &copy;{{currYear}} Katsurin Studios. All Rights Reserved.</span>
-	</footer>
+    <div class="main-container">
+        <router-outlet></router-outlet>
+    </div>
+    <footer>
+        <span>Myneworm &copy;{{currYear}} Katsurin Studios. All Rights Reserved.</span>
+    </footer>
 </div>
