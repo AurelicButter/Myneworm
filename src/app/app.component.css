@@ -8,11 +8,14 @@
 
 .nav-list {
     list-style-type: none;
-    margin: 0;
-    padding: 0;
     overflow: hidden;
     background-color: #333;
     height: 75px;
+}
+
+.nav-list-ul {
+    margin: 0;
+    padding: 0;
 }
 
 .nav-item {
@@ -33,6 +36,8 @@
 .nav-search {
     padding-top: 22.5px;
     padding-bottom: 22.5px;
+    position: absolute;
+    right: 100px;
 }
 
 .nav-item:first-child {
