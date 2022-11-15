@@ -16,9 +16,16 @@ import { SeriesPageModule } from "./series-page/series-page.module";
 import { FaqPageComponent } from "./faq-page/faq-page.component";
 import { AboutPageComponent } from "./about-page/about-page.component";
 import { SearchBarModule } from "./search-bar/search-bar.module";
+import { DataCorrectionFormComponent } from "./data-correction-form/data-correction-form.component";
 
 @NgModule({
-	declarations: [AppComponent, MissingPageComponent, FaqPageComponent, AboutPageComponent],
+	declarations: [
+		AppComponent,
+		MissingPageComponent,
+		FaqPageComponent,
+		AboutPageComponent,
+		DataCorrectionFormComponent
+	],
 	imports: [
 		BrowserModule,
 		HttpClientModule,

@@ -55,4 +55,18 @@ export class UtilitiesService {
 
 		return currDate;
 	}
+
+	toTitleCase(input: string) {
+		const test = input.split(" ");
+		let result = "";
+
+		for (let i = 0; i < test.length; i++) {
+			if (i !== 0) {
+				result += " ";
+			}
+			result += test[i].charAt(0).toUpperCase() + test[i].slice(1);
+		}
+
+		return result;
+	}
 }

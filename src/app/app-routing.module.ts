@@ -9,6 +9,7 @@ import { MissingPageComponent } from "./missing-page/missing-page.component";
 import { SeriesPageComponent } from "./series-page/series-page.component";
 import { FaqPageComponent } from "./faq-page/faq-page.component";
 import { AboutPageComponent } from "./about-page/about-page.component";
+import { DataCorrectionFormComponent } from "./data-correction-form/data-correction-form.component";
 
 const routes: Routes = [
 	{ path: "", component: HomePageComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
 	{ path: "series/:id", component: SeriesPageComponent },
 	{ path: "about", component: AboutPageComponent },
 	{ path: "faq", component: FaqPageComponent },
+	{ path: "correction", component: DataCorrectionFormComponent },
 	{ path: "**", pathMatch: "full", component: MissingPageComponent }
 ];
 
