@@ -26,11 +26,25 @@ div.search-bar:hover > form > input.no-radius-bottom-left {
 }
 
 .search-cover-img {
-    max-width: 48px;
+    max-height: 50px;
 }
 
 .search-image-row {
     padding-left: 10px !important;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.search-result-row:hover > td > .search-cover-img {
+    max-height: 80px;
+}
+
+.search-result-row:hover > td {
+    background-color: lightgray;
 }
 
 .search-item-format {
