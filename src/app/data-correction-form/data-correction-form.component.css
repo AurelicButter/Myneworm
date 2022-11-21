@@ -15,6 +15,12 @@
     float: left;
 }
 
+.form-error {
+    font-style: italic;
+    color: red;
+    font-weight: 500;
+}
+
 button {
     margin-right: 10px;
 }

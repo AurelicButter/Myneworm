@@ -4,11 +4,11 @@
         <div class="form-row">
             <label for="isbn"><strong>ISBN (Required)</strong></label>
             <input type="text" class="form-input" id="isbn" name="isbn" required pattern="\d{13}"
-                [(ngModel)]="correction.isbn" #isbn="ngModel"/>
+                [(ngModel)]="correction.isbn" #isbn="ngModel" />
         </div>
         <div class="form-row form-feedback" *ngIf="isbn.errors && (isbn.dirty || isbn.touched)">
-            <p *ngIf="isbn.errors.required">ISBN number is required</p>
-            <p *ngIf="isbn.errors.pattern">ISBN number is a 13 digit number.</p>
+            <p class="form-error" *ngIf="isbn.errors.required">ISBN number is required</p>
+            <p class="form-error" *ngIf="isbn.errors.pattern">ISBN number isn't a 13 digit number</p>
         </div>
 
         <div class="form-row">
@@ -17,24 +17,35 @@
         </div>
 
         <div class="form-row">
+            <label for="description"><strong>Description</strong></label>
+            <textarea class="form-textbox" name="description" [(ngModel)]="correction.description"
+                #description="ngModel"></textarea>
+        </div>
+
+        <div class="form-row">
             <label for="coverURL"><strong>Cover</strong></label>
-            <input type="url" class="form-input" name="coverURL" [(ngModel)]="correction.coverURL" #coverURL="ngModel" pattern="^http[s]{0,1}:\/\/\S{1,}.\S{1,}.png$"/>
+            <input type="url" class="form-input" name="coverURL" [(ngModel)]="correction.coverURL" #coverURL="ngModel"
+                pattern="^http[s]{0,1}:\/\/\S{1,}.\S{1,}.png$" />
         </div>
         <div class="form-row form-feedback" *ngIf="coverURL.errors && (coverURL.dirty || coverURL.touched)">
-            <p *ngIf="coverURL.errors.pattern">Cover image URL fails to be a PNG file URL.</p>
+            <p class="form-error" *ngIf="coverURL.errors.pattern">Cover image URL fails to be a PNG file URL.</p>
         </div>
 
         <div class="form-row">
             <label for="release"><strong>Release Date</strong></label>
-            <input type="date" class="form-input" name="release" [(ngModel)]="correction.release" #release="ngModel" pattern="^\d{4}-\d{2}-\d{2}$" />
+            <input type="date" class="form-input" name="release" [(ngModel)]="correction.release" #release="ngModel"
+                pattern="^\d{4}-\d{2}-\d{2}$" />
         </div>
         <div class="form-row form-feedback" *ngIf="release.errors && (release.dirty || release.touched)">
-            <p *ngIf="release.errors.pattern">Date must be mm/dd/yyyy.</p>
+            <p class="form-error" *ngIf="release.errors.pattern">Date must be mm/dd/yyyy.</p>
         </div>
 
         <div class="form-row">
             <label for="bookType"><strong>Book Type</strong></label>
-            <input type="text" class="form-input" name="bookType" [(ngModel)]="correction.bookType" #bookType="ngModel" />
+            <select class="form-input" id="bookType" name="bookType" [(ngModel)]="correction.bookType" #bookType="ngModel">
+                <option value="">No type</option>
+                <option *ngFor="let type of booktypes" [ngValue]="type.book_type_name">{{type.book_type_name}}</option>
+            </select>
         </div>
 
         <div class="form-row url-row">
@@ -46,7 +57,8 @@
                 </div>
             </div>
             <div class="url-list-input">
-                <input class="form-input" name="storeURL" pattern="^http[s]{0,1}:\/\/\S{1,}.\S{1,}$" [(ngModel)]="storeURL" #userInput="ngModel" />
+                <input class="form-input" name="storeURL" pattern="^http[s]{0,1}:\/\/\S{1,}.\S{1,}$"
+                    [(ngModel)]="storeURL" #userInput="ngModel" />
                 <button type="button" (click)="addURL()">Add URL</button>
             </div>
         </div>

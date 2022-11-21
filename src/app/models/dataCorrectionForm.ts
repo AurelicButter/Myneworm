@@ -5,6 +5,7 @@ export class dataCorrectionForm {
 	coverURL: string | undefined;
 	storeURLs: StoreURL[];
 	bookType: string | undefined;
+	description: string | undefined;
 
 	constructor() {
 		this.storeURLs = [];

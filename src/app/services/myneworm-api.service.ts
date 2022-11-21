@@ -5,6 +5,7 @@ import { ImprintData } from "../models/imprintData";
 import { MonthReleaseData } from "../models/monthReleaseData";
 import { BookData } from "../models/bookData";
 import { PublisherData } from "../models/publisherData";
+import { BookType } from "../models/BookType";
 
 @Injectable({
 	providedIn: "root"
@@ -78,5 +79,9 @@ export class MynewormAPIService {
 		}
 
 		return this.http.get<BookData[]>(`${environment.API_ADDRESS}/book/search?${params}`);
+	}
+
+	getBookTypes() {
+		return this.http.get<BookType[]>(`${environment.API_ADDRESS}/booktype`);
 	}
 }
