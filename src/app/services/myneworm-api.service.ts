@@ -50,7 +50,7 @@ export class MynewormAPIService {
 	}
 
 	searchBookByTerm(term: string) {
-		return this.http.get<BookData[]>(`${environment.API_ADDRESS}/book/search?term=${term}`);
+		return this.http.get<BookData[]>(`${environment.API_ADDRESS}/book/search?term=${term}&limit=10`);
 	}
 
 	searchBooks(publisherID?: string, startDate?: string, endDate?: string) {
