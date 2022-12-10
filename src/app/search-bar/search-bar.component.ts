@@ -14,6 +14,7 @@ export class SearchBarComponent {
 	displayedColumns = ["cover", "title"];
 	searchTerm = "";
 	public dataSource: MatTableDataSource<BookData> = new MatTableDataSource<BookData>();
+	loading = false;
 
 	constructor(public service: MynewormAPIService, public utilities: UtilitiesService, private router: Router) {}
 
@@ -23,7 +24,7 @@ export class SearchBarComponent {
 		}
 		this.service.searchBookByTerm(this.searchTerm).subscribe((data: BookData[]) => {
 			this.dataSource = new MatTableDataSource<BookData>(data);
-			console.log(data);
+			this.loading = false;
 		});
 	}
 
@@ -33,8 +34,10 @@ export class SearchBarComponent {
 
 	async onChange() {
 		const oldInput = this.searchTerm;
+		this.loading = true;
 		await new Promise((resolve) => setTimeout(resolve, 500));
 		if (oldInput !== this.searchTerm) {
+			this.loading = false;
 			return;
 		}
 
@@ -44,6 +47,7 @@ export class SearchBarComponent {
 	resetData() {
 		this.dataSource = new MatTableDataSource<BookData>();
 		this.searchTerm = "";
+		this.loading = false;
 	}
 
 	onClick(isbn: string) {

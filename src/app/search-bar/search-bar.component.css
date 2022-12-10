@@ -86,3 +86,11 @@ div.search-bar:hover > form > input.no-radius-bottom-left {
 .search-result-row {
     cursor: pointer;
 }
+
+.search-table {
+    width: 280px;
+}
+
+.hide-no-result {
+    display: none;
+}
