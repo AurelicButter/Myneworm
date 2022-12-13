@@ -17,6 +17,7 @@ import { FaqPageComponent } from "./faq-page/faq-page.component";
 import { AboutPageComponent } from "./about-page/about-page.component";
 import { SearchBarModule } from "./search-bar/search-bar.module";
 import { DataCorrectionFormComponent } from "./data-correction-form/data-correction-form.component";
+import { ContactPageComponent } from "./contact-page/contact-page.component";
 
 @NgModule({
 	declarations: [
@@ -24,7 +25,8 @@ import { DataCorrectionFormComponent } from "./data-correction-form/data-correct
 		MissingPageComponent,
 		FaqPageComponent,
 		AboutPageComponent,
-		DataCorrectionFormComponent
+		DataCorrectionFormComponent,
+		ContactPageComponent
 	],
 	imports: [
 		BrowserModule,
