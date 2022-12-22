@@ -1,4 +1,5 @@
 import { Component, ViewChild } from "@angular/core";
+import { Title } from "@angular/platform-browser";
 import { ActivatedRoute } from "@angular/router";
 import { BookType } from "../models/BookType";
 import { dataCorrectionForm } from "../models/dataCorrectionForm";
@@ -20,8 +21,11 @@ export class DataCorrectionFormComponent {
 	constructor(
 		private route: ActivatedRoute,
 		private service: MynewormAPIService,
-		private utilities: UtilitiesService
+		private utilities: UtilitiesService,
+		private titleService: Title
 	) {
+		this.titleService.setTitle("Myneworm - Data Correction");
+
 		this.route.queryParams.subscribe((data) => {
 			this.correction.isbn = data.isbn;
 
