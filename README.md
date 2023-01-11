@@ -1,27 +1,36 @@
 # Myneworm
+<a href="https://discord.gg/qKfqsjW"><img src="https://discordapp.com/api/guilds/303253034551476225/widget.png" alt="Support Server" /></a>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.5.
+The premier web application to track & stay updated on upcoming light novel & manga releases.
 
-## Development server
+See what's next in the pipeline by viewing the [Myneworm Kanboard](https://kanboard.katsurin.com/?controller=BoardViewController&action=readonly&token=00ab148e01a355885744e79894b444bef14000e35e8459ec7e66848fa9fa)!
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Requirements
+- Node.js v16+
+- An instance of the Myneworm API running
 
-## Code scaffolding
+## Installation
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Locally
 
-## Build
+1. Verify API is running
+2. Install dependancies
+3. Run `npm start` to build and launch the web app
+4. Visit the address given on successful launch
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+### Production
+1. Verify API is running
+2. Run `npm run build:prod` to build the app
+3. Use a web host to serve the files on a specific address
+4. Visit the address given on successful launch
 
-## Running unit tests
+## Licensing
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+The Myneworm site code is licensed through the [GPL-3.0 License](https://github.com/Butterstroke/Myneworm/blob/master/LICENSE). Please refer to the license terms for specific use cases. 
 
-## Running end-to-end tests
+## Support and Contact
+Issues and Bug Reports: https://github.com/Butterstroke/Myneworm/issues/new/choose
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Data Corrections: Please use the interactive forms on the site
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+For any other needs, either contact me by email <a href="mailto:support@katsurin.com">support@katsurin.com</a> or through my [Discord server](https://discord.gg/qKfqsjW) in the #site-support channel.
