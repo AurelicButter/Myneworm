@@ -1,6 +1,7 @@
 {
 	"name": "myneworm",
 	"version": "0.4.0",
+	"private": true,
 	"scripts": {
 		"ng": "ng",
 		"start": "ng serve --proxy-config src/proxy.conf.json",
@@ -16,13 +17,34 @@
 		"prettier": "prettier --write .",
 		"prepare": "husky install"
 	},
+	"author": {
+		"name": "Frederick Katsura",
+		"email": "fkatsura@katsurin.com"
+	},
+	"contributors": [
+		{
+			"name": "Frederick Katsura",
+			"email": "fkatsura@katsurin.com"
+		},
+		{
+			"name": "Katsurin Studios",
+			"email": "support@katsurin.com"
+		}
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Butterstroke/Myneworm.git"
+	},
+	"bugs": {
+		"url": "https://github.com/Butterstroke/Myneworm/issues",
+		"email": "support@katsurin.com"
+	},
 	"lint-staged": {
 		"*.{js,json,jsx,ts,tsx}": [
 			"prettier --write",
 			"eslint --fix --quiet"
 		]
 	},
-	"private": true,
 	"license": "GPLv3",
 	"dependencies": {
 		"@angular/animations": "~13.1.1",
