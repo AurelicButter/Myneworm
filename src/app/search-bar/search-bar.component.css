@@ -44,7 +44,7 @@ div.search-bar:hover > form > input.no-radius-bottom-left {
 }
 
 .search-result-row:hover > td {
-    background-color: lightgray;
+    background-color: #0D98BA;
 }
 
 .search-item-format {
@@ -62,9 +62,9 @@ div.search-bar:hover > form > input.no-radius-bottom-left {
     height: 30px;
     border: solid;
     border-radius: 8px 0 0 8px;
-    border-color: white;
+    border-color: #fff;
     border-right: solid;
-    border-right-color: grey;
+    border-right-color: #1F2232;
     border-right-width: 1px;
 }
 
@@ -74,12 +74,12 @@ div.search-bar:hover > form > input.no-radius-bottom-left {
 
 .search-submit {
     padding: 1px 4px 0 6px;
-    background-color: white;
+    background-color: #fff;
     border: solid;
     height: 38px;
     display: flex;
     align-items: center;
-    border-color: white;
+    border-color: #fff;
     border-radius: 0 6px 6px 0;
 }
 
