@@ -83,6 +83,12 @@ div.search-bar:hover > form > input.no-radius-bottom-left {
     border-radius: 0 6px 6px 0;
 }
 
+.search-submit:hover {
+    background-color: #2DC9F0;
+    border-color: #2DC9F0;
+    cursor: pointer;
+}
+
 .search-result-row {
     cursor: pointer;
 }
