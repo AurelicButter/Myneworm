@@ -56,7 +56,7 @@ tr.fc-list-event {
     display: flex;
     float: left;
     margin-right: 4px;
-    background-color: #04d5fd;
+    background-color: #2DC9F0;
     width: 100px;
     height: 20px;
     align-items: center;
@@ -72,15 +72,15 @@ tr.fc-list-event {
  */
 
 .default-imprint-colour {
-    background-color: #04d5fd;
+    background-color: #2DC9F0;
 }
 
 .light-novel {
-    background-color: aquamarine;
+    background-color: #2DC9F0;
 }
 
 .manga {
-    background-color: aquamarine;
+    background-color: #2DC9F0;
 }
 
 .yen-press {
