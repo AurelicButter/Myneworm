@@ -108,18 +108,18 @@ export class HomePageComponent implements OnInit {
 	}
 
 	selectDate(): void {
-		/*const dialogConfig = new MatDialogConfig();
+		const dialogConfig = new MatDialogConfig();
 		dialogConfig.disableClose = true;
 		dialogConfig.id = "datepicker-modal";
 
-		dialogConfig.height = "350px";
-		dialogConfig.width = "600px";
+		dialogConfig.height = "300px";
+		dialogConfig.width = "400px";
 		const modalDialog = this.matDialog.open(DatepickerModalComponent, dialogConfig);
 
 		modalDialog.afterClosed().subscribe((result) => {
 			if (result) {
 				this.calendarManager.updateDate(result);
 			}
-		});*/
+		});
 	}
 }
