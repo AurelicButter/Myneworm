@@ -111,8 +111,8 @@ export class ImprintPageComponent implements OnInit {
 		dialogConfig.disableClose = true;
 		dialogConfig.id = "datepicker-modal";
 
-		dialogConfig.height = "350px";
-		dialogConfig.width = "600px";
+		dialogConfig.height = "300px";
+		dialogConfig.width = "400px";
 		const modalDialog = this.matDialog.open(DatepickerModalComponent, dialogConfig);
 
 		modalDialog.afterClosed().subscribe((result) => {
