@@ -33,7 +33,8 @@
 								"inject": false
 							}
 						],
-						"scripts": []
+						"scripts": [],
+						"allowedCommonJsDependencies": ["moment"]
 					},
 					"configurations": {
 						"production": {
@@ -131,5 +132,8 @@
 				}
 			}
 		}
+	},
+	"cli": {
+		"analytics": false
 	}
 }
