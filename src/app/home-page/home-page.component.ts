@@ -108,7 +108,7 @@ export class HomePageComponent implements OnInit {
 	}
 
 	selectDate(): void {
-		const dialogConfig = new MatDialogConfig();
+		/*const dialogConfig = new MatDialogConfig();
 		dialogConfig.disableClose = true;
 		dialogConfig.id = "datepicker-modal";
 
@@ -120,6 +120,6 @@ export class HomePageComponent implements OnInit {
 			if (result) {
 				this.calendarManager.updateDate(result);
 			}
-		});
+		});*/
 	}
 }
