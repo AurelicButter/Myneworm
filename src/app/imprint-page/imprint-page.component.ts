@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { MynewormAPIService } from "../services/myneworm-api.service";
-import { CalendarOptions } from "@fullcalendar/angular";
+import { CalendarOptions } from "@fullcalendar/core";
 import { CalendarManagerComponent } from "../shared/calendar-manager/calendar-manager.component";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { DatepickerModalComponent } from "../shared/datepicker-modal/datepicker-modal.component";
@@ -9,6 +9,8 @@ import { ImprintData } from "../models/imprintData";
 import { Title } from "@angular/platform-browser";
 import { UtilitiesService } from "../services/utilities.service";
 import { ImprintBookFetcher } from "../classes/ImprintBookFetcher.class";
+import interactionPlugin from "@fullcalendar/interaction";
+import listPlugin from "@fullcalendar/list";
 
 /*
  * Global file values as CalendarOptions does not accept `this` keyword
@@ -43,6 +45,7 @@ export class ImprintPageComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.calendarOptions = {
+			plugins: [interactionPlugin, listPlugin],
 			themeSystem: "standard",
 			height: "calc(100vh - 190px)",
 			initialView: "listMonth",
