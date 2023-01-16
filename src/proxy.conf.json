@@ -2,6 +2,7 @@
 	"/api/*": {
 		"target": "https://myneworm.develop.katsurin.com/",
 		"logLevel": "debug",
-		"changeOrigin": true
+		"changeOrigin": true,
+		"secure": true
 	}
 }

@@ -18,6 +18,7 @@ import { AboutPageComponent } from "./about-page/about-page.component";
 import { SearchBarModule } from "./search-bar/search-bar.module";
 import { DataCorrectionFormComponent } from "./data-correction-form/data-correction-form.component";
 import { ContactPageComponent } from "./contact-page/contact-page.component";
+import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
 	declarations: [
@@ -40,7 +41,8 @@ import { ContactPageComponent } from "./contact-page/contact-page.component";
 		BrowserAnimationsModule,
 		ImprintIndexModule,
 		SeriesPageModule,
-		SearchBarModule
+		SearchBarModule,
+		MatDialogModule
 	],
 	providers: [Title],
 	bootstrap: [AppComponent]
