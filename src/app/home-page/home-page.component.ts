@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { CalendarOptions } from "@fullcalendar/angular";
 import { MynewormAPIService } from "../services/myneworm-api.service";
 import { CalendarManagerComponent } from "../shared/calendar-manager/calendar-manager.component";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
@@ -8,6 +7,10 @@ import { DatepickerModalComponent } from "../shared/datepicker-modal/datepicker-
 import { Title } from "@angular/platform-browser";
 import { UtilitiesService } from "../services/utilities.service";
 import { MonthDateFetcher } from "../classes/MonthDateFetcher.class";
+import { CalendarOptions } from "@fullcalendar/core";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import interactionPlugin from "@fullcalendar/interaction";
+import listPlugin from "@fullcalendar/list";
 
 /*
  * Global file values as CalendarOptions does not accept `this` keyword
@@ -44,6 +47,7 @@ export class HomePageComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.calendarOptions = {
+			plugins: [dayGridPlugin, interactionPlugin, listPlugin],
 			themeSystem: "standard",
 			height: "calc(100vh - 190px)",
 			initialView: "dayGridMonth",
