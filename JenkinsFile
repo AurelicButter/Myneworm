@@ -31,8 +31,16 @@ pipeline {
                 sh 'npm run build:prod'
             }
         }
+        stage ('Build: Staging') {
+            when { branch 'development' }
+            steps {
+                sh 'npm run build:stage'
+            }
+        }
         stage('Build: Development') {
-            when { not { branch 'stable' } }
+            when { 
+                expression { BRANCH_NAME ==~ /(stable|development)/ }
+            }
             steps {
                 sh 'npm run build:test'
             }
