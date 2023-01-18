@@ -39,7 +39,7 @@ pipeline {
         }
         stage('Build: Development') {
             when { 
-                expression { BRANCH_NAME ==~ /(stable|development)/ }
+                expression { BRANCH_NAME != /(stable|development)/ }
             }
             steps {
                 sh 'npm run build:test'
