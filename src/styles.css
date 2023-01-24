@@ -6,6 +6,16 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif; 
     position: relative;
     background-color: #ECEBF3;
+    color: #1F2232;
+}
+
+.aside-link {
+    color: #0D98BA;
+    text-decoration: none;
+}
+
+.aside-link:hover {
+    text-decoration: underline;
 }
 
 /*

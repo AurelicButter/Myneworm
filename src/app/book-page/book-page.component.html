@@ -9,7 +9,7 @@
             <p><strong>Format:</strong> {{this.utilities.formatReadable(book.format_name)}}</p>
             <p><strong>Type:</strong> {{this.utilities.formatReadable(book.book_type_name)}}</p>
             <p><strong>Release:</strong> {{this.utilities.dateReadable(book.release_date)}}</p>
-            <p *ngIf="publisher != undefined"><strong>Imprint:</strong> {{publisher.name}}</p>
+            <p *ngIf="publisher != undefined"><strong>Imprint: </strong><a routerLink="/publisher/{{book.publisher_id}}" class="aside-link">{{publisher.name}}</a></p>
         </div>
         <div class="book-links button-div">
             <a class="button-link" href="."><div class="button-text">EXAMPLE LINK</div></a>
