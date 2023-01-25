@@ -42,14 +42,12 @@ div.search-bar:hover > form > button.no-radius-bottom-right {
 }
 
 .search-image-row {
-    padding-left: 1em !important;
     display: flex;
     align-items: center;
     justify-content: center;
     padding-top: 4px;
     padding-bottom: 4px;
     width: 80px;
-    padding-right: 0;
 }
 
 .search-result-row:hover > td > .search-cover-img {
@@ -67,7 +65,6 @@ div.search-bar:hover > form > button.no-radius-bottom-right {
 
 .search-text-row {
     padding-left: 0;
-    padding-right: 0;
 }
 
 .search-input {
@@ -119,4 +116,8 @@ div.search-bar:hover > form > button.no-radius-bottom-right {
 .search-message {
     color: black;
     margin-left: 1em;
+}
+
+.search-item-title {
+    display: initial;
 }

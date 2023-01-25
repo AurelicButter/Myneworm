@@ -16,11 +16,20 @@
         </ng-container>
         <ng-container matColumnDef="title">
             <td class="search-text-row" mat-cell *matCellDef="let element">
-                <strong>{{element.title}}</strong><br>
+                <p class="search-item-title">
+                    <strong *ngIf="element.title.length > 57">
+                        <span *ngIf="hoveredRow && element.isbn === hoveredRow.isbn">{{element.title}}</span>
+                        <span *ngIf="hoveredRow == null">{{element.title.substring(0, 57)}}...</span>
+                        <span *ngIf="hoveredRow && element.isbn !== hoveredRow.isbn">{{element.title.substring(0, 57)}}...</span>
+                    </strong>
+                    <strong *ngIf="element.title.length < 57">{{element.title}}</strong>
+                </p>
+                <br>
                 <p class="search-item-format"><em>({{this.utilities.formatReadable(element.format_name)}}, {{this.utilities.formatReadable(element.book_type_name)}})</em></p>
             </td>
         </ng-container>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns" class="search-result-row" (click)="onClick(row.isbn)"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns" class="search-result-row" 
+            (click)="onClick(row.isbn)" (mouseenter)="mouseOverRow(row)" (mouseleave)="mouseLeaveRow()"></tr>
         <tr class="mat-row search-result-row" *matNoDataRow [ngClass]="this.searchTerm !== '' ? '' : 'hide-no-result'">
             <td class="mat-cell" [attr.colspan]="displayedColumns.length">
                 <strong>
