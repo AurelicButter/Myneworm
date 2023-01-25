@@ -1,26 +1,41 @@
 @import '~normalize.css';
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+    position: relative;
+    background-color: #ECEBF3;
+    color: #1F2232;
+}
+
+.aside-link {
+    color: #0D98BA;
+    text-decoration: none;
+}
+
+.aside-link:hover {
+    text-decoration: underline;
+}
+
+.disabled {
+    pointer-events:none;
+}
 
 /*
  * Buttons
  */
-.button-link {
-    color: #fff;
+.button-link, .button-link:visited {
+    color: #ECEBF3;
     text-decoration: none;
 }
 
-.button-link:visited {
-    color: #fff;
-}
-
 .button-div {
-    background-color: #333;
+    background-color: #1F2232;
 }
 
 .button-div:hover {
-    background-color: #111;
+    background-color: #0D98BA;
 }
 
 .button-text {

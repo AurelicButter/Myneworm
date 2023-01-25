@@ -1,11 +1,83 @@
+.search-bar {
+    width: 300px;
+    font-size: large;
+}
+
 .search-bar > form {
     display: flex;
     align-items: center;
 }
 
+.search-table {
+    z-index: 99;
+    position: relative;
+}
+
+div.search-bar > .search-table {
+    display: none;
+}
+
+div.search-bar:focus > .search-table,
+div.search-bar:hover > .search-table,
+div.search-bar:focus-within > .search-table,
+.search-table:hover {
+    display: table;
+}
+
+div.search-bar:focus > form > input.no-radius-bottom-left,
+div.search-bar:focus-within > form > input.no-radius-bottom-left,
+div.search-bar:hover > form > input.no-radius-bottom-left {
+    border-bottom-left-radius: 0px;
+}
+
+div.search-bar:focus > form > button.no-radius-bottom-right,
+div.search-bar:focus-within > form > button.no-radius-bottom-right,
+div.search-bar:hover > form > button.no-radius-bottom-right {
+    border-bottom-right-radius: 0px;
+}
+
+
+.search-cover-img {
+    max-height: 50px;
+}
+
+.search-image-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    width: 80px;
+}
+
+.search-result-row:hover > td > .search-cover-img {
+    max-height: 80px;
+}
+
+.search-result-row:hover {
+    background-color: #0D98BA !important;
+}
+
+.search-item-format {
+    padding: 0;
+    margin: 0;
+}
+
+.search-text-row {
+    padding-left: 0;
+}
+
 .search-input {
     outline-width: 0;
     height: 30px;
+    border: solid;
+    border-radius: 8px 0 0 8px;
+    border-color: #fff;
+    border-right: solid;
+    border-right-color: #1F2232;
+    border-right-width: 1px;
+    padding-left: 1em;
+    width: 254px;
 }
 
 .search-btn-icon {
@@ -13,10 +85,39 @@
 }
 
 .search-submit {
-    margin: 0;
-    padding: 0;
-    margin-left: 6px;
-    background-color: transparent;
-    border: none;
-    height: 30px;
+    padding: 1px 4px 0 6px;
+    background-color: #fff;
+    border: solid;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    border-color: #fff;
+    border-radius: 0 6px 6px 0;
+}
+
+.search-submit:hover {
+    background-color: #2DC9F0;
+    border-color: #2DC9F0;
+    cursor: pointer;
+}
+
+.search-result-row {
+    cursor: pointer;
+}
+
+.search-table {
+    width: 280px;
+}
+
+.hide-no-result {
+    display: none;
+}
+
+.search-message {
+    color: black;
+    margin-left: 1em;
+}
+
+.search-item-title {
+    display: initial;
 }

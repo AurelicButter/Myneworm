@@ -5,6 +5,7 @@ import { ImprintData } from "../models/imprintData";
 import { MonthReleaseData } from "../models/monthReleaseData";
 import { BookData } from "../models/bookData";
 import { PublisherData } from "../models/publisherData";
+import { BookType } from "../models/BookType";
 
 @Injectable({
 	providedIn: "root"
@@ -48,6 +49,10 @@ export class MynewormAPIService {
 		return this.http.get<PublisherData>(`${environment.API_ADDRESS}/publisher/${publisherID}`);
 	}
 
+	searchBookByTerm(term: string) {
+		return this.http.get<BookData[]>(`${environment.API_ADDRESS}/book/search?term=${term}&limit=10`);
+	}
+
 	searchBooks(publisherID?: string, startDate?: string, endDate?: string) {
 		let params = "";
 		let multipleParams = false;
@@ -74,5 +79,9 @@ export class MynewormAPIService {
 		}
 
 		return this.http.get<BookData[]>(`${environment.API_ADDRESS}/book/search?${params}`);
+	}
+
+	getBookTypes() {
+		return this.http.get<BookType[]>(`${environment.API_ADDRESS}/booktype`);
 	}
 }

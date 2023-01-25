@@ -16,9 +16,19 @@ import { SeriesPageModule } from "./series-page/series-page.module";
 import { FaqPageComponent } from "./faq-page/faq-page.component";
 import { AboutPageComponent } from "./about-page/about-page.component";
 import { SearchBarModule } from "./search-bar/search-bar.module";
+import { DataCorrectionFormComponent } from "./data-correction-form/data-correction-form.component";
+import { ContactPageComponent } from "./contact-page/contact-page.component";
+import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
-	declarations: [AppComponent, MissingPageComponent, FaqPageComponent, AboutPageComponent],
+	declarations: [
+		AppComponent,
+		MissingPageComponent,
+		FaqPageComponent,
+		AboutPageComponent,
+		DataCorrectionFormComponent,
+		ContactPageComponent
+	],
 	imports: [
 		BrowserModule,
 		HttpClientModule,
@@ -31,7 +41,8 @@ import { SearchBarModule } from "./search-bar/search-bar.module";
 		BrowserAnimationsModule,
 		ImprintIndexModule,
 		SeriesPageModule,
-		SearchBarModule
+		SearchBarModule,
+		MatDialogModule
 	],
 	providers: [Title],
 	bootstrap: [AppComponent]
