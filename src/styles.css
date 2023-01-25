@@ -18,6 +18,10 @@ body {
     text-decoration: underline;
 }
 
+.disabled {
+    pointer-events:none;
+}
+
 /*
  * Buttons
  */
