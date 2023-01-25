@@ -15,6 +15,7 @@ export class SearchBarComponent {
 	searchTerm = "";
 	public dataSource: MatTableDataSource<BookData> = new MatTableDataSource<BookData>();
 	loading = false;
+	hoveredRow: BookData | null = null;
 
 	constructor(public service: MynewormAPIService, public utilities: UtilitiesService, private router: Router) {}
 
@@ -53,5 +54,13 @@ export class SearchBarComponent {
 	onClick(isbn: string) {
 		this.router.navigate([`/book/${isbn}`]);
 		this.resetData();
+	}
+
+	mouseOverRow(row: BookData) {
+		this.hoveredRow = row;
+	}
+
+	mouseLeaveRow() {
+		this.hoveredRow = null;
 	}
 }

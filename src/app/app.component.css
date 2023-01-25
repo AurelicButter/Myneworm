@@ -13,10 +13,6 @@
     color: #ECEBF3;
 }
 
-.nav-list {
-    list-style-type: none;
-}
-
 .nav-list-ul {
     margin: 0;
     padding: 0;
@@ -49,15 +45,6 @@
     padding-right: 80px;
 }
 
-.nav-link a { 
-    color: #ECEBF3;
-    text-decoration: none; 
-}
-
-.nav-link:hover {
-    background-color: #0D98BA;
-}
-
 footer {
     text-align: right;
     width: 100%;
@@ -70,4 +57,17 @@ footer span {
     display: inline-block;
     line-height: 75px;
     margin-right: 20px;
+}
+
+.nav-li {
+    list-style-type: none;
+}
+
+.nav-link {
+    color: #ECEBF3;
+    text-decoration: none;    
+}
+
+.nav-link:hover {
+    background-color: #0D98BA;
 }
