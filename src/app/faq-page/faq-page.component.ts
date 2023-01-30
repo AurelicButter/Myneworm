@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { FAQData } from "./faqData";
-import { Title } from "@angular/platform-browser";
+import { MetadataService } from "../services/metadata.service";
 
 @Component({
 	selector: "app-faq-page",
@@ -10,7 +10,7 @@ import { Title } from "@angular/platform-browser";
 export class FaqPageComponent {
 	faqData = FAQData;
 
-	constructor(private titleService: Title) {
-		this.titleService.setTitle("Myneworm - FAQ");
+	constructor(private metaService: MetadataService) {
+		this.metaService.updateMetaTags("FAQ", "/faq");
 	}
 }

@@ -6,11 +6,11 @@ import { CalendarManagerComponent } from "../shared/calendar-manager/calendar-ma
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { DatepickerModalComponent } from "../shared/datepicker-modal/datepicker-modal.component";
 import { ImprintData } from "../models/imprintData";
-import { Title } from "@angular/platform-browser";
 import { UtilitiesService } from "../services/utilities.service";
 import { ImprintBookFetcher } from "../classes/ImprintBookFetcher.class";
 import interactionPlugin from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
+import { MetadataService } from "../services/metadata.service";
 
 /*
  * Global file values as CalendarOptions does not accept `this` keyword
@@ -36,7 +36,7 @@ export class ImprintPageComponent implements OnInit {
 		private route: ActivatedRoute,
 		private service: MynewormAPIService,
 		public matDialog: MatDialog,
-		private titleService: Title,
+		private metaService: MetadataService,
 		private utilities: UtilitiesService
 	) {
 		imprintFetcher = new ImprintBookFetcher(this.service, this.utilities);
@@ -101,7 +101,12 @@ export class ImprintPageComponent implements OnInit {
 			this.service.getImprintInfo(data.id).subscribe((data: ImprintData) => {
 				this.imprint = data;
 				publisher = data;
-				this.titleService.setTitle(`Myneworm - ${this.imprint.name}`);
+				this.metaService.updateMetaTags(
+					this.imprint.name,
+					`/publisher/${this.imprint.publisher_id}`,
+					undefined,
+					this.getLogo(this.imprint.publisher_id)
+				);
 			});
 		});
 	}
