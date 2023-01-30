@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { Title, Meta } from "@angular/platform-browser";
 import { ActivatedRoute } from "@angular/router";
 import { BookData } from "../models/bookData";
 import { PublisherData } from "../models/publisherData";

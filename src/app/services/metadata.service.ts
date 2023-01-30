@@ -29,7 +29,7 @@ export class MetadataService {
 		}
 
 		if (imageURL) {
-			this.metaService.addTag({ name: "og:image", content: `https://myneworm.katsurin.com${imageURL}` });
+			this.metaService.addTag({ name: "og:image", content: imageURL });
 			this.setImage = true;
 		} else if (this.setImage) {
 			this.metaService.removeTag("name='og:image'");
