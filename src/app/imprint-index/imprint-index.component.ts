@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { MynewormAPIService } from "../services/myneworm-api.service";
 import { ImprintData } from "../models/imprintData";
-import { Title } from "@angular/platform-browser";
+import { MetadataService } from "../services/metadata.service";
 
 @Component({
 	selector: "app-imprint-index",
@@ -12,8 +12,12 @@ import { Title } from "@angular/platform-browser";
 export class ImprintIndexComponent implements OnInit {
 	imprints: ImprintData[];
 
-	constructor(private route: ActivatedRoute, private service: MynewormAPIService, private titleService: Title) {
-		this.titleService.setTitle("Myneworm - Imprint List");
+	constructor(
+		private route: ActivatedRoute,
+		private service: MynewormAPIService,
+		private metaService: MetadataService
+	) {
+		this.metaService.updateMetaTags("Imprint List", "/publisher");
 	}
 
 	ngOnInit() {
