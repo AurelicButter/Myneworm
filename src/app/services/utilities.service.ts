@@ -1,9 +1,13 @@
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
+import { of } from "rxjs";
 
 @Injectable({
 	providedIn: "root"
 })
 export class UtilitiesService {
+	constructor(private router: Router) {}
+
 	dateFormater(year: number, month: number) {
 		let result = `${year}`;
 		if (month < 10) {
@@ -68,5 +72,17 @@ export class UtilitiesService {
 		}
 
 		return result;
+	}
+
+	/* Handle the error catching for pages */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	catchAPIError(error: any) {
+		if (error.status === 404) {
+			this.router.navigate(["/404"]);
+		} else {
+			console.error(error);
+		}
+
+		return of(null);
 	}
 }

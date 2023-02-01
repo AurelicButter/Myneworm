@@ -11,6 +11,7 @@ import { ImprintBookFetcher } from "../classes/ImprintBookFetcher.class";
 import interactionPlugin from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
 import { MetadataService } from "../services/metadata.service";
+import { catchError } from "rxjs";
 
 /*
  * Global file values as CalendarOptions does not accept `this` keyword
@@ -98,16 +99,22 @@ export class ImprintPageComponent implements OnInit {
 		this.calendarVisible = true;
 
 		this.route.params.subscribe((data) => {
-			this.service.getImprintInfo(data.id).subscribe((data: ImprintData) => {
-				this.imprint = data;
-				publisher = data;
-				this.metaService.updateMetaTags(
-					this.imprint.name,
-					`/publisher/${this.imprint.publisher_id}`,
-					undefined,
-					this.getLogo(this.imprint.publisher_id)
-				);
-			});
+			this.service
+				.getImprintInfo(data.id)
+				.pipe(catchError((err) => this.utilities.catchAPIError(err)))
+				.subscribe((data: ImprintData | null) => {
+					if (data === null) {
+						return;
+					}
+					this.imprint = data;
+					publisher = data;
+					this.metaService.updateMetaTags(
+						this.imprint.name,
+						`/publisher/${this.imprint.publisher_id}`,
+						undefined,
+						this.getLogo(this.imprint.publisher_id)
+					);
+				});
 		});
 	}
 
