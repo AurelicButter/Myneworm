@@ -1,3 +1,9 @@
+<!-- 
+    Thank you for contributing! 
+    If you have not already, please review the contribution guidelines before submitting:
+    https://github.com/Butterstroke/Myneworm/tree/master/.github/CONTRIBUTING.md
+-->
+
 ## What Does This Do?
 <!--
     Give a generalized summary of the changes made.
