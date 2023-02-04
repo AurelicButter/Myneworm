@@ -15,6 +15,8 @@ export class SearchPageComponent {
 	displayedColumns = ["cover", "title", "format", "type"];
 	searchTerm = "";
 	public dataSource: MatTableDataSource<BookData> = new MatTableDataSource<BookData>();
+	hoveredRow: BookData | null = null;
+	showAdvancedOptions = false;
 
 	constructor(
 		private route: ActivatedRoute,
@@ -38,7 +40,11 @@ export class SearchPageComponent {
 		this.searchBooks();
 	}
 
-	mouseOverRow(row: BookData) {}
+	mouseOverRow(row: BookData) {
+		this.hoveredRow = row;
+	}
 
-	mouseLeaveRow() {}
+	mouseLeaveRow() {
+		this.hoveredRow = null;
+	}
 }

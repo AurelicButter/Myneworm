@@ -1,16 +1,24 @@
 <div class="search-page">
     <div class="search-bar-large">
-        <form #searchInput="ngForm" (ngSubmit)="submit()" class="search-form">
-            <input type="text" class="search-input-long" placeholder="Search" [(ngModel)]="searchTerm" #userInput="ngModel" [ngModelOptions]="{standalone: true}"
-                [ngClass]="{'no-radius-bottom-left' : this.dataSource.data.length > 0 || (this.dataSource.data.length === 0 && this.searchTerm !== '')}" />
-            <button type="submit" class="search-submit-long" 
-                [ngClass]="{'no-radius-bottom-right' : this.dataSource.data.length > 0 || (this.dataSource.data.length === 0 && this.searchTerm !== '')}"
-                aria-label="Search">
-                    <img class="search-btn-icon-long" src="../../assets/fa-search.svg" alt="Search icon"/>
-            </button>
-        </form>
+        <div class="search-div">
+            <div class="search-inner-div">
+                <form #searchInput="ngForm" (ngSubmit)="submit()" class="search-form">
+                    <input type="text" class="search-input-long" placeholder="Search" [(ngModel)]="searchTerm"
+                        #userInput="ngModel" [ngModelOptions]="{standalone: true}"
+                        [ngClass]="{'no-radius-bottom-left' : this.dataSource.data.length > 0 || (this.dataSource.data.length === 0 && this.searchTerm !== '')}" />
+                    <button type="submit" class="search-submit-long"
+                        [ngClass]="{'no-radius-bottom-right' : this.dataSource.data.length > 0 || (this.dataSource.data.length === 0 && this.searchTerm !== '')}"
+                        aria-label="Search">
+                        <img class="search-btn-icon-long" src="../../assets/fa-search.svg" alt="Search icon" />
+                    </button>
+                </form>
+                <div class="advanced-options-button">
+                    <p>Advanced Options</p>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="advanced-options">
+    <div class="advanced-options" [ngClass]="{ 'hide-adv-options': !showAdvancedOptions }">
         <h3 class="search-page-header">Advanced Options</h3>
         <hr class="search-page-line">
         <p>Coming soon...</p>
@@ -21,12 +29,14 @@
         <table *ngIf="dataSource" mat-table [dataSource]="dataSource" multiTemplateDataRows class="search-results">
             <ng-container matColumnDef="cover">
                 <td class="search-image-row" mat-cell *matCellDef="let element">
-                    <a routerLink="/book/{{element.isbn}}"><img class="search-cover-img" src='{{this.service.getAsset(element.isbn)}}' alt='Cover for {{element.title}}' /></a>
+                    <a routerLink="/book/{{element.isbn}}"><img class="search-cover-img"
+                            src='{{this.service.getAsset(element.isbn)}}' alt='Cover for {{element.title}}' /></a>
                 </td>
             </ng-container>
             <ng-container matColumnDef="title">
                 <td class="search-text-row" mat-cell *matCellDef="let element">
-                    <h4 class="search-item-title"><strong><a routerLink="/book/{{element.isbn}}" class="search-link">{{element.title}}</a></strong></h4>
+                    <h4 class="search-item-title"><strong><a routerLink="/book/{{element.isbn}}"
+                                class="search-link">{{element.title}}</a></strong></h4>
                     <p class="search-item-desc line-clamp" [innerHTML]="element.description"></p>
                     <span class="more"><a routerLink="/book/{{element.isbn}}" class="search-link">Read more</a></span>
                 </td>
@@ -41,30 +51,15 @@
                     <p>{{this.utilities.formatReadable(element.book_type_name)}}</p>
                 </td>
             </ng-container>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns" class="search-result-row" 
+            <tr mat-row *matRowDef="let row; columns: displayedColumns" class="search-result-row"
                 (mouseenter)="mouseOverRow(row)" (mouseleave)="mouseLeaveRow()"></tr>
-            <tr class="mat-row search-result-row" *matNoDataRow [ngClass]="this.searchTerm !== '' ? '' : 'hide-no-result'">
+            <tr class="mat-row search-result-row" *matNoDataRow
+                [ngClass]="this.searchTerm !== '' ? '' : 'hide-no-result'">
                 <td class="mat-cell" [attr.colspan]="displayedColumns.length">
                     <strong>
                         <p class="search-page-message">No results found...</p>
                     </strong>
                 </td>
-            </tr>
-            <tr>
-                <th>Cover</th>
-                <th>Title</th>
-                <th>Format</th>
-                <th>Book Type</th>
-            </tr>
-            <tr>
-                <td>Alfreds Futterkiste</td>
-                <td>Maria Anders</td>
-                <td>Germany</td>
-            </tr>
-            <tr>
-                <td>Centro comercial Moctezuma</td>
-                <td>Francisco Chang</td>
-                <td>Mexico</td>
             </tr>
         </table>
     </div>
