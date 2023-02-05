@@ -53,6 +53,17 @@ export class MynewormAPIService {
 		return this.http.get<BookData[]>(`${environment.API_ADDRESS}/book/search?term=${term}&limit=10`);
 	}
 
+	searchBooksWithLimit(term: string, limit: number, page?: number) {
+		if (page === undefined || page < 1) {
+			page = 1;
+		}
+		if (limit === undefined || limit < 1) {
+			limit = 10;
+		}
+
+		return this.http.get<BookData[]>(`${environment.API_ADDRESS}/book/search/${page}?term=${term}&limit=${limit}`);
+	}
+
 	searchBooks(publisherID?: string, startDate?: string, endDate?: string) {
 		let params = "";
 		let multipleParams = false;
