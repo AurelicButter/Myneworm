@@ -13,7 +13,7 @@
                     </button>
                 </form>
                 <div class="advanced-options-button">
-                    <p>Advanced Options</p>
+                    <a href="javascript:void(0)" class="clickable-button" (click)="onAdvOptionsClick()">Advanced Options</a>
                 </div>
             </div>
         </div>
@@ -26,6 +26,10 @@
     <div class="search-results">
         <h3 class="search-page-header">Search Results</h3>
         <hr class="search-page-line">
+        <div class="search-pagination">
+            <a href="javascript:void(0)" [ngClass]="this.pageNumber == 1 ? 'no-page' : ''" (click)="prevPage()">< Previous</a>
+            <a href="javascript:void(0)" [ngClass]="this.dataSource.filteredData.length === 0 || this.dataSource.filteredData.length < 25 ? 'no-page' : ''" (click)="nextPage()">Next ></a>
+        </div>        
         <table *ngIf="dataSource" mat-table [dataSource]="dataSource" multiTemplateDataRows class="search-results">
             <ng-container matColumnDef="cover">
                 <td class="search-image-row" mat-cell *matCellDef="let element">
@@ -51,8 +55,7 @@
                     <p>{{this.utilities.formatReadable(element.book_type_name)}}</p>
                 </td>
             </ng-container>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns" class="search-result-row"
-                (mouseenter)="mouseOverRow(row)" (mouseleave)="mouseLeaveRow()"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns" class="search-result-row"></tr>
             <tr class="mat-row search-result-row" *matNoDataRow
                 [ngClass]="this.searchTerm !== '' ? '' : 'hide-no-result'">
                 <td class="mat-cell" [attr.colspan]="displayedColumns.length">

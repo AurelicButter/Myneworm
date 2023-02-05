@@ -22,7 +22,17 @@
     width: 75%;
 }
 
-.advanced-options-button {}
+.advanced-options-button {
+    margin-top: 8px;
+}
+
+.advanced-options-button > a {
+    color: #0D98BA;
+}
+
+.hide-adv-options {
+    display: none;
+}
 
 .search-cover-img {
     max-height: 100px;
@@ -87,6 +97,17 @@
     border-radius: 0 6px 6px 0;
     border-left: none;
     border-width: 2px;
+    cursor: pointer;
+}
+
+.search-pagination {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.search-pagination > a {
+    margin-right: 10px;
+    color: #0D98BA;
 }
 
 .search-btn-icon-long {
@@ -130,6 +151,10 @@
 
 .search-result-row:nth-child(2n), .search-result-row:nth-child(2n):hover {
     background-color: #fff;
+}
+
+.no-page {
+    display: none;
 }
 
 .line-clamp {
