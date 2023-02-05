@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { Title } from "@angular/platform-browser";
+import { MetadataService } from "../services/metadata.service";
 
 @Component({
 	selector: "app-missing-page",
@@ -7,7 +7,7 @@ import { Title } from "@angular/platform-browser";
 	styleUrls: ["./missing-page.component.css"]
 })
 export class MissingPageComponent {
-	constructor(private titleService: Title) {
-		this.titleService.setTitle("Myneworm - 404 Not Found");
+	constructor(private metaService: MetadataService) {
+		this.metaService.resetMetaTags("404 Not Found");
 	}
 }

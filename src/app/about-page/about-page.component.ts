@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { Title } from "@angular/platform-browser";
+import { MetadataService } from "../services/metadata.service";
 
 @Component({
 	selector: "app-about-page",
@@ -7,7 +7,7 @@ import { Title } from "@angular/platform-browser";
 	styleUrls: ["./about-page.component.css"]
 })
 export class AboutPageComponent {
-	constructor(private titleService: Title) {
-		this.titleService.setTitle("Myneworm - About");
+	constructor(private metaService: MetadataService) {
+		this.metaService.updateMetaTags("About", "/about");
 	}
 }

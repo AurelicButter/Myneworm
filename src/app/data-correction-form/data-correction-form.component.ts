@@ -1,8 +1,8 @@
 import { Component, ViewChild } from "@angular/core";
-import { Title } from "@angular/platform-browser";
 import { ActivatedRoute } from "@angular/router";
 import { BookType } from "../models/BookType";
 import { dataCorrectionForm } from "../models/dataCorrectionForm";
+import { MetadataService } from "../services/metadata.service";
 import { MynewormAPIService } from "../services/myneworm-api.service";
 import { UtilitiesService } from "../services/utilities.service";
 
@@ -22,9 +22,9 @@ export class DataCorrectionFormComponent {
 		private route: ActivatedRoute,
 		private service: MynewormAPIService,
 		private utilities: UtilitiesService,
-		private titleService: Title
+		private metaService: MetadataService
 	) {
-		this.titleService.setTitle("Myneworm - Data Correction");
+		this.metaService.updateMetaTags("Data Correction", "/correction");
 
 		this.route.queryParams.subscribe((data) => {
 			this.correction.isbn = data.isbn;

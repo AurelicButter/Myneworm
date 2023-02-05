@@ -1,6 +1,6 @@
 import { Component, ViewChild } from "@angular/core";
-import { Title } from "@angular/platform-browser";
 import { userContactForm } from "src/app/models/userContactForm";
+import { MetadataService } from "../services/metadata.service";
 
 @Component({
 	selector: "app-contact-page",
@@ -12,8 +12,8 @@ export class ContactPageComponent {
 	@ViewChild("userContact") dataForm: any;
 	contactForm = new userContactForm();
 
-	constructor(private titleService: Title) {
-		this.titleService.setTitle("Myneworm - Contact");
+	constructor(private metaService: MetadataService) {
+		this.metaService.updateMetaTags("Contact", "/contact");
 	}
 
 	resetForm() {

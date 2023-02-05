@@ -56,6 +56,13 @@ export class SearchBarComponent {
 		this.resetData();
 	}
 
+	onButtonClick() {
+		this.router.navigate(["/search"], {
+			queryParams: { term: this.searchTerm }
+		});
+		this.resetData();
+	}
+
 	mouseOverRow(row: BookData) {
 		this.hoveredRow = row;
 	}
