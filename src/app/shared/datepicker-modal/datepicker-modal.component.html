@@ -5,7 +5,7 @@
     <p class="modal-error">{{errMessage}}</p>
     <div class="modal-content">
         <mat-form-field>
-            <input matInput [matDatepicker]="basicDatepicker" (dateInput)="updateDate($event.value)">
+            <input class="modal-input" matInput [matDatepicker]="basicDatepicker" (dateChange)="updateDate($event.value)" [value]="selectedDateObj">
             <mat-datepicker-toggle matSuffix [for]="basicDatepicker"></mat-datepicker-toggle>
             <mat-datepicker #basicDatepicker></mat-datepicker>
         </mat-form-field>

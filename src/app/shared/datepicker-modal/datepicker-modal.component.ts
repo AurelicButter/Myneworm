@@ -11,6 +11,7 @@ export class DatepickerModalComponent {
 	selectedDate: string;
 	confirmed = false;
 	errMessage = "";
+	selectedDateObj: Date;
 
 	constructor(public dialogRef: MatDialogRef<DatepickerModalComponent>) {}
 
@@ -39,14 +40,17 @@ export class DatepickerModalComponent {
 		}
 	}
 
-	async updateDate(dateInput: Date) {
-		const oldDate = dateInput;
+	updateDate(dateInput: Date) {
+		this.selectedDate = moment.utc(dateInput).format("YYYY-MM-DD");
+		const offset = dateInput.getTimezoneOffset();
 
-		await new Promise((resolve) => setTimeout(resolve, 500));
-
-		if (oldDate === dateInput) {
-			this.selectedDate = moment(dateInput).format("YYYY-MM-DD");
-			this.validateDate();
+		if (offset > 0) {
+			const tempDate = new Date(this.selectedDate).setDate(dateInput.getDate() + 1);
+			this.selectedDateObj = new Date(tempDate);
+		} else {
+			this.selectedDateObj = new Date(this.selectedDate);
 		}
+
+		this.validateDate();
 	}
 }
