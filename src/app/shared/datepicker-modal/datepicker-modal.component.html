@@ -2,6 +2,7 @@
     <header class="modal-header">
         <h1>Select a date</h1>
     </header>
+    <p class="modal-error">{{errMessage}}</p>
     <div class="modal-content">
         <mat-form-field>
             <input matInput [matDatepicker]="basicDatepicker" (dateInput)="updateDate($event.value)">
