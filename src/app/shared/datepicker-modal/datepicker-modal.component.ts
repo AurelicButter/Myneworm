@@ -10,6 +10,8 @@ import * as moment from "moment";
 export class DatepickerModalComponent {
 	selectedDate: string;
 	confirmed = false;
+	errMessage = "";
+	selectedDateObj: Date;
 
 	constructor(public dialogRef: MatDialogRef<DatepickerModalComponent>) {}
 
@@ -19,14 +21,36 @@ export class DatepickerModalComponent {
 	}
 
 	close(): void {
-		if (this.confirmed) {
-			this.dialogRef.close(this.selectedDate);
-			return;
+		if (!this.confirmed) {
+			this.dialogRef.close();
 		}
-		this.dialogRef.close();
+
+		this.validateDate();
+		if (this.errMessage === "") {
+			this.dialogRef.close(this.selectedDate);
+		}
+	}
+
+	validateDate() {
+		if (!this.selectedDate.match(/\d{4}-\d{2}-\d{2}/)) {
+			this.errMessage = "Date out of range. Unable to parse input.";
+			this.confirmed = false;
+		} else {
+			this.errMessage = "";
+		}
 	}
 
 	updateDate(dateInput: Date) {
-		this.selectedDate = moment(dateInput).format("YYYY-MM-DD");
+		this.selectedDate = moment.utc(dateInput).format("YYYY-MM-DD");
+		const offset = dateInput.getTimezoneOffset();
+
+		if (offset > 0) {
+			const tempDate = new Date(this.selectedDate).setDate(dateInput.getDate() + 1);
+			this.selectedDateObj = new Date(tempDate);
+		} else {
+			this.selectedDateObj = new Date(this.selectedDate);
+		}
+
+		this.validateDate();
 	}
 }
