@@ -22,7 +22,7 @@ export class DatepickerModalComponent {
 
 	close(): void {
 		if (!this.confirmed) {
-			this.dialogRef.close();
+			return this.dialogRef.close();
 		}
 
 		this.validateDate();
