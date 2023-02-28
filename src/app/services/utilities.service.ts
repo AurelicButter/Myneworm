@@ -55,7 +55,7 @@ export class UtilitiesService {
 		if (date < 10) {
 			currDate += "0";
 		}
-		currDate += `${date}-`;
+		currDate += date;
 
 		return currDate;
 	}
