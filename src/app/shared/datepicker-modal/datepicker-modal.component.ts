@@ -22,7 +22,7 @@ export class DatepickerModalComponent {
 
 	close(): void {
 		if (!this.confirmed) {
-			this.dialogRef.close();
+			return this.dialogRef.close();
 		}
 
 		this.validateDate();
@@ -45,7 +45,7 @@ export class DatepickerModalComponent {
 		const offset = dateInput.getTimezoneOffset();
 
 		if (offset > 0) {
-			const tempDate = new Date(this.selectedDate).setDate(dateInput.getDate() + 1);
+			const tempDate = new Date(this.selectedDate).setDate(dateInput.getDate());
 			this.selectedDateObj = new Date(tempDate);
 		} else {
 			this.selectedDateObj = new Date(this.selectedDate);
