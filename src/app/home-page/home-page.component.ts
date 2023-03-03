@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, Inject, OnInit, PLATFORM_ID, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { MynewormAPIService } from "../services/myneworm-api.service";
 import { CalendarManagerComponent } from "../shared/calendar-manager/calendar-manager.component";
@@ -11,6 +11,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
 import { MetadataService } from "../services/metadata.service";
+import { isPlatformBrowser } from "@angular/common";
 
 /*
  * Global file values as CalendarOptions does not accept `this` keyword
@@ -36,9 +37,12 @@ export class HomePageComponent implements OnInit {
 		private service: MynewormAPIService,
 		public matDialog: MatDialog,
 		private metaService: MetadataService,
-		private utilities: UtilitiesService
+		private utilities: UtilitiesService,
+		// eslint-disable-next-line @typescript-eslint/ban-types
+		@Inject(PLATFORM_ID) private platformId: Object
 	) {
 		this.metaService.updateMetaTags("Home", "/");
+
 		dateFetcher = new MonthDateFetcher(this.service, this.utilities);
 
 		formatCSS = this.utilities.formatCSSClass;
@@ -46,65 +50,62 @@ export class HomePageComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.calendarOptions = {
-			plugins: [dayGridPlugin, interactionPlugin, listPlugin],
-			themeSystem: "standard",
-			height: "calc(100vh - 190px)",
-			initialView: "dayGridMonth",
-			dayMaxEventRows: 5,
-			buttonText: {
-				list: "schedule"
-			},
-			showNonCurrentDates: false,
-			fixedWeekCount: false,
-			headerToolbar: {
-				left: "today,dateSelector",
-				center: "title",
-				right: "prev,dayGridWeek,dayGridMonth,listMonth,next"
-			},
-			views: {
-				dayGridWeek: {
-					dayMaxEventRows: false
+		if (isPlatformBrowser(this.platformId)) {
+			this.calendarOptions = {
+				plugins: [dayGridPlugin, interactionPlugin, listPlugin],
+				themeSystem: "standard",
+				height: "calc(100vh - 190px)",
+				initialView: "dayGridMonth",
+				dayMaxEventRows: 5,
+				buttonText: {
+					list: "schedule"
 				},
-				listMonth: {
-					eventContent: function (arg) {
-						const formatTag = document.createElement("div");
-						const imprintTag = document.createElement("div");
-						const typeTag = document.createElement("div");
-						const bookTitle = document.createElement("div");
-
-						formatTag.className = `${formatCSS(arg.event.extendedProps.format)} schedule-tag`;
-						imprintTag.className = `${formatCSS(arg.event.extendedProps.imprint)} schedule-tag`;
-						typeTag.className = `${formatCSS(arg.event.extendedProps.bookType)} schedule-tag`;
-						bookTitle.className = "book-title";
-
-						formatTag.innerHTML = formatText(arg.event.extendedProps.format);
-						imprintTag.innerHTML = `<a href="./publisher/${
-							arg.event.extendedProps.imprintID
-						}">${arg.event.extendedProps.imprint.replace("Entertainment", "")}</a>`;
-						typeTag.innerHTML = formatText(arg.event.extendedProps.bookType);
-						bookTitle.innerHTML = `<a href="${arg.event.url}">${arg.event.title}</a>`;
-
-						const arrayOfDomNodes = [formatTag, imprintTag, typeTag, bookTitle];
-						return { domNodes: arrayOfDomNodes };
+				showNonCurrentDates: false,
+				fixedWeekCount: false,
+				headerToolbar: {
+					left: "today,dateSelector",
+					center: "title",
+					right: "prev,dayGridWeek,dayGridMonth,listMonth,next"
+				},
+				views: {
+					dayGridWeek: {
+						dayMaxEventRows: false
+					},
+					listMonth: {
+						eventContent: function (arg) {
+							return {
+								html: `
+								<div class='${formatCSS(arg.event.extendedProps.format)} schedule-tag'>${formatText(
+									arg.event.extendedProps.format
+								)}</div>
+								<div class='${formatCSS(arg.event.extendedProps.imprint)} schedule-tag'><a href="./publisher/${
+									arg.event.extendedProps.imprintID
+								}">${arg.event.extendedProps.imprint.replace("Entertainment", "")}</a></div>
+								<div class='${formatCSS(arg.event.extendedProps.bookType)} schedule-tag'>${formatText(
+									arg.event.extendedProps.bookType
+								)}</div>
+								<div class='book-title'><a href="${arg.event.url}">${arg.event.title}</a></div>
+						`
+							};
+						}
+					}
+				},
+				datesSet: function (dateInfo) {
+					dateFetcher.getDates(dateInfo.view.calendar, dateInfo.start);
+				},
+				customButtons: {
+					dateSelector: {
+						icon: "calendar",
+						text: "Select Date",
+						click: () => {
+							this.selectDate();
+						}
 					}
 				}
-			},
-			datesSet: function (dateInfo) {
-				dateFetcher.getDates(dateInfo.view.calendar, dateInfo.start);
-			},
-			customButtons: {
-				dateSelector: {
-					icon: "calendar",
-					text: "Select Date",
-					click: () => {
-						this.selectDate();
-					}
-				}
-			}
-		};
+			};
 
-		this.calendarVisible = true;
+			this.calendarVisible = true;
+		}
 	}
 
 	selectDate(): void {

@@ -19,7 +19,6 @@ import { SearchBarModule } from "./search-bar/search-bar.module";
 import { DataCorrectionFormComponent } from "./data-correction-form/data-correction-form.component";
 import { ContactPageComponent } from "./contact-page/contact-page.component";
 import { MatDialogModule } from "@angular/material/dialog";
-import { SearchPageComponent } from "./search-page/search-page.component";
 import { SearchPageModule } from "./search-page/search-page.module";
 
 @NgModule({
@@ -32,7 +31,7 @@ import { SearchPageModule } from "./search-page/search-page.module";
 		ContactPageComponent
 	],
 	imports: [
-		BrowserModule,
+		BrowserModule.withServerTransition({ appId: "serverApp" }),
 		HttpClientModule,
 		FormsModule,
 		AppRoutingModule,
