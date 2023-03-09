@@ -11,6 +11,7 @@ import { AboutPageComponent } from "./about-page/about-page.component";
 import { DataCorrectionFormComponent } from "./data-correction-form/data-correction-form.component";
 import { ContactPageComponent } from "./contact-page/contact-page.component";
 import { SearchPageComponent } from "./search-page/search-page.component";
+import { PrivacyPageComponent } from "./privacy-page/privacy-page.component";
 
 const routes: Routes = [
 	{ path: "", component: HomePageComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
 	{ path: "faq", component: FaqPageComponent },
 	{ path: "correction", component: DataCorrectionFormComponent },
 	{ path: "contact", component: ContactPageComponent },
+	{ path: "privacy", component: PrivacyPageComponent },
 	{ path: "**", pathMatch: "full", component: MissingPageComponent }
 ];
 
