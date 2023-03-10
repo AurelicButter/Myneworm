@@ -67,10 +67,10 @@ export class ImprintPageComponent implements OnInit {
 
 						formatTag.className = `${UtilityService.formatCSSClass(
 							arg.event.extendedProps.format
-						)} schedule-tag`;
+						)} format-tag schedule-tag`;
 						typeTag.className = `${UtilityService.formatCSSClass(
 							arg.event.extendedProps.bookType
-						)} schedule-tag`;
+						)} type-tag schedule-tag`;
 						bookTitle.className = "book-title";
 
 						formatTag.innerHTML = UtilityService.formatReadable(arg.event.extendedProps.format);
