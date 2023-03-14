@@ -19,8 +19,8 @@ import { SearchBarModule } from "./search-bar/search-bar.module";
 import { DataCorrectionFormComponent } from "./data-correction-form/data-correction-form.component";
 import { ContactPageComponent } from "./contact-page/contact-page.component";
 import { MatDialogModule } from "@angular/material/dialog";
-import { SearchPageComponent } from "./search-page/search-page.component";
 import { SearchPageModule } from "./search-page/search-page.module";
+import { PrivacyPageComponent } from "./privacy-page/privacy-page.component";
 
 @NgModule({
 	declarations: [
@@ -45,7 +45,8 @@ import { SearchPageModule } from "./search-page/search-page.module";
 		SeriesPageModule,
 		SearchBarModule,
 		SearchPageModule,
-		MatDialogModule
+		MatDialogModule,
+		PrivacyPageComponent
 	],
 	providers: [Title],
 	bootstrap: [AppComponent]

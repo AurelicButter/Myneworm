@@ -73,9 +73,9 @@ export class HomePageComponent implements OnInit {
 						const typeTag = document.createElement("div");
 						const bookTitle = document.createElement("div");
 
-						formatTag.className = `${formatCSS(arg.event.extendedProps.format)} schedule-tag`;
+						formatTag.className = `${formatCSS(arg.event.extendedProps.format)} format-tag schedule-tag`;
 						imprintTag.className = `${formatCSS(arg.event.extendedProps.imprint)} schedule-tag`;
-						typeTag.className = `${formatCSS(arg.event.extendedProps.bookType)} schedule-tag`;
+						typeTag.className = `${formatCSS(arg.event.extendedProps.bookType)} type-tag schedule-tag`;
 						bookTitle.className = "book-title";
 
 						formatTag.innerHTML = formatText(arg.event.extendedProps.format);
