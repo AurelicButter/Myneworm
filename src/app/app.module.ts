@@ -21,6 +21,7 @@ import { ContactPageComponent } from "./contact-page/contact-page.component";
 import { MatDialogModule } from "@angular/material/dialog";
 import { SearchPageModule } from "./search-page/search-page.module";
 import { PrivacyPageComponent } from "./privacy-page/privacy-page.component";
+import { DatabaseGuidelinesComponent } from "./database-guidelines/database-guidelines.component";
 
 @NgModule({
 	declarations: [
@@ -46,7 +47,8 @@ import { PrivacyPageComponent } from "./privacy-page/privacy-page.component";
 		SearchBarModule,
 		SearchPageModule,
 		MatDialogModule,
-		PrivacyPageComponent
+		PrivacyPageComponent,
+		DatabaseGuidelinesComponent
 	],
 	providers: [Title],
 	bootstrap: [AppComponent]
