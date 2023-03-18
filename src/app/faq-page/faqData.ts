@@ -10,10 +10,15 @@
 export const FAQData = {
 	Database: [
 		[
+			"What is accepted in Myneworm's Database?",
+			`We currently accept any English translations for manga and light novels based on our database guidelines. You can find the details on
+			our guideline page <a href='/guidelines'>here</a>.`
+		],
+		[
 			"Why can't I find X title?",
-			`We currently only track English translations of manga and light novels with ISBN numbers. If a title does not meet those conditions, then the
-			title is not tracked. If a title meets those conditions, we might have missed it! Submit a data correction form and a moderator will review
-			and potentially approve the changes!`
+			`As stated previously, we currently track English translations. If a title does not meet our guidelines, then we do not track it. However,
+			if the title meets our guidelines and isn't on the site yet, we might have missed it! You can submit a data correction form
+			<a href='/faq'>here</a>. A moderator will review and potentially approve your changes!`
 		],
 		[
 			"Why aren't J-Novel Club Parts tracked",
@@ -27,6 +32,9 @@ export const FAQData = {
 				"<a href='https://github.com/Butterstroke/Myneworm/issues/new/choose'>GitHub repository</a>" +
 				" or contact us via our support page."
 		],
-		["How can I contact you?", "You can find all of the contact information on our support page."]
+		[
+			"How can I contact you?",
+			"You can find all of the contact information on our support page <a href='/contact'>here</a>."
+		]
 	]
 };
