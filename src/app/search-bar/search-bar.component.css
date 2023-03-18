@@ -1,6 +1,8 @@
 .search-bar {
     width: 300px;
     font-size: large;
+    z-index: 99;
+    position: fixed;
 }
 
 .search-bar > form {
