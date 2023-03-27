@@ -1,8 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { catchError, map, Observable, of } from "rxjs";
-import { LoginResponse } from "src/app/models/authInterfaces";
+import { catchError, map, of } from "rxjs";
 import { environment } from "src/environments/environment";
+import { Buffer } from "buffer";
 
 @Injectable({
 	providedIn: "root"
@@ -10,68 +10,48 @@ import { environment } from "src/environments/environment";
 export class AuthenticationService {
 	constructor(private http: HttpClient) {}
 
-	login(username: string, password: string): Observable<boolean> {
+	login(username: string, password: string) {
 		return this.http
-			.post<LoginResponse>(
-				`${environment.API_ADDRESS}/user/${username}`,
+			.post(
+				`${environment.API_ADDRESS}/auth/login`,
 				{},
 				{
 					headers: {
-						"Content-Type": "application/json",
+						"X-Requested-With": "XMLHttpRequest",
+						"Content-Type": "application/x-www-form-urlencoded",
 						Authorization: `Basic ${Buffer.from(`${username}:${password}`).toString("base64")}`
-					}
+					},
+					withCredentials: true,
+					observe: "response"
 				}
 			)
 			.pipe(
-				map((data: LoginResponse) => {
-					if (data.token !== null) {
-						localStorage.setItem("auth", data.token);
-						localStorage.setItem("lastCheck", Date.now().toString());
-						return true;
-					}
-					return false;
+				map((data) => {
+					return data.status === 200;
 				}),
 				catchError((error) => {
-					return of(false);
+					return of(`ERROR (${error.status}): ${error.statusText}`);
 				})
 			);
 	}
 
-	logout(): boolean {
-		localStorage.removeItem("auth");
-		localStorage.removeItem("lastCheck");
-		return true;
-	}
-
-	private validateToken(): Observable<boolean> {
-		return this.http.post<boolean>(
-			`${environment.API_ADDRESS}/auth/authorized`,
-			{},
-			{
-				headers: {
-					"Content-Type": "application/json",
-					Authorization: `Bearer ${localStorage.getItem("auth")}`
+	logout() {
+		return this.http
+			.post(
+				`${environment.API_ADDRESS}/auth/logout`,
+				{},
+				{
+					withCredentials: true,
+					observe: "response"
 				}
-			}
-		);
-	}
-
-	isLoggedIn(): boolean {
-		if (localStorage.getItem("auth") === null) {
-			return false;
-		}
-		// If the last validation was more than a day ago, validate token again.
-		if (Number(localStorage.getItem("lastCheck")) + 86400000 < Date.now()) {
-			this.validateToken().pipe(
-				map((value) => {
-					return value;
+			)
+			.pipe(
+				map((data) => {
+					return data.status === 200;
 				}),
 				catchError((error) => {
-					return of(false);
+					return of(`ERROR (${error.status}): ${error.statusText}`);
 				})
 			);
-		}
-
-		return true;
 	}
 }
