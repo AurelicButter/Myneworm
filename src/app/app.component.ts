@@ -8,4 +8,5 @@ import { Component } from "@angular/core";
 export class AppComponent {
 	title = "Myneworm";
 	currYear = new Date().getFullYear();
+	isAuthenticated = localStorage.getItem("user") !== null;
 }

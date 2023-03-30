@@ -1,26 +1,15 @@
-import { Injectable } from "@angular/core";
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from "@angular/router";
-import { Observable } from "rxjs";
+import { inject } from "@angular/core";
+import { Router } from "@angular/router";
+import { tap } from "rxjs";
 import { AuthenticationService } from "./authentication.service";
 
-@Injectable({
-	providedIn: "root"
-})
-export class AuthenticationGuard implements CanActivate {
-	constructor(private authService: AuthenticationService, private router: Router) {}
+export const AuthenticationGuard = () => {
+	const router = inject(Router);
+	const authService = inject(AuthenticationService);
 
-	canActivate(
-		route: ActivatedRouteSnapshot,
-		state: RouterStateSnapshot
-	): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-		return this.authenticate();
-	}
-
-	private authenticate(): boolean {
-		if (!this.authService.isLoggedIn()) {
-			this.router.navigateByUrl("/login");
-			return false;
-		}
-		return true;
-	}
-}
+	return authService.isLoggedIn().pipe(
+		tap((value) => {
+			return value ? true : router.navigate(["/login"], { queryParams: { state: "expired" } });
+		})
+	);
+};

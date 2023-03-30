@@ -1,5 +1,5 @@
 import { Component, ViewChild } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { loginForm } from "src/app/models/loginForm";
 import { AuthenticationService } from "src/app/services/authentication/authentication.service";
 import { MetadataService } from "src/app/services/metadata.service";
@@ -14,13 +14,31 @@ export class LoginPageComponent {
 	@ViewChild("loginForm") dataForm: any;
 	login = new loginForm();
 	public err = "";
+	public isAuthenticated = false;
 
 	constructor(
 		private route: ActivatedRoute,
+		private router: Router,
 		private authService: AuthenticationService,
 		private metaService: MetadataService
 	) {
 		this.metaService.updateMetaTags("Login", "/login");
+
+		this.isAuthenticated = localStorage.getItem("user") !== null;
+	}
+
+	ngOnInit() {
+		this.route.queryParams.subscribe((params) => {
+			if (params === null) {
+				return;
+			}
+
+			if (params.state === "expired") {
+				this.err = "Session expired. Please reauthenticate.";
+			}
+
+			this.router.navigate([], { relativeTo: this.route });
+		});
 	}
 
 	resetForm() {

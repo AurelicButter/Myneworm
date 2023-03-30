@@ -3,12 +3,13 @@ import { Injectable } from "@angular/core";
 import { catchError, map, of } from "rxjs";
 import { environment } from "src/environments/environment";
 import { Buffer } from "buffer";
+import { LocalCookiesService } from "./local-cookies.service";
 
 @Injectable({
 	providedIn: "root"
 })
 export class AuthenticationService {
-	constructor(private http: HttpClient) {}
+	constructor(private http: HttpClient, private cookieService: LocalCookiesService) {}
 
 	login(username: string, password: string) {
 		return this.http
@@ -27,9 +28,39 @@ export class AuthenticationService {
 			)
 			.pipe(
 				map((data) => {
+					if (data.body !== null) {
+						// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+						// @ts-ignore
+						this.cookieService.updateUser(data.body.user);
+						return true;
+					}
+
+					return of(`ERROR (500): Response was valid but data was not received.`);
+				}),
+				catchError((error) => {
+					return of(`ERROR (${error.status}): ${error.statusText}`);
+				})
+			);
+	}
+
+	isLoggedIn() {
+		return this.http
+			.post(
+				`${environment.API_ADDRESS}/auth/isAuthenticated`,
+				{},
+				{
+					withCredentials: true,
+					observe: "response"
+				}
+			)
+			.pipe(
+				map((data) => {
 					return data.status === 200;
 				}),
 				catchError((error) => {
+					if (error.status === 401) {
+						return of(false);
+					}
 					return of(`ERROR (${error.status}): ${error.statusText}`);
 				})
 			);
@@ -47,6 +78,7 @@ export class AuthenticationService {
 			)
 			.pipe(
 				map((data) => {
+					this.cookieService.deleteUser();
 					return data.status === 200;
 				}),
 				catchError((error) => {

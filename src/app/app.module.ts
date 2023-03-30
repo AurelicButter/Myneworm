@@ -23,6 +23,7 @@ import { SearchPageModule } from "./search-page/search-page.module";
 import { PrivacyPageComponent } from "./privacy-page/privacy-page.component";
 import { DatabaseGuidelinesComponent } from "./database-guidelines/database-guidelines.component";
 import { LoginPageComponent } from "./login-page/login-page.component";
+import { UserNavMenuComponent } from "./user-nav-menu/user-nav-menu.component";
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -31,7 +32,8 @@ import { LoginPageComponent } from "./login-page/login-page.component";
 		AboutPageComponent,
 		DataCorrectionFormComponent,
 		ContactPageComponent,
-		LoginPageComponent
+		LoginPageComponent,
+		UserNavMenuComponent
 	],
 	imports: [
 		BrowserModule,

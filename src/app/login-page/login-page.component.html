@@ -1,4 +1,12 @@
 <div class="login-container">
+    <div *ngIf="this.isAuthenticated">
+        <p>I am logged in</p>
+    </div>
+
+    <div *ngIf="!this.isAuthenticated">
+        <p>I am not logged in</p>
+    </div>
+
     <h1>Login</h1>
     <form class="login-form" #loginForm="ngForm" (ngSubmit)="submit()">
         <div class="error-message" *ngIf="this.err !== ''">{{this.err}}</div>
