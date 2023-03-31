@@ -14,7 +14,6 @@ export class LoginPageComponent {
 	@ViewChild("loginForm") dataForm: any;
 	login = new loginForm();
 	public err = "";
-	public isAuthenticated = false;
 
 	constructor(
 		private route: ActivatedRoute,
@@ -23,13 +22,11 @@ export class LoginPageComponent {
 		private metaService: MetadataService
 	) {
 		this.metaService.updateMetaTags("Login", "/login");
-
-		this.isAuthenticated = localStorage.getItem("user") !== null;
 	}
 
 	ngOnInit() {
 		this.route.queryParams.subscribe((params) => {
-			if (params === null) {
+			if (Object.keys(params).length === 0) {
 				return;
 			}
 
@@ -63,13 +60,7 @@ export class LoginPageComponent {
 			}
 
 			this.err = "";
-			// Redirect to user homepage
-		});
-	}
-
-	logout() {
-		this.authService.logout().subscribe((data) => {
-			// Reroute to home page
+			this.router.navigate(["/home"]);
 		});
 	}
 }

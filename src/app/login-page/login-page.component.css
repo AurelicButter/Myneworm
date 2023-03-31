@@ -38,6 +38,7 @@
 
 .login-button:hover {
     background-color: #0D98BA;
+    cursor: pointer;
 }
 
 .login-input {
