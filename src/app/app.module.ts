@@ -24,6 +24,7 @@ import { PrivacyPageComponent } from "./privacy-page/privacy-page.component";
 import { DatabaseGuidelinesComponent } from "./database-guidelines/database-guidelines.component";
 import { LoginPageComponent } from "./login-page/login-page.component";
 import { UserNavMenuComponent } from "./user-nav-menu/user-nav-menu.component";
+import { LocalCookiesService } from "./services/authentication/local-cookies.service";
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -53,7 +54,7 @@ import { UserNavMenuComponent } from "./user-nav-menu/user-nav-menu.component";
 		PrivacyPageComponent,
 		DatabaseGuidelinesComponent
 	],
-	providers: [Title],
+	providers: [Title, LocalCookiesService],
 	bootstrap: [AppComponent]
 })
 export class AppModule {}

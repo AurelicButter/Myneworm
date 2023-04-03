@@ -17,6 +17,12 @@
             <li class="nav-li nav-search">
                 <search-bar></search-bar>
             </li>
+            <li class="nav-li nav-user-menu" *ngIf="isAuthenticated">
+                <user-nav-menu></user-nav-menu>               
+            </li>
+            <li class="nav-li nav-user-menu" *ngIf="!isAuthenticated">
+                <a class="nav-item nav-link nav-user-menu-preview" [routerLink]="'/login'">Login</a>
+            </li>
         </ul>
     </div>    
 </nav>
