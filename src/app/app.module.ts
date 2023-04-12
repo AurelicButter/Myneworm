@@ -22,7 +22,9 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { SearchPageModule } from "./search-page/search-page.module";
 import { PrivacyPageComponent } from "./privacy-page/privacy-page.component";
 import { DatabaseGuidelinesComponent } from "./database-guidelines/database-guidelines.component";
-
+import { LoginPageComponent } from "./login-page/login-page.component";
+import { UserNavMenuComponent } from "./user-nav-menu/user-nav-menu.component";
+import { LocalCookiesService } from "./services/authentication/local-cookies.service";
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -30,7 +32,9 @@ import { DatabaseGuidelinesComponent } from "./database-guidelines/database-guid
 		FaqPageComponent,
 		AboutPageComponent,
 		DataCorrectionFormComponent,
-		ContactPageComponent
+		ContactPageComponent,
+		LoginPageComponent,
+		UserNavMenuComponent
 	],
 	imports: [
 		BrowserModule,
@@ -50,7 +54,7 @@ import { DatabaseGuidelinesComponent } from "./database-guidelines/database-guid
 		PrivacyPageComponent,
 		DatabaseGuidelinesComponent
 	],
-	providers: [Title],
+	providers: [Title, LocalCookiesService],
 	bootstrap: [AppComponent]
 })
 export class AppModule {}

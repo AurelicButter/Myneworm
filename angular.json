@@ -35,7 +35,7 @@
 							}
 						],
 						"scripts": [],
-						"allowedCommonJsDependencies": ["moment"]
+						"allowedCommonJsDependencies": ["moment", "buffer"]
 					},
 					"configurations": {
 						"production": {
