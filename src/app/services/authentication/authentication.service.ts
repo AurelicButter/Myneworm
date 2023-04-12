@@ -59,8 +59,29 @@ export class AuthenticationService {
 				}),
 				catchError((error) => {
 					if (error.status === 401) {
+						this.cookieService.deleteUser();
 						return of(false);
 					}
+					return of(`ERROR (${error.status}): ${error.statusText}`);
+				})
+			);
+	}
+
+	reauthenticate() {
+		return this.http
+			.post(
+				`${environment.API_ADDRESS}/auth/reauth`,
+				{},
+				{
+					withCredentials: true,
+					observe: "response"
+				}
+			)
+			.pipe(
+				map((data) => {
+					return data.status === 200;
+				}),
+				catchError((error) => {
 					return of(`ERROR (${error.status}): ${error.statusText}`);
 				})
 			);
@@ -82,6 +103,10 @@ export class AuthenticationService {
 					return data.status === 200;
 				}),
 				catchError((error) => {
+					if (error.status === 401) {
+						this.cookieService.deleteUser();
+						return of(false);
+					}
 					return of(`ERROR (${error.status}): ${error.statusText}`);
 				})
 			);
