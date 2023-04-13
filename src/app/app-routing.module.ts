@@ -12,6 +12,9 @@ import { DataCorrectionFormComponent } from "./data-correction-form/data-correct
 import { ContactPageComponent } from "./contact-page/contact-page.component";
 import { SearchPageComponent } from "./search-page/search-page.component";
 import { PrivacyPageComponent } from "./privacy-page/privacy-page.component";
+import { DatabaseGuidelinesComponent } from "./database-guidelines/database-guidelines.component";
+import { LoginPageComponent } from "./login-page/login-page.component";
+import { AuthenticationGuard } from "./services/authentication/authentication.guard";
 
 const routes: Routes = [
 	{ path: "", component: HomePageComponent },
@@ -26,6 +29,9 @@ const routes: Routes = [
 	{ path: "correction", component: DataCorrectionFormComponent },
 	{ path: "contact", component: ContactPageComponent },
 	{ path: "privacy", component: PrivacyPageComponent },
+	{ path: "guidelines", component: DatabaseGuidelinesComponent },
+	{ path: "login", component: LoginPageComponent },
+	{ path: "login/authorized", component: LoginPageComponent, canActivate: [AuthenticationGuard] },
 	{ path: "**", pathMatch: "full", component: MissingPageComponent }
 ];
 

@@ -4,5 +4,12 @@
 		"logLevel": "debug",
 		"changeOrigin": true,
 		"secure": true
+	},
+	"/local/api/*": {
+		"target": "http://localhost:3001/",
+		"logLevel": "debug",
+		"changeOrigin": true,
+		"secure": true,
+		"pathRewrite": { "^/local/api": "/api" }
 	}
 }
