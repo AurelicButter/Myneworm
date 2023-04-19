@@ -17,7 +17,7 @@
 				"build": {
 					"builder": "@angular-devkit/build-angular:browser",
 					"options": {
-						"outputPath": "dist/Myneworm",
+						"outputPath": "dist/Myneworm/browser",
 						"index": "src/index.html",
 						"main": "src/main.ts",
 						"polyfills": "src/polyfills.ts",
@@ -148,6 +148,94 @@
 							"devServerTarget": "Myneworm:serve:production"
 						}
 					}
+				},
+				"server": {
+					"builder": "@angular-devkit/build-angular:server",
+					"options": {
+						"outputPath": "dist/Myneworm/server",
+						"main": "server.ts",
+						"tsConfig": "tsconfig.server.json"
+					},
+					"configurations": {
+						"production": {
+							"outputHashing": "media",
+							"fileReplacements": [
+								{
+									"replace": "src/environments/environment.ts",
+									"with": "src/environments/environment.prod.ts"
+								}
+							],
+							"optimization": true,
+							"sourceMap": false,
+							"extractLicenses": true,
+							"vendorChunk": false
+						},
+						"staging": {
+							"outputHashing": "media",
+							"fileReplacements": [
+								{
+									"replace": "src/environments/environment.ts",
+									"with": "src/environments/environment.staging.ts"
+								}
+							],
+							"optimization": true,
+							"sourceMap": false,
+							"extractLicenses": true,
+							"vendorChunk": false
+						},
+						"testing": {
+							"outputHashing": "media",
+							"fileReplacements": [
+								{
+									"replace": "src/environments/environment.ts",
+									"with": "src/environments/environment.testing.ts"
+								}
+							],
+							"optimization": false,
+							"sourceMap": false,
+							"extractLicenses": true,
+							"vendorChunk": true
+						},
+						"local": {
+							"outputHashing": "media",
+							"optimization": false,
+							"sourceMap": false,
+							"extractLicenses": true,
+							"vendorChunk": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve-ssr": {
+					"builder": "@nguniversal/builders:ssr-dev-server",
+					"configurations": {
+						"testing": {
+							"browserTarget": "Myneworm:build:testing",
+							"serverTarget": "Myneworm:server:testing"
+						},
+						"production": {
+							"browserTarget": "Myneworm:build:production",
+							"serverTarget": "Myneworm:server:production"
+						}
+					},
+					"defaultConfiguration": "testing"
+				},
+				"prerender": {
+					"builder": "@nguniversal/builders:prerender",
+					"options": {
+						"routes": ["/"]
+					},
+					"configurations": {
+						"production": {
+							"browserTarget": "Myneworm:build:production",
+							"serverTarget": "Myneworm:server:production"
+						},
+						"testing": {
+							"browserTarget": "Myneworm:build:testing",
+							"serverTarget": "Myneworm:server:testing"
+						}
+					},
+					"defaultConfiguration": "production"
 				}
 			}
 		}

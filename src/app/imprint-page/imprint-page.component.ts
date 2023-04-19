@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, Inject, OnInit, PLATFORM_ID, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { MynewormAPIService } from "../services/myneworm-api.service";
 import { CalendarOptions } from "@fullcalendar/core";
@@ -12,6 +12,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
 import { MetadataService } from "../services/metadata.service";
 import { catchError } from "rxjs";
+import { isPlatformBrowser } from "@angular/common";
 
 /*
  * Global file values as CalendarOptions does not accept `this` keyword
@@ -38,7 +39,9 @@ export class ImprintPageComponent implements OnInit {
 		private service: MynewormAPIService,
 		public matDialog: MatDialog,
 		private metaService: MetadataService,
-		private utilities: UtilitiesService
+		private utilities: UtilitiesService,
+		// eslint-disable-next-line @typescript-eslint/ban-types
+		@Inject(PLATFORM_ID) private platformId: Object
 	) {
 		imprintFetcher = new ImprintBookFetcher(this.service, this.utilities);
 		UtilityService = this.utilities;
@@ -79,24 +82,55 @@ export class ImprintPageComponent implements OnInit {
 
 						const arrayOfDomNodes = [formatTag, typeTag, bookTitle];
 						return { domNodes: arrayOfDomNodes };
+		if (isPlatformBrowser(this.platformId)) {
+			this.calendarOptions = {
+				plugins: [interactionPlugin, listPlugin],
+				themeSystem: "standard",
+				height: "calc(100vh - 190px)",
+				initialView: "listMonth",
+				editable: false,
+				showNonCurrentDates: false,
+				fixedWeekCount: false,
+				headerToolbar: {
+					left: "prev,today,dateSelector,next",
+					center: "title",
+					right: undefined
+				},
+				views: {
+					listMonth: {
+						eventContent: function (arg) {
+							return {
+								html: `
+								<div class='${UtilityService.formatCSSClass(
+									arg.event.extendedProps.format
+								)} schedule-tag'>${UtilityService.formatReadable(arg.event.extendedProps.format)}</div>
+								<div class='${UtilityService.formatCSSClass(
+									arg.event.extendedProps.bookType
+								)} schedule-tag'>${UtilityService.formatReadable(
+									arg.event.extendedProps.bookType
+								)}</div>
+								<div class='book-title'><a href="${arg.event.url}">${arg.event.title}</a></div>
+						`
+							};
+						}
+					}
+				},
+				datesSet: function (dateInfo) {
+					imprintFetcher.getBooks(dateInfo.view.calendar, publisher.publisher_id, dateInfo.start);
+				},
+				customButtons: {
+					dateSelector: {
+						icon: "calendar",
+						text: "Select Date",
+						click: () => {
+							this.selectDate();
+						}
 					}
 				}
-			},
-			datesSet: function (dateInfo) {
-				imprintFetcher.getBooks(dateInfo.view.calendar, publisher.publisher_id, dateInfo.start);
-			},
-			customButtons: {
-				dateSelector: {
-					icon: "calendar",
-					text: "Select Date",
-					click: () => {
-						this.selectDate();
-					}
-				}
-			}
-		};
+			};
 
-		this.calendarVisible = true;
+			this.calendarVisible = true;
+		}
 
 		this.route.params.subscribe((data) => {
 			this.service

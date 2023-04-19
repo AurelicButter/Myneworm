@@ -37,7 +37,7 @@ import { LocalCookiesService } from "./services/authentication/local-cookies.ser
 		UserNavMenuComponent
 	],
 	imports: [
-		BrowserModule,
+		BrowserModule.withServerTransition({ appId: "serverApp" }),
 		HttpClientModule,
 		FormsModule,
 		AppRoutingModule,

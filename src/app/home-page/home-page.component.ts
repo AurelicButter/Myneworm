@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, Inject, OnInit, PLATFORM_ID, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { MynewormAPIService } from "../services/myneworm-api.service";
 import { CalendarManagerComponent } from "../shared/calendar-manager/calendar-manager.component";
@@ -11,6 +11,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
 import { MetadataService } from "../services/metadata.service";
+import { isPlatformBrowser } from "@angular/common";
 
 /*
  * Global file values as CalendarOptions does not accept `this` keyword
@@ -36,9 +37,12 @@ export class HomePageComponent implements OnInit {
 		private service: MynewormAPIService,
 		public matDialog: MatDialog,
 		private metaService: MetadataService,
-		private utilities: UtilitiesService
+		private utilities: UtilitiesService,
+		// eslint-disable-next-line @typescript-eslint/ban-types
+		@Inject(PLATFORM_ID) private platformId: Object
 	) {
 		this.metaService.updateMetaTags("Home", "/");
+
 		dateFetcher = new MonthDateFetcher(this.service, this.utilities);
 
 		formatCSS = this.utilities.formatCSSClass;
@@ -46,25 +50,15 @@ export class HomePageComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.calendarOptions = {
-			plugins: [dayGridPlugin, interactionPlugin, listPlugin],
-			themeSystem: "standard",
-			height: "calc(100vh - 190px)",
-			initialView: "dayGridMonth",
-			dayMaxEventRows: 5,
-			buttonText: {
-				list: "schedule"
-			},
-			showNonCurrentDates: false,
-			fixedWeekCount: false,
-			headerToolbar: {
-				left: "today,dateSelector",
-				center: "title",
-				right: "prev,dayGridWeek,dayGridMonth,listMonth,next"
-			},
-			views: {
-				dayGridWeek: {
-					dayMaxEventRows: false
+		if (isPlatformBrowser(this.platformId)) {
+			this.calendarOptions = {
+				plugins: [dayGridPlugin, interactionPlugin, listPlugin],
+				themeSystem: "standard",
+				height: "calc(100vh - 190px)",
+				initialView: "dayGridMonth",
+				dayMaxEventRows: 5,
+				buttonText: {
+					list: "schedule"
 				},
 				listMonth: {
 					eventContent: function (arg) {
@@ -87,24 +81,36 @@ export class HomePageComponent implements OnInit {
 
 						const arrayOfDomNodes = [formatTag, imprintTag, typeTag, bookTitle];
 						return { domNodes: arrayOfDomNodes };
+  },
+				showNonCurrentDates: false,
+				fixedWeekCount: false,
+				headerToolbar: {
+					left: "today,dateSelector",
+					center: "title",
+					right: "prev,dayGridWeek,dayGridMonth,listMonth,next"
+				},
+				views: {
+					dayGridWeek: {
+						dayMaxEventRows: false
+					},
+					}
+				},
+				datesSet: function (dateInfo) {
+					dateFetcher.getDates(dateInfo.view.calendar, dateInfo.start);
+				},
+				customButtons: {
+					dateSelector: {
+						icon: "calendar",
+						text: "Select Date",
+						click: () => {
+							this.selectDate();
+						}
 					}
 				}
-			},
-			datesSet: function (dateInfo) {
-				dateFetcher.getDates(dateInfo.view.calendar, dateInfo.start);
-			},
-			customButtons: {
-				dateSelector: {
-					icon: "calendar",
-					text: "Select Date",
-					click: () => {
-						this.selectDate();
-					}
-				}
-			}
-		};
+			};
 
-		this.calendarVisible = true;
+			this.calendarVisible = true;
+		}
 	}
 
 	selectDate(): void {

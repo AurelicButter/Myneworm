@@ -20,7 +20,11 @@
 		"eslint": "eslint .",
 		"eslint:fix": "eslint . --fix",
 		"prettier": "prettier --write .",
-		"prepare": "husky install"
+		"prepare": "husky install",
+		"dev:ssr": "ng run Myneworm:serve-ssr",
+		"serve:ssr": "node dist/Myneworm/server/main.js",
+		"build:ssr": "ng build && ng run Myneworm:server",
+		"prerender": "ng run Myneworm:prerender"
 	},
 	"author": {
 		"name": "Frederick Katsura",
@@ -67,6 +71,10 @@
 		"@fullcalendar/daygrid": "^6.1.5",
 		"@fullcalendar/interaction": "^6.1.5",
 		"@fullcalendar/list": "^6.1.5",
+		"@angular/platform-server": "^15.2.1",
+		"@nguniversal/express-engine": "^15.2.0",
+		"express": "^4.15.2",
+		"isbot": "^3.6.6",
 		"moment": "^2.29.4",
 		"normalize.css": "^8.0.1",
 		"rxjs": "^7.8.0",
@@ -77,6 +85,8 @@
 		"@angular-devkit/build-angular": "^15.2.6",
 		"@angular/cli": "^15.2.6",
 		"@angular/compiler-cli": "^15.2.6",
+		"@nguniversal/builders": "^15.2.0",
+		"@types/express": "^4.17.0",
 		"@types/jasmine": "^4.3.1",
 		"@types/node": "^18.15.11",
 		"@typescript-eslint/eslint-plugin": "^5.58.0",
