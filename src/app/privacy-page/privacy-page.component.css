@@ -1,0 +1,146 @@
+.privacy-container {
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.privacy-title {
+    font-family: Arial;
+    font-size: 26px;
+    color: #000000;
+}
+
+.privacy-subtitle {
+    font-family: Arial;
+    color: #595959;
+    font-size: 14px;
+}
+
+.privacy-description {
+    margin-top: 48px;
+    margin-bottom: 48px;
+}
+
+.privacy-h1 {
+    font-family: Arial;
+    font-size: 19px;
+    color: #000000;
+    margin: 0;
+    margin-bottom: 24px;
+}
+
+.privacy-h2 {
+    font-family: Arial;
+    font-size: 17px;
+    color: #000000;
+    margin: 0;
+}
+
+.privacy-header-subtitle {
+    font-family: Arial;
+    font-size: 15px;
+    color: rgb(89, 89, 89);
+}
+
+.body-text {
+    color: #595959 !important;
+    font-size: 14px !important;
+    font-family: Arial !important;
+}
+
+.link {
+    color: #3030F1 !important;
+    font-size: 14px !important;
+    font-family: Arial !important;
+    word-break: break-word !important;
+}
+
+.line-height-15 {
+    line-height: 1.5;
+}
+
+.margin-16 {
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.margin-left-20 {
+    margin-left: 20px;
+}
+
+.width-100 {
+    width: 100%;
+}
+
+ul {
+    list-style-type: square;
+}
+
+ul>li>ul {
+    list-style-type: circle;
+}
+
+ul>li>ul>li>ul {
+    list-style-type: square;
+}
+
+ol li {
+    font-family: Arial;
+}
+
+.privacy-link {
+    color: #3030F1 !important;
+    font-size: 14px !important;
+    font-family: Arial !important;
+    word-break: break-word !important;
+}
+
+.table-border-center {
+    border-right: 1px solid black; 
+    border-top: 1px solid black;
+    width: 51.4385%;
+}
+
+.table-borders-left {
+    border-left: 1px solid black; 
+    border-right: 1px solid black; 
+    border-top: 1px solid black;
+    width: 33.8274%;
+}
+
+.table-border-right {
+    border-right: 1px solid black; 
+    border-top: 1px solid black;
+    width: 14.9084%; 
+    text-align: center;
+}
+
+.vertical-aline-middle {
+    vertical-align: middle;
+}
+
+.table-border-bottom {
+    border-bottom: 1px solid black;
+}
+
+td:last-child > span {
+    color: rgb(89, 89, 89);
+    font-size: 15px;
+}
+
+.privacy-section-header {
+    color: rgb(0, 0, 0);
+    font-size: 15px;
+}
+
+.privacy-section-div {
+    margin-bottom: 24px;
+}
+
+.termly-footer {
+    color: #595959;
+    font-size: 14px;
+    font-family: Arial;
+    padding-top:16px;
+}

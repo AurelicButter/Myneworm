@@ -48,6 +48,40 @@ export class ImprintPageComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
+		this.calendarOptions = {
+			plugins: [interactionPlugin, listPlugin],
+			themeSystem: "standard",
+			height: "calc(100vh - 190px)",
+			initialView: "listMonth",
+			editable: false,
+			showNonCurrentDates: false,
+			fixedWeekCount: false,
+			headerToolbar: {
+				left: "prev,today,dateSelector,next",
+				center: "title",
+				right: undefined
+			},
+			views: {
+				listMonth: {
+					eventContent: function (arg) {
+						const formatTag = document.createElement("div");
+						const typeTag = document.createElement("div");
+						const bookTitle = document.createElement("div");
+
+						formatTag.className = `${UtilityService.formatCSSClass(
+							arg.event.extendedProps.format
+						)} format-tag schedule-tag`;
+						typeTag.className = `${UtilityService.formatCSSClass(
+							arg.event.extendedProps.bookType
+						)} type-tag schedule-tag`;
+						bookTitle.className = "book-title";
+
+						formatTag.innerHTML = UtilityService.formatReadable(arg.event.extendedProps.format);
+						typeTag.innerHTML = UtilityService.formatReadable(arg.event.extendedProps.bookType);
+						bookTitle.innerHTML = `<a href="${arg.event.url}">${arg.event.title}</a>`;
+
+						const arrayOfDomNodes = [formatTag, typeTag, bookTitle];
+						return { domNodes: arrayOfDomNodes };
 		if (isPlatformBrowser(this.platformId)) {
 			this.calendarOptions = {
 				plugins: [interactionPlugin, listPlugin],

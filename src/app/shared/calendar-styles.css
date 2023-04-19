@@ -57,10 +57,14 @@ tr.fc-list-event {
     float: left;
     margin-right: 4px;
     background-color: #2DC9F0;
-    width: 100px;
+    width: 125px;
     height: 20px;
     align-items: center;
     justify-content: center;
+}
+
+.format-tag, .type-tag {
+    width: 100px;
 }
 
 .schedule-tag a, .schedule-tag a:hover {

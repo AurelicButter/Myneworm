@@ -60,6 +60,28 @@ export class HomePageComponent implements OnInit {
 				buttonText: {
 					list: "schedule"
 				},
+				listMonth: {
+					eventContent: function (arg) {
+						const formatTag = document.createElement("div");
+						const imprintTag = document.createElement("div");
+						const typeTag = document.createElement("div");
+						const bookTitle = document.createElement("div");
+
+						formatTag.className = `${formatCSS(arg.event.extendedProps.format)} format-tag schedule-tag`;
+						imprintTag.className = `${formatCSS(arg.event.extendedProps.imprint)} schedule-tag`;
+						typeTag.className = `${formatCSS(arg.event.extendedProps.bookType)} type-tag schedule-tag`;
+						bookTitle.className = "book-title";
+
+						formatTag.innerHTML = formatText(arg.event.extendedProps.format);
+						imprintTag.innerHTML = `<a href="./publisher/${
+							arg.event.extendedProps.imprintID
+						}">${arg.event.extendedProps.imprint.replace("Entertainment", "")}</a>`;
+						typeTag.innerHTML = formatText(arg.event.extendedProps.bookType);
+						bookTitle.innerHTML = `<a href="${arg.event.url}">${arg.event.title}</a>`;
+
+						const arrayOfDomNodes = [formatTag, imprintTag, typeTag, bookTitle];
+						return { domNodes: arrayOfDomNodes };
+  },
 				showNonCurrentDates: false,
 				fixedWeekCount: false,
 				headerToolbar: {
@@ -71,23 +93,6 @@ export class HomePageComponent implements OnInit {
 					dayGridWeek: {
 						dayMaxEventRows: false
 					},
-					listMonth: {
-						eventContent: function (arg) {
-							return {
-								html: `
-								<div class='${formatCSS(arg.event.extendedProps.format)} schedule-tag'>${formatText(
-									arg.event.extendedProps.format
-								)}</div>
-								<div class='${formatCSS(arg.event.extendedProps.imprint)} schedule-tag'><a href="./publisher/${
-									arg.event.extendedProps.imprintID
-								}">${arg.event.extendedProps.imprint.replace("Entertainment", "")}</a></div>
-								<div class='${formatCSS(arg.event.extendedProps.bookType)} schedule-tag'>${formatText(
-									arg.event.extendedProps.bookType
-								)}</div>
-								<div class='book-title'><a href="${arg.event.url}">${arg.event.title}</a></div>
-						`
-							};
-						}
 					}
 				},
 				datesSet: function (dateInfo) {
