@@ -7,16 +7,20 @@
     <div class="settings-content">
         <div *ngIf="currPage === 'PROFILE'">
             <h3>About Me</h3>
-            <textarea></textarea>
+            <textarea name="aboutMe" autocomplete="off" class="settings-textarea"></textarea>
             <br>
             <h3>Avatar</h3>
             <img class="avatar-display" *ngIf="url !== undefined" src={{url}}>
+            <div class="avatar-display missing-avatar" *ngIf="url === undefined">
+                No image uploaded
+            </div>
             <form>
                 <div class="button-div settings-button">
                     <label for="avatarFile" class="button-link button-text">Upload File</label>
                     <input type="file" id="avatarFile" name="avatar" accept="image/jpeg" (change)="onFileChanged($event)">
                 </div>                
             </form>
+            <br>
             <button class="button-div button-link settings-button" type="submit" name="Submit" value="Submit">Save</button>
         </div>
 
