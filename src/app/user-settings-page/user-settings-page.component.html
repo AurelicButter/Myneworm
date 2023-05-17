@@ -10,6 +10,7 @@
             <textarea name="aboutMe" autocomplete="off" class="settings-textarea"></textarea>
             <br>
             <h3>Avatar</h3>
+            <p *ngIf="message !== undefined">{{message}}</p>
             <img class="avatar-display" *ngIf="url !== undefined" src={{url}}>
             <div class="avatar-display missing-avatar" *ngIf="url === undefined">
                 No image uploaded

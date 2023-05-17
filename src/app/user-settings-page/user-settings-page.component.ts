@@ -11,7 +11,6 @@ export class UserSettingsPageComponent implements OnInit {
 	currPage: string;
 	avatar: unknown;
 	message: string;
-	imagePath: unknown;
 	url: string | ArrayBuffer | null;
 
 	constructor(private route: ActivatedRoute, private service: MynewormAPIService) {}
@@ -38,16 +37,14 @@ export class UserSettingsPageComponent implements OnInit {
 			return;
 		}
 
-		const mimeType = files[0].type;
-		if (mimeType.match(/image\/*/) === null) {
+		if (files[0].type.match(/image\/*/) === null) {
 			this.message = "Only images are supported.";
 			return;
 		}
 
 		const reader = new FileReader();
-		this.imagePath = files;
 		reader.readAsDataURL(files[0]);
-		reader.onload = (_event) => {
+		reader.onload = () => {
 			this.url = reader.result;
 		};
 	}
