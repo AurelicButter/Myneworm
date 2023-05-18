@@ -15,6 +15,7 @@ import { PrivacyPageComponent } from "./privacy-page/privacy-page.component";
 import { DatabaseGuidelinesComponent } from "./database-guidelines/database-guidelines.component";
 import { LoginPageComponent } from "./login-page/login-page.component";
 import { AuthenticationGuard } from "./services/authentication/authentication.guard";
+import { UserSettingsPageComponent } from "./user-settings-page/user-settings-page.component";
 
 const routes: Routes = [
 	{ path: "", component: HomePageComponent },
@@ -32,6 +33,8 @@ const routes: Routes = [
 	{ path: "guidelines", component: DatabaseGuidelinesComponent },
 	{ path: "login", component: LoginPageComponent },
 	{ path: "login/authorized", component: LoginPageComponent, canActivate: [AuthenticationGuard] },
+	{ path: "settings", pathMatch: "full", component: UserSettingsPageComponent, canActivate: [AuthenticationGuard] },
+	{ path: "settings/:page", component: UserSettingsPageComponent, canActivate: [AuthenticationGuard] },
 	{ path: "**", pathMatch: "full", component: MissingPageComponent }
 ];
 
