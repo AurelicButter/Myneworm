@@ -2,7 +2,7 @@
     width: 300px;
     font-size: large;
     z-index: 99;
-    position: fixed;
+    position: absolute;
 }
 
 .search-bar > form {
@@ -13,9 +13,6 @@
 .search-table {
     z-index: 99;
     position: relative;
-}
-
-div.search-bar > .search-table {
     display: none;
 }
 
@@ -38,14 +35,12 @@ div.search-bar:hover > form > button.no-radius-bottom-right {
     border-bottom-right-radius: 0px;
 }
 
-
 .search-cover-img {
     max-height: 50px;
 }
 
 .search-image-row {
     display: flex;
-    align-items: center;
     justify-content: center;
     padding-top: 4px;
     padding-bottom: 4px;
@@ -75,7 +70,6 @@ div.search-bar:hover > form > button.no-radius-bottom-right {
     border: solid;
     border-radius: 8px 0 0 8px;
     border-color: #fff;
-    border-right: solid;
     border-right-color: #1F2232;
     border-right-width: 1px;
     padding-left: 1em;
