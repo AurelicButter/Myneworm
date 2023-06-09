@@ -25,6 +25,7 @@ import { DatabaseGuidelinesComponent } from "./database-guidelines/database-guid
 import { LoginPageComponent } from "./login-page/login-page.component";
 import { UserNavMenuComponent } from "./user-nav-menu/user-nav-menu.component";
 import { LocalCookiesService } from "./services/authentication/local-cookies.service";
+import { UserSettingsPageComponent } from "./user-settings-page/user-settings-page.component";
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -34,7 +35,8 @@ import { LocalCookiesService } from "./services/authentication/local-cookies.ser
 		DataCorrectionFormComponent,
 		ContactPageComponent,
 		LoginPageComponent,
-		UserNavMenuComponent
+		UserNavMenuComponent,
+		UserSettingsPageComponent
 	],
 	imports: [
 		BrowserModule,

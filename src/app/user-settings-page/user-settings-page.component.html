@@ -1,0 +1,50 @@
+<div class="settings-page">
+    <aside class="settings-menu">
+        <h2 style="font-size: xx-large;">Settings</h2>
+        <a routerLink="/settings/profile" [ngClass]="{current: currPage === 'PROFILE'}">Profile</a>
+        <a routerLink="/settings/account" [ngClass]="{current: currPage === 'ACCOUNT'}">Account</a>
+    </aside>
+    <div class="settings-content">
+        <div *ngIf="currPage === 'PROFILE'">
+            <h3>About Me</h3>
+            <textarea name="aboutMe" autocomplete="off" class="settings-textarea"></textarea>
+            <br>
+            <h3>Avatar</h3>
+            <p *ngIf="message !== undefined">{{message}}</p>
+            <img class="avatar-display" *ngIf="url !== undefined" src={{url}}>
+            <div class="avatar-display missing-avatar" *ngIf="url === undefined">
+                No image uploaded
+            </div>
+            <form>
+                <div class="button-div settings-button">
+                    <label for="avatarFile" class="button-link button-text">Upload File</label>
+                    <input type="file" id="avatarFile" name="avatar" accept="image/jpeg" (change)="onFileChanged($event)">
+                </div>                
+            </form>
+            <br>
+            <button class="button-div button-link settings-button" type="submit" name="Submit" value="Submit">Save</button>
+        </div>
+
+        <div *ngIf="currPage === 'ACCOUNT'">
+            <h3>Username</h3>
+            <input class="settings-input">
+            <h3>Email</h3>
+            <input type="email" class="settings-input">
+            <h3>Password</h3>
+            <div class="settings-subdiv">
+                <input type="password" placeholder="New Password" class="settings-input">
+                <input type="password" placeholder="Confirm Password" class="settings-input">
+            </div>
+            <br>            
+            <button class="button-div button-link settings-button" type="submit" name="Submit" value="Submit">Save</button>
+            <br><br>
+            <h3>Delete Your Account</h3>
+            <div class="settings-subdiv">
+                <p>By clicking this button, your account will be flagged for deletion. You will have up to 48 hours after
+                    submission to revert this change. Afterwards, your account will be deleted and there is no recovery
+                    beyond the 48 hour grace period.</p>
+                <button class="button-div button-link settings-button">Delete My Account</button>
+            </div>            
+        </div>
+    </div>
+</div>
