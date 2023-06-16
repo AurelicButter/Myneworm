@@ -23,21 +23,21 @@ const routes: Routes = [
 	{ path: "search", component: SearchPageComponent },
 	{
 		path: "about",
-		loadChildren: () => import("./about-page/about-page.component").then((m) => m.AboutPageComponent)
+		loadComponent: () => import("./about-page/about-page.component").then((m) => m.AboutPageComponent)
 	},
 	{
 		path: "faq",
-		loadChildren: () => import("./faq-page/faq-page.component").then((m) => m.FaqPageComponent)
+		loadComponent: () => import("./faq-page/faq-page.component").then((m) => m.FaqPageComponent)
 	},
 	{ path: "correction", component: DataCorrectionFormComponent },
 	{ path: "contact", component: ContactPageComponent },
 	{
 		path: "privacy",
-		loadChildren: () => import("./privacy-page/privacy-page.component").then((m) => m.PrivacyPageComponent)
+		loadComponent: () => import("./privacy-page/privacy-page.component").then((m) => m.PrivacyPageComponent)
 	},
 	{
 		path: "guidelines",
-		loadChildren: () =>
+		loadComponent: () =>
 			import("./database-guidelines/database-guidelines.component").then((m) => m.DatabaseGuidelinesComponent)
 	},
 	{ path: "login", component: LoginPageComponent },
