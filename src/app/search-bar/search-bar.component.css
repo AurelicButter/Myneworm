@@ -3,16 +3,16 @@
     font-size: large;
     z-index: 99;
     position: absolute;
+    margin-top: 18.5px;
+    margin-bottom: 18.5px;
 }
 
 .search-bar > form {
     display: flex;
-    align-items: center;
+    height: 38px;
 }
 
 .search-table {
-    z-index: 99;
-    position: relative;
     display: none;
 }
 
@@ -66,7 +66,7 @@ div.search-bar:hover > form > button.no-radius-bottom-right {
 
 .search-input {
     outline-width: 0;
-    height: 30px;
+    height: inherit;
     border: solid;
     border-radius: 8px 0 0 8px;
     border-color: #fff;
@@ -81,12 +81,8 @@ div.search-bar:hover > form > button.no-radius-bottom-right {
 }
 
 .search-submit {
-    padding: 1px 4px 0 6px;
     background-color: #fff;
     border: solid;
-    height: 38px;
-    display: flex;
-    align-items: center;
     border-color: #fff;
     border-radius: 0 6px 6px 0;
 }
