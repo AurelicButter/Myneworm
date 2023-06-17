@@ -1,16 +1,11 @@
 .imprint-index {
-    width: 98%;
-    margin-left: 1%;
-    margin-right: 1%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    align-items: flex-end;
 }
 
 .imprint-item {
     width: 25em;
-    display: flex;
-    justify-content: center;
     margin-right: 2em;
     margin-bottom: 1em;
     margin-left: 2em;
@@ -32,4 +27,5 @@
 .imprint-logo {
     max-width: 25em;
     max-height: 200px;
+    margin-bottom: 16px;
 }

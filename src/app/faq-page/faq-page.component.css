@@ -1,17 +1,6 @@
-.faq-page {
-    width: 98%;
-    margin-left: 1%;
-    margin-right: 1%;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.faq-section {
-    width: 100%;
-}
-
 .faq-header {
     width: fit-content;
+    margin-bottom: 16px;
 }
 
 .faq-header:after

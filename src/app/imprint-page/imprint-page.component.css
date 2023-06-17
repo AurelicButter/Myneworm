@@ -1,44 +1,28 @@
-.imprint-left {
-    width: 20%;
-    float: left;
-    margin-left: 2em;
-    margin-right: 1em;
-}
-
 .imprint-left-header {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
 }
 
-.imprint-header {
-    text-align: center;
-    width: 100%;
-}
-
-.imprint-content {
-    width: 75%;
-    float: left;
-    margin-right: 2em;
+.imprint-spacer {
+    margin-top: 30px;
 }
 
 .imprint-info {
     margin-top: 2em;
 }
 
-.info-URL {
-    flex-basis: auto;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-    text-align: center;
-}
-
-.info-container {
+.imprint-btn {
     margin-left: 2em;
     margin-right: 2em;
+    width: -webkit-fill-available;
 }
 
 .imprint-logo {
     max-width: 98%;
     max-height: 300px;
+}
+
+.imprint-calendar {
+    margin-bottom: 16px;
 }

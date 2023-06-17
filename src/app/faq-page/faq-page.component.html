@@ -1,9 +1,7 @@
-<div class="faq-page">
-    <div *ngFor="let section of faqData | keyvalue" class="faq-section">
-        <h2 class="faq-header">{{section.key}}</h2>
-        <div *ngFor="let question of section.value; let i = index">
-            <h3 class="faq-question">Q: {{question[0]}}</h3>
-            <p class="faq-answer">A: <span [innerHTML]="question[1]"></span></p>
-        </div>
+<div *ngFor="let section of faqData | keyvalue">
+    <h3 class="faq-header">{{section.key}}</h3>
+    <div *ngFor="let question of section.value; let i = index">
+        <h4>Q: {{question[0]}}</h4>
+        <p>A: <span [innerHTML]="question[1]"></span></p>
     </div>
 </div>

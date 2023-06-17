@@ -16,7 +16,7 @@ export class DatepickerModalComponent {
 	constructor(public dialogRef: MatDialogRef<DatepickerModalComponent>) {}
 
 	submit() {
-		this.confirmed = true;
+		this.confirmed = this.selectedDateObj !== undefined;
 		this.close();
 	}
 

@@ -31,7 +31,6 @@ import { UserSettingsPageComponent } from "./user-settings-page/user-settings-pa
 	declarations: [
 		AppComponent,
 		MissingPageComponent,
-		AboutPageComponent,
 		DataCorrectionFormComponent,
 		ContactPageComponent,
 		LoginPageComponent,
@@ -55,7 +54,8 @@ import { UserSettingsPageComponent } from "./user-settings-page/user-settings-pa
 		MatDialogModule,
 		PrivacyPageComponent,
 		DatabaseGuidelinesComponent,
-		FaqPageComponent
+		FaqPageComponent,
+		AboutPageComponent
 	],
 	providers: [Title, LocalCookiesService],
 	bootstrap: [AppComponent]

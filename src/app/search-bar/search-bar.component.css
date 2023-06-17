@@ -16,11 +16,23 @@
     display: none;
 }
 
+::ng-deep .mdc-data-table__cell {
+    border: 0 !important;
+}
+
+tr:last-child {
+    border-bottom: 0 !important;
+}
+
+tr {
+    border-bottom: 1px solid lightgray;
+}
+
 div.search-bar:focus > .search-table,
 div.search-bar:hover > .search-table,
 div.search-bar:focus-within > .search-table,
 .search-table:hover {
-    display: table;
+    display: inline-table;
 }
 
 div.search-bar:focus > form > input.no-radius-bottom-left,
@@ -108,6 +120,8 @@ div.search-bar:hover > form > button.no-radius-bottom-right {
 .search-message {
     color: black;
     margin-left: 1em;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
 }
 
 .search-item-title {
