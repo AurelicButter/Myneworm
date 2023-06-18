@@ -1,8 +1,8 @@
 @import '~normalize.css';
+@import "~bootstrap/dist/css/bootstrap.css";
 
 html, body { height: 100%; }
 body { 
-    margin: 0; 
     font-family: Roboto, "Helvetica Neue", sans-serif; 
     position: relative;
     background-color: #ECEBF3;
@@ -25,20 +25,26 @@ body {
 /*
  * Buttons
  */
-.button-link, .button-link:visited {
+.button-link, .button-link:visited,
+.btn-link, .btn-link:visited {
     color: #ECEBF3;
     text-decoration: none;
 }
 
-.button-div {
+.button-div, .btn-div {
     background-color: #1F2232;
 }
 
-.button-div:hover {
+.button-div:hover, .btn-div:hover {
     background-color: #0D98BA;
 }
 
-.button-text {
+.button-text, .btn-text {
     padding: 0.75em;
     text-align: center;
+}
+
+.myneworm-btn {
+    background-color: #1F2232 !important;
+    color: #ECEBF3 !important;
 }

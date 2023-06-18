@@ -3,24 +3,36 @@
     font-size: large;
     z-index: 99;
     position: absolute;
+    margin-top: 18.5px;
+    margin-bottom: 18.5px;
 }
 
 .search-bar > form {
     display: flex;
-    align-items: center;
+    height: 38px;
 }
 
 .search-table {
-    z-index: 99;
-    position: relative;
     display: none;
+}
+
+::ng-deep .mdc-data-table__cell {
+    border: 0 !important;
+}
+
+tr:last-child {
+    border-bottom: 0 !important;
+}
+
+tr {
+    border-bottom: 1px solid lightgray;
 }
 
 div.search-bar:focus > .search-table,
 div.search-bar:hover > .search-table,
 div.search-bar:focus-within > .search-table,
 .search-table:hover {
-    display: table;
+    display: inline-table;
 }
 
 div.search-bar:focus > form > input.no-radius-bottom-left,
@@ -66,7 +78,7 @@ div.search-bar:hover > form > button.no-radius-bottom-right {
 
 .search-input {
     outline-width: 0;
-    height: 30px;
+    height: inherit;
     border: solid;
     border-radius: 8px 0 0 8px;
     border-color: #fff;
@@ -81,12 +93,8 @@ div.search-bar:hover > form > button.no-radius-bottom-right {
 }
 
 .search-submit {
-    padding: 1px 4px 0 6px;
     background-color: #fff;
     border: solid;
-    height: 38px;
-    display: flex;
-    align-items: center;
     border-color: #fff;
     border-radius: 0 6px 6px 0;
 }
@@ -112,6 +120,8 @@ div.search-bar:hover > form > button.no-radius-bottom-right {
 .search-message {
     color: black;
     margin-left: 1em;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
 }
 
 .search-item-title {
