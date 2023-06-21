@@ -26,6 +26,7 @@ import { LoginPageComponent } from "./login-page/login-page.component";
 import { UserNavMenuComponent } from "./user-nav-menu/user-nav-menu.component";
 import { LocalCookiesService } from "./services/authentication/local-cookies.service";
 import { UserSettingsPageComponent } from "./user-settings-page/user-settings-page.component";
+import { UserListPageModule } from "./user-list-page/user-list-page.module";
 
 @NgModule({
 	declarations: [
@@ -55,7 +56,8 @@ import { UserSettingsPageComponent } from "./user-settings-page/user-settings-pa
 		PrivacyPageComponent,
 		DatabaseGuidelinesComponent,
 		FaqPageComponent,
-		AboutPageComponent
+		AboutPageComponent,
+		UserListPageModule
 	],
 	providers: [Title, LocalCookiesService],
 	bootstrap: [AppComponent]
