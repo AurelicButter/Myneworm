@@ -4,7 +4,7 @@
     <aside class="col-2">
         <h3 class="filter-header">Filters</h3>
         <div class="list-filter-div">
-            <h4>Active Status</h4>
+            <h4>Status</h4>
             <div class="form-check">
                 <input type="checkbox" id="reading" value="reading" class="form-check-input">
                 <label for="reading" class="form-check-label">Reading</label>
@@ -70,73 +70,51 @@
     </aside>
     <main class="col-9">
         <h3>Reading</h3>
-        <table *ngIf="dataSource" mat-table [dataSource]="dataSource" multiTemplateDataRows class="display-table">
+        <table *ngIf="dataSource" mat-table matSort [dataSource]="dataSource" multiTemplateDataRows (matSortChange)="sortData($event)">
             <ng-container matColumnDef="cover">
+                <th mat-header-cell *matHeaderCellDef scope="col" [attr.role]="null"></th>
                 <td mat-cell *matCellDef="let element" class="row-padding">
                     <img class="table-img" src='{{this.getCover(element.isbn)}}' alt='Cover for {{element.title}}' />
                 </td>
             </ng-container>
             <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef scope="col" [attr.role]="null">Title</th>
                 <td mat-cell *matCellDef="let element">
-                    <h5><strong><a routerLink="/book/{{element.isbn}}">{{element.isbn}}</a></strong></h5>
+                    <span><strong><a routerLink="/book/{{element.isbn}}" class="list-title-link">{{element.title}}</a></strong></span>
                 </td>
             </ng-container>
             <ng-container matColumnDef="score">
-                <td mat-cell *matCellDef="let element">
+                <th mat-header-cell mat-sort-header="score" *matHeaderCellDef scope="col" [attr.role]="null" class="align-center">Score</th>
+                <td mat-cell *matCellDef="let element" class="align-center">
                     <span>{{element.score}}</span>
                 </td>
             </ng-container>
             <ng-container matColumnDef="reread">
-                <td mat-cell *matCellDef="let element">
+                <th mat-header-cell mat-sort-header="reread" *matHeaderCellDef scope="col" [attr.role]="null" class="align-center">Reread</th>
+                <td mat-cell *matCellDef="let element" class="align-center">
                     <span>{{element.reread}}</span>
                 </td>
             </ng-container>
             <ng-container matColumnDef="active">
-                <td mat-cell *matCellDef="let element">
+                <th mat-header-cell *matHeaderCellDef scope="col" [attr.role]="null" class="align-center">Status</th>
+                <td mat-cell *matCellDef="let element" class="align-center">
                     <span>{{element.active_status}}</span>
                 </td>
             </ng-container>
             <ng-container matColumnDef="owner">
-                <td mat-cell *matCellDef="let element">
+                <th mat-header-cell *matHeaderCellDef scope="col" [attr.role]="null" class="align-center">Ownership</th>
+                <td mat-cell *matCellDef="let element" class="align-center">
                     <span>{{element.owner_status}}</span>
                 </td>
             </ng-container>
             <ng-container matColumnDef="notes">
+                <th mat-header-cell *matHeaderCellDef scope="col" [attr.role]="null">Notes</th>
                 <td mat-cell *matCellDef="let element">
                     <span>{{element.notes}}</span>
                 </td>
             </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns" [attr.role]="null"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-            <!-- 
-            <ng-container matColumnDef="title">
-                <td class="search-text-row" mat-cell *matCellDef="let element">
-                    <h5 class="search-item-title"><strong><a routerLink="/book/{{element.isbn}}"
-                                class="search-link">{{element.title}}</a></strong></h5>
-                    <p *ngIf="element.description" class="search-item-desc line-clamp" [innerHTML]="element.description">
-                    </p>
-                    <p *ngIf="!element.description" class="search-item-desc line-clamp">No description provided...</p>
-                    <span *ngIf="element.description" class="more"><a routerLink="/book/{{element.isbn}}"
-                            class="search-link">Read more</a></span>
-                </td>
-            </ng-container>
-            <ng-container matColumnDef="format">
-                <td class="search-format-col type-col" mat-cell *matCellDef="let element">
-                    <p class="type-cell">{{this.utilities.formatReadable(element.format_name)}}</p>
-                </td>
-            </ng-container>
-            <ng-container matColumnDef="type">
-                <td class="type-col" mat-cell *matCellDef="let element">
-                    <p class="type-cell">{{this.utilities.formatReadable(element.book_type_name)}}</p>
-                </td>
-            </ng-container>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns" class="search-result-row"></tr>
-            <tr class="mat-row search-result-row" *matNoDataRow [ngClass]="this.searchTerm !== '' ? '' : 'hide-no-result'">
-                <td class="mat-cell" [attr.colspan]="displayedColumns.length">
-                    <strong>
-                        <p class="search-page-message">No results found...</p>
-                    </strong>
-                </td>
-            </tr>-->
         </table>
     </main>
 </div>

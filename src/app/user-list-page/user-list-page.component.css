@@ -15,10 +15,6 @@
     max-height: 100px;
 }
 
-.display-table {
-    cursor: pointer;
-}
-
 .row-padding {
     padding-top: 8px;
     padding-bottom: 8px;
@@ -30,4 +26,17 @@ tr:last-child {
 
 tr {
     border-bottom: 1px solid lightgray;
+}
+
+.list-title-link {
+    text-decoration: none;
+    color: #1F2232;
+}
+
+.align-center {
+    text-align: center;
+}
+
+::ng-deep .mat-sort-header-container {
+    justify-content: center;
 }

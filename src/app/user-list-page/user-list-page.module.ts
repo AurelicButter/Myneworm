@@ -7,6 +7,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatTableModule } from "@angular/material/table";
 import { RouterModule } from "@angular/router";
+import { MatSortModule } from "@angular/material/sort";
 
 @NgModule({
 	declarations: [UserListPageComponent],
@@ -18,7 +19,8 @@ import { RouterModule } from "@angular/router";
 		MatFormFieldModule,
 		MatInputModule,
 		MatTableModule,
-		RouterModule
+		RouterModule,
+		MatSortModule
 	],
 	exports: [UserListPageComponent]
 })
