@@ -3,7 +3,8 @@ import { MatTableDataSource } from "@angular/material/table";
 import { MynewormAPIService } from "../services/myneworm-api.service";
 import { MetadataService } from "../services/metadata.service";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Sort } from "@angular/material/sort";
+
+import { ListEntry } from "../models/ListEntry";
 
 @Component({
 	selector: "user-list-page",
@@ -11,8 +12,11 @@ import { Sort } from "@angular/material/sort";
 	styleUrls: ["./user-list-page.component.css"]
 })
 export class UserListPageComponent {
-	displayedColumns = ["cover", "title", "score", "reread", "active", "owner", "notes"];
-	public dataSource: MatTableDataSource<any> = new MatTableDataSource<any>();
+	public readingSource: MatTableDataSource<ListEntry> = new MatTableDataSource<ListEntry>();
+	public completedSource: MatTableDataSource<ListEntry> = new MatTableDataSource<ListEntry>();
+	public pausedSource: MatTableDataSource<ListEntry> = new MatTableDataSource<ListEntry>();
+	public droppedSource: MatTableDataSource<ListEntry> = new MatTableDataSource<ListEntry>();
+	public planningSource: MatTableDataSource<ListEntry> = new MatTableDataSource<ListEntry>();
 	listUser = "";
 
 	constructor(
@@ -26,7 +30,7 @@ export class UserListPageComponent {
 			this.listUser = data.username;
 		});
 
-		this.dataSource.data = [
+		const dummyList: ListEntry[] = [
 			{
 				list_id: 1,
 				user_id: 1,
@@ -52,38 +56,74 @@ export class UserListPageComponent {
 				active_status: "completed",
 				owner_status: "loaned",
 				notes: "Wish I owned this for real..."
+			},
+			{
+				list_id: 3,
+				user_id: 1,
+				isbn: 9781718356139,
+				title: "Ascendance of a Bookworm: Part 4 Volume 2",
+				start_date: "2023-02-10",
+				score: 10,
+				reread: 0,
+				active_status: "reading",
+				owner_status: "owned",
+				notes: "<3"
+			},
+			{
+				list_id: 4,
+				user_id: 1,
+				isbn: 9781718346406,
+				title: "Ascendance of a Bookworm: Part 4 Volume 9",
+				score: 0,
+				reread: 0,
+				active_status: "planning",
+				owner_status: "wanting"
+			},
+			{
+				list_id: 5,
+				user_id: 1,
+				isbn: 9781718356030,
+				title: "Ascendance of a Bookworm: Part 2 Volume 1",
+				score: 10,
+				reread: 0,
+				start_date: "2021-04-26",
+				end_date: "2021-04-27",
+				active_status: "completed",
+				owner_status: "previous_own"
 			}
 		];
-	}
 
-	getCover(isbn: string) {
-		return this.service.getAsset(`${isbn}`);
-	}
+		const lists: { [key: string]: ListEntry[] } = {};
 
-	sortData(sort: Sort) {
-		const data = this.dataSource.data;
-
-		if (!sort.active || sort.direction === "") {
-			this.dataSource.data = data;
-			return;
+		for (const entry of dummyList) {
+			entry["isExpanded"] = false;
+			if (Object.prototype.hasOwnProperty.call(lists, entry.active_status)) {
+				lists[entry.active_status].push(entry);
+			} else {
+				lists[entry.active_status] = [entry];
+			}
 		}
 
-		this.dataSource.data = data.sort((a, b) => {
-			const isAsc = sort.direction === "asc";
-			switch (sort.active) {
-				case "title":
-					return compare(a.title, b.title, isAsc);
-				case "score":
-					return compare(a.score, b.score, isAsc);
-				case "reread":
-					return compare(a.reread, b.reread, isAsc);
+		for (const key of Object.keys(lists)) {
+			switch (key) {
+				case "reading":
+					this.readingSource.data = lists[key];
+					break;
+				case "completed":
+					this.completedSource.data = lists[key];
+					break;
+				case "paused":
+					this.pausedSource.data = lists[key];
+					break;
+				case "dropped":
+					this.droppedSource.data = lists[key];
+					break;
+				case "planning":
+					this.planningSource.data = lists[key];
+					break;
 				default:
-					return 0;
+					throw new Error("Type not in switch for table data");
 			}
-		});
+		}
 	}
-}
-
-function compare(a: number | string, b: number | string, isAsc: boolean) {
-	return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

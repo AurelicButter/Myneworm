@@ -46,7 +46,7 @@ const routes: Routes = [
 	{ path: "settings", pathMatch: "full", component: UserSettingsPageComponent, canActivate: [AuthenticationGuard] },
 	{ path: "settings/:page", component: UserSettingsPageComponent, canActivate: [AuthenticationGuard] },
 	{ path: "user/:username/lists", component: UserListPageComponent },
-	{ path: "**", pathMatch: "full", component: MissingPageComponent }
+	{ path: "**", component: MissingPageComponent }
 ];
 
 @NgModule({
