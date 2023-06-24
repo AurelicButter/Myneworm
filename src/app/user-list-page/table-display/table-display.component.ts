@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, OnChanges, OnInit, SimpleChange } from "@angular/core";
 import { Sort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { ListEntry } from "src/app/models/ListEntry";
@@ -10,39 +10,81 @@ import { formatOwnerStatus } from "src/app/functions/formatOwnerStatus";
 	templateUrl: "./table-display.component.html",
 	styleUrls: ["./table-display.component.css"]
 })
-export class TableDisplayComponent {
-	displayedColumns = ["cover", "title", "score", "reread", "owner", "more"];
-	@Input() dataSource: MatTableDataSource<ListEntry>;
+export class TableDisplayComponent implements OnInit, OnChanges {
+	displayedColumns = ["cover", "title", "score", "reread", "owner", "bookType", "more"];
+	@Input() _allEntries: MatTableDataSource<ListEntry>;
 	@Input() tableName: string;
+	@Input() ownershipFilter: string[];
+	@Input() booktypeFilter: string[];
 	formatOwnerStatus = formatOwnerStatus;
+	public listEntries: ListEntry[];
 
 	constructor(public service: MynewormAPIService) {}
+
+	ngOnInit() {
+		this.listEntries = this._allEntries.data;
+	}
+
+	ngOnChanges(changes: { [key: string]: SimpleChange }) {
+		if (
+			Object.prototype.hasOwnProperty.call(changes, "ownershipFilter") &&
+			changes["ownershipFilter"].isFirstChange()
+		) {
+			return;
+		}
+
+		if (
+			Object.prototype.hasOwnProperty.call(changes, "booktypeFilter") &&
+			changes["booktypeFilter"].isFirstChange()
+		) {
+			return;
+		}
+
+		if (this.ownershipFilter.length === 0 && this.booktypeFilter.length === 0) {
+			this.listEntries = this._allEntries.data;
+			return;
+		}
+
+		let data = this._allEntries.data;
+
+		if (this.ownershipFilter.length > 0) {
+			data = data.filter((item) => this.ownershipFilter.includes(item.owner_status));
+		}
+
+		if (this.booktypeFilter.length > 0) {
+			data = data.filter((item) => this.booktypeFilter.includes(item.book_type));
+		}
+
+		this.listEntries = data;
+	}
 
 	getCover(isbn: string) {
 		return this.service.getAsset(`${isbn}`);
 	}
 
 	sortData(sort: Sort) {
-		const data = this.dataSource.data;
+		const data = this.listEntries;
 
 		if (!sort.active || sort.direction === "") {
-			this.dataSource.data = data;
+			this.listEntries = data;
 			return;
 		}
 
-		this.dataSource.data = data.sort((a, b) => {
-			const isAsc = sort.direction === "asc";
-			switch (sort.active) {
-				case "title":
-					return compare(a.title, b.title, isAsc);
-				case "score":
-					return compare(a.score, b.score, isAsc);
-				case "reread":
-					return compare(a.reread, b.reread, isAsc);
-				default:
-					return 0;
-			}
-		});
+		this.listEntries = [
+			...data.sort((a, b) => {
+				const isAsc = sort.direction === "asc";
+				switch (sort.active) {
+					case "title":
+						return compare(a.title, b.title, isAsc);
+					case "score":
+						return compare(a.score, b.score, isAsc);
+					case "reread":
+						return compare(a.reread, b.reread, isAsc);
+					default:
+						return 0;
+				}
+			})
+		];
 	}
 
 	expandedDetails(element: ListEntry) {

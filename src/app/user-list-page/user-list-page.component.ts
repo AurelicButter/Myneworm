@@ -18,6 +18,16 @@ export class UserListPageComponent {
 	public droppedSource: MatTableDataSource<ListEntry> = new MatTableDataSource<ListEntry>();
 	public planningSource: MatTableDataSource<ListEntry> = new MatTableDataSource<ListEntry>();
 	listUser = "";
+	appliedFilter = 0;
+	filter = {
+		reading: false,
+		completed: false,
+		paused: false,
+		dropped: false,
+		planning: false
+	};
+	ownershipFilter: string[] = [];
+	booktypeFilter: string[] = [];
 
 	constructor(
 		private route: ActivatedRoute,
@@ -38,6 +48,7 @@ export class UserListPageComponent {
 				title: "Ascendance of a Bookworm: Part 3 Volume 4",
 				start_date: "2023-01-10",
 				end_date: "2023-02-10",
+				book_type: "paperback",
 				score: 10,
 				reread: 2,
 				active_status: "completed",
@@ -51,6 +62,7 @@ export class UserListPageComponent {
 				title: "Ascendance of a Bookworm: Short Story Collection Volume 1",
 				start_date: "2023-02-10",
 				end_date: "2023-03-15",
+				book_type: "paperback",
 				score: 9,
 				reread: 0,
 				active_status: "completed",
@@ -63,6 +75,7 @@ export class UserListPageComponent {
 				isbn: 9781718356139,
 				title: "Ascendance of a Bookworm: Part 4 Volume 2",
 				start_date: "2023-02-10",
+				book_type: "ebook",
 				score: 10,
 				reread: 0,
 				active_status: "reading",
@@ -74,6 +87,7 @@ export class UserListPageComponent {
 				user_id: 1,
 				isbn: 9781718346406,
 				title: "Ascendance of a Bookworm: Part 4 Volume 9",
+				book_type: "audiobook",
 				score: 0,
 				reread: 0,
 				active_status: "planning",
@@ -84,6 +98,7 @@ export class UserListPageComponent {
 				user_id: 1,
 				isbn: 9781718356030,
 				title: "Ascendance of a Bookworm: Part 2 Volume 1",
+				book_type: "hardcover",
 				score: 10,
 				reread: 0,
 				start_date: "2021-04-26",
@@ -125,5 +140,65 @@ export class UserListPageComponent {
 					throw new Error("Type not in switch for table data");
 			}
 		}
+	}
+
+	updateFilterCount(newValue: boolean) {
+		if (newValue) {
+			this.appliedFilter++;
+			return;
+		}
+
+		this.appliedFilter--;
+	}
+
+	statusUpdate(update: string): void {
+		switch (update) {
+			case "reading":
+				this.filter.reading = !this.filter.reading;
+				this.updateFilterCount(this.filter.reading);
+				break;
+			case "completed":
+				this.filter.completed = !this.filter.completed;
+				this.updateFilterCount(this.filter.completed);
+				break;
+			case "paused":
+				this.filter.paused = !this.filter.paused;
+				this.updateFilterCount(this.filter.paused);
+				break;
+			case "dropped":
+				this.filter.dropped = !this.filter.dropped;
+				this.updateFilterCount(this.filter.dropped);
+				break;
+			case "planning":
+				this.filter.planning = !this.filter.planning;
+				this.updateFilterCount(this.filter.planning);
+				break;
+		}
+	}
+
+	addOwnership(status: string) {
+		const index = this.ownershipFilter.indexOf(status);
+
+		if (index !== -1) {
+			this.ownershipFilter.splice(index, 1);
+			this.ownershipFilter = [...this.ownershipFilter];
+			return;
+		}
+
+		this.ownershipFilter.push(status);
+		this.ownershipFilter = [...this.ownershipFilter];
+	}
+
+	addBooktype(booktype: string) {
+		const index = this.booktypeFilter.indexOf(booktype);
+
+		if (index !== -1) {
+			this.booktypeFilter.splice(index, 1);
+			this.booktypeFilter = [...this.booktypeFilter];
+			return;
+		}
+
+		this.booktypeFilter.push(booktype);
+		this.booktypeFilter = [...this.booktypeFilter];
 	}
 }

@@ -5,6 +5,7 @@ export interface ListEntry {
 	title: string;
 	start_date?: string;
 	end_date?: string;
+	book_type: string;
 	score: number;
 	reread: number;
 	active_status: string;

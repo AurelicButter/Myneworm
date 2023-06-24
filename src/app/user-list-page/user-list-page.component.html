@@ -6,75 +6,76 @@
         <div class="list-filter-div">
             <h4>Status</h4>
             <div class="form-check">
-                <input type="checkbox" id="reading" value="reading" class="form-check-input">
+                <input type="checkbox" id="reading" value="reading" class="form-check-input" (click)="statusUpdate('reading')">
                 <label for="reading" class="form-check-label">Reading</label>
             </div>
             <div class="form-check">
-                <input type="checkbox" id="completed" value="completed" class="form-check-input">
+                <input type="checkbox" id="completed" value="completed" class="form-check-input" (click)="statusUpdate('completed')">
                 <label for="completed" class="form-check-label">Completed</label>
             </div>
             <div class="form-check">
-                <input type="checkbox" id="paused" value="paused" class="form-check-input">
+                <input type="checkbox" id="paused" value="paused" class="form-check-input" (click)="statusUpdate('paused')">
                 <label for="paused" class="form-check-label">Paused</label>
             </div>
             <div class="form-check">
-                <input type="checkbox" id="dropped" value="dropped" class="form-check-input">
+                <input type="checkbox" id="dropped" value="dropped" class="form-check-input" (click)="statusUpdate('dropped')">
                 <label for="dropped" class="form-check-label">Dropped</label>
             </div>
             <div class="form-check">
-                <input type="checkbox" id="planning" value="planning" class="form-check-input">
+                <input type="checkbox" id="planning" value="planning" class="form-check-input" (click)="statusUpdate('planning')">
                 <label for="planning" class="form-check-label">Planning</label>
             </div>
         </div>
         <div class="list-filter-div">
             <h4>Ownership</h4>
             <div class="form-check">
-                <input type="checkbox" id="owned" value="owned" class="form-check-input">
+                <input type="checkbox" id="owned" value="owned" class="form-check-input" (click)="addOwnership('owned')">
                 <label for="owned" class="form-check-label">Owned</label>
             </div>
             <div class="form-check">
-                <input type="checkbox" id="loaned" value="loaned" class="form-check-input">
+                <input type="checkbox" id="loaned" value="loaned" class="form-check-input" (click)="addOwnership('loaned')">
                 <label for="loaned" class="form-check-label">Loaned</label>
             </div>
             <div class="form-check">
-                <input type="checkbox" id="previous_own" value="previous_own" class="form-check-input">
+                <input type="checkbox" id="previous_own" value="previous_own" class="form-check-input" (click)="addOwnership('previous_own')">
                 <label for="previous_own" class="form-check-label">Previously Owned</label>
             </div>
             <div class="form-check">
-                <input type="checkbox" id="wanting" value="wanting" class="form-check-input">
+                <input type="checkbox" id="wanting" value="wanting" class="form-check-input" (click)="addOwnership('wanting')">
                 <label for="wanting" class="form-check-label">Wanted</label>
             </div>
         </div>
         <div class="list-filter-div">
             <h4>Book Types</h4>
             <div class="form-check">
-                <input type="checkbox" id="paperback" value="paperback" class="form-check-input">
+                <input type="checkbox" id="paperback" value="paperback" class="form-check-input" (click)="addBooktype('paperback')">
                 <label for="paperback" class="form-check-label">Paperback</label>
             </div>
             <div class="form-check">
-                <input type="checkbox" id="ebook" value="ebook" class="form-check-input">
+                <input type="checkbox" id="ebook" value="ebook" class="form-check-input" (click)="addBooktype('ebook')">
                 <label for="ebook" class="form-check-label">Ebook</label>
             </div>
             <div class="form-check">
-                <input type="checkbox" id="hardcover" value="hardcover" class="form-check-input">
+                <input type="checkbox" id="hardcover" value="hardcover" class="form-check-input" (click)="addBooktype('hardcover')">
                 <label for="hardcover" class="form-check-label">Hardcover</label>
             </div>
             <div class="form-check">
-                <input type="checkbox" id="audiobook" value="audiobook" class="form-check-input">
+                <input type="checkbox" id="audiobook" value="audiobook" class="form-check-input" (click)="addBooktype('audiobook')">
                 <label for="audiobook" class="form-check-label">Audiobook</label>
             </div>
         </div>
     </aside>
     <main class="col-9">
-        <table-display *ngIf="readingSource.data.length > 0" [dataSource]="readingSource"
-            tableName="Reading"></table-display>
-        <table-display *ngIf="completedSource.data.length > 0" [dataSource]="completedSource"
-            tableName="Completed"></table-display>
-        <table-display *ngIf="pausedSource.data.length > 0" [dataSource]="pausedSource"
-            tableName="Paused"></table-display>
-        <table-display *ngIf="droppedSource.data.length > 0" [dataSource]="droppedSource"
-            tableName="Dropped"></table-display>
-        <table-display *ngIf="planningSource.data.length > 0" [dataSource]="planningSource"
-            tableName="Planning"></table-display>
+        <table-display 
+            *ngIf="readingSource.data.length > 0 && (appliedFilter === 0 || (filter.reading && appliedFilter > 0))" 
+            [_allEntries]="readingSource" tableName="Reading" [ownershipFilter]="ownershipFilter" [booktypeFilter]="booktypeFilter"></table-display>
+        <table-display *ngIf="completedSource.data.length > 0 && (appliedFilter === 0 || (filter.completed && appliedFilter > 0))" 
+            [_allEntries]="completedSource" tableName="Completed" [ownershipFilter]="ownershipFilter" [booktypeFilter]="booktypeFilter"></table-display>
+        <table-display *ngIf="pausedSource.data.length > 0 && (appliedFilter === 0 || (filter.paused && appliedFilter > 0))" 
+            [_allEntries]="pausedSource" tableName="Paused" [ownershipFilter]="ownershipFilter" [booktypeFilter]="booktypeFilter"></table-display>
+        <table-display *ngIf="droppedSource.data.length > 0 && (appliedFilter === 0 || (filter.dropped && appliedFilter > 0))" 
+            [_allEntries]="droppedSource" tableName="Dropped" [ownershipFilter]="ownershipFilter" [booktypeFilter]="booktypeFilter"></table-display>
+        <table-display *ngIf="planningSource.data.length > 0 && (appliedFilter === 0 || (filter.planning && appliedFilter > 0))" 
+            [_allEntries]="planningSource" tableName="Planning" [ownershipFilter]="ownershipFilter" [booktypeFilter]="booktypeFilter"></table-display>
     </main>
 </div>

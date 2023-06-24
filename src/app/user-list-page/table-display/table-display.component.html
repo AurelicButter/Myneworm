@@ -1,72 +1,80 @@
-<h3>{{tableName}}</h3>
-<table mat-table matSort [dataSource]="dataSource" multiTemplateDataRows
-    (matSortChange)="sortData($event)">
-    <ng-container matColumnDef="cover">
-        <th mat-header-cell *matHeaderCellDef scope="col" [attr.role]="null"></th>
-        <td mat-cell *matCellDef="let element" class="row-padding col-1">
-            <div class="cover-wrapper">
-                <img class="table-img" src='{{this.getCover(element.isbn)}}' alt='Cover for {{element.title}}' />
-                <img class="hover-preview" src='{{this.getCover(element.isbn)}}' alt='' />
-            </div>
-            
-        </td>
-    </ng-container>
-    <ng-container matColumnDef="title">
-        <th mat-header-cell *matHeaderCellDef scope="col" [attr.role]="null">Title</th>
-        <td mat-cell *matCellDef="let element" class="col-5">
-            <span><strong><a routerLink="/book/{{element.isbn}}"
-                        class="list-title-link">{{element.title}}</a></strong></span>
-        </td>
-    </ng-container>
-    <ng-container matColumnDef="score">
-        <th mat-header-cell mat-sort-header="score" *matHeaderCellDef scope="col" [attr.role]="null"
-            class="align-center">Score</th>
-        <td mat-cell *matCellDef="let element" class="align-center col-1">
-            <span *ngIf="element.score > 0">{{element.score}}</span>
-            <span *ngIf="element.score === 0">-</span>
-        </td>
-    </ng-container>
-    <ng-container matColumnDef="reread">
-        <th mat-header-cell mat-sort-header="reread" *matHeaderCellDef scope="col" [attr.role]="null"
-            class="align-center">Reread</th>
-        <td mat-cell *matCellDef="let element" class="align-center col-1">
-            <span *ngIf="element.reread > 0">{{element.reread}}</span>
-            <span *ngIf="element.reread === 0">-</span>
-        </td>
-    </ng-container>
-    <ng-container matColumnDef="owner">
-        <th mat-header-cell *matHeaderCellDef scope="col" [attr.role]="null" class="align-center">Ownership
-        </th>
-        <td mat-cell *matCellDef="let element" class="align-center col-1">
-            <span>{{formatOwnerStatus(element.owner_status)}}</span>
-        </td>
-    </ng-container>
-    <ng-container matColumnDef="more">
-        <th mat-header-cell *matHeaderCellDef scope="col" [attr.role]="null"></th>
-        <td mat-cell *matCellDef="let element" class="col-1">
-            <div class="more-col" *ngIf="hasExpandedDetails(element)">
-                <button class="btn myneworm-btn more-btn" (click)="expandedDetails(element)"><span>...</span></button>
-            </div>            
-        </td>
-    </ng-container>
-    <ng-container matColumnDef="expandedDetail">
-        <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
-            <div class="additional-details">
-                <div *ngIf="element.start_date" class="additional-details-cell">
-                    <p><strong>Start Date</strong> {{element.start_date}}</p>
+<div *ngIf="listEntries.length > 0">
+    <h3>{{tableName}}</h3>
+    <table mat-table matSort [dataSource]="listEntries" multiTemplateDataRows (matSortChange)="sortData($event)">
+        <ng-container matColumnDef="cover">
+            <th mat-header-cell *matHeaderCellDef scope="col" [attr.role]="null"></th>
+            <td mat-cell *matCellDef="let element" class="row-padding col-1">
+                <div class="cover-wrapper">
+                    <img class="table-img" src='{{this.getCover(element.isbn)}}' alt='Cover for {{element.title}}' />
+                    <img class="hover-preview" src='{{this.getCover(element.isbn)}}' alt='' />
                 </div>
-                <div *ngIf="element.end_date" class="additional-details-cell">
-                    <p><strong>Finish Date</strong> {{element.end_date}}</p>
+
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="title">
+            <th mat-header-cell mat-sort-header="title" *matHeaderCellDef scope="col" [attr.role]="null">Title</th>
+            <td mat-cell *matCellDef="let element" class="col-5">
+                <span><strong><a routerLink="/book/{{element.isbn}}"
+                            class="list-title-link">{{element.title}}</a></strong></span>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="score">
+            <th mat-header-cell mat-sort-header="score" *matHeaderCellDef scope="col" [attr.role]="null"
+                class="align-center">Score</th>
+            <td mat-cell *matCellDef="let element" class="align-center col-1">
+                <span *ngIf="element.score > 0">{{element.score}}</span>
+                <span *ngIf="element.score === 0">-</span>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="reread">
+            <th mat-header-cell mat-sort-header="reread" *matHeaderCellDef scope="col" [attr.role]="null"
+                class="align-center">Reread</th>
+            <td mat-cell *matCellDef="let element" class="align-center col-1">
+                <span *ngIf="element.reread > 0">{{element.reread}}</span>
+                <span *ngIf="element.reread === 0">-</span>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="owner">
+            <th mat-header-cell *matHeaderCellDef scope="col" [attr.role]="null" class="align-center">Ownership
+            </th>
+            <td mat-cell *matCellDef="let element" class="align-center col-1">
+                <span>{{formatOwnerStatus(element.owner_status)}}</span>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="bookType">
+            <th mat-header-cell *matHeaderCellDef scope="col" [attr.role]="null" class="align-center">Book Type
+            </th>
+            <td mat-cell *matCellDef="let element" class="align-center col-1">
+                <span class="captialize-text">{{element.book_type}}</span>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="more">
+            <th mat-header-cell *matHeaderCellDef scope="col" [attr.role]="null"></th>
+            <td mat-cell *matCellDef="let element" class="col-1">
+                <div class="more-col" *ngIf="hasExpandedDetails(element)">
+                    <button class="btn myneworm-btn more-btn"
+                        (click)="expandedDetails(element)"><span>...</span></button>
                 </div>
-                <div *ngIf="element.notes" class="additional-details-cell">
-                    <p><strong>Notes</strong> {{element.notes}}</p>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="expandedDetail">
+            <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+                <div class="additional-details">
+                    <div *ngIf="element.start_date" class="additional-details-cell">
+                        <p><strong>Start Date</strong> {{element.start_date}}</p>
+                    </div>
+                    <div *ngIf="element.end_date" class="additional-details-cell">
+                        <p><strong>Finish Date</strong> {{element.end_date}}</p>
+                    </div>
+                    <div *ngIf="element.notes" class="additional-details-cell">
+                        <p><strong>Notes</strong> {{element.notes}}</p>
+                    </div>
                 </div>
-            </div>
-        </td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns" [attr.role]="null"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" 
-        [ngClass]="row.isExpanded ? 'expanded' : 'collapsed'"
-    ></tr>
-</table>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns" [attr.role]="null"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']"
+            [ngClass]="row.isExpanded ? 'expanded' : 'collapsed'"></tr>
+    </table>
+</div>

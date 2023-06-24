@@ -101,3 +101,7 @@ h3 {
     display: flex;
     align-items: center;
 }
+
+.captialize-text {
+    text-transform: capitalize;
+}
