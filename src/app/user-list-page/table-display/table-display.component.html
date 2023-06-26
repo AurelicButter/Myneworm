@@ -44,7 +44,7 @@
             <th mat-header-cell *matHeaderCellDef scope="col" [attr.role]="null" class="align-center">Book Type
             </th>
             <td mat-cell *matCellDef="let element" class="align-center col-1">
-                <span class="captialize-text">{{element.book_type}}</span>
+                <span class="captialize-text">{{element.book_type_name}}</span>
             </td>
         </ng-container>
         <ng-container matColumnDef="more">
@@ -61,10 +61,10 @@
             <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
                 <div class="additional-details">
                     <div *ngIf="element.start_date" class="additional-details-cell">
-                        <p><strong>Start Date</strong> {{element.start_date}}</p>
+                        <p><strong>Start Date</strong> {{formatDateString(element.start_date)}}</p>
                     </div>
                     <div *ngIf="element.end_date" class="additional-details-cell">
-                        <p><strong>Finish Date</strong> {{element.end_date}}</p>
+                        <p><strong>Finish Date</strong> {{formatDateString(element.end_date)}}</p>
                     </div>
                     <div *ngIf="element.notes" class="additional-details-cell">
                         <p><strong>Notes</strong> {{element.notes}}</p>

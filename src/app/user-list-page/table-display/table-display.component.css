@@ -96,3 +96,7 @@ h3 {
 .captialize-text {
     text-transform: capitalize;
 }
+
+.align-center {
+    text-align: center;
+}

@@ -77,15 +77,15 @@
         </div>
     </aside>
     <main class="col-9">
-        <table-display *ngIf="appliedFilter === 0 || (filter.reading && appliedFilter > 0)" 
+        <table-display *ngIf="appliedFilter === 0 || (filter.reading && appliedFilter > 0)" [triggerListUpdate]="triggerListUpdate"
             [_allEntries]="readingSource" tableName="Reading" [ownershipFilter]="ownershipFilter" [booktypeFilter]="booktypeFilter"></table-display>
-        <table-display *ngIf="appliedFilter === 0 || (filter.completed && appliedFilter > 0)" 
+        <table-display *ngIf="appliedFilter === 0 || (filter.completed && appliedFilter > 0)" [triggerListUpdate]="triggerListUpdate"
             [_allEntries]="completedSource" tableName="Completed" [ownershipFilter]="ownershipFilter" [booktypeFilter]="booktypeFilter"></table-display>
-        <table-display *ngIf="appliedFilter === 0 || (filter.paused && appliedFilter > 0)" 
+        <table-display *ngIf="appliedFilter === 0 || (filter.paused && appliedFilter > 0)" [triggerListUpdate]="triggerListUpdate"
             [_allEntries]="pausedSource" tableName="Paused" [ownershipFilter]="ownershipFilter" [booktypeFilter]="booktypeFilter"></table-display>
-        <table-display *ngIf="appliedFilter === 0 || (filter.dropped && appliedFilter > 0)" 
+        <table-display *ngIf="appliedFilter === 0 || (filter.dropped && appliedFilter > 0)" [triggerListUpdate]="triggerListUpdate"
             [_allEntries]="droppedSource" tableName="Dropped" [ownershipFilter]="ownershipFilter" [booktypeFilter]="booktypeFilter"></table-display>
-        <table-display *ngIf="appliedFilter === 0 || (filter.planning && appliedFilter > 0)" 
+        <table-display *ngIf="appliedFilter === 0 || (filter.planning && appliedFilter > 0)" [triggerListUpdate]="triggerListUpdate"
             [_allEntries]="planningSource" tableName="Planning" [ownershipFilter]="ownershipFilter" [booktypeFilter]="booktypeFilter"></table-display>
     </main>
 </div>

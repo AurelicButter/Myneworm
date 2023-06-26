@@ -2,9 +2,12 @@ import { Component } from "@angular/core";
 import { MatTableDataSource } from "@angular/material/table";
 import { MynewormAPIService } from "../services/myneworm-api.service";
 import { MetadataService } from "../services/metadata.service";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 
 import { ListEntry } from "../models/ListEntry";
+import { UtilitiesService } from "../services/utilities.service";
+import { catchError } from "rxjs";
+import { UserData } from "../models/userData";
 
 @Component({
 	selector: "user-list-page",
@@ -28,89 +31,48 @@ export class UserListPageComponent {
 	};
 	ownershipFilter: string[] = [];
 	booktypeFilter: string[] = [];
+	triggerListUpdate = false;
 
 	constructor(
 		private route: ActivatedRoute,
 		public service: MynewormAPIService,
 		private metaService: MetadataService,
-		private router: Router
+		private utilities: UtilitiesService
 	) {
 		this.route.params.subscribe((data) => {
 			this.metaService.updateMetaTags(`${data.username}'s List`, `/user/${data.username}/lists`);
 			this.listUser = data.username;
 		});
+	}
 
-		const dummyList: ListEntry[] = [
-			{
-				list_id: 1,
-				user_id: 1,
-				isbn: 9781718356108,
-				title: "Ascendance of a Bookworm: Part 3 Volume 4",
-				start_date: "2023-01-10",
-				end_date: "2023-02-10",
-				book_type: "paperback",
-				score: 10,
-				reread: 2,
-				active_status: "completed",
-				owner_status: "owned",
-				notes: "Best book ever"
-			},
-			{
-				list_id: 2,
-				user_id: 1,
-				isbn: 9781718346741,
-				title: "Ascendance of a Bookworm: Short Story Collection Volume 1",
-				start_date: "2023-02-10",
-				end_date: "2023-03-15",
-				book_type: "paperback",
-				score: 9,
-				reread: 0,
-				active_status: "completed",
-				owner_status: "loaned",
-				notes: "Wish I owned this for real..."
-			},
-			{
-				list_id: 3,
-				user_id: 1,
-				isbn: 9781718356139,
-				title: "Ascendance of a Bookworm: Part 4 Volume 2",
-				start_date: "2023-02-10",
-				book_type: "ebook",
-				score: 10,
-				reread: 0,
-				active_status: "reading",
-				owner_status: "owned",
-				notes: "<3"
-			},
-			{
-				list_id: 4,
-				user_id: 1,
-				isbn: 9781718346406,
-				title: "Ascendance of a Bookworm: Part 4 Volume 9",
-				book_type: "audiobook",
-				score: 0,
-				reread: 0,
-				active_status: "planning",
-				owner_status: "wanting"
-			},
-			{
-				list_id: 5,
-				user_id: 1,
-				isbn: 9781718356030,
-				title: "Ascendance of a Bookworm: Part 2 Volume 1",
-				book_type: "hardcover",
-				score: 10,
-				reread: 0,
-				start_date: "2021-04-26",
-				end_date: "2021-04-27",
-				active_status: "completed",
-				owner_status: "previous_own"
-			}
-		];
+	ngOnInit() {
+		this.route.params.subscribe((data) => {
+			this.service
+				.getUser(data.username)
+				.pipe(catchError((err) => this.utilities.catchAPIError(err)))
+				.subscribe((userData: UserData | null) => {
+					if (userData === null) {
+						return;
+					}
 
+					this.service
+						.getUserList(userData.user_id.toString())
+						.pipe(catchError((err) => this.utilities.catchAPIError(err)))
+						.subscribe((listEntries: ListEntry[] | null) => {
+							if (listEntries === null) {
+								return;
+							}
+
+							this.compileLists(listEntries);
+						});
+				});
+		});
+	}
+
+	compileLists(listEntries: ListEntry[]) {
 		const lists: { [key: string]: ListEntry[] } = {};
 
-		for (const entry of dummyList) {
+		for (const entry of listEntries) {
 			entry["isExpanded"] = false;
 			if (Object.prototype.hasOwnProperty.call(lists, entry.active_status)) {
 				lists[entry.active_status].push(entry);
@@ -140,6 +102,12 @@ export class UserListPageComponent {
 					throw new Error("Type not in switch for table data");
 			}
 		}
+
+		this.refreshTables();
+	}
+
+	refreshTables() {
+		this.triggerListUpdate = !this.triggerListUpdate;
 	}
 
 	updateFilterCount(newValue: boolean) {
@@ -178,28 +146,14 @@ export class UserListPageComponent {
 
 	addOwnership(status: string) {
 		const index = this.ownershipFilter.indexOf(status);
-
-		if (index !== -1) {
-			this.ownershipFilter.splice(index, 1);
-			this.ownershipFilter = [...this.ownershipFilter];
-			return;
-		}
-
-		this.ownershipFilter.push(status);
-		this.ownershipFilter = [...this.ownershipFilter];
+		index !== -1 ? this.ownershipFilter.splice(index, 1) : this.ownershipFilter.push(status);
+		this.refreshTables();
 	}
 
 	addBooktype(booktype: string) {
 		const index = this.booktypeFilter.indexOf(booktype);
-
-		if (index !== -1) {
-			this.booktypeFilter.splice(index, 1);
-			this.booktypeFilter = [...this.booktypeFilter];
-			return;
-		}
-
-		this.booktypeFilter.push(booktype);
-		this.booktypeFilter = [...this.booktypeFilter];
+		index !== -1 ? this.booktypeFilter.splice(index, 1) : this.booktypeFilter.push(booktype);
+		this.refreshTables();
 	}
 
 	clearFilters() {

@@ -6,6 +6,8 @@ import { MonthReleaseData } from "../models/monthReleaseData";
 import { BookData } from "../models/bookData";
 import { PublisherData } from "../models/publisherData";
 import { BookType } from "../models/BookType";
+import { ListEntry } from "../models/ListEntry";
+import { UserData } from "../models/userData";
 
 @Injectable({
 	providedIn: "root"
@@ -94,5 +96,13 @@ export class MynewormAPIService {
 
 	getBookTypes() {
 		return this.http.get<BookType[]>(`${environment.API_ADDRESS}/booktype`);
+	}
+
+	getUser(username: string) {
+		return this.http.get<UserData>(`${environment.API_ADDRESS}/user/${username}`);
+	}
+
+	getUserList(userID: string) {
+		return this.http.get<ListEntry[]>(`${environment.API_ADDRESS}/lists/${userID}`);
 	}
 }
