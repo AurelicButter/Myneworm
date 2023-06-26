@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-1"></div>
     <aside class="col-2">
-        <h3 class="filter-header">Filters</h3>
+        <h3 class="align-center">Filters</h3>
         <div class="list-filter-div">
             <h4>Status</h4>
             <div class="form-check">
@@ -29,53 +29,63 @@
         <div class="list-filter-div">
             <h4>Ownership</h4>
             <div class="form-check">
-                <input type="checkbox" id="owned" value="owned" class="form-check-input" (click)="addOwnership('owned')">
+                <input type="checkbox" id="owned" value="owned" class="form-check-input" 
+                    [checked]='this.ownershipFilter.includes("owned")' (click)="addOwnership('owned')">
                 <label for="owned" class="form-check-label">Owned</label>
             </div>
             <div class="form-check">
-                <input type="checkbox" id="loaned" value="loaned" class="form-check-input" (click)="addOwnership('loaned')">
+                <input type="checkbox" id="loaned" value="loaned" class="form-check-input" 
+                    [checked]='this.ownershipFilter.includes("loaned")' (click)="addOwnership('loaned')">
                 <label for="loaned" class="form-check-label">Loaned</label>
             </div>
             <div class="form-check">
-                <input type="checkbox" id="previous_own" value="previous_own" class="form-check-input" (click)="addOwnership('previous_own')">
+                <input type="checkbox" id="previous_own" value="previous_own" class="form-check-input" 
+                    [checked]='this.ownershipFilter.includes("previous_own")' (click)="addOwnership('previous_own')">
                 <label for="previous_own" class="form-check-label">Previously Owned</label>
             </div>
             <div class="form-check">
-                <input type="checkbox" id="wanting" value="wanting" class="form-check-input" (click)="addOwnership('wanting')">
+                <input type="checkbox" id="wanting" value="wanting" class="form-check-input" 
+                    [checked]='this.ownershipFilter.includes("wanting")' (click)="addOwnership('wanting')">
                 <label for="wanting" class="form-check-label">Wanted</label>
             </div>
         </div>
         <div class="list-filter-div">
             <h4>Book Types</h4>
             <div class="form-check">
-                <input type="checkbox" id="paperback" value="paperback" class="form-check-input" (click)="addBooktype('paperback')">
+                <input type="checkbox" id="paperback" value="paperback" class="form-check-input" 
+                    [checked]='this.booktypeFilter.includes("paperback")' (click)="addBooktype('paperback')">
                 <label for="paperback" class="form-check-label">Paperback</label>
             </div>
             <div class="form-check">
-                <input type="checkbox" id="ebook" value="ebook" class="form-check-input" (click)="addBooktype('ebook')">
+                <input type="checkbox" id="ebook" value="ebook" class="form-check-input" 
+                    [checked]='this.booktypeFilter.includes("ebook")' (click)="addBooktype('ebook')">
                 <label for="ebook" class="form-check-label">Ebook</label>
             </div>
             <div class="form-check">
-                <input type="checkbox" id="hardcover" value="hardcover" class="form-check-input" (click)="addBooktype('hardcover')">
+                <input type="checkbox" id="hardcover" value="hardcover" class="form-check-input" 
+                    [checked]='this.booktypeFilter.includes("hardcover")'(click)="addBooktype('hardcover')">
                 <label for="hardcover" class="form-check-label">Hardcover</label>
             </div>
             <div class="form-check">
-                <input type="checkbox" id="audiobook" value="audiobook" class="form-check-input" (click)="addBooktype('audiobook')">
+                <input type="checkbox" id="audiobook" value="audiobook" class="form-check-input" 
+                    [checked]='this.booktypeFilter.includes("audiobook")' (click)="addBooktype('audiobook')">
                 <label for="audiobook" class="form-check-label">Audiobook</label>
             </div>
         </div>
+        <div class="list-filter-div">
+            <button class="btn myneworm-btn" (click)="clearFilters()">Clear Filters</button>
+        </div>
     </aside>
     <main class="col-9">
-        <table-display 
-            *ngIf="readingSource.data.length > 0 && (appliedFilter === 0 || (filter.reading && appliedFilter > 0))" 
+        <table-display *ngIf="appliedFilter === 0 || (filter.reading && appliedFilter > 0)" 
             [_allEntries]="readingSource" tableName="Reading" [ownershipFilter]="ownershipFilter" [booktypeFilter]="booktypeFilter"></table-display>
-        <table-display *ngIf="completedSource.data.length > 0 && (appliedFilter === 0 || (filter.completed && appliedFilter > 0))" 
+        <table-display *ngIf="appliedFilter === 0 || (filter.completed && appliedFilter > 0)" 
             [_allEntries]="completedSource" tableName="Completed" [ownershipFilter]="ownershipFilter" [booktypeFilter]="booktypeFilter"></table-display>
-        <table-display *ngIf="pausedSource.data.length > 0 && (appliedFilter === 0 || (filter.paused && appliedFilter > 0))" 
+        <table-display *ngIf="appliedFilter === 0 || (filter.paused && appliedFilter > 0)" 
             [_allEntries]="pausedSource" tableName="Paused" [ownershipFilter]="ownershipFilter" [booktypeFilter]="booktypeFilter"></table-display>
-        <table-display *ngIf="droppedSource.data.length > 0 && (appliedFilter === 0 || (filter.dropped && appliedFilter > 0))" 
+        <table-display *ngIf="appliedFilter === 0 || (filter.dropped && appliedFilter > 0)" 
             [_allEntries]="droppedSource" tableName="Dropped" [ownershipFilter]="ownershipFilter" [booktypeFilter]="booktypeFilter"></table-display>
-        <table-display *ngIf="planningSource.data.length > 0 && (appliedFilter === 0 || (filter.planning && appliedFilter > 0))" 
+        <table-display *ngIf="appliedFilter === 0 || (filter.planning && appliedFilter > 0)" 
             [_allEntries]="planningSource" tableName="Planning" [ownershipFilter]="ownershipFilter" [booktypeFilter]="booktypeFilter"></table-display>
     </main>
 </div>

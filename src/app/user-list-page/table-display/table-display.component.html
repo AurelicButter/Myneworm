@@ -8,12 +8,11 @@
                     <img class="table-img" src='{{this.getCover(element.isbn)}}' alt='Cover for {{element.title}}' />
                     <img class="hover-preview" src='{{this.getCover(element.isbn)}}' alt='' />
                 </div>
-
             </td>
         </ng-container>
         <ng-container matColumnDef="title">
             <th mat-header-cell mat-sort-header="title" *matHeaderCellDef scope="col" [attr.role]="null">Title</th>
-            <td mat-cell *matCellDef="let element" class="col-5">
+            <td mat-cell *matCellDef="let element" class="col-4-half">
                 <span><strong><a routerLink="/book/{{element.isbn}}"
                             class="list-title-link">{{element.title}}</a></strong></span>
             </td>
@@ -50,11 +49,12 @@
         </ng-container>
         <ng-container matColumnDef="more">
             <th mat-header-cell *matHeaderCellDef scope="col" [attr.role]="null"></th>
-            <td mat-cell *matCellDef="let element" class="col-1">
-                <div class="more-col" *ngIf="hasExpandedDetails(element)">
-                    <button class="btn myneworm-btn more-btn"
+            <td mat-cell *matCellDef="let element" class="col-1-half">
+                <div class="more-col">
+                    <button class="btn myneworm-btn disabled">Edit</button>
+                    <button *ngIf="hasExpandedDetails(element)" class="btn myneworm-btn more-btn"
                         (click)="expandedDetails(element)"><span>...</span></button>
-                </div>
+                </div>                
             </td>
         </ng-container>
         <ng-container matColumnDef="expandedDetail">

@@ -2,19 +2,6 @@ table {
     background-color: #E7E6F0;
 }
 
-.filter-header {
-    text-align: center;
-}
-
-.list-filter-div {
-    margin-bottom: 10px;
-}
-
-.page-title {
-    border-bottom: 1px solid grey;
-    margin-bottom: 20px;
-}
-
 .table-img {
     max-height: 70px;
 }
@@ -35,10 +22,6 @@ tr {
 .list-title-link {
     text-decoration: none;
     color: #1F2232;
-}
-
-.align-center {
-    text-align: center;
 }
 
 ::ng-deep .mat-sort-header-container {
@@ -64,12 +47,20 @@ h3 {
 }
 
 .additional-details-cell {
-    margin-right: 10px;
+    margin-right: 20px;
+}
+
+.additional-details-cell:first-child {
+    margin-left: 10px;
+}
+
+.additional-details-cell > p {
+    margin-bottom: 0;
 }
 
 .more-col {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
 .more-btn {

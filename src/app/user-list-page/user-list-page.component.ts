@@ -201,4 +201,18 @@ export class UserListPageComponent {
 		this.booktypeFilter.push(booktype);
 		this.booktypeFilter = [...this.booktypeFilter];
 	}
+
+	clearFilters() {
+		this.ownershipFilter = [];
+		this.booktypeFilter = [];
+		this.filter = {
+			reading: false,
+			completed: false,
+			paused: false,
+			dropped: false,
+			planning: false
+		};
+
+		this.appliedFilter = 0;
+	}
 }

@@ -1,7 +1,3 @@
-.filter-header {
-    text-align: center;
-}
-
 .list-filter-div {
     margin-bottom: 10px;
 }
@@ -9,34 +5,4 @@
 .page-title {
     border-bottom: 1px solid grey;
     margin-bottom: 20px;
-}
-
-.table-img {
-    max-height: 100px;
-}
-
-.row-padding {
-    padding-top: 8px;
-    padding-bottom: 8px;
-}
-
-tr:last-child {
-    border-bottom: 0 !important;
-}
-
-tr {
-    border-bottom: 1px solid lightgray;
-}
-
-.list-title-link {
-    text-decoration: none;
-    color: #1F2232;
-}
-
-.align-center {
-    text-align: center;
-}
-
-::ng-deep .mat-sort-header-container {
-    justify-content: center;
 }
