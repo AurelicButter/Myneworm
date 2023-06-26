@@ -22,6 +22,10 @@ body {
     pointer-events:none;
 }
 
+.align-center {
+    text-align: center;
+}
+
 /*
  * Buttons
  */
@@ -47,4 +51,18 @@ body {
 .myneworm-btn {
     background-color: #1F2232 !important;
     color: #ECEBF3 !important;
+}
+
+/*
+ * Collumn Widths
+ */
+
+.col-1-half {
+    flex: 0 0 auto;
+    width: 12.5%;
+}
+
+.col-4-half {
+    flex: 0 0 auto;
+    width: 37.5%;
 }
