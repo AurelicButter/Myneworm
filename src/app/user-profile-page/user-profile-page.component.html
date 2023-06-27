@@ -1,0 +1,129 @@
+<div class="user-header">
+    <img src="../../assets/Rozemyne_square.jpg">
+    <div class="user-header-description">
+        <div class="username-display">
+            <h2 class="aside-offset">Butterstroke</h2>
+        </div>
+        <div class="user-about-me aside-offset">
+            Hello world
+        </div>
+    </div>
+</div>
+<div class="user-container-wrapper">
+    <aside class="user-aside">
+        <p><b>Last Online:</b> Online</p>
+        <p><b>Joined:</b> Yesterday</p>
+        <p><b>Location:</b> Raleigh, NC</p>
+    </aside>
+    <div class="profile-content aside-offset">
+        <h3 id="#statistics" class="list-display-header">Statistics</h3>
+        <div class="list-displays">
+            <div class="active-status">
+                <h4>By Activity</h4>
+                <div class="status-display">
+                    <div class="counter">
+                        <div class="counter-level reading"
+                            [style.width]="calculatePercentage(activeStatusCount.reading, activeTotal) + '%'"></div>
+                        <div class="counter-level completed"
+                            [style.width]="calculatePercentage(activeStatusCount.completed, activeTotal) + '%'"></div>
+                        <div class="counter-level paused"
+                            [style.width]="calculatePercentage(activeStatusCount.paused, activeTotal) + '%'"></div>
+                        <div class="counter-level dropped"
+                            [style.width]="calculatePercentage(activeStatusCount.dropped, activeTotal) + '%'"></div>
+                        <div class="counter-level planning"
+                            [style.width]="calculatePercentage(activeStatusCount.planning, activeTotal) + '%'"></div>
+                    </div>
+                    <div class="text-display">
+                        <div class="text-display-row">
+                            <p class="label-display"><span class="icon-shape reading"></span> Reading</p>
+                            <p>{{activeStatusCount.reading}}</p>
+                        </div>
+                        <div class="text-display-row">
+                            <p class="label-display"><span class="icon-shape completed"></span> Completed</p>
+                            <p>{{activeStatusCount.completed}}</p>
+                        </div>
+                        <div class="text-display-row">
+                            <p class="label-display"><span class="icon-shape paused"></span> Paused</p>
+                            <p>{{activeStatusCount.paused}}</p>
+                        </div>
+                        <div class="text-display-row">
+                            <p class="label-display"><span class="icon-shape dropped"></span> Dropped</p>
+                            <p>{{activeStatusCount.dropped}}</p>
+                        </div>
+                        <div class="text-display-row">
+                            <p class="label-display"><span class="icon-shape planning"></span> Planning</p>
+                            <p>{{activeStatusCount.planning}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="owner-status">
+                <h4>By Ownership</h4>
+                <div class="status-display">
+                    <div class="counter">
+                        <div class="counter-level owned"
+                            [style.width]="calculatePercentage(ownershipCount.owned, ownershipTotal) + '%'"></div>
+                        <div class="counter-level previous-own"
+                            [style.width]="calculatePercentage(ownershipCount.previous_own, ownershipTotal) + '%'">
+                        </div>
+                        <div class="counter-level loaned"
+                            [style.width]="calculatePercentage(ownershipCount.loaned, ownershipTotal) + '%'"></div>
+                        <div class="counter-level wanted"
+                            [style.width]="calculatePercentage(ownershipCount.wanted, ownershipTotal) + '%'"></div>
+                    </div>
+                    <div class="text-display">
+                        <div class="text-display-row">
+                            <p class="label-display"><span class="icon-shape owned"></span> Owned</p>
+                            <p>{{ownershipCount.owned}}</p>
+                        </div>
+                        <div class="text-display-row">
+                            <p class="label-display"><span class="icon-shape previous-own"></span> Previously Owned</p>
+                            <p>{{ownershipCount.previous_own}}</p>
+                        </div>
+                        <div class="text-display-row">
+                            <p class="label-display"><span class="icon-shape loaned"></span> Loaned</p>
+                            <p>{{ownershipCount.loaned}}</p>
+                        </div>
+                        <div class="text-display-row">
+                            <p class="label-display"><span class="icon-shape wanted"></span> Wanted</p>
+                            <p>{{ownershipCount.wanted}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="type-status">
+                <h4>By Book Type</h4>
+                <div class="status-display">
+                    <div class="counter">
+                        <div class="counter-level paperback"
+                            [style.width]="calculatePercentage(bookTypeCount.paperback, bookTypeTotal) + '%'"></div>
+                        <div class="counter-level ebook"
+                            [style.width]="calculatePercentage(bookTypeCount.ebook, bookTypeTotal) + '%'"></div>
+                        <div class="counter-level hardcover"
+                            [style.width]="calculatePercentage(bookTypeCount.hardcover, bookTypeTotal) + '%'"></div>
+                        <div class="counter-level audiobook"
+                            [style.width]="calculatePercentage(bookTypeCount.audiobook, bookTypeTotal) + '%'"></div>
+                    </div>
+                    <div class="text-display">
+                        <div class="text-display-row">
+                            <p class="label-display"><span class="icon-shape paperback"></span> Paperback</p>
+                            <p>{{bookTypeCount.paperback}}</p>
+                        </div>
+                        <div class="text-display-row">
+                            <p class="label-display"><span class="icon-shape ebook"></span> Ebook</p>
+                            <p>{{bookTypeCount.ebook}}</p>
+                        </div>
+                        <div class="text-display-row">
+                            <p class="label-display"><span class="icon-shape hardcover"></span> Hardcover</p>
+                            <p>{{bookTypeCount.hardcover}}</p>
+                        </div>
+                        <div class="text-display-row">
+                            <p class="label-display"><span class="icon-shape audiobook"></span> Audiobook</p>
+                            <p>{{bookTypeCount.audiobook}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,133 @@
+.aside-offset {
+    margin-left: 40px;
+}
+
+.user-header {
+    display: flex;
+    align-items: flex-start;
+}
+
+.user-header>img {
+    height: 250px;
+    width: 250px;
+    border: 6px solid gray;
+    border-radius: 6px;
+}
+
+.username-display {
+    margin-top: 30px;
+    border-bottom: 2px solid gray;
+}
+
+.username-display>h2 {
+    margin-bottom: 0;
+}
+
+.user-header-description {
+    width: -webkit-fill-available;
+}
+
+.user-about-me {
+    margin-top: 10px;
+}
+
+.user-container-wrapper {
+    display: flex;
+}
+
+.user-aside {
+    width: 250px;
+    margin-top: 10px;
+}
+
+.user-aside>p {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    width: inherit;
+}
+
+.counter {
+    height: 30px;
+    border-radius: 10px;
+    display: flex;
+}
+
+.profile-content {
+    width: -webkit-fill-available;
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    flex-wrap: wrap;
+}
+
+.active-status, .owner-status, .type-status {
+    width: 80%;
+    margin-top: 10px;
+}
+
+.counter-level {
+    height: inherit;
+}
+
+.counter-level:first-child {
+    border-radius: 10px 0px 0px 10px;
+}
+
+.counter-level:last-child {
+    border-radius: 0px 10px 10px 0px;
+}
+
+.reading, .ebook {
+    background-color: blue;
+}
+
+.completed, .owned, .paperback {
+    background-color: green;
+}
+
+.paused, .previous-own, .hardcover {
+    background-color: yellow;
+}
+
+.dropped, .loaned, .audiobook {
+    background-color: red;
+}
+
+.planning, .wanted {
+    background-color: gray;
+}
+
+.label-display {
+    display: flex;
+    align-items: center;
+}
+
+.icon-shape {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.text-display {
+    margin-top: 10px;
+}
+
+.text-display-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.list-displays {
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    flex-wrap: wrap;
+}
+
+.list-display-header {
+    width: 95%;
+    border-bottom: 2px solid gray;   
+}
