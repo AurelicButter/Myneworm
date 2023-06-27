@@ -5,42 +5,46 @@
 .user-header {
     display: flex;
     align-items: flex-start;
+    flex-direction: column;
 }
 
-.user-header>img {
+aside > img {
     height: 250px;
     width: 250px;
     border: 6px solid gray;
     border-radius: 6px;
+    margin-bottom: 10px;
 }
 
 .username-display {
     margin-top: 30px;
     border-bottom: 2px solid gray;
+    width: -webkit-fill-available;
+}
+
+.profile-container {
+    width: calc(100% - 250px);
+}
+
+.profile-flex {
+    display: flex;
 }
 
 .username-display>h2 {
     margin-bottom: 0;
 }
 
-.user-header-description {
-    width: -webkit-fill-available;
-}
-
 .user-about-me {
     margin-top: 10px;
+    margin-bottom: 10px;
+    min-height: 50px;
 }
 
 .user-container-wrapper {
     display: flex;
 }
 
-.user-aside {
-    width: 250px;
-    margin-top: 10px;
-}
-
-.user-aside>p {
+aside > p {
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
@@ -54,11 +58,8 @@
 }
 
 .profile-content {
-    width: -webkit-fill-available;
     display: flex;
     flex-direction: column;
-    align-content: space-around;
-    flex-wrap: wrap;
 }
 
 .active-status, .owner-status, .type-status {
