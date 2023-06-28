@@ -1,0 +1,60 @@
+.margin-top-10 {
+    margin-top: 10px;
+}
+
+.counter {
+    height: 30px;
+    border-radius: 10px;
+    display: flex;
+}
+
+.counter-level {
+    height: inherit;
+}
+
+.counter-level:first-child {
+    border-radius: 10px 0px 0px 10px;
+}
+
+.counter-level:last-child {
+    border-radius: 0px 10px 10px 0px;
+}
+
+.reading, .ebook {
+    background-color: blue;
+}
+
+.completed, .owned, .paperback {
+    background-color: green;
+}
+
+.paused, .previous_own, .hardcover {
+    background-color: yellow;
+}
+
+.dropped, .loaned, .audiobook {
+    background-color: red;
+}
+
+.planning, .wanted {
+    background-color: gray;
+}
+
+.label-display {
+    display: flex;
+    align-items: center;
+    text-transform: capitalize;
+}
+
+.icon-shape {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.text-display-row {
+    display: flex;
+    justify-content: space-between;
+}

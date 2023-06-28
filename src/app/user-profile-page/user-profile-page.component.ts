@@ -28,11 +28,22 @@ export class UserProfilePageComponent {
 	activeTotal = 0;
 	ownershipTotal = 0;
 	bookTypeTotal = 0;
+	finishedInit = false;
 
 	constructor() {
 		this.activeTotal = this.calculateTotal(this.activeStatusCount);
 		this.ownershipTotal = this.calculateTotal(this.ownershipCount);
 		this.bookTypeTotal = this.calculateTotal(this.bookTypeCount);
+
+		this.refreshComponent();
+	}
+
+	ngOnInit() {
+		this.refreshComponent();
+	}
+
+	refreshComponent() {
+		this.finishedInit = !this.finishedInit;
 	}
 
 	calculateTotal(object: { [key: string]: number }) {
