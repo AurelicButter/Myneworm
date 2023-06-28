@@ -1,12 +1,11 @@
 .flex-break {
     flex-basis: 100%;
-    height: 0;
+    height: 6px;
 }
 
 .missing-page {
     display: flex;
     justify-content: center;
-    align-items: center;
     flex-wrap: wrap;
     align-content: center;
     height: calc(100vh - 500px);
@@ -19,6 +18,8 @@
 .missing-nav-button {
     margin-left: 0.375em;
     margin-right: 0.375em;
+    display: flex;
+    align-items: center;
 }
 
 .missing-nav-button:last-child {

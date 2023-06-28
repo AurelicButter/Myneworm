@@ -1,23 +1,17 @@
-<div class="imprint-page" *ngIf="imprint != undefined">
-    <div class="imprint-left">
+<div class="row imprint-spacer" *ngIf="imprint != undefined">
+    <aside class="col-3">
         <div class="imprint-left-header">
-            <h1 class="imprint-header">{{imprint.name}}</h1>
+            <h2>{{imprint.name}}</h2>
             <img class="imprint-logo" src='{{getLogo(imprint.publisher_id)}}'>
         </div>
         <div class="imprint-info">
-            <div class="info-container button-div">
-                <a class="button-link" href="{{imprint.official_site}}">
-                    <div class="info-URL button-text">Official Page</div>
-                </a>
-            </div>
+            <a class="btn btn-lg imprint-btn myneworm-btn" href="{{imprint.official_site}}" type="button">Official Page</a>
         </div>
-    </div>
-    <div class="imprint-content">
-        <h2>Upcoming Releases</h2>
+    </aside>
+    <main class="col-9">
+        <h3>Upcoming Releases</h3>
         <div class="imprint-calendar">
-            <div class="calendar-container">
-                <calendar-manager #calendar [options]="calendarOptions"></calendar-manager>
-            </div>
+            <calendar-manager #calendar [options]="calendarOptions"></calendar-manager>
         </div>
-    </div>
+    </main>
 </div>

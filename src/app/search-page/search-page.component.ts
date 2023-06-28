@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Location } from "@angular/common";
 import { MatTableDataSource } from "@angular/material/table";
 import { ActivatedRoute, Params, Router } from "@angular/router";
 import { BookData } from "../models/bookData";
@@ -23,7 +24,8 @@ export class SearchPageComponent implements OnInit {
 		public service: MynewormAPIService,
 		public utilities: UtilitiesService,
 		private metaService: MetadataService,
-		private router: Router
+		private router: Router,
+		private location: Location
 	) {
 		this.metaService.updateMetaTags("Search", "/search");
 	}
@@ -46,13 +48,11 @@ export class SearchPageComponent implements OnInit {
 		}
 		this.service.searchBooksWithLimit(this.searchTerm, 25, this.pageNumber).subscribe((data: BookData[]) => {
 			this.dataSource = new MatTableDataSource<BookData>(data);
-			console.log(this.dataSource);
 		});
 	}
 
 	submit() {
 		this.pageNumber = 1;
-		this.searchBooks();
 		this.updateQuery();
 	}
 
@@ -66,11 +66,16 @@ export class SearchPageComponent implements OnInit {
 			page: this.pageNumber
 		};
 
-		this.router.navigate([], {
-			relativeTo: this.route,
-			queryParams: queryParams,
-			queryParamsHandling: "merge"
-		});
+		const url = this.router
+			.createUrlTree([], {
+				relativeTo: this.route,
+				queryParams: queryParams,
+				queryParamsHandling: "merge"
+			})
+			.toString();
+
+		this.location.go(url);
+		this.searchBooks();
 	}
 
 	nextPage() {

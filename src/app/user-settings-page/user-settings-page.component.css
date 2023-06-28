@@ -1,10 +1,7 @@
 .settings-menu {
-    width: 15%;
-    float: left;
     align-items: center;
     display: flex;
     flex-direction: column;
-    flex-wrap: nowrap;
     margin-left: 5%;
     margin-right: 5%;
     font-size: x-large;
@@ -27,14 +24,9 @@
     margin-bottom: 4px;
 }
 
-.settings-content {
-    width: 65%;
-    float: left;
-    margin-right: 10%
-}
-
 label {
     cursor: pointer;
+    padding: 0;
 }
 
 #avatarFile {

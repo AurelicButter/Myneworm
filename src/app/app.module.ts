@@ -26,12 +26,12 @@ import { LoginPageComponent } from "./login-page/login-page.component";
 import { UserNavMenuComponent } from "./user-nav-menu/user-nav-menu.component";
 import { LocalCookiesService } from "./services/authentication/local-cookies.service";
 import { UserSettingsPageComponent } from "./user-settings-page/user-settings-page.component";
+import { UserListPageModule } from "./user-list-page/user-list-page.module";
+
 @NgModule({
 	declarations: [
 		AppComponent,
 		MissingPageComponent,
-		FaqPageComponent,
-		AboutPageComponent,
 		DataCorrectionFormComponent,
 		ContactPageComponent,
 		LoginPageComponent,
@@ -54,7 +54,10 @@ import { UserSettingsPageComponent } from "./user-settings-page/user-settings-pa
 		SearchPageModule,
 		MatDialogModule,
 		PrivacyPageComponent,
-		DatabaseGuidelinesComponent
+		DatabaseGuidelinesComponent,
+		FaqPageComponent,
+		AboutPageComponent,
+		UserListPageModule
 	],
 	providers: [Title, LocalCookiesService],
 	bootstrap: [AppComponent]

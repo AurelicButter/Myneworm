@@ -13,11 +13,6 @@
     margin-left: 0;
 }
 
-.modal-footer button {
-    background-color: #2c3e50;
-    color: #fff;
-}
-
 .modal-action {
     margin-right: 30px;
 }
@@ -45,4 +40,8 @@
 
 .mat-form-field-autofilled .modal-input:-webkit-autofill:focus {
     -webkit-box-shadow: 0 0 0px 1000px #DCDCDC inset;
+}
+
+::ng-deep .mat-mdc-dialog-surface.mdc-dialog__surface {
+    height: initial;
 }

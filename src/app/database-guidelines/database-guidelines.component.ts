@@ -4,8 +4,7 @@ import { MetadataService } from "../services/metadata.service";
 @Component({
 	standalone: true,
 	selector: "database-guidelines",
-	templateUrl: "./database-guidelines.component.html",
-	styleUrls: ["./database-guidelines.component.css"]
+	templateUrl: "./database-guidelines.component.html"
 })
 export class DatabaseGuidelinesComponent {
 	constructor(private metaService: MetadataService) {

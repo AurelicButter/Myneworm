@@ -48,6 +48,14 @@ tr.fc-list-event {
     background-color: inherit;
 }
 
+.fc-col-header-cell-cushion,
+.fc-daygrid-day-number,
+.fc-list-day-text,
+.fc-list-day-side-text {
+    color: black;
+    text-decoration: none;
+}
+
 /**
  * SCHEDULE TAGS
  **/
