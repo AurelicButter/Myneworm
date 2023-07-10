@@ -49,7 +49,7 @@ export class HomePageComponent implements OnInit {
 		this.calendarOptions = {
 			plugins: [dayGridPlugin, interactionPlugin, listPlugin],
 			themeSystem: "standard",
-			height: "calc(100vh - 190px)",
+			height: "calc(100vh - 180px)",
 			initialView: "dayGridMonth",
 			dayMaxEventRows: 5,
 			buttonText: {
