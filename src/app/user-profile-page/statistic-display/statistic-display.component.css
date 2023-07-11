@@ -6,6 +6,7 @@
     height: 30px;
     border-radius: 10px;
     display: flex;
+    background-color: gray;
 }
 
 .counter-level {
@@ -37,7 +38,7 @@
 }
 
 .planning, .wanted {
-    background-color: gray;
+    background-color: purple;
 }
 
 .label-display {

@@ -1,20 +1,22 @@
 <div class="profile-flex">
-    <aside>
-        <img src="../../assets/Rozemyne_square.jpg">
-        <p><b>Last Online:</b> Online</p>
-        <p><b>Joined:</b> Yesterday</p>
-        <p><b>Location:</b> Raleigh, NC</p>
-        <p><b>Birthday:</b> 26 April 2000</p>
+    <aside class="aside-width">
+        <img src='{{getAvatar()}}'>
+        <p><b>Last Online:</b> {{this.isOnlineText()}}</p>
+        <p><b>Joined:</b> {{this.utilities.dateReadable(profileInfo.create_date)}}</p>
+        <p><b>Location:</b> {{profileInfo.location}}</p>
+        <p *ngIf="profileInfo.birthday"><b>Birthday:</b> {{this.utilities.dateReadable(profileInfo.birthday)}}</p>
         <br>
-        <a class="btn btn-lg myneworm-btn" role="button" href="./user/Mynebooks/lists">My List</a>
+        <a class="btn btn-lg myneworm-btn" role="button" href="./user/{{profileInfo.username}}/lists">My List</a>
     </aside>
     <div class="profile-container">
         <div class="user-header">
             <div class="username-display">
-                <h2 class="aside-offset">Butterstroke</h2>
+                <h2 *ngIf="profileInfo.display_name" class="aside-offset">{{profileInfo.display_name}} (@{{profileInfo.username}})</h2>
+                <h2 *ngIf="profileInfo.display_name === null" class="aside-offset">{{profileInfo.username}}</h2>
             </div>
             <div class="user-about-me aside-offset">
-                <p>Hello world</p>
+                <p *ngIf="profileInfo.about_me">{{profileInfo.about_me}}</p>
+                <p *ngIf="profileInfo.about_me === null">No about me section is provided! Perhaps one day, this user will choose to write this section instead of reading.</p>
             </div>
         </div>
         <div class="profile-content aside-offset">

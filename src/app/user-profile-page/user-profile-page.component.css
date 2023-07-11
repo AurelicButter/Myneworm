@@ -2,6 +2,10 @@
     margin-left: 40px;
 }
 
+.aside-width {
+    width: clamp(150px, 20%, 250px);
+}
+
 aside > a {
     width: -webkit-fill-available;
 }
@@ -13,8 +17,8 @@ aside > a {
 }
 
 aside > img {
-    height: 250px;
-    width: 250px;
+    aspect-ratio: 1/1;
+    width: 100%;
     border: 6px solid gray;
     border-radius: 6px;
     margin-bottom: 10px;
@@ -48,7 +52,6 @@ aside > p {
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
-    width: inherit;
 }
 
 .profile-content {
