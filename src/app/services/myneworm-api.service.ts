@@ -8,6 +8,7 @@ import { PublisherData } from "../models/publisherData";
 import { BookType } from "../models/BookType";
 import { ListEntry } from "../models/ListEntry";
 import { UserData } from "../models/userData";
+import { UserStatisticsProfile } from "../models/userStatisticsData";
 
 @Injectable({
 	providedIn: "root"
@@ -100,6 +101,10 @@ export class MynewormAPIService {
 
 	getUser(username: string) {
 		return this.http.get<UserData>(`${environment.API_ADDRESS}/user/${username}`);
+	}
+
+	getUserStats(username: string) {
+		return this.http.get<UserStatisticsProfile>(`${environment.API_ADDRESS}/user/stats/${username}`);
 	}
 
 	getUserList(userID: string) {
