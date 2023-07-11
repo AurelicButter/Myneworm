@@ -27,6 +27,8 @@ import { UserNavMenuComponent } from "./user-nav-menu/user-nav-menu.component";
 import { LocalCookiesService } from "./services/authentication/local-cookies.service";
 import { UserSettingsPageComponent } from "./user-settings-page/user-settings-page.component";
 import { UserListPageModule } from "./user-list-page/user-list-page.module";
+import { UserProfilePageComponent } from "./user-profile-page/user-profile-page.component";
+import { StatisticDisplayComponent } from "./user-profile-page/statistic-display/statistic-display.component";
 
 @NgModule({
 	declarations: [
@@ -36,7 +38,9 @@ import { UserListPageModule } from "./user-list-page/user-list-page.module";
 		ContactPageComponent,
 		LoginPageComponent,
 		UserNavMenuComponent,
-		UserSettingsPageComponent
+		UserSettingsPageComponent,
+		UserProfilePageComponent,
+		StatisticDisplayComponent
 	],
 	imports: [
 		BrowserModule,

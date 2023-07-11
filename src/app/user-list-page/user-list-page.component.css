@@ -6,3 +6,8 @@
     border-bottom: 1px solid grey;
     margin-bottom: 20px;
 }
+
+.title-link {
+    text-decoration: none;
+    color: inherit;
+}

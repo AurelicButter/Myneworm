@@ -1,0 +1,24 @@
+<div class="margin-top-10">
+    <h4>By {{displayTitle}}</h4>
+    <div class="status-display">
+        <div class="counter">
+            <div class="counter-level" *ngFor="let status of displayObj | keyvalue:onCompare" [ngClass]="status.key" 
+                [style.width]="calculatePercentage(displayObj[status.key], total) + '%'">
+            </div>
+        </div>
+        <div class="margin-top-10" *ngIf="total > 0">
+            <div class="text-display-row" *ngFor="let status of displayObj | keyvalue:onCompare">
+                <p class="label-display"><span class="icon-shape" [ngClass]="status.key"></span> {{formatKey(status.key)}}</p>
+                <p>{{status.value}}</p>
+            </div>
+        </div>
+        <div class="margin-top-10" *ngIf="total === 0">
+            <div class="text-display-row">
+                <p>
+                    This user does not have anything on their list for this section right now or have recently joined.<br>
+                    Check back later for updates
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
