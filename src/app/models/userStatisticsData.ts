@@ -14,27 +14,3 @@ export interface UserStatisticsProfile {
 	type_hardcover: number;
 	type_audiobook: number;
 }
-
-export type UserStatisticsObj<T> = { [K in keyof T]: T[K] };
-
-export class UserStatisticsActive {
-	reading: number;
-	completed: number;
-	paused: number;
-	dropped: number;
-	planning: number;
-}
-
-export interface UserStatisticsOwnership {
-	owned: number;
-	previous_own: number;
-	loaned: number;
-	wanted: number;
-}
-
-export class UserStatisticsBooktype {
-	paperback: number;
-	ebook: number;
-	hardcover: number;
-	audiobook: number;
-}
