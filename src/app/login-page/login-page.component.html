@@ -12,8 +12,8 @@
             <input type="password" class="login-input" name="password" required placeholder="Password"
                 [(ngModel)]="login.password" #password="ngModel" />
         </div>
-        <button class="login-button" type="submit">Login</button>
+        <button class="btn myneworm-btn login-button" type="submit">Login</button>
     </form>
-    <button class="login-button" type="button">Forgot Password?</button>
-    <button class="login-button" type="button">Register</button>
+    <button class="btn myneworm-btn login-button" type="button">Forgot Password?</button>
+    <a [routerLink]="'/register'" class="btn myneworm-btn login-button" role="button">Register</a>
 </div>
