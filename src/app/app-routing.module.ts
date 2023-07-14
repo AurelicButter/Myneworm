@@ -14,6 +14,7 @@ import { AuthenticationGuard } from "./services/authentication/authentication.gu
 import { UserSettingsPageComponent } from "./user-settings-page/user-settings-page.component";
 import { UserListPageComponent } from "./user-list-page/user-list-page.component";
 import { UserProfilePageComponent } from "./user-profile-page/user-profile-page.component";
+import { RegistrationPageComponent } from "./registration-page/registration-page.component";
 
 const routes: Routes = [
 	{ path: "", component: HomePageComponent },
@@ -44,6 +45,7 @@ const routes: Routes = [
 	},
 	{ path: "login", component: LoginPageComponent },
 	{ path: "login/authorized", component: LoginPageComponent, canActivate: [AuthenticationGuard] },
+	{ path: "register", component: RegistrationPageComponent },
 	{ path: "settings", pathMatch: "full", component: UserSettingsPageComponent, canActivate: [AuthenticationGuard] },
 	{ path: "settings/:page", component: UserSettingsPageComponent, canActivate: [AuthenticationGuard] },
 	{ path: "user/:username", component: UserProfilePageComponent },

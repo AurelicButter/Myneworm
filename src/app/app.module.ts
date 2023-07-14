@@ -29,6 +29,7 @@ import { UserSettingsPageComponent } from "./user-settings-page/user-settings-pa
 import { UserListPageModule } from "./user-list-page/user-list-page.module";
 import { UserProfilePageComponent } from "./user-profile-page/user-profile-page.component";
 import { StatisticDisplayComponent } from "./user-profile-page/statistic-display/statistic-display.component";
+import { RegistrationPageComponent } from "./registration-page/registration-page.component";
 
 @NgModule({
 	declarations: [
@@ -40,7 +41,8 @@ import { StatisticDisplayComponent } from "./user-profile-page/statistic-display
 		UserNavMenuComponent,
 		UserSettingsPageComponent,
 		UserProfilePageComponent,
-		StatisticDisplayComponent
+		StatisticDisplayComponent,
+		RegistrationPageComponent
 	],
 	imports: [
 		BrowserModule,

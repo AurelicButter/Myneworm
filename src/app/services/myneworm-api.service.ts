@@ -9,6 +9,7 @@ import { BookType } from "../models/BookType";
 import { ListEntry } from "../models/ListEntry";
 import { UserData } from "../models/userData";
 import { UserStatisticsProfile } from "../models/userStatisticsData";
+import { RegistrationData } from "../models/RegistrationData";
 
 @Injectable({
 	providedIn: "root"
@@ -109,5 +110,17 @@ export class MynewormAPIService {
 
 	getUserList(userID: string) {
 		return this.http.get<ListEntry[]>(`${environment.API_ADDRESS}/lists/${userID}`);
+	}
+
+	registerUser(user: RegistrationData) {
+		return this.http.post(
+			`${environment.API_ADDRESS}/user/`,
+			{ user: user },
+			{
+				withCredentials: true,
+				observe: "body",
+				responseType: "json"
+			}
+		);
 	}
 }
