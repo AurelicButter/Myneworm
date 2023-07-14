@@ -1,0 +1,76 @@
+<div class="row wrap-single-column">
+    <div class="col-6 flex-form">
+        <h2>Sign Up</h2>
+        <form (ngSubmit)="submit()" #registerForm="ngForm">
+            <div class="alert alert-danger form-alert align-center" *ngIf="APIErrResponse !== ''">Error: {{APIErrResponse}}</div>
+            <div class="form-group group-margin">
+                <label for="username">Username<span class="required-mark">*</span></label>
+                <input type="text" class="form-control" id="username" name="username" 
+                    required pattern="^\S+$" [(ngModel)]="registrationForm.username" #username="ngModel">
+                <div [hidden]="username.valid || username.pristine"
+                    class="alert alert-danger form-alert">
+                 Username is required and must not contain any whitespace.
+               </div>
+            </div>
+            <div class="form-group group-margin">
+                <label for="password">Password<span class="required-mark">*</span></label>
+                <input type="password" class="form-control" id="password" aria-describedby="passwordhelp" name="password" #password="ngModel"
+                    required pattern="(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}" [(ngModel)]="registrationForm.password" (input)="checkPasswordUsernameMatch()">
+                <small id="passwordhelp" class="form-text text-muted">Your password must be at least 8 characters long with one number and one special character.</small>
+                <div [hidden]="(password.valid && !usernameMatch) || password.pristine"
+                    class="alert alert-danger form-alert">
+                 Password does not match guidelines or is the same as the given username.
+               </div>
+            </div>
+            <div class="form-group group-margin">
+                <label for="confirm">Confirm Password<span class="required-mark">*</span></label>
+                <input type="password" class="form-control" id="confirm" name="confirm" required #confirmed="ngModel"
+                    [(ngModel)]="registrationForm.confirmed" (input)="checkPasswordConfirmation()">
+                <div [hidden]="confirmedPassword || confirmed.pristine"
+                    class="alert alert-danger form-alert">
+                 Password confirmation does not match.
+               </div>
+            </div>
+            <div class="form-group group-margin">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" aria-describedby="emailhelp" name="email" pattern="^\S{1,}@\S{1,}.\S{1,}$"
+                    [(ngModel)]="registrationForm.email" #email="ngModel">
+                <small id="emailhelp" class="form-text text-muted">Note that while an email address is not required, it is used for account 
+                    verification and support assistance.</small>
+                <div [hidden]="email.valid || email.pristine" class="alert alert-danger form-alert">
+                    A valid email address was not provided.
+                </div>
+            </div>
+            <div class="form-group group-margin">
+                <label for="birthday">Birthday<span class="required-mark">*</span></label>
+                <input type="date" class="form-control" id="birthday" name="birthday" aria-describedby="birthdayhelp" required
+                    [(ngModel)]="registrationForm.birthday" (input)="birthdayCheck()" #birthday="ngModel">
+                <small id="birthdayhelp" class="form-text text-muted">Your birthday will not be displayed by default.</small>  
+                <div [hidden]="validBirthday || birthday.pristine" class="alert alert-danger form-alert">
+                    You must be 13 years or older to sign up.
+                </div>
+            </div>       
+            <br>
+            <div class="form-group group-margin">
+                <label for="accesscode">User Beta Access Code<span class="required-mark">*</span></label>
+                <input type="text" class="form-control" id="accesscode" name="accesscode"
+                    required [(ngModel)]="registrationForm.accessCode" #accessCode="ngModel">
+                <div [hidden]="accessCode.valid || accessCode.pristine" class="alert alert-danger form-alert">
+                    You must provide a valid access code to register.
+                </div>
+            </div>
+            <br>
+            <div class="form-check group-margin">
+                <input type="checkbox" class="form-check-input" id="acceptpolicy" name="acceptpolicy" value="true" 
+                    required [(ngModel)]="registrationForm.acceptPolicy">
+                <label for="acceptpolicy" class="form-check-label"> By checking this box, you accept Katsurin Studios' <a href="/privacy">privacy
+                    policy</a>.</label>
+            </div>
+            <br>
+            <div class="submission-box">
+                <button class="btn myneworm-btn btn-lg" type="submit" [disabled]="registerForm.invalid || !registrationForm.acceptPolicy">Register</button>
+                <p class="form-text text-muted">Already have an account? <a href="/login">Login now</a></p>
+            </div>
+        </form>
+    </div>
+</div>
