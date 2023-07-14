@@ -1,7 +1,7 @@
 .main-container {
-    min-height: calc(100vh - 190px); /* Header + Footer height ignored */
+    min-height: calc(100vh - 180px); /* Header + Footer height ignored */
     margin-top: 20px;
-    margin-bottom: 20px;
+    padding: 0;
 }
 
 footer {
@@ -11,7 +11,7 @@ footer {
     color: #ECEBF3;
     text-align: right;
     font-size: large;
-    clear: both;
+    margin-top: 10px;
 }
 
 footer span {

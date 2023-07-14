@@ -1,0 +1,31 @@
+<div class="profile-flex">
+    <aside class="aside-width">
+        <img src='{{getAvatar()}}'>
+        <p><b>Last Online:</b> {{this.isOnlineText()}}</p>
+        <p><b>Joined:</b> {{this.utilities.dateReadable(profileInfo.create_date)}}</p>
+        <p><b>Location:</b> {{profileInfo.location}}</p>
+        <p *ngIf="profileInfo.birthday"><b>Birthday:</b> {{this.utilities.dateReadable(profileInfo.birthday)}}</p>
+        <br>
+        <a class="btn btn-lg myneworm-btn" role="button" href="./user/{{profileInfo.username}}/lists">My List</a>
+    </aside>
+    <div class="profile-container">
+        <div class="user-header">
+            <div class="username-display">
+                <h2 *ngIf="profileInfo.display_name" class="aside-offset">{{profileInfo.display_name}} (@{{profileInfo.username}})</h2>
+                <h2 *ngIf="profileInfo.display_name === null" class="aside-offset">{{profileInfo.username}}</h2>
+            </div>
+            <div class="user-about-me aside-offset">
+                <p *ngIf="profileInfo.about_me">{{profileInfo.about_me}}</p>
+                <p *ngIf="profileInfo.about_me === null">No about me section is provided! Perhaps one day, this user will choose to write this section instead of reading.</p>
+            </div>
+        </div>
+        <div class="profile-content aside-offset">
+            <h3 id="#statistics" class="list-display-header">Statistics</h3>
+            <div class="list-displays">
+                <statistic-display displayTitle="Activity" [displayObj]="activeStatusCount"></statistic-display>
+                <statistic-display displayTitle="Ownership" [displayObj]="ownershipCount"></statistic-display>
+                <statistic-display displayTitle="Book Type" [displayObj]="bookTypeCount"></statistic-display>
+            </div>
+        </div>
+    </div>
+</div>
