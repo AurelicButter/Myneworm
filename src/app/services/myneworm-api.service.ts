@@ -100,6 +100,10 @@ export class MynewormAPIService {
 		return this.http.get<BookType[]>(`${environment.API_ADDRESS}/booktype`);
 	}
 
+	getAuthUser(userID: string) {
+		return this.http.get<UserData>(`${environment.API_ADDRESS}/user/byID/${userID}`);
+	}
+
 	getUser(username: string) {
 		return this.http.get<UserData>(`${environment.API_ADDRESS}/user/${username}`);
 	}
@@ -110,6 +114,14 @@ export class MynewormAPIService {
 
 	getUserList(userID: string) {
 		return this.http.get<ListEntry[]>(`${environment.API_ADDRESS}/lists/${userID}`);
+	}
+
+	updateAvatar(avatar: FormData) {
+		return this.http.post(`${environment.API_ADDRESS}/asset/user`, avatar);
+	}
+
+	updateProfile() {
+		return this.http.post(`${environment.API_ADDRESS}/user/profile`, null);
 	}
 
 	registerUser(user: RegistrationData) {

@@ -24,24 +24,47 @@
     margin-bottom: 4px;
 }
 
-label {
-    cursor: pointer;
-    padding: 0;
-}
-
 #avatarFile {
     opacity: 0;
     position: absolute;
-    z-index: -1;
+    width: inherit;
+    cursor: pointer;
+}
+
+.delete-button {
+    color: #ECEBF3;
+}
+
+.avatar-upload-btn {
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+.custom-file-label {
+    width: -webkit-fill-available;
+    height: 46px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.button-group {
+    margin-top: 10px;
+}
+
+.button-group > .btn {
+    margin-right: 20px;
+}
+
+.avatar-label {
+    margin-bottom: 10px;
 }
 
 .settings-button {
     width: 10%;
     min-width: 200px;
-    text-align: center;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    border: none;
     margin-top: 10px;
 }
 
@@ -60,14 +83,12 @@ label {
 .settings-input {
     margin-top: 5px;
     margin-bottom: 5px;
-    width: 300px;
-    height: 25px;
+    width: 50%;
 }
 
 .settings-textarea {
     resize: none;
-    width: 300px;
-    height: 150px;
+    width: 50%;
 }
 
 .missing-avatar {
@@ -75,4 +96,8 @@ label {
     align-items: center;
     justify-content: center;
     border: 2px dashed black;
+}
+
+.pad-form-div {
+    margin-top: 20px;
 }
