@@ -4,7 +4,8 @@ import { MynewormAPIService } from "../services/myneworm-api.service";
 import { LocalCookiesService } from "../services/authentication/local-cookies.service";
 import { catchError } from "rxjs";
 import { UtilitiesService } from "../services/utilities.service";
-import { UserData } from "../models/userData";
+import { AccountData, UserData } from "../models/userData";
+import { AccountUpdateData } from "../models/accountUpdateData";
 
 @Component({
 	selector: "user-settings-page",
@@ -16,7 +17,9 @@ export class UserSettingsPageComponent implements OnInit {
 	message: string;
 	url: string | ArrayBuffer | null | undefined;
 	private user: any;
+	private oldEmail: string;
 	profileData: UserData;
+	accountData: AccountData;
 	avatarForm = new FormData();
 
 	constructor(
@@ -37,6 +40,18 @@ export class UserSettingsPageComponent implements OnInit {
 					}
 
 					this.profileData = data;
+					this.profileData.displaybirthday = data.birthday !== null;
+				});
+			this.service
+				.getAccount()
+				.pipe(catchError((err) => this.utilities.catchAPIError(err)))
+				.subscribe((data: AccountData | null) => {
+					if (data === null) {
+						return;
+					}
+
+					this.accountData = data;
+					this.oldEmail = data.email;
 				});
 		});
 	}
@@ -81,14 +96,39 @@ export class UserSettingsPageComponent implements OnInit {
 		this.url = undefined;
 	}
 
-	async submitProfile() {
+	submitProfile() {
 		if (this.url !== undefined && this.url !== null) {
 			this.service.updateAvatar(this.avatarForm).subscribe();
 		}
+
+		this.service
+			.updateProfile({
+				about_me: this.profileData.about_me,
+				display_name: this.profileData.display_name,
+				location: this.profileData.location,
+				displaybirthday: this.profileData.displaybirthday
+			})
+			.subscribe();
 		return;
 	}
 
 	submitAccount() {
-		return;
+		const accountInfo: AccountUpdateData = {};
+
+		if (this.accountData.username !== this.user.username) {
+			accountInfo.username = this.accountData.username;
+		}
+
+		if (this.accountData.password !== undefined && this.accountData.password === this.accountData.confirm) {
+			accountInfo.password = this.accountData.password;
+		}
+
+		if (this.accountData.email !== this.oldEmail) {
+			accountInfo.email = this.accountData.email;
+		}
+
+		if (Object.keys(accountInfo).length > 0) {
+			this.service.updateAccount(accountInfo).subscribe();
+		}
 	}
 }

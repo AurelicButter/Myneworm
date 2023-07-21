@@ -41,6 +41,10 @@
     cursor: pointer;
 }
 
+.form-check-label {
+    margin-left: 10px;
+}
+
 .custom-file-label {
     width: -webkit-fill-available;
     height: 46px;

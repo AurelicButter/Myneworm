@@ -1,93 +1,116 @@
-<div class="row" *ngIf="profileData !== undefined">
+<div class="row">
     <aside class="settings-menu col-2">
         <h2 style="font-size: xx-large;">Settings</h2>
         <a routerLink="/settings/profile" [ngClass]="{current: currPage === 'PROFILE'}">Profile</a>
         <a routerLink="/settings/account" [ngClass]="{current: currPage === 'ACCOUNT'}">Account</a>
     </aside>
     <div class="col-8">
-        <div *ngIf="currPage === 'PROFILE'">
-            <form #profileForm="ngForm" (ngSubmit)="submitProfile()">
+        <div *ngIf="currPage === 'PROFILE' && profileData !== undefined">
+            <form (ngSubmit)="submitProfile()" #profileForm="ngForm">
                 <div class="form-group">
                     <label for="aboutMe">
                         <h3>About Me</h3>
                     </label>
-                    <textarea name="aboutMe" autocomplete="off" class="form-control settings-textarea" rows="3" [(ngModel)]="profileData.about_me"></textarea>
+                    <textarea name="aboutMe" autocomplete="off" class="form-control settings-textarea" rows="3"
+                        [(ngModel)]="profileData.about_me"></textarea>
                 </div>
                 <div class="form-group pad-form-div">
                     <label for="location">
                         <h3>Location</h3>
                     </label>
-                    <input type="text" class="settings-input form-control" id="location" name="location" [(ngModel)]="profileData.location">
+                    <input type="text" class="settings-input form-control" id="location" name="location"
+                        [(ngModel)]="profileData.location">
                 </div>
                 <div class="form-group pad-form-div">
                     <label for="displayName">
                         <h3>Display Name</h3>
                     </label>
-                    <input type="text" class="settings-input form-control" id="displayName" name="displayName" 
+                    <input type="text" class="settings-input form-control" id="displayName" name="displayName"
                         [(ngModel)]="profileData.display_name" aria-describedby="displayNameHelp">
                     <small id="displayNameHelp" class="form-text text-muted">
                         Leaving this blank will disable the display name and your username will be used instead.
                     </small>
                 </div>
                 <div class="form-group pad-form-div">
-                    <label for="avatarFile" class="avatar-label"><h3>Avatar</h3></label>
+                    <h3>Other Options</h3>
+                    <input type="checkbox" class="form-check-input" id="displaybirthday" name="displaybirthday"
+                        value="true" [(ngModel)]="profileData.displaybirthday" aria-describedby="displaybirthdayHelp">
+                    <label for="displaybirthday" class="form-check-label"> Display Birthday</label>
+                    <br>
+                    <small id="displaybirthdayHelp" class="form-text text-muted">
+                        If enabled, other users will be able to see your birthday on your profile.
+                    </small>
+                </div>
+                <div class="form-group pad-form-div">
+                    <label for="avatarFile" class="avatar-label">
+                        <h3>Avatar</h3>
+                    </label>
                     <p *ngIf="message !== undefined">{{message}}</p>
                     <div class="avatar-display" *ngIf="url !== undefined">
                         <img class="avatar-display" src={{url}}>
-                    </div>                    
+                    </div>
                     <div class="avatar-display missing-avatar" *ngIf="url === undefined">
                         No image uploaded
                     </div>
                     <div class="button-group">
                         <div class="btn btn-lg myneworm-btn settings-button avatar-upload-btn">
-                            <input type="file" id="avatarFile" name="avatar" class="custom-file-input" accept="image/jpeg"
-                                (change)="onFileChanged($event)">
+                            <input type="file" id="avatarFile" name="avatar" class="custom-file-input"
+                                accept="image/jpeg" (change)="onFileChanged($event)">
                             <label for="avatarFile" class="custom-file-label">Upload File</label>
                         </div>
-                        <button class="btn btn-lg myneworm-btn settings-button" name="clearAvatar" (click)="resetAvatar()">Clear</button>
-                    </div>                    
+                        <button class="btn btn-lg myneworm-btn settings-button" name="clearAvatar"
+                            (click)="resetAvatar()">Clear</button>
+                    </div>
                 </div>
                 <br>
-                <button class="btn btn-lg myneworm-btn settings-button" type="submit" name="Submit"
-                value="Submit">Save</button>
-            </form>            
+                <button class="btn btn-lg myneworm-btn settings-button" type="submit">Save</button>
+            </form>
         </div>
-        <div *ngIf="currPage === 'ACCOUNT'">
+        <div *ngIf="currPage === 'ACCOUNT' && accountData !== undefined">
             <form #accountForm="ngForm" (ngSubmit)="submitAccount()">
                 <div class="form-group">
                     <label for="username">
                         <h3>Username</h3>
                     </label>
-                    <input type="text" class="settings-input form-control" id="username" name="username">
+                    <input type="text" class="settings-input form-control" id="username" name="username"
+                        [(ngModel)]="accountData.username">
                 </div>
-                <div class="form-group">
+                <div class="form-group pad-form-div">
                     <label for="email">
                         <h3>Email</h3>
                     </label>
                     <input type="email" class="settings-input form-control" id="email" name="email"
-                        pattern="^\S{1,}@\S{1,}.\S{1,}$">
+                        pattern="^\S{1,}@\S{1,}.\S{1,}$" [(ngModel)]="accountData.email">
                 </div>
-                <div class="form-group">
+                <div class="form-group pad-form-div">
                     <label for="password">
                         <h3>Password</h3>
                     </label>
                     <input type="password" class="settings-input form-control" id="password" name="password"
                         pattern="(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}" placeholder="New Password"
-                        aria-placeholder="New Password">
+                        aria-placeholder="New Password" [(ngModel)]="accountData.password">
                     <input type="password" class="settings-input form-control" id="password" name="password"
                         pattern="(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}" placeholder="Confirm Password"
-                        aria-placeholder="Confirm Password">
+                        aria-placeholder="Confirm Password" [(ngModel)]="accountData.confirm">
                 </div>
-                <button class="btn btn-lg myneworm-btn settings-button" type="submit" name="Submit"
-                    value="Submit">Save</button>
+                <button class="btn btn-lg myneworm-btn settings-button" type="submit">Save</button>
             </form>
             <br><br>
+            <h3>Requesting Your Data</h3>
+            <div class="settings-subdiv">
+                <p> At this time, Myneworm cannot provide an automated system to download your data.
+                    You can still make a request by sending an email to <a
+                        href="mailto:myneworm@katsurin.com">myneworm@katsurin.com</a>,
+                    from the email linked to your account, requesting your data. A human will respond to you in a timely
+                    manner.
+                </p>
+            </div>
+            <br>
             <h3>Delete Your Account</h3>
             <div class="settings-subdiv">
-                <p>By clicking this button, your account will be flagged for deletion. You will have up to 48 hours
-                    after
+                <p>By clicking this button, your account will be flagged for deletion. You will have up to 5 days after
                     submission to revert this change. Afterwards, your account will be deleted and there is no recovery
-                    beyond the 48 hour grace period.</p>
+                    beyond the grace period.</p>
                 <button class="btn btn-lg btn-danger settings-button delete-button">Delete</button>
             </div>
         </div>
