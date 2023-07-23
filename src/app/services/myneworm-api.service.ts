@@ -7,9 +7,11 @@ import { BookData } from "../models/bookData";
 import { PublisherData } from "../models/publisherData";
 import { BookType } from "../models/BookType";
 import { ListEntry } from "../models/ListEntry";
-import { UserData } from "../models/userData";
+import { AccountData, UserData } from "../models/userData";
 import { UserStatisticsProfile } from "../models/userStatisticsData";
 import { RegistrationData } from "../models/RegistrationData";
+import { ProfileUpdateData } from "../models/profileUpdateData";
+import { AccountUpdateData } from "../models/accountUpdateData";
 
 @Injectable({
 	providedIn: "root"
@@ -104,6 +106,10 @@ export class MynewormAPIService {
 		return this.http.get<UserData>(`${environment.API_ADDRESS}/user/byID/${userID}`);
 	}
 
+	getAccount() {
+		return this.http.get<AccountData>(`${environment.API_ADDRESS}/user/account`);
+	}
+
 	getUser(username: string) {
 		return this.http.get<UserData>(`${environment.API_ADDRESS}/user/${username}`);
 	}
@@ -120,8 +126,12 @@ export class MynewormAPIService {
 		return this.http.post(`${environment.API_ADDRESS}/asset/user`, avatar);
 	}
 
-	updateProfile() {
-		return this.http.post(`${environment.API_ADDRESS}/user/profile`, null);
+	updateProfile(profileInfo: ProfileUpdateData) {
+		return this.http.patch(`${environment.API_ADDRESS}/user/profile`, { user: profileInfo });
+	}
+
+	updateAccount(accountInfo: AccountUpdateData) {
+		return this.http.patch(`${environment.API_ADDRESS}/user`, { user: accountInfo });
 	}
 
 	registerUser(user: RegistrationData) {

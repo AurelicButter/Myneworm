@@ -1,0 +1,25 @@
+.toast-wrapper {
+    width: -webkit-fill-available;
+    top: 20px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    position: sticky;
+}
+
+.toast-text-white {
+    color: #ECEBF3 !important;
+}
+
+.toast-text-black {
+    color: #1F2232 !important;
+}
+
+.toast {
+    display: block;
+}
+
+.d-flex {
+    padding: 4px;
+    font-size: medium;
+}
