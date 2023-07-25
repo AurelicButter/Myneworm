@@ -45,7 +45,6 @@
                     <label for="avatarFile" class="avatar-label">
                         <h3>Avatar</h3>
                     </label>
-                    <p *ngIf="message !== undefined">{{message}}</p>
                     <div class="avatar-display" *ngIf="url !== undefined">
                         <img class="avatar-display" src={{url}}>
                     </div>
@@ -96,7 +95,7 @@
                 <button class="btn btn-lg myneworm-btn settings-button" type="submit">Save</button>
             </form>
             <br><br>
-            <h3>Requesting Your Data</h3>
+            <h3>Request Your Data</h3>
             <div class="settings-subdiv">
                 <p> At this time, Myneworm cannot provide an automated system to download your data.
                     You can still make a request by sending an email to <a
@@ -104,14 +103,20 @@
                     from the email linked to your account, requesting your data. A human will respond to you in a timely
                     manner.
                 </p>
+                <button class="btn btn-lg myneworm-btn settings-button disabled"
+                    aria-disabled="true" tabindex="-1">Request Data</button>
             </div>
             <br>
             <h3>Delete Your Account</h3>
             <div class="settings-subdiv">
-                <p>By clicking this button, your account will be flagged for deletion. You will have up to 5 days after
+                <!--<p>By clicking this button, your account will be flagged for deletion. You will have up to 5 days after
                     submission to revert this change. Afterwards, your account will be deleted and there is no recovery
-                    beyond the grace period.</p>
-                <button class="btn btn-lg btn-danger settings-button delete-button">Delete</button>
+                    beyond the grace period.</p>-->
+                <p>Please send an email to <a href="mailto:myneworm@katsurin.com">myneworm@katsurin.com</a>,
+                    from the email linked to your account, requesting your account be deleted. You will have up to 5 days
+                    after to revert this change. Once your account is deleted, there is no recovery.</p>
+                <button class="btn btn-lg btn-danger settings-button delete-button disabled"
+                    aria-disabled="true" tabindex="-1">Delete</button>
             </div>
         </div>
     </div>

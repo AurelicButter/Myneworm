@@ -1,7 +1,5 @@
 .main-container {
-    min-height: calc(100vh - 180px); /* Header + Footer height ignored */
-    margin-top: 20px;
-    padding: 0;
+    min-height: calc(100vh - 160px); /* Header + Footer height ignored */
 }
 
 footer {
@@ -22,4 +20,9 @@ footer span {
 
 footer span:last-child {
     margin-right: 20px;
+}
+
+toast-messages {
+    height: 0;
+    display: contents;
 }
