@@ -30,6 +30,7 @@ import { UserListPageModule } from "./user-list-page/user-list-page.module";
 import { UserProfilePageComponent } from "./user-profile-page/user-profile-page.component";
 import { StatisticDisplayComponent } from "./user-profile-page/statistic-display/statistic-display.component";
 import { RegistrationPageComponent } from "./registration-page/registration-page.component";
+import { SharedModule } from "./shared/shared.module";
 
 @NgModule({
 	declarations: [
@@ -63,7 +64,8 @@ import { RegistrationPageComponent } from "./registration-page/registration-page
 		DatabaseGuidelinesComponent,
 		FaqPageComponent,
 		AboutPageComponent,
-		UserListPageModule
+		UserListPageModule,
+		SharedModule
 	],
 	providers: [Title, LocalCookiesService],
 	bootstrap: [AppComponent]
