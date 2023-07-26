@@ -22,7 +22,7 @@ export class TableDisplayComponent implements OnInit, OnChanges {
 	formatDateString = formatDateString;
 	public listEntries: ListEntry[];
 
-	constructor(public service: MynewormAPIService) {}
+	constructor(private service: MynewormAPIService) {}
 
 	ngOnInit() {
 		this.listEntries = this._allEntries.data;
@@ -49,6 +49,14 @@ export class TableDisplayComponent implements OnInit, OnChanges {
 
 	getCover(isbn: string) {
 		return this.service.getAsset(`${isbn}`);
+	}
+
+	getThumbnail(isbn: string) {
+		return this.service.getCover(isbn, "thumbnail");
+	}
+
+	getPreview(isbn: string) {
+		return this.service.getCover(isbn, "small");
 	}
 
 	sortData(sort: Sort) {

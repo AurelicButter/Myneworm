@@ -11,7 +11,7 @@
     <table *ngIf="dataSource" mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8 search-table" cellspacing="0">
         <ng-container matColumnDef="cover">
             <td class="search-image-row" mat-cell *matCellDef="let element">
-                <img class="search-cover-img" src='{{this.service.getAsset(element.isbn)}}' alt='Cover for {{element.title}}' />
+                <img class="search-cover-img" src='{{getCover(element.isbn)}}' alt='Cover for {{element.title}}' />
             </td>
         </ng-container>
         <ng-container matColumnDef="title">
