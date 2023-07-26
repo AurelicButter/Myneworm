@@ -17,7 +17,11 @@ export class SearchBarComponent {
 	loading = false;
 	hoveredRow: BookData | null = null;
 
-	constructor(public service: MynewormAPIService, public utilities: UtilitiesService, private router: Router) {}
+	constructor(
+		private service: MynewormAPIService,
+		public utilities: UtilitiesService,
+		private router: Router
+	) {}
 
 	private searchBooks() {
 		if (this.searchTerm === "") {
@@ -27,6 +31,10 @@ export class SearchBarComponent {
 			this.dataSource = new MatTableDataSource<BookData>(data);
 			this.loading = false;
 		});
+	}
+
+	getCover(isbn: string) {
+		return this.service.getCover(isbn, "thumbnail");
 	}
 
 	submit() {

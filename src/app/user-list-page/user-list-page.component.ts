@@ -35,7 +35,7 @@ export class UserListPageComponent {
 
 	constructor(
 		private route: ActivatedRoute,
-		public service: MynewormAPIService,
+		private service: MynewormAPIService,
 		private metaService: MetadataService,
 		private utilities: UtilitiesService
 	) {

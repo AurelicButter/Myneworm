@@ -48,7 +48,7 @@ export class BookPageComponent implements OnInit {
 		});
 	}
 
-	getCover(isbn: string) {
-		return this.service.getAsset(`${isbn}`);
+	getCover() {
+		return this.service.getCover(this.book.isbn, "large");
 	}
 }

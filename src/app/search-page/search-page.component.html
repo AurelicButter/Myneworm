@@ -37,7 +37,7 @@
         <ng-container matColumnDef="cover">
             <td class="search-image-row" mat-cell *matCellDef="let element">
                 <a routerLink="/book/{{element.isbn}}"><img class="search-cover-img"
-                        src='{{this.service.getAsset(element.isbn)}}' alt='Cover for {{element.title}}' /></a>
+                        src='{{getCover(element.isbn)}}' alt='Cover for {{element.title}}' /></a>
             </td>
         </ng-container>
         <ng-container matColumnDef="title">
