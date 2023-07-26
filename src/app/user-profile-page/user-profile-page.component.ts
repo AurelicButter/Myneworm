@@ -95,24 +95,7 @@ export class UserProfilePageComponent {
 	}
 
 	isOnlineText() {
-		const days = moment(this.profileInfo.last_login).diff(moment(), "days");
-
-		if (days === 0) {
-			return "Today";
-		}
-		if (days === 1) {
-			return "Yesterday";
-		}
-		if (days < 8) {
-			return "A week ago";
-		}
-		if (days < 31) {
-			return "A couple weeks ago";
-		}
-		if (days < 60) {
-			return "A month ago";
-		}
-		return this.utilities.dateReadable(this.profileInfo.last_login);
+		return moment(this.profileInfo.last_login).from(moment());
 	}
 
 	getAvatar() {

@@ -4,11 +4,11 @@ import { LazyLoadStyleService } from "../services/lazy-load-style.service";
 
 import { CalendarManagerModule } from "./calendar-manager/calendar-manager.module";
 import { DatepickerModalModule } from "./datepicker-modal/datepicker-modal.module";
+import { ToastMessagesComponent } from "./toast-messages/toast-messages.component";
 
 @NgModule({
-	declarations: [],
-	imports: [BrowserModule, CalendarManagerModule, DatepickerModalModule],
+	imports: [BrowserModule, CalendarManagerModule, DatepickerModalModule, ToastMessagesComponent],
 	providers: [LazyLoadStyleService],
-	exports: [CalendarManagerModule, DatepickerModalModule]
+	exports: [CalendarManagerModule, DatepickerModalModule, ToastMessagesComponent]
 })
 export class SharedModule {}

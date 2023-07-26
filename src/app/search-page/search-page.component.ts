@@ -21,7 +21,7 @@ export class SearchPageComponent implements OnInit {
 
 	constructor(
 		private route: ActivatedRoute,
-		public service: MynewormAPIService,
+		private service: MynewormAPIService,
 		public utilities: UtilitiesService,
 		private metaService: MetadataService,
 		private router: Router,
@@ -90,5 +90,9 @@ export class SearchPageComponent implements OnInit {
 
 		this.pageNumber--;
 		this.updateQuery();
+	}
+
+	getCover(isbn: string) {
+		return this.service.getCover(isbn, "small");
 	}
 }
