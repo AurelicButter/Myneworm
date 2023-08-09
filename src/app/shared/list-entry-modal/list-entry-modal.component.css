@@ -1,0 +1,106 @@
+.list-entry-modal {
+    padding: 2% 3%;
+    height: -webkit-fill-available;
+    width: -webkit-fill-available;
+    background-color: #ECEBF3;
+    color: #1F2232;
+}
+
+.modal-container {
+    display: flex;
+    flex-direction: column;
+    margin: 1em 2em;
+}
+
+.modal-header {
+    font-size: 20px;
+    height: 85px;
+}
+
+.modal-header>h1 {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.modal-action {
+    margin-right: 20px;
+}
+
+.modal-input,
+.modal-input:hover,
+.modal-input:focus {
+    border: none !important;
+    -webkit-text-fill-color: inherit !important;
+    box-shadow: none;
+}
+
+.mat-form-field-autofilled .modal-input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #F5F5F5 inset;
+}
+
+.mat-form-field-autofilled:hover .modal-input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #ECECEC inset;
+}
+
+.mat-form-field-autofilled .modal-input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px #DCDCDC inset;
+}
+
+.modal-footer {
+    position: absolute;
+    bottom: 10px;
+    width: -webkit-fill-available;
+    margin-right: 20px;
+}
+
+.datepicker-input {
+    display: flex;
+    position: relative;
+    width: initial;
+    align-items: center;
+    height: 38px;
+}
+
+.mat-date-input {
+    width: -webkit-fill-available;
+}
+
+.date-icon {
+    z-index: 10;
+    margin-left: 10px;
+    position: relative;
+}
+
+.date-input {
+    z-index: 9;
+    position: absolute;
+    padding-left: 35px;
+}
+
+.calendar-card-select {
+    position: fixed;
+    z-index: 1000;
+    width: 300px;
+    display: none;
+}
+
+.show-calendar {
+    display: block;
+}
+
+.form-group {
+    margin-top: 15px;
+}
+
+::ng-deep.mat-calendar-body-today:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
+    border: 0;
+}
+
+.modal-row {
+    justify-content: space-between;
+}
+
+.modal-form {
+    display: flex;
+    flex-direction: column;
+}

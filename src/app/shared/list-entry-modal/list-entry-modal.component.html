@@ -1,0 +1,76 @@
+<div class="list-entry-modal">
+    <header class="modal-header">
+        <h2>{{bookData.title}}</h2>
+    </header>
+    <div class="modal-content">
+        <div class="row modal-row">
+            <img class="col-3-half" src='{{bookData.cover}}'>
+            <form class="col-8 modal-form" (ngSubmit)="submit()" #entryForm="ngForm">
+                <div class="form-group row">
+                    <div class="col-6">
+                        <label for="score">Score</label>
+                        <input type="number" class="form-control modal-input" id="score" name="score" min="1" max="10"
+                            [(ngModel)]="listEntryForm.score" (input)="validateScore()">
+                    </div>
+                    <div class="col-6">
+                        <label for="reread">Reread</label>
+                        <input type="number" class="form-control modal-input" id="reread" name="reread" min="1"
+                            [(ngModel)]="listEntryForm.reread" (input)="validateReread()">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-6">
+                        <label for="activity">Activity</label>
+                        <input type="text" class="form-control modal-input" id="activity" name="activity"
+                            [(ngModel)]="listEntryForm.active_status">
+                    </div>
+                    <div class="col-6">
+                        <label for="ownership">Ownership</label>
+                        <input type="text" class="form-control modal-input" id="ownership" name="ownership"
+                            [(ngModel)]="listEntryForm.owner_status">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-6" (focusout)="removeDateDisplay(0)">
+                        <label for="startDate">Start Date</label>
+                        <div class="datepicker-input">
+                            <img src="/assets/fa-calendar-dark.svg" class="date-icon" />
+                            <input type="text" autocomplete="off" aria-autocomplete="none"
+                                class="form-control date-input modal-input" id="startDate" name="startDate"
+                                (focus)="showDates(0)" (focusout)="validateDate(true)"
+                                [(ngModel)]="listEntryForm.start_date">
+                        </div>
+                        <mat-card class="calendar-card-select" [ngClass]="{ 'show-calendar': showDatePicker[0] }">
+                            <mat-calendar [dateClass]="dateClass()"
+                                (selectedChange)="updateDate($event, 0)"></mat-calendar>
+                        </mat-card>
+                    </div>
+                    <div class="col-6" (focusout)="removeDateDisplay(1)">
+                        <label for="endDate">End Date</label>
+                        <div class="datepicker-input">
+                            <img src="/assets/fa-calendar-dark.svg" class="date-icon" />
+                            <input type="text" autocomplete="off" aria-autocomplete="none"
+                                class="form-control date-input modal-input" id="endDate" name="endDate"
+                                (focus)="showDates(1)" (focusout)="validateDate(false)"
+                                [(ngModel)]="listEntryForm.end_date">
+                        </div>
+                        <mat-card class="calendar-card-select" [ngClass]="{ 'show-calendar': showDatePicker[1] }">
+                            <mat-calendar (selectedChange)="updateDate($event, 1)"></mat-calendar>
+                        </mat-card>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="notes">Notes</label>
+                    <div class="col-12">
+                        <input type="text" class="form-control modal-input" id="notes" name="notes" autocomplete="off"
+                            aria-autocomplete="none" [(ngModel)]="listEntryForm.notes">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <footer class="modal-footer">
+            <button mat-raised-button class="modal-action btn btn-lg myneworm-btn">Save</button>
+            <button mat-raised-button class="btn-danger btn btn-lg">Delete</button>
+        </footer>
+    </div>
+</div>
