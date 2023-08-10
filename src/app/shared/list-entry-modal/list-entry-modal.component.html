@@ -4,8 +4,13 @@
     </header>
     <div class="modal-content">
         <div class="row modal-row">
-            <img class="col-3-half" src='{{bookData.cover}}'>
+            <div class="col-3-half">
+                <img class="img-aspect-ratio" src='{{bookData.cover}}'>
+            </div>
             <form class="col-8 modal-form" (ngSubmit)="submit()" #entryForm="ngForm">
+                <div style="max-width: 0; max-height: 0; overflow: hidden;">
+                    <input type="text" autofocus />
+                </div>
                 <div class="form-group row">
                     <div class="col-6">
                         <label for="score">Score</label>
@@ -20,14 +25,21 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-6">
-                        <label for="activity">Activity</label>
-                        <input type="text" class="form-control modal-input" id="activity" name="activity"
+                        <label for="activity">Status</label>
+                        <select class="form-select modal-input" id="activity" name="activity"
                             [(ngModel)]="listEntryForm.active_status">
+                            <option *ngFor="let status of activityStatus | keyvalue" [ngValue]="status.value">
+                                {{status.key}}</option>
+                        </select>
                     </div>
                     <div class="col-6">
                         <label for="ownership">Ownership</label>
-                        <input type="text" class="form-control modal-input" id="ownership" name="ownership"
+                        <select class="form-select modal-input" id="ownership" name="ownership"
                             [(ngModel)]="listEntryForm.owner_status">
+                            <option value=""></option>
+                            <option *ngFor="let status of ownershipStatus | keyvalue" [ngValue]="status.value">
+                                {{status.key}}</option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -37,12 +49,11 @@
                             <img src="/assets/fa-calendar-dark.svg" class="date-icon" />
                             <input type="text" autocomplete="off" aria-autocomplete="none"
                                 class="form-control date-input modal-input" id="startDate" name="startDate"
-                                (focus)="showDates(0)" (focusout)="validateDate(true)"
+                                pattern="^\d{4}-\d{2}-\d{2}$" (focus)="showDates(0)" (focusout)="validateDate(true)"
                                 [(ngModel)]="listEntryForm.start_date">
                         </div>
                         <mat-card class="calendar-card-select" [ngClass]="{ 'show-calendar': showDatePicker[0] }">
-                            <mat-calendar [dateClass]="dateClass()"
-                                (selectedChange)="updateDate($event, 0)"></mat-calendar>
+                            <mat-calendar (selectedChange)="updateDate($event, 0)"></mat-calendar>
                         </mat-card>
                     </div>
                     <div class="col-6" (focusout)="removeDateDisplay(1)">
@@ -51,7 +62,7 @@
                             <img src="/assets/fa-calendar-dark.svg" class="date-icon" />
                             <input type="text" autocomplete="off" aria-autocomplete="none"
                                 class="form-control date-input modal-input" id="endDate" name="endDate"
-                                (focus)="showDates(1)" (focusout)="validateDate(false)"
+                                pattern="^\d{4}-\d{2}-\d{2}$" (focus)="showDates(1)" (focusout)="validateDate(false)"
                                 [(ngModel)]="listEntryForm.end_date">
                         </div>
                         <mat-card class="calendar-card-select" [ngClass]="{ 'show-calendar': showDatePicker[1] }">
@@ -62,15 +73,17 @@
                 <div class="form-group row">
                     <label for="notes">Notes</label>
                     <div class="col-12">
-                        <input type="text" class="form-control modal-input" id="notes" name="notes" autocomplete="off"
-                            aria-autocomplete="none" [(ngModel)]="listEntryForm.notes">
+                        <textarea rows="3" class="form-control modal-input modal-input-textarea" id="notes" name="notes"
+                            autocomplete="off" aria-autocomplete="none" [(ngModel)]="listEntryForm.notes"></textarea>
                     </div>
                 </div>
             </form>
         </div>
         <footer class="modal-footer">
-            <button mat-raised-button class="modal-action btn btn-lg myneworm-btn">Save</button>
-            <button mat-raised-button class="btn-danger btn btn-lg">Delete</button>
+            <button mat-raised-button class="modal-action btn btn-lg myneworm-btn" [disabled]="entryForm.invalid"
+                aria-disabled='{entryForm.invalid}' tabindex='{{entryForm.invalid ? -1 : 0 }}'>Save</button>
+            <button mat-raised-button class="btn-danger btn btn-lg" [disabled]="!isUpdate" aria-disabled='{!isUpdate}'
+                tabindex='{{isUpdate ? 0 : -1 }}'>Delete</button>
         </footer>
     </div>
 </div>
