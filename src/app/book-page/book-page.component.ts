@@ -8,6 +8,7 @@ import { MynewormAPIService } from "../services/myneworm-api.service";
 import { UtilitiesService } from "../services/utilities.service";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { ListEntryModalComponent } from "../shared/list-entry-modal/list-entry-modal.component";
+import { LocalCookiesService } from "../services/authentication/local-cookies.service";
 
 @Component({
 	selector: "app-book-page",
@@ -17,14 +18,20 @@ import { ListEntryModalComponent } from "../shared/list-entry-modal/list-entry-m
 export class BookPageComponent implements OnInit {
 	book: BookData;
 	publisher: PublisherData;
+	isLoggedIn = false;
 
 	constructor(
 		private route: ActivatedRoute,
 		private service: MynewormAPIService,
 		public utilities: UtilitiesService,
 		private metaService: MetadataService,
-		public matDialog: MatDialog
-	) {}
+		public matDialog: MatDialog,
+		private cookieService: LocalCookiesService
+	) {
+		this.cookieService.userEvent.subscribe((value) => {
+			this.isLoggedIn = Object.keys(value).length === 0;
+		});
+	}
 
 	ngOnInit(): void {
 		this.route.params.subscribe((data) => {
