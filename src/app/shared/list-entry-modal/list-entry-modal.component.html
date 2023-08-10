@@ -80,10 +80,10 @@
             </form>
         </div>
         <footer class="modal-footer">
-            <button mat-raised-button class="modal-action btn btn-lg myneworm-btn" [disabled]="entryForm.invalid"
-                aria-disabled='{entryForm.invalid}' tabindex='{{entryForm.invalid ? -1 : 0 }}'>Save</button>
+            <button type="submit" mat-raised-button class="modal-action btn btn-lg myneworm-btn" [disabled]="entryForm.invalid"
+                aria-disabled='{entryForm.invalid}' tabindex='{{entryForm.invalid ? -1 : 0 }}' (click)="submit()">Save</button>
             <button mat-raised-button class="btn-danger btn btn-lg" [disabled]="!isUpdate" aria-disabled='{!isUpdate}'
-                tabindex='{{isUpdate ? 0 : -1 }}'>Delete</button>
+                tabindex='{{isUpdate ? 0 : -1 }}' (click)="deleteEntry()">Delete</button>
         </footer>
     </div>
 </div>

@@ -99,6 +99,7 @@
     width: 100%;
     display: block;
     height: auto;
+    max-height: 385px;
 }
 
 .modal-input-textarea {

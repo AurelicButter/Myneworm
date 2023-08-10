@@ -109,13 +109,13 @@ export class ListEntryModalComponent {
 	}
 
 	async validateScore() {
-		const oldInput = this.listEntryForm.score;
-		await new Promise((resolve) => setTimeout(resolve, 500));
-		if (oldInput !== this.listEntryForm.score) {
+		if (this.listEntryForm.score === null) {
 			return;
 		}
 
-		if (this.listEntryForm.score === null) {
+		const oldInput = this.listEntryForm.score;
+		await new Promise((resolve) => setTimeout(resolve, 500));
+		if (oldInput !== this.listEntryForm.score) {
 			return;
 		}
 
@@ -127,13 +127,13 @@ export class ListEntryModalComponent {
 	}
 
 	async validateReread() {
-		const oldInput = this.listEntryForm.reread;
-		await new Promise((resolve) => setTimeout(resolve, 500));
-		if (oldInput !== this.listEntryForm.reread) {
+		if (this.listEntryForm.reread === null) {
 			return;
 		}
 
-		if (this.listEntryForm.reread === null) {
+		const oldInput = this.listEntryForm.reread;
+		await new Promise((resolve) => setTimeout(resolve, 500));
+		if (oldInput !== this.listEntryForm.reread) {
 			return;
 		}
 
@@ -148,11 +148,31 @@ export class ListEntryModalComponent {
 			return;
 		}
 
+		if (this.isUpdate) {
+			this.service
+				.updateListEntry(this.bookData.isbn, this.listEntryForm)
+				.pipe(
+					catchError((err) => {
+						this.toastService.sendError("Unknown error response. Unable to update entry.");
+						return of(null);
+					})
+				)
+				.subscribe((data) => {
+					if (data === null) {
+						return;
+					}
+
+					this.toastService.sendSuccess("Updated entry!");
+					this.dialogRef.close();
+				});
+			return;
+		}
+
 		this.service
 			.addListEntry(this.bookData.isbn, this.listEntryForm)
 			.pipe(
 				catchError((err) => {
-					this.toastService.sendError("Unknown error response. Unable to save entry at this time...");
+					this.toastService.sendError("Unknown error response. Unable to save entry.");
 					return of(null);
 				})
 			)
@@ -161,14 +181,14 @@ export class ListEntryModalComponent {
 					return;
 				}
 
-				this.toastService.sendSuccess("Updated entry!");
+				this.toastService.sendSuccess("Added entry!");
 				this.dialogRef.close();
 			});
 	}
 
 	deleteEntry() {
 		this.service
-			.removeListEntry("1")
+			.removeListEntry(this.bookData.isbn)
 			.pipe(
 				catchError((err) => {
 					if (err.status === 404) {
@@ -186,6 +206,7 @@ export class ListEntryModalComponent {
 				}
 
 				this.toastService.sendSuccess("Entry removed from list");
+				this.dialogRef.close();
 			});
 	}
 }

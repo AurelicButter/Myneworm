@@ -1,4 +1,7 @@
 export function formatOwnerStatus(status: string): string {
+	if (status === null) {
+		return "";
+	}
 	if (status === "owned") {
 		return "Owned";
 	}
