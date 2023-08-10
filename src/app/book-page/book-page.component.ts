@@ -6,6 +6,8 @@ import { PublisherData } from "../models/publisherData";
 import { MetadataService } from "../services/metadata.service";
 import { MynewormAPIService } from "../services/myneworm-api.service";
 import { UtilitiesService } from "../services/utilities.service";
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
+import { ListEntryModalComponent } from "../shared/list-entry-modal/list-entry-modal.component";
 
 @Component({
 	selector: "app-book-page",
@@ -20,7 +22,8 @@ export class BookPageComponent implements OnInit {
 		private route: ActivatedRoute,
 		private service: MynewormAPIService,
 		public utilities: UtilitiesService,
-		private metaService: MetadataService
+		private metaService: MetadataService,
+		public matDialog: MatDialog
 	) {}
 
 	ngOnInit(): void {
@@ -50,5 +53,19 @@ export class BookPageComponent implements OnInit {
 
 	getCover() {
 		return this.service.getCover(this.book.isbn, "large");
+	}
+
+	updateListEntry(): void {
+		const dialogConfig = new MatDialogConfig();
+		dialogConfig.id = "list-entry-modal";
+
+		dialogConfig.height = "60%";
+		dialogConfig.width = "55%";
+		dialogConfig.data = {
+			isbn: this.book.isbn,
+			cover: this.service.getCover(this.book.isbn, "medium"),
+			title: this.book.title
+		};
+		this.matDialog.open(ListEntryModalComponent, dialogConfig);
 	}
 }
