@@ -32,6 +32,8 @@ export class UserListPageComponent {
 	ownershipFilter: string[] = [];
 	booktypeFilter: string[] = [];
 	triggerListUpdate = false;
+	hasEntries = false;
+	isLoading = true;
 
 	constructor(
 		private route: ActivatedRoute,
@@ -63,6 +65,7 @@ export class UserListPageComponent {
 								return;
 							}
 
+							this.hasEntries = true;
 							this.compileLists(listEntries);
 						});
 				});
@@ -104,6 +107,7 @@ export class UserListPageComponent {
 		}
 
 		this.refreshTables();
+		this.isLoading = false;
 	}
 
 	refreshTables() {
