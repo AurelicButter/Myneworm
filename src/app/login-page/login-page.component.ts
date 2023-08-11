@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { loginForm } from "src/app/models/loginForm";
 import { AuthenticationService } from "src/app/services/authentication/authentication.service";
 import { MetadataService } from "src/app/services/metadata.service";
+import { ToastService } from "../services/toast.service";
 
 @Component({
 	selector: "login-page",
@@ -13,13 +14,13 @@ export class LoginPageComponent {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	@ViewChild("loginForm") dataForm: any;
 	login = new loginForm();
-	public err = "";
 
 	constructor(
 		private route: ActivatedRoute,
 		private router: Router,
 		private authService: AuthenticationService,
-		private metaService: MetadataService
+		private metaService: MetadataService,
+		private toastService: ToastService
 	) {
 		this.metaService.updateMetaTags("Login", "/login");
 	}
@@ -31,7 +32,7 @@ export class LoginPageComponent {
 			}
 
 			if (params.state === "expired") {
-				this.err = "Session expired. Please reauthenticate.";
+				this.toastService.sendError("Session expired. Please reauthenticate.");
 			}
 
 			this.router.navigate([], { relativeTo: this.route });
@@ -49,17 +50,16 @@ export class LoginPageComponent {
 			this.login.password === undefined ||
 			this.login.password === ""
 		) {
-			this.err = "Missing username or password";
+			this.toastService.sendError("Failed to login. Missing username or password");
 			return;
 		}
 
 		this.authService.login(this.login.username, this.login.password).subscribe((data) => {
 			if (typeof data === "string") {
-				this.err = data;
+				this.toastService.sendError(data);
 				return;
 			}
 
-			this.err = "";
 			this.router.navigate(["/home"]);
 		});
 	}

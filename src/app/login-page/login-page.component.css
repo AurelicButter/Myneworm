@@ -5,17 +5,6 @@
     align-items: center;
 }
 
-.error-message {
-    background-color: rgba(240, 45, 58, 0.3);
-    width: clamp(220px, 50%, 400px);
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 6px;
-    color: #E5101E;
-}
-
 .login-form {
     display: flex;
     flex-direction: column;
@@ -45,11 +34,9 @@ a.login-button {
     cursor: pointer;
 }
 
-.login-input {
-    width: calc(100% - 16px);
-    height: 30px;
-    padding-left: 6px;
-    padding-right: 6px;
+input:focus {
+    border-color: var(--bs-border-color);
+    box-shadow: none;
 }
 
 .login-label {
