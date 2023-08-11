@@ -13,3 +13,19 @@ export interface ListEntry {
 	notes?: string;
 	isExpanded?: boolean;
 }
+
+export class ListEntryClass implements ListEntry {
+	list_id: number;
+	user_id: number;
+	isbn: number;
+	title: string;
+	start_date?: string;
+	end_date?: string;
+	book_type_name: string;
+	score: number;
+	reread: number;
+	active_status: string;
+	owner_status: string;
+	notes?: string;
+	isExpanded?: boolean;
+}

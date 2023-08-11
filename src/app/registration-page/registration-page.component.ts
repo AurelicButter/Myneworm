@@ -5,6 +5,7 @@ import { RegistrationData } from "../models/RegistrationData";
 import * as moment from "moment";
 import { catchError, of } from "rxjs";
 import { Router } from "@angular/router";
+import { ToastService } from "../services/toast.service";
 
 @Component({
 	selector: "registration-page",
@@ -16,9 +17,13 @@ export class RegistrationPageComponent {
 	usernameMatch = false;
 	confirmedPassword = false;
 	validBirthday = false;
-	APIErrResponse = "";
 
-	constructor(private service: MynewormAPIService, private router: Router, private metaService: MetadataService) {
+	constructor(
+		private service: MynewormAPIService,
+		private router: Router,
+		private metaService: MetadataService,
+		private toastService: ToastService
+	) {
 		this.metaService.updateMetaTags("Registration", "/register");
 	}
 
@@ -27,7 +32,7 @@ export class RegistrationPageComponent {
 			.registerUser(this.registrationForm)
 			.pipe(
 				catchError((err) => {
-					this.APIErrResponse = err.error.errors;
+					this.toastService.sendError(err.error.errors);
 					return of(null);
 				})
 			)
@@ -35,7 +40,8 @@ export class RegistrationPageComponent {
 				if (data === null) {
 					return;
 				}
-				// Add message to showcase success at login page.
+
+				this.toastService.sendSuccess("Created account! Please login to continue.");
 				this.router.navigate(["/login"]);
 			});
 	}

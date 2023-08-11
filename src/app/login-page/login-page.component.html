@@ -1,19 +1,18 @@
 <div class="login-container">
     <h1>Login</h1>
     <form class="login-form" #loginForm="ngForm" (ngSubmit)="submit()">
-        <div class="error-message" *ngIf="this.err !== ''">{{this.err}}</div>
         <div class="login-form-div">
             <label class="login-label" for="username"><strong>Username</strong></label>
-            <input type="text" class="login-input" id="login" name="login" placeholder="Username" required
+            <input type="text" class="form-control" id="login" name="login" placeholder="Username" required
                 [(ngModel)]="login.username" #username="ngModel" />
         </div>
         <div class="login-form-div">
             <label class="login-label" for="password"><strong>Password</strong></label>
-            <input type="password" class="login-input" name="password" required placeholder="Password"
+            <input type="password" class="form-control" name="password" required placeholder="Password"
                 [(ngModel)]="login.password" #password="ngModel" />
         </div>
         <button class="btn myneworm-btn login-button" type="submit">Login</button>
     </form>
-    <button class="btn myneworm-btn login-button" type="button">Forgot Password?</button>
+    <button class="btn myneworm-btn login-button disabled" type="button" aria-disabled="true" tabindex="-1">Forgot Password?</button>
     <a [routerLink]="'/register'" class="btn myneworm-btn login-button" role="button">Register</a>
 </div>

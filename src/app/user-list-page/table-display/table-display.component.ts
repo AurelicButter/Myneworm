@@ -5,6 +5,8 @@ import { ListEntry } from "src/app/models/ListEntry";
 import { MynewormAPIService } from "src/app/services/myneworm-api.service";
 import { formatOwnerStatus } from "src/app/functions/formatOwnerStatus";
 import { formatDateString } from "src/app/functions/formatDateString";
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
+import { ListEntryModalComponent } from "src/app/shared/list-entry-modal/list-entry-modal.component";
 
 @Component({
 	selector: "table-display",
@@ -18,11 +20,15 @@ export class TableDisplayComponent implements OnInit, OnChanges {
 	@Input() ownershipFilter: string[];
 	@Input() booktypeFilter: string[];
 	@Input() triggerListUpdate: boolean;
+	@Input() isAuthUser: boolean;
 	formatOwnerStatus = formatOwnerStatus;
 	formatDateString = formatDateString;
 	public listEntries: ListEntry[];
 
-	constructor(private service: MynewormAPIService) {}
+	constructor(
+		private service: MynewormAPIService,
+		private matDialog: MatDialog
+	) {}
 
 	ngOnInit() {
 		this.listEntries = this._allEntries.data;
@@ -45,10 +51,6 @@ export class TableDisplayComponent implements OnInit, OnChanges {
 		}
 
 		this.listEntries = data;
-	}
-
-	getCover(isbn: string) {
-		return this.service.getAsset(`${isbn}`);
 	}
 
 	getThumbnail(isbn: string) {
@@ -88,6 +90,20 @@ export class TableDisplayComponent implements OnInit, OnChanges {
 
 	hasExpandedDetails(element: ListEntry) {
 		return element.start_date !== undefined || element.end_date !== undefined || element.notes !== undefined;
+	}
+
+	updateListEntry(isbn: string, title: string): void {
+		const dialogConfig = new MatDialogConfig();
+		dialogConfig.id = "list-entry-modal";
+
+		dialogConfig.height = "60%";
+		dialogConfig.width = "55%";
+		dialogConfig.data = {
+			isbn: isbn,
+			cover: this.service.getCover(isbn, "medium"),
+			title: title
+		};
+		this.matDialog.open(ListEntryModalComponent, dialogConfig);
 	}
 }
 

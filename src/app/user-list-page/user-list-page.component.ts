@@ -8,6 +8,7 @@ import { ListEntry } from "../models/ListEntry";
 import { UtilitiesService } from "../services/utilities.service";
 import { catchError } from "rxjs";
 import { UserData } from "../models/userData";
+import { LocalCookiesService } from "../services/authentication/local-cookies.service";
 
 @Component({
 	selector: "user-list-page",
@@ -32,16 +33,24 @@ export class UserListPageComponent {
 	ownershipFilter: string[] = [];
 	booktypeFilter: string[] = [];
 	triggerListUpdate = false;
+	hasEntries = false;
+	isAuthUser = false;
+	isLoading = true;
 
 	constructor(
 		private route: ActivatedRoute,
 		private service: MynewormAPIService,
 		private metaService: MetadataService,
-		private utilities: UtilitiesService
+		private utilities: UtilitiesService,
+		private cookieService: LocalCookiesService
 	) {
 		this.route.params.subscribe((data) => {
 			this.metaService.updateMetaTags(`${data.username}'s List`, `/user/${data.username}/lists`);
 			this.listUser = data.username;
+
+			this.cookieService.userEvent.subscribe((value) => {
+				this.isAuthUser = value.username === this.listUser;
+			});
 		});
 	}
 
@@ -63,6 +72,7 @@ export class UserListPageComponent {
 								return;
 							}
 
+							this.hasEntries = true;
 							this.compileLists(listEntries);
 						});
 				});
@@ -104,6 +114,7 @@ export class UserListPageComponent {
 		}
 
 		this.refreshTables();
+		this.isLoading = false;
 	}
 
 	refreshTables() {

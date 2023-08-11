@@ -2,7 +2,6 @@
     <div class="col-6 flex-form">
         <h2>Sign Up</h2>
         <form (ngSubmit)="submit()" #registerForm="ngForm">
-            <div class="alert alert-danger form-alert align-center" *ngIf="APIErrResponse !== ''">Error: {{APIErrResponse}}</div>
             <div class="form-group group-margin">
                 <label for="username">Username<span class="required-mark">*</span></label>
                 <input type="text" class="form-control" id="username" name="username" 

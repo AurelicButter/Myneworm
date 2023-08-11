@@ -154,4 +154,40 @@ export class MynewormAPIService {
 			}
 		);
 	}
+
+	getListEntry(isbn: string, userID: string) {
+		return this.http.get<ListEntry>(`${environment.API_ADDRESS}/lists/${isbn}/${userID}`);
+	}
+
+	addListEntry(isbn: string, data: ListEntry) {
+		return this.http.post(
+			`${environment.API_ADDRESS}/lists/${isbn}`,
+			{ list: data },
+			{
+				withCredentials: true,
+				observe: "body",
+				responseType: "json"
+			}
+		);
+	}
+
+	updateListEntry(isbn: string, data: ListEntry) {
+		return this.http.patch(
+			`${environment.API_ADDRESS}/lists/${isbn}`,
+			{ list: data },
+			{
+				withCredentials: true,
+				observe: "body",
+				responseType: "json"
+			}
+		);
+	}
+
+	removeListEntry(isbn: string) {
+		return this.http.delete(`${environment.API_ADDRESS}/lists/${isbn}`, {
+			withCredentials: true,
+			observe: "body",
+			responseType: "json"
+		});
+	}
 }
