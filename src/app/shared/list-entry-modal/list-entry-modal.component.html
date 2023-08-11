@@ -1,0 +1,89 @@
+<div class="list-entry-modal">
+    <header class="modal-header">
+        <h2>{{bookData.title}}</h2>
+    </header>
+    <div class="modal-content">
+        <div class="row modal-row">
+            <div class="col-3-half">
+                <img class="img-aspect-ratio" src='{{bookData.cover}}'>
+            </div>
+            <form class="col-8 modal-form" (ngSubmit)="submit()" #entryForm="ngForm">
+                <div style="max-width: 0; max-height: 0; overflow: hidden;">
+                    <input type="text" autofocus />
+                </div>
+                <div class="form-group row">
+                    <div class="col-6">
+                        <label for="score">Score</label>
+                        <input type="number" class="form-control modal-input" id="score" name="score" min="1" max="10"
+                            [(ngModel)]="listEntryForm.score" (input)="validateScore()">
+                    </div>
+                    <div class="col-6">
+                        <label for="reread">Reread</label>
+                        <input type="number" class="form-control modal-input" id="reread" name="reread" min="1"
+                            [(ngModel)]="listEntryForm.reread" (input)="validateReread()">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-6">
+                        <label for="activity">Status</label>
+                        <select class="form-select modal-input" id="activity" name="activity"
+                            [(ngModel)]="listEntryForm.active_status">
+                            <option *ngFor="let status of activityStatus | keyvalue" [ngValue]="status.value">
+                                {{status.key}}</option>
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <label for="ownership">Ownership</label>
+                        <select class="form-select modal-input" id="ownership" name="ownership"
+                            [(ngModel)]="listEntryForm.owner_status">
+                            <option value=""></option>
+                            <option *ngFor="let status of ownershipStatus | keyvalue" [ngValue]="status.value">
+                                {{status.key}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-6" (focusout)="removeDateDisplay(0)">
+                        <label for="startDate">Start Date</label>
+                        <div class="datepicker-input">
+                            <img src="/assets/fa-calendar-dark.svg" class="date-icon" />
+                            <input type="text" autocomplete="off" aria-autocomplete="none"
+                                class="form-control date-input modal-input" id="startDate" name="startDate"
+                                pattern="^\d{4}-\d{2}-\d{2}$" (focus)="showDates(0)" (focusout)="validateDate(true)"
+                                [(ngModel)]="listEntryForm.start_date">
+                        </div>
+                        <mat-card class="calendar-card-select" [ngClass]="{ 'show-calendar': showDatePicker[0] }">
+                            <mat-calendar (selectedChange)="updateDate($event, 0)"></mat-calendar>
+                        </mat-card>
+                    </div>
+                    <div class="col-6" (focusout)="removeDateDisplay(1)">
+                        <label for="endDate">End Date</label>
+                        <div class="datepicker-input">
+                            <img src="/assets/fa-calendar-dark.svg" class="date-icon" />
+                            <input type="text" autocomplete="off" aria-autocomplete="none"
+                                class="form-control date-input modal-input" id="endDate" name="endDate"
+                                pattern="^\d{4}-\d{2}-\d{2}$" (focus)="showDates(1)" (focusout)="validateDate(false)"
+                                [(ngModel)]="listEntryForm.end_date">
+                        </div>
+                        <mat-card class="calendar-card-select" [ngClass]="{ 'show-calendar': showDatePicker[1] }">
+                            <mat-calendar (selectedChange)="updateDate($event, 1)"></mat-calendar>
+                        </mat-card>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="notes">Notes</label>
+                    <div class="col-12">
+                        <textarea rows="3" class="form-control modal-input modal-input-textarea" id="notes" name="notes"
+                            autocomplete="off" aria-autocomplete="none" [(ngModel)]="listEntryForm.notes"></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <footer class="modal-footer">
+            <button type="submit" mat-raised-button class="modal-action btn btn-lg myneworm-btn" [disabled]="entryForm.invalid"
+                aria-disabled='{entryForm.invalid}' tabindex='{{entryForm.invalid ? -1 : 0 }}' (click)="submit()">Save</button>
+            <button mat-raised-button class="btn-danger btn btn-lg" [disabled]="!isUpdate" aria-disabled='{!isUpdate}'
+                tabindex='{{isUpdate ? 0 : -1 }}' (click)="deleteEntry()">Delete</button>
+        </footer>
+    </div>
+</div>

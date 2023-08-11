@@ -62,6 +62,11 @@ body {
     width: 12.5%;
 }
 
+.col-3-half {
+    flex: 0 0 auto;
+    width: 29.16%;
+}
+
 .col-4-half {
     flex: 0 0 auto;
     width: 37.5%;

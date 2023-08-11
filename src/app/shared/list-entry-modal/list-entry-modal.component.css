@@ -1,0 +1,107 @@
+.list-entry-modal {
+    padding: 2% 3%;
+    height: -webkit-fill-available;
+    width: -webkit-fill-available;
+    background-color: #ECEBF3;
+    color: #1F2232;
+}
+
+.modal-content {
+    height: 84%;
+    justify-content: space-between;
+}
+
+.modal-container {
+    display: flex;
+    flex-direction: column;
+    margin: 1em 2em;
+}
+
+.modal-header {
+    font-size: 20px;
+    height: 85px;
+}
+
+.modal-header>h1 {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.modal-action {
+    margin-right: 20px;
+}
+
+.modal-input,
+.modal-input:hover,
+.modal-input:focus {
+    border: none !important;
+    -webkit-text-fill-color: inherit !important;
+    box-shadow: none;
+}
+
+.modal-footer {
+    width: -webkit-fill-available;
+}
+
+.datepicker-input {
+    display: flex;
+    position: relative;
+    width: initial;
+    align-items: center;
+    height: 38px;
+}
+
+.mat-date-input {
+    width: -webkit-fill-available;
+}
+
+.date-icon {
+    z-index: 10;
+    margin-left: 10px;
+    position: relative;
+}
+
+.date-input {
+    z-index: 9;
+    position: absolute;
+    padding-left: 35px;
+}
+
+.calendar-card-select {
+    position: fixed;
+    z-index: 1000;
+    width: 300px;
+    display: none;
+}
+
+.show-calendar {
+    display: block;
+}
+
+.form-group:nth-child(n+2) {
+    margin-top: 15px;
+}
+
+::ng-deep.mat-calendar-body-today:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
+    border: 0;
+}
+
+.modal-row {
+    justify-content: space-between;
+}
+
+.modal-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.img-aspect-ratio {
+    width: 100%;
+    display: block;
+    height: auto;
+    max-height: 385px;
+}
+
+.modal-input-textarea {
+    max-height: 120px;
+}

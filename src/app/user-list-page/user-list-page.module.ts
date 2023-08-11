@@ -5,10 +5,11 @@ import { MatTableModule } from "@angular/material/table";
 import { RouterModule } from "@angular/router";
 import { MatSortModule } from "@angular/material/sort";
 import { TableDisplayComponent } from "./table-display/table-display.component";
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
 	declarations: [UserListPageComponent, TableDisplayComponent],
-	imports: [BrowserModule, MatTableModule, RouterModule, MatSortModule],
+	imports: [BrowserModule, MatTableModule, RouterModule, MatSortModule, SharedModule],
 	exports: [UserListPageComponent]
 })
 export class UserListPageModule {}

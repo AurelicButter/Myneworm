@@ -4,7 +4,8 @@
         <aside class="col-2 aside-content">
             <img class="book-cover" src='{{getCover()}}' alt='Cover for {{book.title}}'>
             <div class="aside-btn-group">
-                <a class="btn btn-lg myneworm-btn disabled" tabindex="-1" role="button" aria-disabled="true">Add to List</a>
+                <a class="btn btn-lg myneworm-btn" role="button" (click)="updateListEntry()" [ngClass]="{ disabled: isLoggedIn }"
+                    aria-disabled="{isLoggedIn}" tabindex='{{isLoggedIn ? -1 : 0}}'>Add to List</a>
                 <a [routerLink]="'/correction'" [queryParams]="{isbn: book.isbn}" class="btn btn-lg myneworm-btn disabled" tabindex="-1" role="button" aria-disabled="true">Edit Entry</a>
             </div>
             <div>
