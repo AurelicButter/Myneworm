@@ -20,6 +20,7 @@ export class TableDisplayComponent implements OnInit, OnChanges {
 	@Input() ownershipFilter: string[];
 	@Input() booktypeFilter: string[];
 	@Input() triggerListUpdate: boolean;
+	@Input() isAuthUser: boolean;
 	formatOwnerStatus = formatOwnerStatus;
 	formatDateString = formatDateString;
 	public listEntries: ListEntry[];
@@ -50,10 +51,6 @@ export class TableDisplayComponent implements OnInit, OnChanges {
 		}
 
 		this.listEntries = data;
-	}
-
-	getCover(isbn: string) {
-		return this.service.getAsset(`${isbn}`);
 	}
 
 	getThumbnail(isbn: string) {
