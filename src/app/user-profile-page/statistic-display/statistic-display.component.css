@@ -7,18 +7,7 @@
     border-radius: 10px;
     display: flex;
     background-color: gray;
-}
-
-.counter-level {
-    height: inherit;
-}
-
-.counter-level:first-child {
-    border-radius: 10px 0px 0px 10px;
-}
-
-.counter-level:last-child {
-    border-radius: 0px 10px 10px 0px;
+    overflow: hidden;
 }
 
 .reading, .ebook {
