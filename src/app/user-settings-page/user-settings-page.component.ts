@@ -125,9 +125,9 @@ export class UserSettingsPageComponent implements OnInit {
 		if (!this.profileForm.pristine) {
 			this.service
 				.updateProfile({
-					about_me: this.profileData.about_me,
-					display_name: this.profileData.display_name,
-					location: this.profileData.location,
+					about_me: this.profileData.about_me === "" ? null : this.profileData.about_me,
+					display_name: this.profileData.display_name === "" ? null : this.profileData.display_name,
+					location: this.profileData.location === "" ? null : this.profileData.location,
 					displaybirthday: this.profileData.displaybirthday
 				})
 				// eslint-disable-next-line @typescript-eslint/no-explicit-any
