@@ -1,5 +1,5 @@
 .main-container {
-    min-height: calc(100vh - 160px); /* Header + Footer height ignored */
+    min-height: calc(100vh - 180px); /* Header + Footer height ignored */
 }
 
 footer {
@@ -22,7 +22,13 @@ footer span:last-child {
     margin-right: 20px;
 }
 
-toast-messages {
+.toast-wrapper-div {
     height: 0;
-    display: contents;
+    z-index: 100;
+    position: sticky;
+    top: 20px
+}
+
+::ng-deep router-outlet + * > div {
+    margin-top: 20px;
 }

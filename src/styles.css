@@ -53,6 +53,10 @@ body {
     color: #ECEBF3 !important;
 }
 
+.myneworm-btn:hover {
+    background-color: #0D98BA !important;
+}
+
 /*
  * Collumn Widths
  */
