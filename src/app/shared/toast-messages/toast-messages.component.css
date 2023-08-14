@@ -1,10 +1,8 @@
 .toast-wrapper {
-    width: -webkit-fill-available;
-    top: 20px;
+    width: 100%;
     display: inline-flex;
     flex-direction: column;
     align-items: center;
-    position: sticky;
 }
 
 .toast-text-white {

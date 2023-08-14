@@ -15,6 +15,10 @@ export class StatisticDisplayComponent {
 
 	ngOnChanges() {
 		this.total = this.calculateTotal(this.displayObj);
+
+		if (this.displayObj["reading"]) {
+			this.displayObj["reading"] = 1;
+		}
 	}
 
 	calculateTotal(object: { [key: string]: number }) {
