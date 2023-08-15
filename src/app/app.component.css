@@ -29,6 +29,6 @@ footer span:last-child {
     top: 20px
 }
 
-::ng-deep router-outlet + * > div {
+.router-wrapper {
     margin-top: 20px;
 }

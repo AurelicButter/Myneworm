@@ -84,6 +84,7 @@ export class UserSettingsPageComponent implements OnInit {
 			return this.toastService.sendError("Only images are supported");
 		}
 
+		this.avatarForm.delete("KS-Myneworm");
 		this.avatarForm.append("KS-Myneworm", files[0]);
 
 		const reader = new FileReader();
@@ -125,9 +126,9 @@ export class UserSettingsPageComponent implements OnInit {
 		if (!this.profileForm.pristine) {
 			this.service
 				.updateProfile({
-					about_me: this.profileData.about_me,
-					display_name: this.profileData.display_name,
-					location: this.profileData.location,
+					about_me: this.profileData.about_me === "" ? null : this.profileData.about_me,
+					display_name: this.profileData.display_name === "" ? null : this.profileData.display_name,
+					location: this.profileData.location === "" ? null : this.profileData.location,
 					displaybirthday: this.profileData.displaybirthday
 				})
 				// eslint-disable-next-line @typescript-eslint/no-explicit-any

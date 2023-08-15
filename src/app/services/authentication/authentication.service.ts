@@ -9,7 +9,10 @@ import { LocalCookiesService } from "./local-cookies.service";
 	providedIn: "root"
 })
 export class AuthenticationService {
-	constructor(private http: HttpClient, private cookieService: LocalCookiesService) {}
+	constructor(
+		private http: HttpClient,
+		private cookieService: LocalCookiesService
+	) {}
 
 	login(username: string, password: string) {
 		return this.http
@@ -38,6 +41,9 @@ export class AuthenticationService {
 					return of(`ERROR (500): Response was valid but data was not received.`);
 				}),
 				catchError((error) => {
+					if (error.status === 401) {
+						return of("Username or password is invalid");
+					}
 					return of(`ERROR (${error.status}): ${error.statusText}`);
 				})
 			);
