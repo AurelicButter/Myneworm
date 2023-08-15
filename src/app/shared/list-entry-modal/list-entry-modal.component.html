@@ -13,19 +13,19 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-6">
-                        <label for="score">Score</label>
+                        <label for="score" class="modal-label">Score</label>
                         <input type="number" class="form-control modal-input" id="score" name="score" min="1" max="10"
                             [(ngModel)]="listEntryForm.score" (input)="validateScore()">
                     </div>
                     <div class="col-6">
-                        <label for="reread">Reread</label>
+                        <label for="reread" class="modal-label">Reread</label>
                         <input type="number" class="form-control modal-input" id="reread" name="reread" min="1"
                             [(ngModel)]="listEntryForm.reread" (input)="validateReread()">
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-6">
-                        <label for="activity">Status</label>
+                        <label for="activity" class="modal-label">Status</label>
                         <select class="form-select modal-input" id="activity" name="activity"
                             [(ngModel)]="listEntryForm.active_status">
                             <option *ngFor="let status of activityStatus | keyvalue" [ngValue]="status.value">
@@ -33,7 +33,7 @@
                         </select>
                     </div>
                     <div class="col-6">
-                        <label for="ownership">Ownership</label>
+                        <label for="ownership" class="modal-label">Ownership</label>
                         <select class="form-select modal-input" id="ownership" name="ownership"
                             [(ngModel)]="listEntryForm.owner_status">
                             <option value=""></option>
@@ -44,7 +44,7 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-6" (focusout)="removeDateDisplay(0)">
-                        <label for="startDate">Start Date</label>
+                        <label for="startDate" class="modal-label">Start Date</label>
                         <div class="datepicker-input">
                             <img src="/assets/fa-calendar-dark.svg" class="date-icon" />
                             <input type="text" autocomplete="off" aria-autocomplete="none"
@@ -57,7 +57,7 @@
                         </mat-card>
                     </div>
                     <div class="col-6" (focusout)="removeDateDisplay(1)">
-                        <label for="endDate">End Date</label>
+                        <label for="endDate" class="modal-label">End Date</label>
                         <div class="datepicker-input">
                             <img src="/assets/fa-calendar-dark.svg" class="date-icon" />
                             <input type="text" autocomplete="off" aria-autocomplete="none"
@@ -71,7 +71,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="notes">Notes</label>
+                    <label for="notes" class="modal-label">Notes</label>
                     <div class="col-12">
                         <textarea rows="3" class="form-control modal-input modal-input-textarea" id="notes" name="notes"
                             autocomplete="off" aria-autocomplete="none" [(ngModel)]="listEntryForm.notes"></textarea>

@@ -1,13 +1,22 @@
 .list-entry-modal {
     padding: 2% 3%;
-    height: -webkit-fill-available;
-    width: -webkit-fill-available;
+    height: 100%;
     background-color: #ECEBF3;
     color: #1F2232;
 }
 
+.modal-label {
+    font-size: 0.941vw;
+}
+
+@media screen and (max-width: 1024px) {
+    .modal-label {
+        font-size: 1.563vw;
+    }
+}
+
 .modal-content {
-    height: 84%;
+    height: calc(60vh - 135px);
     justify-content: space-between;
 }
 
@@ -37,10 +46,6 @@
     border: none !important;
     -webkit-text-fill-color: inherit !important;
     box-shadow: none;
-}
-
-.modal-footer {
-    width: -webkit-fill-available;
 }
 
 .datepicker-input {
@@ -79,7 +84,7 @@
 }
 
 .form-group:nth-child(n+2) {
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 ::ng-deep.mat-calendar-body-today:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
@@ -98,10 +103,8 @@
 .img-aspect-ratio {
     width: 100%;
     display: block;
-    height: auto;
-    max-height: 385px;
 }
 
 .modal-input-textarea {
-    max-height: 120px;
+    max-height: calc(46vh - 315px);
 }
