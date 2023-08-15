@@ -84,6 +84,7 @@ export class UserSettingsPageComponent implements OnInit {
 			return this.toastService.sendError("Only images are supported");
 		}
 
+		this.avatarForm.delete("KS-Myneworm");
 		this.avatarForm.append("KS-Myneworm", files[0]);
 
 		const reader = new FileReader();
