@@ -33,8 +33,10 @@
 <div class="container-fluid main-container">
     <div class="toast-wrapper-div">
         <toast-messages></toast-messages>
-    </div>    
-    <router-outlet></router-outlet>
+    </div>  
+    <div class="router-wrapper">
+        <router-outlet></router-outlet>
+    </div>  
 </div>
 <footer>
     <span><a class="btn-link" [routerLink]="'/privacy'">Privacy</a></span>
