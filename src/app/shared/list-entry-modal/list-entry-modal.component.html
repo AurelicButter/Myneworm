@@ -50,7 +50,7 @@
                             <input type="text" autocomplete="off" aria-autocomplete="none"
                                 class="form-control date-input modal-input" id="startDate" name="startDate"
                                 pattern="^\d{4}-\d{2}-\d{2}$" (focus)="showDates(0)" (focusout)="validateDate(true)"
-                                [(ngModel)]="listEntryForm.start_date">
+                                [(ngModel)]="listEntryForm.start_date" placeholder="YYYY-MM-DD" aria-placeholder="YYYY-MM-DD">
                         </div>
                         <mat-card class="calendar-card-select" [ngClass]="{ 'show-calendar': showDatePicker[0] }">
                             <mat-calendar (selectedChange)="updateDate($event, 0)"></mat-calendar>
@@ -63,7 +63,7 @@
                             <input type="text" autocomplete="off" aria-autocomplete="none"
                                 class="form-control date-input modal-input" id="endDate" name="endDate"
                                 pattern="^\d{4}-\d{2}-\d{2}$" (focus)="showDates(1)" (focusout)="validateDate(false)"
-                                [(ngModel)]="listEntryForm.end_date">
+                                [(ngModel)]="listEntryForm.end_date" placeholder="YYYY-MM-DD" aria-placeholder="YYYY-MM-DD">
                         </div>
                         <mat-card class="calendar-card-select" [ngClass]="{ 'show-calendar': showDatePicker[1] }">
                             <mat-calendar (selectedChange)="updateDate($event, 1)"></mat-calendar>
@@ -81,8 +81,8 @@
         </div>
         <footer class="modal-footer">
             <button type="submit" mat-raised-button class="modal-action btn btn-lg myneworm-btn" [disabled]="entryForm.invalid"
-                aria-disabled='{entryForm.invalid}' tabindex='{{entryForm.invalid ? -1 : 0 }}' (click)="submit()">Save</button>
-            <button mat-raised-button class="btn-danger btn btn-lg" [disabled]="!isUpdate" aria-disabled='{!isUpdate}'
+                [attr.aria-disabled]="entryForm.invalid" tabindex='{{entryForm.invalid ? -1 : 0 }}' (click)="submit()">Save</button>
+            <button mat-raised-button class="btn-danger btn btn-lg" [disabled]="!isUpdate" [attr.aria-disabled]="!isUpdate"
                 tabindex='{{isUpdate ? 0 : -1 }}' (click)="deleteEntry()">Delete</button>
         </footer>
     </div>

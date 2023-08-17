@@ -86,12 +86,6 @@ export class ListEntryModalComponent {
 			this.toastService.sendError("Unable to parse date input. One or more date values exceed date range.");
 			return;
 		}
-
-		if (start) {
-			this.listEntryForm.start_date = this.utilities.APIDateFormatter(new Date(dateToCheck));
-		} else {
-			this.listEntryForm.end_date = this.utilities.APIDateFormatter(new Date(dateToCheck));
-		}
 	}
 
 	updateDate(event: Date | null, target: number) {

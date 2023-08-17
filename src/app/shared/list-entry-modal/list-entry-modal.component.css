@@ -92,11 +92,13 @@
 }
 
 .modal-row {
+    display: inline-flex;
+    height: calc(56vh - 135px);
     justify-content: space-between;
 }
 
 .modal-form {
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
 }
 
