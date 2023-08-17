@@ -18,3 +18,13 @@
     margin-top: 10px;
     margin-bottom: 16px;   
 }
+
+@media screen and (max-width: 1024px) {
+    .aside-btn-group {
+        flex-direction: column;
+    }
+
+    .aside-btn-group > .myneworm-btn:nth-child(n+2) {
+        margin-top: 10px;
+    }
+}
