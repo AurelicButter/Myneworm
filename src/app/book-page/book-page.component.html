@@ -22,8 +22,8 @@
         </aside>
         <main class="col-8">
             <div class="book-description">
-                <p *ngIf="book.description != ''" [innerHTML]="book.description"></p>
-                <p *ngIf="book.description === ''">No description available.</p>
+                <p *ngIf="book.description !== '' && book.description !== null" [innerHTML]="book.description"></p>
+                <p *ngIf="book.description === '' || book.description === null">No description available.</p>
             </div>
         </main>
     </div>
