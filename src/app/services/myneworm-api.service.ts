@@ -155,6 +155,14 @@ export class MynewormAPIService {
 		);
 	}
 
+	deleteUser() {
+		return this.http.delete(`${environment.API_ADDRESS}/user`, {
+			withCredentials: true,
+			observe: "body",
+			responseType: "json"
+		});
+	}
+
 	getListEntry(isbn: string, userID: string) {
 		return this.http.get<ListEntry>(`${environment.API_ADDRESS}/lists/${isbn}/${userID}`);
 	}
