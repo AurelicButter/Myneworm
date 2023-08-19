@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { MynewormAPIService } from "../services/myneworm-api.service";
 import { LocalCookiesService } from "../services/authentication/local-cookies.service";
 import { catchError, of } from "rxjs";
@@ -7,6 +7,9 @@ import { UtilitiesService } from "../services/utilities.service";
 import { AccountData, UserData } from "../models/userData";
 import { AccountUpdateData } from "../models/accountUpdateData";
 import { ToastService } from "../services/toast.service";
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
+import { DeleteConfirmationComponent } from "./delete-confirmation/delete-confirmation.component";
+import { AuthenticationService } from "../services/authentication/authentication.service";
 
 @Component({
 	selector: "user-settings-page",
@@ -28,38 +31,41 @@ export class UserSettingsPageComponent implements OnInit {
 		private route: ActivatedRoute,
 		private service: MynewormAPIService,
 		private cookieService: LocalCookiesService,
+		private authService: AuthenticationService,
 		private utilities: UtilitiesService,
-		private toastService: ToastService
+		private toastService: ToastService,
+		private matDialog: MatDialog,
+		private router: Router
 	) {
 		this.cookieService.userEvent.subscribe((value) => {
 			this.user = value;
-
-			this.service
-				.getAuthUser(this.user.user_id)
-				.pipe(catchError((err) => this.utilities.catchAPIError(err)))
-				.subscribe((data: UserData | null) => {
-					if (data === null) {
-						return;
-					}
-
-					this.profileData = data;
-					this.profileData.displaybirthday = data.birthday !== null;
-				});
-			this.service
-				.getAccount()
-				.pipe(catchError((err) => this.utilities.catchAPIError(err)))
-				.subscribe((data: AccountData | null) => {
-					if (data === null) {
-						return;
-					}
-
-					this.accountData = data;
-					this.oldEmail = data.email;
-				});
 		});
 	}
 
 	ngOnInit() {
+		this.service
+			.getAuthUser(this.user.user_id)
+			.pipe(catchError((err) => this.utilities.catchAPIError(err)))
+			.subscribe((data: UserData | null) => {
+				if (data === null) {
+					return;
+				}
+
+				this.profileData = data;
+				this.profileData.displaybirthday = data.birthday !== null;
+			});
+		this.service
+			.getAccount()
+			.pipe(catchError((err) => this.utilities.catchAPIError(err)))
+			.subscribe((data: AccountData | null) => {
+				if (data === null) {
+					return;
+				}
+
+				this.accountData = data;
+				this.oldEmail = data.email;
+			});
+
 		this.route.params.subscribe((data) => {
 			if (data.page) {
 				this.currPage = data.page.toUpperCase();
@@ -96,6 +102,21 @@ export class UserSettingsPageComponent implements OnInit {
 
 	resetAvatar() {
 		this.url = undefined;
+	}
+
+	deleteAccount() {
+		const dialogConfig = new MatDialogConfig();
+		dialogConfig.id = "delete-confirmation";
+
+		const deleteConfirmed = this.matDialog.open(DeleteConfirmationComponent, dialogConfig);
+
+		deleteConfirmed.afterClosed().subscribe((check) => {
+			if (check) {
+				this.authService.logout().subscribe(() => {
+					this.router.navigate(["/"]);
+				});
+			}
+		});
 	}
 
 	submitProfile() {
