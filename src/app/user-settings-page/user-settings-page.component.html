@@ -88,7 +88,7 @@
                     <input type="password" class="settings-input form-control" id="password" name="password"
                         pattern="(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}" placeholder="New Password"
                         aria-placeholder="New Password" [(ngModel)]="accountData.password">
-                    <input type="password" class="settings-input form-control" id="password" name="password"
+                    <input type="password" class="settings-input form-control" id="confirm" name="confirm"
                         pattern="(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}" placeholder="Confirm Password"
                         aria-placeholder="Confirm Password" [(ngModel)]="accountData.confirm">
                 </div>
@@ -109,14 +109,13 @@
             <br>
             <h3>Delete Your Account</h3>
             <div class="settings-subdiv">
-                <!--<p>By clicking this button, your account will be flagged for deletion. You will have up to 5 days after
-                    submission to revert this change. Afterwards, your account will be deleted and there is no recovery
-                    beyond the grace period.</p>-->
-                <p>Please send an email to <a href="mailto:myneworm@katsurin.com">myneworm@katsurin.com</a>,
-                    from the email linked to your account, requesting your account be deleted. You will have up to 5 days
-                    after to revert this change. Once your account is deleted, there is no recovery.</p>
-                <button class="btn btn-lg btn-danger settings-button delete-button disabled"
-                    aria-disabled="true" tabindex="-1">Delete</button>
+                <p style="color: red;">This will permanently delete your account!</p>
+                <p>
+                    By clicking this button, your account will be flagged for deletion. You will have up to seven (7) days after 
+                    submission to revert this change by logging back into your account. After the grace period and your account
+                    is deleted, there is no data recovery.
+                </p>
+                <button class="btn btn-lg btn-danger settings-button delete-button" (click)="deleteAccount()">Delete</button>
             </div>
         </div>
     </div>

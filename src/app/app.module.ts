@@ -31,6 +31,7 @@ import { UserProfilePageComponent } from "./user-profile-page/user-profile-page.
 import { StatisticDisplayComponent } from "./user-profile-page/statistic-display/statistic-display.component";
 import { RegistrationPageComponent } from "./registration-page/registration-page.component";
 import { SharedModule } from "./shared/shared.module";
+import { DeleteConfirmationComponent } from "./user-settings-page/delete-confirmation/delete-confirmation.component";
 
 @NgModule({
 	declarations: [
@@ -43,7 +44,8 @@ import { SharedModule } from "./shared/shared.module";
 		UserSettingsPageComponent,
 		UserProfilePageComponent,
 		StatisticDisplayComponent,
-		RegistrationPageComponent
+		RegistrationPageComponent,
+		DeleteConfirmationComponent
 	],
 	imports: [
 		BrowserModule,
