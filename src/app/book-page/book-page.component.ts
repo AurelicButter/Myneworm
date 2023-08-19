@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { catchError } from "rxjs";
+import { catchError, of } from "rxjs";
 import { BookData } from "../models/bookData";
 import { PublisherData } from "../models/publisherData";
 import { MetadataService } from "../services/metadata.service";
@@ -9,6 +9,8 @@ import { UtilitiesService } from "../services/utilities.service";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { ListEntryModalComponent } from "../shared/list-entry-modal/list-entry-modal.component";
 import { LocalCookiesService } from "../services/authentication/local-cookies.service";
+import { ListEntry } from "../models/ListEntry";
+import { ToastService } from "../services/toast.service";
 
 @Component({
 	selector: "app-book-page",
@@ -19,17 +21,24 @@ export class BookPageComponent implements OnInit {
 	book: BookData;
 	publisher: PublisherData;
 	isLoggedIn = false;
+	private userID: string;
+	hasExistingEntry = false;
 
 	constructor(
 		private route: ActivatedRoute,
 		private service: MynewormAPIService,
 		public utilities: UtilitiesService,
 		private metaService: MetadataService,
-		public matDialog: MatDialog,
-		private cookieService: LocalCookiesService
+		private matDialog: MatDialog,
+		private cookieService: LocalCookiesService,
+		private toastService: ToastService
 	) {
 		this.cookieService.userEvent.subscribe((value) => {
-			this.isLoggedIn = Object.keys(value).length === 0;
+			this.isLoggedIn = Object.keys(value).length > 0;
+
+			if (this.isLoggedIn) {
+				this.userID = value.user_id;
+			}
 		});
 	}
 
@@ -55,6 +64,27 @@ export class BookPageComponent implements OnInit {
 						this.publisher = pubData;
 					});
 				});
+
+			if (this.isLoggedIn) {
+				this.service
+					.getListEntry(data.isbn, this.userID)
+					.pipe(
+						catchError((err) => {
+							if (err.status === 404) {
+								return of(null);
+							}
+							this.toastService.sendError("ERROR: Failed check for list entry.");
+							return of(null);
+						})
+					)
+					.subscribe((data: ListEntry | null) => {
+						if (data === null) {
+							return;
+						}
+
+						this.hasExistingEntry = true;
+					});
+			}
 		});
 	}
 
@@ -73,6 +103,10 @@ export class BookPageComponent implements OnInit {
 			cover: this.service.getCover(this.book.isbn, "medium"),
 			title: this.book.title
 		};
-		this.matDialog.open(ListEntryModalComponent, dialogConfig);
+		const listDialog = this.matDialog.open(ListEntryModalComponent, dialogConfig);
+
+		listDialog.afterClosed().subscribe((result) => {
+			this.hasExistingEntry = result !== null;
+		});
 	}
 }
