@@ -146,7 +146,7 @@ export class ListEntryModalComponent {
 			this.service
 				.updateListEntry(this.bookData.isbn, this.listEntryForm)
 				.pipe(
-					catchError((err) => {
+					catchError(() => {
 						this.toastService.sendError("Unknown error response. Unable to update entry.");
 						return of(null);
 					})
@@ -157,7 +157,7 @@ export class ListEntryModalComponent {
 					}
 
 					this.toastService.sendSuccess("Updated entry!");
-					this.dialogRef.close();
+					this.close();
 				});
 			return;
 		}
@@ -165,7 +165,7 @@ export class ListEntryModalComponent {
 		this.service
 			.addListEntry(this.bookData.isbn, this.listEntryForm)
 			.pipe(
-				catchError((err) => {
+				catchError(() => {
 					this.toastService.sendError("Unknown error response. Unable to save entry.");
 					return of(null);
 				})
@@ -176,8 +176,16 @@ export class ListEntryModalComponent {
 				}
 
 				this.toastService.sendSuccess("Added entry!");
-				this.dialogRef.close();
+				this.close();
 			});
+	}
+
+	close(isDeleted = false) {
+		if (isDeleted) {
+			this.dialogRef.close(null);
+			return;
+		}
+		this.dialogRef.close(this.listEntryForm);
 	}
 
 	deleteEntry() {
@@ -200,7 +208,7 @@ export class ListEntryModalComponent {
 				}
 
 				this.toastService.sendSuccess("Entry removed from list");
-				this.dialogRef.close();
+				this.close(true);
 			});
 	}
 }
