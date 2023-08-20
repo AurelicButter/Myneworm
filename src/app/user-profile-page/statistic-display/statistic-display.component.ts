@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, OnChanges } from "@angular/core";
 
 @Component({
 	selector: "statistic-display",
@@ -8,9 +8,10 @@ import { Component, Input } from "@angular/core";
 		"[style.width]": "'75%'"
 	}
 })
-export class StatisticDisplayComponent {
+export class StatisticDisplayComponent implements OnChanges {
 	@Input() displayTitle: string;
 	@Input() displayObj: { [key: string]: number };
+	@Input() triggerUpdate: boolean;
 	total = 0;
 
 	ngOnChanges() {

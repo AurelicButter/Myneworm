@@ -13,15 +13,11 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ImprintIndexModule } from "./imprint-index/imprint-index.module";
 import { MissingPageComponent } from "./missing-page/missing-page.component";
 import { SeriesPageModule } from "./series-page/series-page.module";
-import { FaqPageComponent } from "./faq-page/faq-page.component";
-import { AboutPageComponent } from "./about-page/about-page.component";
 import { SearchBarModule } from "./search-bar/search-bar.module";
 import { DataCorrectionFormComponent } from "./data-correction-form/data-correction-form.component";
 import { ContactPageComponent } from "./contact-page/contact-page.component";
 import { MatDialogModule } from "@angular/material/dialog";
 import { SearchPageModule } from "./search-page/search-page.module";
-import { PrivacyPageComponent } from "./privacy-page/privacy-page.component";
-import { DatabaseGuidelinesComponent } from "./database-guidelines/database-guidelines.component";
 import { LoginPageComponent } from "./login-page/login-page.component";
 import { UserNavMenuComponent } from "./user-nav-menu/user-nav-menu.component";
 import { LocalCookiesService } from "./services/authentication/local-cookies.service";
@@ -62,10 +58,6 @@ import { DeleteConfirmationComponent } from "./user-settings-page/delete-confirm
 		SearchBarModule,
 		SearchPageModule,
 		MatDialogModule,
-		PrivacyPageComponent,
-		DatabaseGuidelinesComponent,
-		FaqPageComponent,
-		AboutPageComponent,
 		UserListPageModule,
 		SharedModule
 	],
