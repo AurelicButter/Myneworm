@@ -34,7 +34,7 @@ export class UserProfilePageComponent {
 		hardcover: 0,
 		audiobook: 0
 	};
-	finishedInit = false;
+	triggerUpdate = false;
 
 	constructor(
 		private route: ActivatedRoute,
@@ -91,7 +91,7 @@ export class UserProfilePageComponent {
 	}
 
 	refreshComponent() {
-		this.finishedInit = !this.finishedInit;
+		this.triggerUpdate = !this.triggerUpdate;
 	}
 
 	isOnlineText() {
