@@ -1,5 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
+import { ToastNotification } from "src/app/models/toastNotification";
 import { ToastService } from "src/app/services/toast.service";
 
 @Component({
@@ -10,7 +11,7 @@ import { ToastService } from "src/app/services/toast.service";
 	standalone: true
 })
 export class ToastMessagesComponent {
-	messages: { message: string; status: string }[];
+	messages: ToastNotification[];
 
 	constructor(private toastService: ToastService) {
 		this.toastService.msgEvent.subscribe((notifications) => {
