@@ -5,8 +5,8 @@
             <th mat-header-cell *matHeaderCellDef scope="col" [attr.role]="null"></th>
             <td mat-cell *matCellDef="let element" class="row-padding col-1">
                 <div class="cover-wrapper">
-                    <img class="table-img" src='{{getThumbnail(element.isbn)}}' alt='Cover for {{element.title}}' />
-                    <img class="hover-preview" src='{{getPreview(element.isbn)}}' alt='' />
+                    <img class="table-img" src='{{getThumbnail(element.isbn)}}' alt='Cover for {{element.title}}' loading="lazy" />
+                    <img class="hover-preview" src='{{getPreview(element.isbn)}}' alt='' loading="lazy"/>
                 </div>
             </td>
         </ng-container>
