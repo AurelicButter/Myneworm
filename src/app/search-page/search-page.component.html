@@ -2,17 +2,16 @@
     <div class="search-div">
         <div class="search-inner-div">
             <form #searchInput="ngForm" (ngSubmit)="submit()" class="search-form">
-                <input type="text" class="search-input-long" placeholder="Search" [(ngModel)]="searchTerm"
-                    #userInput="ngModel" [ngModelOptions]="{standalone: true}"
-                    [ngClass]="{'no-radius-bottom-left' : this.dataSource.data.length > 0 || (this.dataSource.data.length === 0 && this.searchTerm !== '')}" />
-                <button type="submit" class="search-submit-long"
-                    [ngClass]="{'no-radius-bottom-right' : this.dataSource.data.length > 0 || (this.dataSource.data.length === 0 && this.searchTerm !== '')}"
-                    aria-label="Search">
+                <input type="text" class="search-input-long no-radius-bottom-left" placeholder="Search" [(ngModel)]="searchTerm"
+                    #userInput="ngModel" [ngModelOptions]="{standalone: true}" />
+                <button type="submit" class="search-submit-long no-radius-bottom-right" aria-label="Search">
                     <img class="search-btn-icon-long" src="../../assets/fa-search.svg" alt="Search icon" />
                 </button>
             </form>
             <div class="advanced-options-button">
-                <a href="javascript:void(0)" class="clickable-button" (click)="onAdvOptionsClick()">Advanced Options</a>
+                <button class="clickable-button btn myneworm-btn" (click)="onAdvOptionsClick()">
+                    {{ !showAdvancedOptions ? 'Show Filters' : 'Hide Filters' }}
+                </button>
             </div>
         </div>
     </div>
@@ -26,18 +25,16 @@
     <h3 class="search-page-header">Search Results</h3>
     <hr class="search-page-line">
     <div class="search-pagination">
-        <a href="javascript:void(0)" type="button" class="btn myneworm-btn"
-            [ngClass]="this.pageNumber == 1 ? 'no-page' : ''" (click)="prevPage()">
-            < Previous</a>
-                <a href="javascript:void(0)" type="button" class="btn myneworm-btn"
-                    [ngClass]="this.dataSource.filteredData.length === 0 || this.dataSource.filteredData.length < 25 ? 'no-page' : ''"
-                    (click)="nextPage()">Next ></a>
+        <button class="btn myneworm-btn" [ngClass]="this.pageNumber == 1 ? 'no-page' : ''" (click)="prevPage()">&lt; Previous</button>
+        <button class="btn myneworm-btn" 
+            [ngClass]="this.dataSource.filteredData.length === 0 || this.dataSource.filteredData.length < 25 ? 'no-page' : ''"
+            (click)="nextPage()">Next &gt;</button>
     </div>
     <table *ngIf="dataSource" mat-table [dataSource]="dataSource" multiTemplateDataRows class="search-results">
         <ng-container matColumnDef="cover">
             <td class="search-image-row" mat-cell *matCellDef="let element">
-                <a routerLink="/book/{{element.isbn}}"><img class="search-cover-img"
-                        src='{{getCover(element.isbn)}}' alt='Cover for {{element.title}}' /></a>
+                <a routerLink="/book/{{element.isbn}}" [attr.alt]="element.title"><img class="search-cover-img"
+                        src='{{getCover(element.isbn)}}' alt='Cover for {{element.title}}' loading="lazy" /></a>
             </td>
         </ng-container>
         <ng-container matColumnDef="title">
@@ -70,4 +67,10 @@
             </td>
         </tr>
     </table>
+    <div class="search-pagination">
+        <button class="btn myneworm-btn" [ngClass]="this.pageNumber == 1 ? 'no-page' : ''" (click)="prevPage()">&lt; Previous</button>
+        <button class="btn myneworm-btn" 
+            [ngClass]="this.dataSource.filteredData.length === 0 || this.dataSource.filteredData.length < 25 ? 'no-page' : ''"
+            (click)="nextPage()">Next &gt;</button>
+    </div>
 </div>
