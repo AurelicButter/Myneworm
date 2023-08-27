@@ -22,7 +22,7 @@ export class UserNavMenuComponent {
 	}
 
 	logout() {
-		this.authService.logout().subscribe((data) => {
+		this.authService.logout().subscribe(() => {
 			this.router.navigate(["/home"]);
 		});
 	}
