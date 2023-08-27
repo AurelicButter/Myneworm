@@ -19,7 +19,7 @@
                 <li class="nav-li nav-search">
                     <search-bar></search-bar>
                 </li>
-                <li class="nav-li nav-user-menu" *ngIf="isAuthenticated">
+                <li class="nav-li nav-user-menu" *ngIf="isAuthenticated" aria-haspopup="menu">
                     <user-nav-menu></user-nav-menu>
                 </li>
                 <li class="nav-li nav-user-menu" *ngIf="!isAuthenticated">
