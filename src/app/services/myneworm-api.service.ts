@@ -13,6 +13,7 @@ import { RegistrationData } from "../models/RegistrationData";
 import { ProfileUpdateData } from "../models/profileUpdateData";
 import { AccountUpdateData } from "../models/accountUpdateData";
 import { AssetSize } from "../models/AssetSize";
+import { BookFormat } from "../models/BookFormat";
 
 @Injectable({
 	providedIn: "root"
@@ -109,6 +110,10 @@ export class MynewormAPIService {
 
 	getBookTypes() {
 		return this.http.get<BookType[]>(`${environment.API_ADDRESS}/booktype`);
+	}
+
+	getBookFormats() {
+		return this.http.get<BookFormat[]>(`${environment.API_ADDRESS}/bookformat`);
 	}
 
 	getAuthUser(userID: string) {
