@@ -6,6 +6,12 @@ import { BookData } from "../models/bookData";
 import { MetadataService } from "../services/metadata.service";
 import { MynewormAPIService } from "../services/myneworm-api.service";
 import { UtilitiesService } from "../services/utilities.service";
+import { SearchOptions } from "../models/SearchOptions";
+import { BookType } from "../models/BookType";
+import { BookFormat } from "../models/BookFormat";
+import { ImprintData } from "../models/imprintData";
+import * as moment from "moment";
+import { ToastService } from "../services/toast.service";
 
 @Component({
 	selector: "search-page",
@@ -18,6 +24,22 @@ export class SearchPageComponent implements OnInit {
 	public dataSource: MatTableDataSource<BookData> = new MatTableDataSource<BookData>();
 	showAdvancedOptions = false;
 	pageNumber = 1;
+	advancedOptions = new SearchOptions();
+	types: BookType[];
+	formats: BookFormat[];
+	publishers: ImprintData[];
+	startDate: { [key: string]: number | null } = {
+		year: null,
+		month: null,
+		day: null
+	};
+	endDate: { [key: string]: number | null } = {
+		year: null,
+		month: null,
+		day: null
+	};
+	private isFirstLoad = true;
+	lastSearchedTerm = "";
 
 	constructor(
 		private route: ActivatedRoute,
@@ -26,10 +48,9 @@ export class SearchPageComponent implements OnInit {
 		private metaService: MetadataService,
 		private router: Router,
 		private location: Location,
-		private scroll: ViewportScroller
-	) {
-		this.metaService.updateMetaTags("Search", "/search");
-	}
+		private scroll: ViewportScroller,
+		private toastService: ToastService
+	) {}
 
 	ngOnInit() {
 		this.route.queryParams.subscribe((params) => {
@@ -39,21 +60,155 @@ export class SearchPageComponent implements OnInit {
 
 			this.searchTerm = params.term;
 			this.pageNumber = params.page || 1;
-			this.searchBooks();
+			this.advancedOptions.startDate = params.start;
+			this.advancedOptions.endDate = params.end;
+			this.advancedOptions.type = params.type;
+			this.advancedOptions.format = params.format;
+			this.advancedOptions.publisher_id = params.publisher;
+
+			if (params.start || params.end || params.type || params.format || params.publisher) {
+				this.showAdvancedOptions = true;
+			}
+
+			if (params.start) {
+				const date = moment(params.start);
+				this.startDate.year = date.get("year");
+				this.startDate.month = date.get("month");
+				this.startDate.day = date.get("date");
+			}
+
+			if (params.end) {
+				const date = moment(params.end);
+				this.endDate.year = date.get("year");
+				this.endDate.month = date.get("month");
+				this.endDate.day = date.get("date");
+			}
+
+			this.searchBooks(this.generateParams());
+		});
+
+		this.service.getBookTypes().subscribe((data) => this.types = data);
+		this.service.getBookFormats().subscribe((data) => this.formats = data);
+		this.service.getImprints().subscribe((data) => {
+			this.publishers = data;
+			if (this.advancedOptions.publisher_id) {
+				this.advancedOptions.publisher_id++;
+				this.advancedOptions.publisher_id--;
+			}
 		});
 	}
 
-	private searchBooks() {
-		if (this.searchTerm === "") {
+	private searchBooks(queryParams: Params) {
+		console.log(queryParams);
+		if (!this.isFirstLoad && Object.keys(queryParams).length < 3) {
+			// Params only are page and limit counts
+			this.toastService.sendError("No parameters provided. Unable to search");
 			return;
 		}
-		this.service.searchBooksWithLimit(this.searchTerm, 25, this.pageNumber).subscribe((data: BookData[]) => {
+
+		if (!this.showAdvancedOptions && !this.searchTerm && this.isFirstLoad) {
+			return;
+		}
+
+		this.isFirstLoad = false;
+
+		this.service.searchBooksWithFilter(queryParams).subscribe((data: BookData[]) => {
 			this.dataSource = new MatTableDataSource<BookData>(data);
+			if (this.searchTerm) {
+				this.metaService.updateMetaTags(`Search - ${this.searchTerm}`, "/search");
+			} else {
+				this.metaService.updateMetaTags("Search", "/search");
+			}
+
+			this.lastSearchedTerm = this.searchTerm + (this.showAdvancedOptions ? " with filters" : "");
 		});
 	}
 
 	private scrollToTop() {
 		this.scroll.scrollToPosition([0, 0]);
+	}
+
+	private generateParams(): Params {
+		const queryParams: Params = {
+			page: this.pageNumber,
+			limit: 25
+		};
+
+		if (this.searchTerm) {
+			queryParams["term"] = this.searchTerm;
+		}
+
+		if (this.advancedOptions.startDate) {
+			queryParams["start"] = this.advancedOptions.startDate;
+		}
+		if (this.advancedOptions.endDate) {
+			queryParams["end"] = this.advancedOptions.endDate;
+		}
+		if (this.advancedOptions.publisher_id) {
+			queryParams["publisher"] = this.advancedOptions.publisher_id;
+		}
+		if (this.advancedOptions.type) {
+			queryParams["type"] = this.advancedOptions.type;
+		}
+		if (this.advancedOptions.format) {
+			queryParams["format"] = this.advancedOptions.format;
+		}
+
+		return queryParams;
+	}
+
+	clearFilters() {
+		this.advancedOptions = new SearchOptions();
+	}
+
+	onStartDateChange() {
+		if (this.startDate.year === null) {
+			this.advancedOptions.startDate = undefined;
+			this.startDate.month = null;
+			this.startDate.day = null;
+			return;
+		}
+
+		const targetDate = moment().startOf("year").set("year", this.startDate.year);
+
+		if (this.startDate.month !== null && this.startDate.month !== -1) {
+			targetDate.set("month", this.startDate.month);
+		} else {
+			this.startDate.day = null;
+		}
+
+		if (this.startDate.day !== null) {
+			targetDate.set("date", this.startDate.day);
+		}
+
+		this.advancedOptions.startDate = targetDate.format("YYYY-MM-DD");
+	}
+
+	onEndDateChange() {
+		if (this.endDate.year === null) {
+			this.advancedOptions.endDate = undefined;
+			this.endDate.month = null;
+			this.endDate.day = null;
+			return;
+		}
+
+		const targetDate = moment().startOf("year").set("year", this.endDate.year);
+
+		if (this.endDate.month !== null && this.endDate.month !== -1) {
+			targetDate.set("month", this.endDate.month);
+		} else {
+			this.endDate.day = null;
+		}
+
+		if (this.endDate.day !== null) {
+			targetDate.set("date", this.endDate.day);
+		}
+
+		this.advancedOptions.endDate = targetDate.format("YYYY-MM-DD");
+	}
+
+	getMonth(i: number) {
+		return new Date(0, i).toLocaleString("en", { month: "long" });
 	}
 
 	submit() {
@@ -66,21 +221,17 @@ export class SearchPageComponent implements OnInit {
 	}
 
 	updateQuery() {
-		const queryParams: Params = {
-			term: this.searchTerm,
-			page: this.pageNumber
-		};
+		const params = this.generateParams();
 
 		const url = this.router
 			.createUrlTree([], {
 				relativeTo: this.route,
-				queryParams: queryParams,
-				queryParamsHandling: "merge"
+				queryParams: params
 			})
 			.toString();
 
 		this.location.go(url);
-		this.searchBooks();
+		this.searchBooks(params);
 		this.scrollToTop();
 	}
 
