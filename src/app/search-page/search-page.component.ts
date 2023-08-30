@@ -38,6 +38,8 @@ export class SearchPageComponent implements OnInit {
 		month: null,
 		day: null
 	};
+	private isFirstLoad = true;
+	lastSearchedTerm = "";
 
 	constructor(
 		private route: ActivatedRoute,
@@ -48,9 +50,7 @@ export class SearchPageComponent implements OnInit {
 		private location: Location,
 		private scroll: ViewportScroller,
 		private toastService: ToastService
-	) {
-		this.metaService.updateMetaTags("Search", "/search");
-	}
+	) {}
 
 	ngOnInit() {
 		this.route.queryParams.subscribe((params) => {
@@ -85,14 +85,28 @@ export class SearchPageComponent implements OnInit {
 	}
 
 	private searchBooks(queryParams: Params) {
-		if (Object.keys(queryParams).length < 3) {
+		console.log(queryParams);
+		if (!this.isFirstLoad && Object.keys(queryParams).length < 3) {
 			// Params only are page and limit counts
 			this.toastService.sendError("No parameters provided. Unable to search");
 			return;
 		}
 
+		if (!this.showAdvancedOptions && !this.searchTerm && this.isFirstLoad) {
+			return;
+		}
+
+		this.isFirstLoad = false;
+
 		this.service.searchBooksWithFilter(queryParams).subscribe((data: BookData[]) => {
 			this.dataSource = new MatTableDataSource<BookData>(data);
+			if (this.searchTerm) {
+				this.metaService.updateMetaTags(`Search - ${this.searchTerm}`, "/search");
+			} else {
+				this.metaService.updateMetaTags("Search", "/search");
+			}
+
+			this.lastSearchedTerm = this.searchTerm + (this.showAdvancedOptions ? " with filters" : "");
 		});
 	}
 
@@ -110,22 +124,20 @@ export class SearchPageComponent implements OnInit {
 			queryParams["term"] = this.searchTerm;
 		}
 
-		if (this.showAdvancedOptions) {
-			if (this.advancedOptions.startDate) {
-				queryParams["start"] = this.advancedOptions.startDate;
-			}
-			if (this.advancedOptions.endDate) {
-				queryParams["end"] = this.advancedOptions.endDate;
-			}
-			if (this.advancedOptions.publisher_id) {
-				queryParams["publisher"] = this.advancedOptions.publisher_id;
-			}
-			if (this.advancedOptions.type) {
-				queryParams["type"] = this.advancedOptions.type;
-			}
-			if (this.advancedOptions.format) {
-				queryParams["format"] = this.advancedOptions.format;
-			}
+		if (this.advancedOptions.startDate) {
+			queryParams["start"] = this.advancedOptions.startDate;
+		}
+		if (this.advancedOptions.endDate) {
+			queryParams["end"] = this.advancedOptions.endDate;
+		}
+		if (this.advancedOptions.publisher_id) {
+			queryParams["publisher"] = this.advancedOptions.publisher_id;
+		}
+		if (this.advancedOptions.type) {
+			queryParams["type"] = this.advancedOptions.type;
+		}
+		if (this.advancedOptions.format) {
+			queryParams["format"] = this.advancedOptions.format;
 		}
 
 		return queryParams;
@@ -200,8 +212,7 @@ export class SearchPageComponent implements OnInit {
 		const url = this.router
 			.createUrlTree([], {
 				relativeTo: this.route,
-				queryParams: params,
-				queryParamsHandling: "merge"
+				queryParams: params
 			})
 			.toString();
 

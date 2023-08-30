@@ -120,8 +120,8 @@
             </select>
         </div>
         <div class="form-buttons">
-            <button class="btn btn-lg myneworm-btn" type="reset" (click)="clearFilters()">Clear Filters</button>
-            <button class="btn btn-lg myneworm-btn" type="submit">Search with Filters</button>
+            <button class="btn myneworm-btn" type="reset" (click)="clearFilters()">Clear Filters</button>
+            <button class="btn myneworm-btn" type="submit">Search with Filters</button>
         </div>
     </form>
     </div>
@@ -165,10 +165,12 @@
             </td>
         </ng-container>
         <tr mat-row *matRowDef="let row; columns: displayedColumns" class="search-result-row"></tr>
-        <tr class="mat-row search-result-row" *matNoDataRow [ngClass]="this.searchTerm !== '' ? '' : 'hide-no-result'">
+        <tr class="mat-row search-result-row" *matNoDataRow [ngClass]="this.searchTerm ? '' : 'hide-no-result'">
             <td class="mat-cell" [attr.colspan]="displayedColumns.length">
                 <strong>
-                    <p class="search-page-message">No results found...</p>
+                    <p class="search-page-message">
+                        No results{{ lastSearchedTerm ? ' found for ' + lastSearchedTerm : '' }}...
+                    </p>
                 </strong>
             </td>
         </tr>
