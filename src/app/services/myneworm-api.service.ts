@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { ImprintData } from "../models/imprintData";
 import { MonthReleaseData } from "../models/monthReleaseData";
 import { BookData } from "../models/bookData";
@@ -14,6 +14,7 @@ import { ProfileUpdateData } from "../models/profileUpdateData";
 import { AccountUpdateData } from "../models/accountUpdateData";
 import { AssetSize } from "../models/AssetSize";
 import { BookFormat } from "../models/BookFormat";
+import { Params } from "@angular/router";
 
 @Injectable({
 	providedIn: "root"
@@ -78,6 +79,14 @@ export class MynewormAPIService {
 		}
 
 		return this.http.get<BookData[]>(`${environment.API_ADDRESS}/book/search/${page}?term=${term}&limit=${limit}`);
+	}
+
+	searchBooksWithFilter(queryParams: Params) {
+		return this.http.get<BookData[]>(
+			`${environment.API_ADDRESS}/book/search/${queryParams["page"]}?${new HttpParams({
+				fromObject: queryParams
+			}).toString()}`
+		);
 	}
 
 	searchBooks(publisherID?: string, startDate?: string, endDate?: string) {
