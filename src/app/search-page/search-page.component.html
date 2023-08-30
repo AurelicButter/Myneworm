@@ -43,14 +43,14 @@
             <div class="datepicker-decomposed-inputs">
                 <input type="number" class="form-control" name="startYear" id="startYear" [(ngModel)]="startDate.year" (input)="onStartDateChange()">
                 <select class="form-select" name="startMonth" id="startMonth" [(ngModel)]="startDate.month" (ngModelChange)="onStartDateChange()"
-                    [disabled]="startDate.year === null || startDate.year === ''">
-                    <option value=""></option>
+                    [disabled]="startDate.year === null">
+                    <option value="-1"></option>
                     <option *ngFor="let item of [].constructor(12); let i = index" [ngValue]="i">
                         {{getMonth(i)}}
                     </option>
                 </select>
                 <input type="number" class="form-control" name="startDay" id="startDay" [(ngModel)]="startDate.day" (input)="onStartDateChange()"
-                    [disabled]="startDate.month === null || startDate.month === ''">
+                    [disabled]="startDate.month === null || startDate.month === -1">
             </div>
         </div>
         <div class="form-group">
@@ -75,14 +75,14 @@
             <div class="datepicker-decomposed-inputs">
                 <input type="number" class="form-control" name="endYear" id="endYear" [(ngModel)]="endDate.year" (input)="onEndDateChange()">
                 <select class="form-select" name="endMonth" id="endMonth" [(ngModel)]="endDate.month" (ngModelChange)="onEndDateChange()"
-                    [disabled]="endDate.year === null || endDate.year === ''">
-                    <option value=""></option>
+                    [disabled]="endDate.year === null">
+                    <option value="-1"></option>
                     <option *ngFor="let item of [].constructor(12); let i = index" [ngValue]="i">
                         {{getMonth(i)}}
                     </option>
                 </select>
                 <input type="number" class="form-control" name="endDay" id="endDay" [(ngModel)]="endDate.day" (input)="onEndDateChange()"
-                    [disabled]="endDate.month === null || endDate.month === ''">
+                    [disabled]="endDate.month === null || endDate.month === -1">
             </div>
         </div>
         <div class="form-group">

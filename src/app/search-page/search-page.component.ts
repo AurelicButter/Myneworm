@@ -28,12 +28,12 @@ export class SearchPageComponent implements OnInit {
 	types: BookType[];
 	formats: BookFormat[];
 	publishers: ImprintData[];
-	startDate = {
+	startDate: { [key: string]: number | null } = {
 		year: null,
 		month: null,
 		day: null
 	};
-	endDate = {
+	endDate: { [key: string]: number | null } = {
 		year: null,
 		month: null,
 		day: null
@@ -68,6 +68,20 @@ export class SearchPageComponent implements OnInit {
 
 			if (params.start || params.end || params.type || params.format || params.publisher) {
 				this.showAdvancedOptions = true;
+			}
+
+			if (params.start) {
+				const date = moment(params.start);
+				this.startDate.year = date.get("year");
+				this.startDate.month = date.get("month");
+				this.startDate.day = date.get("date");
+			}
+
+			if (params.end) {
+				const date = moment(params.end);
+				this.endDate.year = date.get("year");
+				this.endDate.month = date.get("month");
+				this.endDate.day = date.get("date");
 			}
 
 			this.searchBooks(this.generateParams());
@@ -157,7 +171,7 @@ export class SearchPageComponent implements OnInit {
 
 		const targetDate = moment().startOf("year").set("year", this.startDate.year);
 
-		if (this.startDate.month !== null && this.startDate.month !== "") {
+		if (this.startDate.month !== null && this.startDate.month !== -1) {
 			targetDate.set("month", this.startDate.month);
 		} else {
 			this.startDate.day = null;
@@ -180,7 +194,7 @@ export class SearchPageComponent implements OnInit {
 
 		const targetDate = moment().startOf("year").set("year", this.endDate.year);
 
-		if (this.endDate.month !== null && this.endDate.month !== "") {
+		if (this.endDate.month !== null && this.endDate.month !== -1) {
 			targetDate.set("month", this.endDate.month);
 		} else {
 			this.endDate.day = null;
