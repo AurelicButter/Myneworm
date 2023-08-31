@@ -10,6 +10,9 @@ footer {
     text-align: right;
     font-size: large;
     margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 footer span {
@@ -20,6 +23,21 @@ footer span {
 
 footer span:last-child {
     margin-right: 20px;
+}
+
+.social-links {
+    display: inline-flex;
+}
+
+.social-logo {
+    aspect-ratio: 1;
+    width: 40px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.github-logo {
+    width: 35px;
 }
 
 .toast-wrapper-div {

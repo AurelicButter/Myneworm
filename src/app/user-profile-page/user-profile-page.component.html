@@ -22,9 +22,9 @@
         <div class="profile-content aside-offset">
             <h3 id="#statistics" class="list-display-header">Statistics</h3>
             <div class="list-displays">
-                <statistic-display displayTitle="Activity" [displayObj]="activeStatusCount"></statistic-display>
-                <statistic-display displayTitle="Ownership" [displayObj]="ownershipCount"></statistic-display>
-                <statistic-display displayTitle="Book Type" [displayObj]="bookTypeCount"></statistic-display>
+                <statistic-display displayTitle="Activity" [displayObj]="activeStatusCount" [triggerUpdate]="triggerUpdate"></statistic-display>
+                <statistic-display displayTitle="Ownership" [displayObj]="ownershipCount" [triggerUpdate]="triggerUpdate"></statistic-display>
+                <statistic-display displayTitle="Book Type" [displayObj]="bookTypeCount" [triggerUpdate]="triggerUpdate"></statistic-display>
             </div>
         </div>
     </div>

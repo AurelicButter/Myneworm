@@ -1,10 +1,9 @@
 <div class="user-menu-wrap">
     <span class="nav-item nav-link nav-user-menu-preview">{{user.username}}</span>
     <div class="user-menu">
-        <ul>
-            <li><a class="user-menu-link" href="/user/{{user.username}}">Profile</a></li>
-            <li><a class="user-menu-link" href="/settings">Settings</a></li>
-            <li><a class="user-menu-link" (click)="logout()">Logout</a></li>
-        </ul>
+        <a class="btn-link btn-div" href="/user/{{user.username}}">Profile</a>
+        <a class="btn-link btn-div" href="/user/{{user.username}}/lists">My List</a>
+        <a class="btn-link btn-div" href="/settings">Settings</a>
+        <a class="myneworm-btn btn-link btn-div" type="button" (click)="logout()">Logout</a>
     </div>
 </div>   

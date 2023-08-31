@@ -2,17 +2,16 @@
     <div class="search-div">
         <div class="search-inner-div">
             <form #searchInput="ngForm" (ngSubmit)="submit()" class="search-form">
-                <input type="text" class="search-input-long" placeholder="Search" [(ngModel)]="searchTerm"
-                    #userInput="ngModel" [ngModelOptions]="{standalone: true}"
-                    [ngClass]="{'no-radius-bottom-left' : this.dataSource.data.length > 0 || (this.dataSource.data.length === 0 && this.searchTerm !== '')}" />
-                <button type="submit" class="search-submit-long"
-                    [ngClass]="{'no-radius-bottom-right' : this.dataSource.data.length > 0 || (this.dataSource.data.length === 0 && this.searchTerm !== '')}"
-                    aria-label="Search">
+                <input type="text" class="search-input-long no-radius-bottom-left" placeholder="Search"
+                    [(ngModel)]="searchTerm" #userInput="ngModel" [ngModelOptions]="{standalone: true}" />
+                <button type="submit" class="search-submit-long no-radius-bottom-right" aria-label="Search">
                     <img class="search-btn-icon-long" src="../../assets/fa-search.svg" alt="Search icon" />
                 </button>
             </form>
             <div class="advanced-options-button">
-                <a href="javascript:void(0)" class="clickable-button" (click)="onAdvOptionsClick()">Advanced Options</a>
+                <button class="btn myneworm-btn" (click)="onAdvOptionsClick()">
+                    {{ !showAdvancedOptions ? 'Show Filters' : 'Hide Filters' }}
+                </button>
             </div>
         </div>
     </div>
@@ -20,24 +19,128 @@
 <div class="advanced-options" [ngClass]="{ 'hide-adv-options': !showAdvancedOptions }">
     <h3 class="search-page-header">Advanced Options</h3>
     <hr class="search-page-line">
-    <p>Coming soon...</p>
+    <div class="advanced-options-form-wrapper">
+    <form #optionsForm="ngForm" class="advanced-options-form" (ngSubmit)="submit()">
+        <div class="form-group">
+            <label for="startDate">
+                <h5>Earliest Date</h5>
+            </label>
+            <br>
+            <small id="startDateHelp" class="form-text text-muted">
+                Inclusive from the date selected: "From or after January 1st, 2022"
+            </small>
+            <div class="datepicker-decomposed-labels">
+                <label for="startYear">
+                    <h6>Year</h6>
+                </label>
+                <label for="startMonth">
+                    <h6>Month</h6>
+                </label>
+                <label for="startDay">
+                    <h6>Day</h6>
+                </label>
+            </div>
+            <div class="datepicker-decomposed-inputs">
+                <input type="number" class="form-control" name="startYear" id="startYear" [(ngModel)]="startDate.year" (input)="onStartDateChange()">
+                <select class="form-select" name="startMonth" id="startMonth" [(ngModel)]="startDate.month" (ngModelChange)="onStartDateChange()"
+                    [disabled]="startDate.year === null">
+                    <option value="-1"></option>
+                    <option *ngFor="let item of [].constructor(12); let i = index" [ngValue]="i">
+                        {{getMonth(i)}}
+                    </option>
+                </select>
+                <input type="number" class="form-control" name="startDay" id="startDay" [(ngModel)]="startDate.day" (input)="onStartDateChange()"
+                    [disabled]="startDate.month === null || startDate.month === -1">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="endDate">
+                <h5>Latest Date</h5>
+            </label>
+            <br>
+            <small id="endDateHelp" class="form-text text-muted">
+                Inclusive from the date selected: "Before or on January 1st, 2022"
+            </small>
+            <div class="datepicker-decomposed-labels">
+                <label for="endYear">
+                    <h6>Year</h6>
+                </label>
+                <label for="endMonth">
+                    <h6>Month</h6>
+                </label>
+                <label for="endDay">
+                    <h6>Day</h6>
+                </label>
+            </div>
+            <div class="datepicker-decomposed-inputs">
+                <input type="number" class="form-control" name="endYear" id="endYear" [(ngModel)]="endDate.year" (input)="onEndDateChange()">
+                <select class="form-select" name="endMonth" id="endMonth" [(ngModel)]="endDate.month" (ngModelChange)="onEndDateChange()"
+                    [disabled]="endDate.year === null">
+                    <option value="-1"></option>
+                    <option *ngFor="let item of [].constructor(12); let i = index" [ngValue]="i">
+                        {{getMonth(i)}}
+                    </option>
+                </select>
+                <input type="number" class="form-control" name="endDay" id="endDay" [(ngModel)]="endDate.day" (input)="onEndDateChange()"
+                    [disabled]="endDate.month === null || endDate.month === -1">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="publisher_id">
+                <h5>Imprint</h5>
+            </label>
+            <select class="form-select" name="publisher_id" id="publisher_id"
+                [(ngModel)]="advancedOptions.publisher_id">
+                <option value=""></option>
+                <option *ngFor="let publisher of publishers" [ngValue]="publisher.publisher_id">
+                    {{publisher.name}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="format">
+                <h5>Format</h5>
+            </label>
+            <select class="form-select" name="format" id="format" [(ngModel)]="advancedOptions.format">
+                <option value=""></option>
+                <option *ngFor="let format of formats" [ngValue]="format.format_name">
+                    {{this.utilities.formatReadable(format.format_name)}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="type">
+                <h5>Type</h5>
+            </label>
+            <select class="form-select" name="type" id="type" [(ngModel)]="advancedOptions.type">
+                <option value=""></option>
+                <option *ngFor="let type of types" [ngValue]="type.book_type_name">
+                    {{this.utilities.toTitleCase(type.book_type_name)}}
+                </option>
+            </select>
+        </div>
+        <div class="form-buttons">
+            <button class="btn myneworm-btn" type="reset" (click)="clearFilters()">Clear Filters</button>
+            <button class="btn myneworm-btn" type="submit">Search with Filters</button>
+        </div>
+    </form>
+    </div>
 </div>
 <div class="search-results">
     <h3 class="search-page-header">Search Results</h3>
     <hr class="search-page-line">
     <div class="search-pagination">
-        <a href="javascript:void(0)" type="button" class="btn myneworm-btn"
-            [ngClass]="this.pageNumber == 1 ? 'no-page' : ''" (click)="prevPage()">
-            < Previous</a>
-                <a href="javascript:void(0)" type="button" class="btn myneworm-btn"
-                    [ngClass]="this.dataSource.filteredData.length === 0 || this.dataSource.filteredData.length < 25 ? 'no-page' : ''"
-                    (click)="nextPage()">Next ></a>
+        <button class="btn myneworm-btn" [ngClass]="this.pageNumber == 1 ? 'no-page' : ''" (click)="prevPage()">&lt;
+            Previous</button>
+        <button class="btn myneworm-btn"
+            [ngClass]="this.dataSource.filteredData.length === 0 || this.dataSource.filteredData.length < 25 ? 'no-page' : ''"
+            (click)="nextPage()">Next &gt;</button>
     </div>
     <table *ngIf="dataSource" mat-table [dataSource]="dataSource" multiTemplateDataRows class="search-results">
         <ng-container matColumnDef="cover">
             <td class="search-image-row" mat-cell *matCellDef="let element">
-                <a routerLink="/book/{{element.isbn}}"><img class="search-cover-img"
-                        src='{{getCover(element.isbn)}}' alt='Cover for {{element.title}}' /></a>
+                <a routerLink="/book/{{element.isbn}}" [attr.alt]="element.title"><img class="search-cover-img"
+                        src='{{getCover(element.isbn)}}' alt='Cover for {{element.title}}' loading="lazy" /></a>
             </td>
         </ng-container>
         <ng-container matColumnDef="title">
@@ -62,12 +165,21 @@
             </td>
         </ng-container>
         <tr mat-row *matRowDef="let row; columns: displayedColumns" class="search-result-row"></tr>
-        <tr class="mat-row search-result-row" *matNoDataRow [ngClass]="this.searchTerm !== '' ? '' : 'hide-no-result'">
+        <tr class="mat-row search-result-row" *matNoDataRow [ngClass]="this.searchTerm ? '' : 'hide-no-result'">
             <td class="mat-cell" [attr.colspan]="displayedColumns.length">
                 <strong>
-                    <p class="search-page-message">No results found...</p>
+                    <p class="search-page-message">
+                        No results{{ lastSearchedTerm ? ' found for ' + lastSearchedTerm : '' }}...
+                    </p>
                 </strong>
             </td>
         </tr>
     </table>
+    <div class="search-pagination">
+        <button class="btn myneworm-btn" [ngClass]="this.pageNumber == 1 ? 'no-page' : ''" (click)="prevPage()">&lt;
+            Previous</button>
+        <button class="btn myneworm-btn"
+            [ngClass]="this.dataSource.filteredData.length === 0 || this.dataSource.filteredData.length < 25 ? 'no-page' : ''"
+            (click)="nextPage()">Next &gt;</button>
+    </div>
 </div>

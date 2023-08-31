@@ -3,8 +3,8 @@ export interface ListEntry {
 	user_id: number;
 	isbn: number;
 	title: string;
-	start_date?: string;
-	end_date?: string;
+	start_date?: string | null;
+	end_date?: string | null;
 	book_type_name: string;
 	score: number;
 	reread: number;
@@ -19,8 +19,8 @@ export class ListEntryClass implements ListEntry {
 	user_id: number;
 	isbn: number;
 	title: string;
-	start_date?: string;
-	end_date?: string;
+	start_date?: string | null;
+	end_date?: string | null;
 	book_type_name: string;
 	score: number;
 	reread: number;

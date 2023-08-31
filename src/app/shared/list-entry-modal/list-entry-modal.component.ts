@@ -78,13 +78,16 @@ export class ListEntryModalComponent {
 
 	validateDate(start: boolean) {
 		const dateToCheck = start ? this.listEntryForm.start_date : this.listEntryForm.end_date;
-		if (dateToCheck === undefined || dateToCheck === "") {
-			return;
-		}
 
-		if (isNaN(new Date(dateToCheck).getTime())) {
+		if (dateToCheck && isNaN(new Date(dateToCheck).getTime())) {
 			this.toastService.sendError("Unable to parse date input. One or more date values exceed date range.");
 			return;
+		} else if (dateToCheck) {
+			if (start) {
+				this.listEntryForm.start_date = this.utilities.APIDateFormatter(new Date(dateToCheck));
+			} else {
+				this.listEntryForm.end_date = this.utilities.APIDateFormatter(new Date(dateToCheck));
+			}
 		}
 	}
 
@@ -140,6 +143,13 @@ export class ListEntryModalComponent {
 		if (!Object.values(this.activityStatus).includes(this.listEntryForm.active_status)) {
 			this.toastService.sendError("Activity status is required to add a list entry.");
 			return;
+		}
+
+		if (this.listEntryForm.start_date === "") {
+			this.listEntryForm.start_date = null;
+		}
+		if (this.listEntryForm.end_date === "") {
+			this.listEntryForm.end_date = null;
 		}
 
 		if (this.isUpdate) {
