@@ -32,6 +32,11 @@
 								"input": "src/app/shared/calendar-styles.css",
 								"bundleName": "calendar-styles",
 								"inject": false
+							},
+							{
+								"input": "src/app/shared/authentication-pages.css",
+								"bundleName": "authentication-pages",
+								"inject": false
 							}
 						],
 						"scripts": [],

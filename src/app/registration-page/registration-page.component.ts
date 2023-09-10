@@ -10,7 +10,7 @@ import { ToastService } from "../services/toast.service";
 @Component({
 	selector: "registration-page",
 	templateUrl: "./registration-page.component.html",
-	styleUrls: ["./registration-page.component.css"]
+	styleUrls: ["../shared/authentication-pages.css"]
 })
 export class RegistrationPageComponent {
 	registrationForm = new RegistrationData();
@@ -51,7 +51,6 @@ export class RegistrationPageComponent {
 		await new Promise((resolve) => setTimeout(resolve, 1000));
 		if (oldInput === this.registrationForm.password) {
 			this.usernameMatch = this.registrationForm.password === this.registrationForm.username;
-			return;
 		}
 	}
 
@@ -60,7 +59,6 @@ export class RegistrationPageComponent {
 		await new Promise((resolve) => setTimeout(resolve, 1000));
 		if (oldInput === this.registrationForm.password) {
 			this.confirmedPassword = this.registrationForm.password === this.registrationForm.confirmed;
-			return;
 		}
 	}
 
