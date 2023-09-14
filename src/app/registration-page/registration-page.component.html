@@ -5,7 +5,7 @@
             <div class="form-group group-margin">
                 <label for="username">Username<span class="required-mark">*</span></label>
                 <input type="text" class="form-control" id="username" name="username" 
-                    required pattern="^\S+$" [(ngModel)]="registrationForm.username" #username="ngModel">
+                    required [pattern]="usernamePattern" [(ngModel)]="registrationForm.username" #username="ngModel">
                 <div [hidden]="username.valid || username.pristine"
                     class="alert alert-danger form-alert">
                  Username is required and must not contain any whitespace.
@@ -14,8 +14,8 @@
             <div class="form-group group-margin">
                 <label for="password">Password<span class="required-mark">*</span></label>
                 <input type="password" class="form-control" id="password" aria-describedby="passwordhelp" name="password" #password="ngModel"
-                    required pattern="(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}" [(ngModel)]="registrationForm.password" (input)="checkPasswordUsernameMatch()">
-                <small id="passwordhelp" class="form-text text-muted">Your password must be at least 8 characters long with one number and one special character.</small>
+                    required [pattern]="passwordPattern" [(ngModel)]="registrationForm.password" (input)="checkPasswordUsernameMatch()">
+                <small id="passwordhelp" class="form-text text-muted">{{passwordHelp}}</small>
                 <div [hidden]="(password.valid && !usernameMatch) || password.pristine"
                     class="alert alert-danger form-alert">
                  Password does not match guidelines or is the same as the given username.
@@ -24,15 +24,15 @@
             <div class="form-group group-margin">
                 <label for="confirm">Confirm Password<span class="required-mark">*</span></label>
                 <input type="password" class="form-control" id="confirm" name="confirm" required #confirmed="ngModel"
-                    [(ngModel)]="registrationForm.confirmed" (input)="checkPasswordConfirmation()">
-                <div [hidden]="confirmedPassword || confirmed.pristine"
+                    [(ngModel)]="registrationForm.confirmed">
+                <div [hidden]="confirmed.pristine || registrationForm.password === registrationForm.confirmed"
                     class="alert alert-danger form-alert">
                  Password confirmation does not match.
                </div>
             </div>
             <div class="form-group group-margin">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" aria-describedby="emailhelp" name="email" pattern="^\S{1,}@\S{1,}.\S{1,}$"
+                <input type="email" class="form-control" id="email" aria-describedby="emailhelp" name="email" [pattern]="emailPattern"
                     [(ngModel)]="registrationForm.email" #email="ngModel">
                 <small id="emailhelp" class="form-text text-muted">Note that while an email address is not required, it is used for account 
                     verification and support assistance.</small>
@@ -65,7 +65,6 @@
                 <label for="acceptpolicy" class="form-check-label"> By checking this box, you accept Katsurin Studios' <a href="/privacy">privacy
                     policy</a>.</label>
             </div>
-            <br>
             <div class="submission-box">
                 <button class="btn myneworm-btn btn-lg" type="submit" [disabled]="registerForm.invalid || !registrationForm.acceptPolicy">Register</button>
                 <p class="form-text text-muted">Already have an account? <a href="/login">Login now</a></p>

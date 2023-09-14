@@ -47,15 +47,14 @@ a.auth-button {
 }
 
 input:focus {
-    border-color: var(--bs-border-color);
-    box-shadow: none;
+    border-color: transparent !important;
+    box-shadow: none !important;
 }
 
 .auth-label {
     font-size: larger;
     text-align: left;
     width: 100%;
-    display: block;
     margin-top: 20px;
 }
 
@@ -75,6 +74,7 @@ input:focus {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 10px;
 }
 
 .required-mark {

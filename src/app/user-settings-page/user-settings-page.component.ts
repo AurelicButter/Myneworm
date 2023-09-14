@@ -10,6 +10,7 @@ import { ToastService } from "../services/toast.service";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { DeleteConfirmationComponent } from "./delete-confirmation/delete-confirmation.component";
 import { AuthenticationService } from "../services/authentication/authentication.service";
+import { email, password, username } from "../models/validationPatterns";
 
 @Component({
 	selector: "user-settings-page",
@@ -26,6 +27,10 @@ export class UserSettingsPageComponent implements OnInit {
 	avatarForm = new FormData();
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	@ViewChild("profileForm") profileForm: any;
+
+	usernamePattern = username;
+	passwordPattern = password;
+	emailPattern = email;
 
 	constructor(
 		private route: ActivatedRoute,
