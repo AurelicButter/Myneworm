@@ -1,0 +1,101 @@
+.auth-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.auth-form, .flex-form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.auth-form, .auth-content {
+    width: clamp(250px, 80%, 900px);
+}
+
+.auth-form-div {
+    width: clamp(220px, 50%, 400px);
+}
+
+.auth-button-horizontal {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.auth-button-horizontal > .auth-button {
+    margin: 10px;
+}
+
+.auth-button {
+    height: 50px;
+    width: 220px;
+    border: 0;
+    margin-top: 10px;
+}
+
+a.auth-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-button:hover {
+    cursor: pointer;
+}
+
+input:focus {
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.auth-label {
+    font-size: larger;
+    text-align: left;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.wrap-single-column {
+    justify-content: space-around;
+}
+
+.flex-form > h2 {
+    text-align: center;
+}
+
+.group-margin {
+    margin-top: 20px;
+}
+
+.submission-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.required-mark {
+    color: red;
+}
+
+.form-alert {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    margin-top: 6px; 
+}
+
+@media (max-width: 768px) {
+    [class*="col-"] {
+        width: 80%;
+    }
+}
+
+@media (max-width: 425px) {
+    [class*="col-"] {
+        width: 100%;
+    }
+}

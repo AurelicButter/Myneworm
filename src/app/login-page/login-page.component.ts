@@ -8,7 +8,7 @@ import { ToastService } from "../services/toast.service";
 @Component({
 	selector: "login-page",
 	templateUrl: "./login-page.component.html",
-	styleUrls: ["./login-page.component.css"]
+	styleUrls: ["../shared/authentication-pages.css"]
 })
 export class LoginPageComponent {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
