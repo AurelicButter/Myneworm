@@ -154,6 +154,10 @@ export class MynewormAPIService {
 	}
 
 	updateAccount(accountInfo: AccountUpdateData) {
+		if (accountInfo.password) {
+			accountInfo.password = Buffer.from(accountInfo.password).toString("base64");
+		}
+
 		return this.http.patch(`${environment.API_ADDRESS}/user`, { user: accountInfo });
 	}
 
