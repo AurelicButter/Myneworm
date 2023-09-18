@@ -107,6 +107,16 @@
                     tabindex="-1">Request Data</button>
             </div>
             <br>
+            <h3>Clear All Sessions</h3>
+            <div class="settings-subdiv">
+                <p style="color: red">This will log you out of your current session.</p>
+                <p>
+                    By clicking this button, all authenticated sessions will be invalidated and will need to be relogged
+                    into.
+                </p>
+                <button class="btn btn-lg myneworm-btn settings-button" (click)="clearSessions()">Clear Sessions</button>
+            </div>
+            <br>
             <h3>Delete Your Account</h3>
             <div class="settings-subdiv">
                 <p style="color: red;">This will permanently delete your account!</p>

@@ -6,7 +6,7 @@
 /* eslint-disable no-useless-escape */
 
 export const password = /(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}/;
-export const username = /^\S+$/;
+export const username = /^\w+$/;
 export const email = /^\S{1,}@\S{1,}\.\S{1,}$/;
 
 export const passwordHelp =

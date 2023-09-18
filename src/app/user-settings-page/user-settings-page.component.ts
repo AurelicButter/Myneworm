@@ -72,11 +72,7 @@ export class UserSettingsPageComponent implements OnInit {
 			});
 
 		this.route.params.subscribe((data) => {
-			if (data.page) {
-				this.currPage = data.page.toUpperCase();
-			} else {
-				this.currPage = "PROFILE";
-			}
+			this.currPage = data.page ? data.page.toUpperCase() : "PROFILE";
 		});
 	}
 
@@ -122,6 +118,25 @@ export class UserSettingsPageComponent implements OnInit {
 				});
 			}
 		});
+	}
+
+	clearSessions() {
+		this.authService
+			.clearSessions()
+			.pipe(
+				catchError((err: any) => {
+					this.toastService.sendError(err.error.errors);
+					return of(null);
+				})
+			)
+			.subscribe((data: any | null) => {
+				if (data === null) {
+					return;
+				}
+
+				this.toastService.sendSuccess("Sessions Cleared.");
+				this.router.navigate(["/"]);
+			});
 	}
 
 	submitProfile() {
