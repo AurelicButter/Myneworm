@@ -111,6 +111,11 @@ export class AuthenticationService {
 			);
 	}
 
+	clearSessions() {
+		this.cookieService.deleteUser();
+		return this.http.post(`${environment.API_ADDRESS}/auth/clear`, {});
+	}
+
 	logout() {
 		return this.http
 			.post(
