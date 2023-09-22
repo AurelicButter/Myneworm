@@ -29,6 +29,11 @@
         <div class="list-filter-div">
             <h4>Ownership</h4>
             <div class="form-check">
+                <input type="checkbox" id="ordered" value="ordered" class="form-check-input" 
+                    [checked]='this.ownershipFilter.includes("ordered")' (click)="addOwnership('ordered')">
+                <label for="ordered" class="form-check-label">Ordered</label>
+            </div>
+            <div class="form-check">
                 <input type="checkbox" id="owned" value="owned" class="form-check-input" 
                     [checked]='this.ownershipFilter.includes("owned")' (click)="addOwnership('owned')">
                 <label for="owned" class="form-check-label">Owned</label>
@@ -78,15 +83,15 @@
     </aside>
     <main class="col-9" *ngIf="isLoading === false">
         <table-display *ngIf="appliedFilter === 0 || (filter.reading && appliedFilter > 0)" [triggerListUpdate]="triggerListUpdate"
-            [_allEntries]="readingSource" tableName="Reading" [ownershipFilter]="ownershipFilter" [booktypeFilter]="booktypeFilter" [isAuthUser]="isAuthUser"></table-display>
+            [listEntries]="readingSource" tableName="Reading" [ownershipFilter]="ownershipFilter" [booktypeFilter]="booktypeFilter" [isAuthUser]="isAuthUser"></table-display>
         <table-display *ngIf="appliedFilter === 0 || (filter.completed && appliedFilter > 0)" [triggerListUpdate]="triggerListUpdate"
-            [_allEntries]="completedSource" tableName="Completed" [ownershipFilter]="ownershipFilter" [booktypeFilter]="booktypeFilter" [isAuthUser]="isAuthUser"></table-display>
+            [listEntries]="completedSource" tableName="Completed" [ownershipFilter]="ownershipFilter" [booktypeFilter]="booktypeFilter" [isAuthUser]="isAuthUser"></table-display>
         <table-display *ngIf="appliedFilter === 0 || (filter.paused && appliedFilter > 0)" [triggerListUpdate]="triggerListUpdate"
-            [_allEntries]="pausedSource" tableName="Paused" [ownershipFilter]="ownershipFilter" [booktypeFilter]="booktypeFilter" [isAuthUser]="isAuthUser"></table-display>
+            [listEntries]="pausedSource" tableName="Paused" [ownershipFilter]="ownershipFilter" [booktypeFilter]="booktypeFilter" [isAuthUser]="isAuthUser"></table-display>
         <table-display *ngIf="appliedFilter === 0 || (filter.dropped && appliedFilter > 0)" [triggerListUpdate]="triggerListUpdate"
-            [_allEntries]="droppedSource" tableName="Dropped" [ownershipFilter]="ownershipFilter" [booktypeFilter]="booktypeFilter" [isAuthUser]="isAuthUser"></table-display>
+            [listEntries]="droppedSource" tableName="Dropped" [ownershipFilter]="ownershipFilter" [booktypeFilter]="booktypeFilter" [isAuthUser]="isAuthUser"></table-display>
         <table-display *ngIf="appliedFilter === 0 || (filter.planning && appliedFilter > 0)" [triggerListUpdate]="triggerListUpdate"
-            [_allEntries]="planningSource" tableName="Planning" [ownershipFilter]="ownershipFilter" [booktypeFilter]="booktypeFilter" [isAuthUser]="isAuthUser"></table-display>
+            [listEntries]="planningSource" tableName="Planning" [ownershipFilter]="ownershipFilter" [booktypeFilter]="booktypeFilter" [isAuthUser]="isAuthUser"></table-display>
         <div *ngIf="hasEntries === false">
             <p><b>User does not have any books in their list.</b></p>
             <a class="aside-link" href="/user/{{listUser}}">Return to {{listUser}}'s profile</a>

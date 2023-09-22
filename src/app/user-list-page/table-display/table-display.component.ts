@@ -1,5 +1,5 @@
-import { Component, Input, OnChanges, OnInit } from "@angular/core";
-import { Sort } from "@angular/material/sort";
+import { Component, Input, OnChanges, OnInit, ViewChild } from "@angular/core";
+import { MatSort, Sort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { ListEntry } from "src/app/models/ListEntry";
 import { MynewormAPIService } from "src/app/services/myneworm-api.service";
@@ -15,15 +15,15 @@ import { ListEntryModalComponent } from "src/app/shared/list-entry-modal/list-en
 })
 export class TableDisplayComponent implements OnInit, OnChanges {
 	displayedColumns = ["cover", "title", "score", "reread", "owner", "bookType", "more"];
-	@Input() _allEntries: MatTableDataSource<ListEntry>;
+	@Input() listEntries: MatTableDataSource<ListEntry>;
 	@Input() tableName: string;
 	@Input() ownershipFilter: string[];
 	@Input() booktypeFilter: string[];
 	@Input() triggerListUpdate: boolean;
 	@Input() isAuthUser: boolean;
+	@ViewChild(MatSort) sort: MatSort;
 	formatOwnerStatus = formatOwnerStatus;
 	formatDateString = formatDateString;
-	public listEntries: ListEntry[];
 
 	constructor(
 		private service: MynewormAPIService,
@@ -31,57 +31,73 @@ export class TableDisplayComponent implements OnInit, OnChanges {
 	) {}
 
 	ngOnInit() {
-		this.listEntries = this._allEntries.data;
+		this.listEntries.filterPredicate = this.filterData();
+		this.listEntries.sortData = this.sortData();
+	}
+
+	ngAfterViewInit() {
+		this.listEntries.sort = this.sort;
 	}
 
 	ngOnChanges() {
-		if (this.ownershipFilter.length === 0 && this.booktypeFilter.length === 0) {
-			this.listEntries = this._allEntries.data;
+		if (this.listEntries === undefined) {
+			// Prevent change load before entries initialized.
 			return;
 		}
 
-		let data = this._allEntries.data;
-
-		if (this.ownershipFilter.length > 0) {
-			data = data.filter((item) => this.ownershipFilter.includes(item.owner_status));
+		if (this.ownershipFilter.length === 0 && this.booktypeFilter.length === 0) {
+			this.listEntries.filter = "";
+			return;
 		}
 
-		if (this.booktypeFilter.length > 0) {
-			data = data.filter((item) => this.booktypeFilter.includes(item.book_type_name));
-		}
-
-		this.listEntries = data;
-	}
-
-	getThumbnail(isbn: string) {
-		return this.service.getCover(isbn, "thumbnail");
+		this.listEntries.filter = "true";
 	}
 
 	getPreview(isbn: string) {
 		return this.service.getCover(isbn, "small");
 	}
 
-	sortData(sort: Sort) {
-		if (!sort.active || sort.direction === "") {
-			this.listEntries = this._allEntries.data;
-			return;
-		}
-
-		const data = this.listEntries;
-
-		this.listEntries = data.sort((a, b) => {
-			const isAsc = sort.direction === "asc";
-			switch (sort.active) {
-				case "title":
-					return compare(a.title, b.title, isAsc);
-				case "score":
-					return compare(a.score, b.score, isAsc);
-				case "reread":
-					return compare(a.reread, b.reread, isAsc);
-				default:
-					return 0;
+	filterData() {
+		return (data: ListEntry, filter: any) => {
+			if (!filter) {
+				return true;
 			}
-		});
+
+			let ownerCheck = true;
+			let booktypeCheck = true;
+
+			if (this.ownershipFilter.length > 0) {
+				ownerCheck = this.ownershipFilter.includes(data.owner_status);
+			}
+
+			if (this.booktypeFilter.length > 0) {
+				booktypeCheck = this.booktypeFilter.includes(data.book_type_name);
+			}
+
+			return ownerCheck === true && ownerCheck === booktypeCheck;
+		};
+	}
+
+	sortData() {
+		return (data: ListEntry[], sort: Sort) => {
+			if (!sort.active || sort.direction === "") {
+				return data;
+			}
+
+			return data.sort((a, b) => {
+				const isAsc = sort.direction === "asc";
+				switch (sort.active) {
+					case "title":
+						return compare(a.title, b.title, isAsc);
+					case "score":
+						return compare(a.score, b.score, isAsc);
+					case "reread":
+						return compare(a.reread, b.reread, isAsc);
+					default:
+						return 0;
+				}
+			});
+		};
 	}
 
 	expandedDetails(element: ListEntry) {
@@ -108,5 +124,11 @@ export class TableDisplayComponent implements OnInit, OnChanges {
 }
 
 function compare(a: number | string, b: number | string, isAsc: boolean) {
+	if (a === null) {
+		return 1 * (isAsc ? 1 : -1);
+	}
+	if (b === null) {
+		return -1 * (isAsc ? 1 : -1);
+	}
 	return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

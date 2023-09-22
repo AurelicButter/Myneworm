@@ -10,5 +10,6 @@ export const OwnershipStatus = {
 	Wanted: "wanting",
 	Loaned: "loaned",
 	"Previously Owned": "previous_own",
-	Owned: "owned"
+	Owned: "owned",
+	Ordered: "ordered"
 };
