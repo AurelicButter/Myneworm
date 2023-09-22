@@ -1,6 +1,7 @@
 <div *ngIf="listEntries.filteredData.length > 0">
     <h3>{{tableName}}</h3>
-    <table mat-table matSort [dataSource]="listEntries" multiTemplateDataRows matSort>
+    <table mat-table matSort [dataSource]="listEntries" multiTemplateDataRows matSort
+        matSortActive="title" matSortDirection="asc" matSortDisableClear>
         <ng-container matColumnDef="cover">
             <th mat-header-cell *matHeaderCellDef scope="col" [attr.role]="null"></th>
             <td mat-cell *matCellDef="let element" class="row-padding col-1">
