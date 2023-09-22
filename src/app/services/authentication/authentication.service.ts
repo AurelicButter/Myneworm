@@ -93,6 +93,29 @@ export class AuthenticationService {
 			);
 	}
 
+	resetPasswordRequest(email: string) {
+		return this.http.post(`${environment.API_ADDRESS}/auth/reset`, { user: email }).pipe(
+			map(() => true),
+			catchError(() => of(false))
+		);
+	}
+
+	resetPassword(resetID: string, password: string) {
+		return this.http
+			.post(`${environment.API_ADDRESS}/auth/reset/${resetID}`, {
+				user: Buffer.from(password).toString("base64")
+			})
+			.pipe(
+				map(() => true),
+				catchError(() => of(false))
+			);
+	}
+
+	clearSessions() {
+		this.cookieService.deleteUser();
+		return this.http.post(`${environment.API_ADDRESS}/auth/clear`, {});
+	}
+
 	logout() {
 		return this.http
 			.post(

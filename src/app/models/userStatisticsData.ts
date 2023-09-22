@@ -9,6 +9,7 @@ export interface UserStatisticsProfile {
 	owner_loaned: number;
 	owner_previous: number;
 	owner_owned: number;
+	owner_ordered: number;
 	type_paperback: number;
 	type_ebook: number;
 	type_hardcover: number;

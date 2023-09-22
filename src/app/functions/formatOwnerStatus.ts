@@ -14,5 +14,8 @@ export function formatOwnerStatus(status: string): string {
 	if (status === "wanting") {
 		return "Wanted";
 	}
+	if (status === "ordered") {
+		return "Ordered";
+	}
 	return "Failed to translate status";
 }

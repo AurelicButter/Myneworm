@@ -10,6 +10,7 @@ import { ToastService } from "../services/toast.service";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { DeleteConfirmationComponent } from "./delete-confirmation/delete-confirmation.component";
 import { AuthenticationService } from "../services/authentication/authentication.service";
+import { email, password, username } from "../models/validationPatterns";
 
 @Component({
 	selector: "user-settings-page",
@@ -26,6 +27,10 @@ export class UserSettingsPageComponent implements OnInit {
 	avatarForm = new FormData();
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	@ViewChild("profileForm") profileForm: any;
+
+	usernamePattern = username;
+	passwordPattern = password;
+	emailPattern = email;
 
 	constructor(
 		private route: ActivatedRoute,
@@ -67,11 +72,7 @@ export class UserSettingsPageComponent implements OnInit {
 			});
 
 		this.route.params.subscribe((data) => {
-			if (data.page) {
-				this.currPage = data.page.toUpperCase();
-			} else {
-				this.currPage = "PROFILE";
-			}
+			this.currPage = data.page ? data.page.toUpperCase() : "PROFILE";
 		});
 	}
 
@@ -117,6 +118,25 @@ export class UserSettingsPageComponent implements OnInit {
 				});
 			}
 		});
+	}
+
+	clearSessions() {
+		this.authService
+			.clearSessions()
+			.pipe(
+				catchError((err: any) => {
+					this.toastService.sendError(err.error.errors);
+					return of(null);
+				})
+			)
+			.subscribe((data: any | null) => {
+				if (data === null) {
+					return;
+				}
+
+				this.toastService.sendSuccess("Sessions Cleared.");
+				this.router.navigate(["/"]);
+			});
 	}
 
 	submitProfile() {
