@@ -24,6 +24,10 @@ tr {
     color: #1F2232;
 }
 
+.entry-row {
+    height: 87px;
+}
+
 ::ng-deep .mat-sort-header-container {
     justify-content: center;
 }

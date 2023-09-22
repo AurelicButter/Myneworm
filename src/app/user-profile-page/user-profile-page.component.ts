@@ -26,7 +26,8 @@ export class UserProfilePageComponent {
 		owned: 0,
 		previous_own: 0,
 		loaned: 0,
-		wanted: 0
+		wanted: 0,
+		ordered: 0
 	};
 	bookTypeCount = {
 		paperback: 0,
@@ -79,6 +80,7 @@ export class UserProfilePageComponent {
 					this.ownershipCount.loaned = data.owner_loaned;
 					this.ownershipCount.previous_own = data.owner_previous;
 					this.ownershipCount.wanted = data.owner_wanting;
+					this.ownershipCount.ordered = data.owner_ordered;
 
 					this.bookTypeCount.paperback = data.type_paperback;
 					this.bookTypeCount.ebook = data.type_ebook;

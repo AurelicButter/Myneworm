@@ -10,7 +10,7 @@
     overflow: hidden;
 }
 
-.reading, .ebook {
+.reading, .ordered, .ebook {
     background-color: blue;
 }
 

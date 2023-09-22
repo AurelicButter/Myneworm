@@ -80,33 +80,24 @@ export class UserListPageComponent {
 	}
 
 	compileLists(listEntries: ListEntry[]) {
-		const lists: { [key: string]: ListEntry[] } = {};
-
 		for (const entry of listEntries) {
 			entry["isExpanded"] = false;
-			if (Object.prototype.hasOwnProperty.call(lists, entry.active_status)) {
-				lists[entry.active_status].push(entry);
-			} else {
-				lists[entry.active_status] = [entry];
-			}
-		}
 
-		for (const key of Object.keys(lists)) {
-			switch (key) {
+			switch (entry.active_status) {
 				case "reading":
-					this.readingSource.data = lists[key];
+					this.readingSource.data.push(entry);
 					break;
 				case "completed":
-					this.completedSource.data = lists[key];
+					this.completedSource.data.push(entry);
 					break;
 				case "paused":
-					this.pausedSource.data = lists[key];
+					this.pausedSource.data.push(entry);
 					break;
 				case "dropped":
-					this.droppedSource.data = lists[key];
+					this.droppedSource.data.push(entry);
 					break;
 				case "planning":
-					this.planningSource.data = lists[key];
+					this.planningSource.data.push(entry);
 					break;
 				default:
 					throw new Error("Type not in switch for table data");
