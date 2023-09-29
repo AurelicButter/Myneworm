@@ -15,7 +15,6 @@ import { UserSettingsPageComponent } from "./user-settings-page/user-settings-pa
 import { UserListPageComponent } from "./user-list-page/user-list-page.component";
 import { UserProfilePageComponent } from "./user-profile-page/user-profile-page.component";
 import { RegistrationPageComponent } from "./registration-page/registration-page.component";
-import { ResetPasswordComponent } from "./pages/reset-password/reset-password.component";
 
 const routes: Routes = [
 	{ path: "", component: HomePageComponent },
@@ -45,7 +44,6 @@ const routes: Routes = [
 			import("./database-guidelines/database-guidelines.component").then((m) => m.DatabaseGuidelinesComponent)
 	},
 	{ path: "login", component: LoginPageComponent },
-	{ path: "login/authorized", component: LoginPageComponent, canActivate: [AuthenticationGuard] },
 	{ path: "register", component: RegistrationPageComponent },
 	{
 		path: "reset",
@@ -60,14 +58,15 @@ const routes: Routes = [
 				(m) => m.ResetPasswordLinkComponent
 			)
 	},
-
-	// Reset ID must be 64 characters long.
-	// https://connect.cineplex.com/Account/Authorization/PasswordReset/b285c3df8152ac739a281c47bfed0439f0433ad0b20557802d7bb4a27cdcbfd2?language=1
 	{ path: "settings", pathMatch: "full", component: UserSettingsPageComponent, canActivate: [AuthenticationGuard] },
 	{ path: "settings/:page", component: UserSettingsPageComponent, canActivate: [AuthenticationGuard] },
 	{ path: "user/:username", component: UserProfilePageComponent },
 	{ path: "user/:username/profile", component: UserProfilePageComponent },
 	{ path: "user/:username/lists", component: UserListPageComponent },
+	{
+		path: "admin",
+		loadChildren: () => import("./admin-pages/admin.module").then((m) => m.AdminModule)
+	},
 	{ path: "**", component: MissingPageComponent }
 ];
 
