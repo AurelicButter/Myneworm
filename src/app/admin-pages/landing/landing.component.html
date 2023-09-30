@@ -1,0 +1,13 @@
+<div class="row">
+    <aside class="col-3 admin-side-nav">
+        <a routerLink="./home">Dashboard</a>
+        <a routerLink="./data-correction" aria-disabled="true" tabindex="-1">Data Corrections</a>
+        <a routerLink="./user-management" aria-disabled="true" tabindex="-1">User Management</a>
+        <a routerLink="./user-report" aria-disabled="true" tabindex="-1">User Reports</a>
+    </aside>
+    <main class="col-9">
+        <div class="admin-content">
+            <router-outlet></router-outlet>
+        </div>        
+    </main>
+</div>
