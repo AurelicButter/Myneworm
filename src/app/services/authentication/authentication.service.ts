@@ -49,6 +49,28 @@ export class AuthenticationService {
 			);
 	}
 
+	validateCookies() {
+		return this.http
+			.post(
+				`${environment.API_ADDRESS}/auth/validateCookies`,
+				{},
+				{
+					withCredentials: true,
+					observe: "response"
+				}
+			)
+			.pipe(
+				map((data) => {
+					this.cookieService.updateUser(data.body);
+					return true;
+				}),
+				catchError(() => {
+					this.cookieService.deleteUser();
+					return of(false);
+				})
+			);
+	}
+
 	isLoggedIn() {
 		return this.http
 			.post(

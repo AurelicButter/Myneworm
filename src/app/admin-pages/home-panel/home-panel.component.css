@@ -1,0 +1,36 @@
+.statistic-div {
+    margin-top: 40px;
+}
+
+.statistic-div > h4 {
+    border-bottom: 2px #1f2232 solid;
+}
+
+.statistic-overview {
+    display: flex;
+    justify-content: space-evenly;
+    color: #ECEBF3;
+}
+
+.statistic-overview > .statistic-square:nth-child(1) {
+    background-color: #0D98BA;
+}
+.statistic-overview > .statistic-square:nth-child(2) {
+    background-color: #F02D3A;
+}
+
+.statistic-square {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 10px;
+    justify-content: space-around;
+    height: 120px;
+    width: 160px;
+    border-radius: 6px;
+}
+
+.statistic-square > p {
+    margin-bottom: 0;
+    font-style: italic;
+}
