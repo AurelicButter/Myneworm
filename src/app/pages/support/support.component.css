@@ -1,0 +1,9 @@
+.support-component {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.support-notice {
+    width: 700px;
+}

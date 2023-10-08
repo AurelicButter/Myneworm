@@ -25,6 +25,7 @@ export const FAQData = {
 			"While the J-Novel parts are English translated, they do not have ISBN numbers or a whole book. Thus don't meet the minimum requirements."
 		]
 	],
+	"Account Questions": [],
 	"Other Questions": [
 		[
 			"I found a bug or have an issue with the site!",
@@ -32,9 +33,10 @@ export const FAQData = {
 				"<a href='https://github.com/Butterstroke/Myneworm/issues/new/choose'>GitHub repository</a>" +
 				" or contact us via our support page."
 		],
+		["I want to delete my account. Where can I do that?"],
 		[
 			"How can I contact you?",
-			"You can find all of the contact information on our support page <a href='/contact'>here</a>."
+			"If you have further questions or need support, please reach out to <a href='mailto:myneworm@katsurin.com'>myneworm@katsurin.com</a>, explaining your issue."
 		]
 	]
 };
