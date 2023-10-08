@@ -7,7 +7,6 @@ import { ImprintIndexComponent } from "./imprint-index/imprint-index.component";
 import { MissingPageComponent } from "./missing-page/missing-page.component";
 import { SeriesPageComponent } from "./series-page/series-page.component";
 import { DataCorrectionFormComponent } from "./data-correction-form/data-correction-form.component";
-import { SupportPageComponent } from "./pages/support/support.component";
 import { SearchPageComponent } from "./search-page/search-page.component";
 import { LoginPageComponent } from "./login-page/login-page.component";
 import { AuthenticationGuard } from "./services/authentication/authentication.guard";
@@ -30,7 +29,7 @@ const routes: Routes = [
 	},
 	{
 		path: "faq",
-		loadComponent: () => import("./faq-page/faq-page.component").then((m) => m.FaqPageComponent)
+		loadComponent: () => import("./pages/faq/faq.component").then((m) => m.FaqComponent)
 	},
 	{ path: "correction", component: DataCorrectionFormComponent },
 	{
