@@ -10,6 +10,7 @@ import { LocalCookiesService } from "../services/authentication/local-cookies.se
 })
 export class UserNavMenuComponent {
 	user: any;
+	isModerator = false;
 
 	constructor(
 		private router: Router,
@@ -18,6 +19,7 @@ export class UserNavMenuComponent {
 	) {
 		this.cookieService.userEvent.subscribe((value) => {
 			this.user = value;
+			this.isModerator = !this.user.role_id.includes("user");
 		});
 	}
 

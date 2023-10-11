@@ -3,6 +3,7 @@
     <div class="user-menu">
         <a class="btn-link btn-div" href="/user/{{user.username}}">Profile</a>
         <a class="btn-link btn-div" href="/user/{{user.username}}/lists">My List</a>
+        <a *ngIf='isModerator' class="btn-link btn-div" href="/admin">Admin Portal</a>
         <a class="btn-link btn-div" href="/settings">Settings</a>
         <a class="myneworm-btn btn-link btn-div" type="button" (click)="logout()">Logout</a>
     </div>

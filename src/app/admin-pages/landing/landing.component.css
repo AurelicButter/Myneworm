@@ -1,0 +1,32 @@
+.admin-side-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.admin-side-nav > h2 {
+    font-size: xx-large;
+}
+
+.admin-side-nav > a {
+    display: flex;
+    text-decoration: none;
+    color: #1F2232;
+    width: 80%;
+    justify-content: center;
+    font-size: large;
+    border-bottom: 1px #1f2232 solid;
+    padding: 12px 0px;
+    margin: 10px 0px;
+}
+
+.admin-side-nav > a:hover {
+    color: #ECEBF3;
+    background-color: #0D98BA;
+    border-radius: 6px;
+}
+
+.admin-content {
+    margin: 20px;
+    color: #1f2232;
+}

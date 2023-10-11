@@ -7,7 +7,6 @@ import { ImprintIndexComponent } from "./imprint-index/imprint-index.component";
 import { MissingPageComponent } from "./missing-page/missing-page.component";
 import { SeriesPageComponent } from "./series-page/series-page.component";
 import { DataCorrectionFormComponent } from "./data-correction-form/data-correction-form.component";
-import { ContactPageComponent } from "./contact-page/contact-page.component";
 import { SearchPageComponent } from "./search-page/search-page.component";
 import { LoginPageComponent } from "./login-page/login-page.component";
 import { AuthenticationGuard } from "./services/authentication/authentication.guard";
@@ -15,7 +14,6 @@ import { UserSettingsPageComponent } from "./user-settings-page/user-settings-pa
 import { UserListPageComponent } from "./user-list-page/user-list-page.component";
 import { UserProfilePageComponent } from "./user-profile-page/user-profile-page.component";
 import { RegistrationPageComponent } from "./registration-page/registration-page.component";
-import { ResetPasswordComponent } from "./pages/reset-password/reset-password.component";
 
 const routes: Routes = [
 	{ path: "", component: HomePageComponent },
@@ -31,10 +29,13 @@ const routes: Routes = [
 	},
 	{
 		path: "faq",
-		loadComponent: () => import("./faq-page/faq-page.component").then((m) => m.FaqPageComponent)
+		loadComponent: () => import("./pages/faq/faq.component").then((m) => m.FaqComponent)
 	},
 	{ path: "correction", component: DataCorrectionFormComponent },
-	{ path: "contact", component: ContactPageComponent },
+	{
+		path: "support",
+		loadComponent: () => import("./pages/support/support.component").then((m) => m.SupportPageComponent)
+	},
 	{
 		path: "privacy",
 		loadComponent: () => import("./privacy-page/privacy-page.component").then((m) => m.PrivacyPageComponent)
@@ -45,7 +46,6 @@ const routes: Routes = [
 			import("./database-guidelines/database-guidelines.component").then((m) => m.DatabaseGuidelinesComponent)
 	},
 	{ path: "login", component: LoginPageComponent },
-	{ path: "login/authorized", component: LoginPageComponent, canActivate: [AuthenticationGuard] },
 	{ path: "register", component: RegistrationPageComponent },
 	{
 		path: "reset",
@@ -60,14 +60,15 @@ const routes: Routes = [
 				(m) => m.ResetPasswordLinkComponent
 			)
 	},
-
-	// Reset ID must be 64 characters long.
-	// https://connect.cineplex.com/Account/Authorization/PasswordReset/b285c3df8152ac739a281c47bfed0439f0433ad0b20557802d7bb4a27cdcbfd2?language=1
 	{ path: "settings", pathMatch: "full", component: UserSettingsPageComponent, canActivate: [AuthenticationGuard] },
 	{ path: "settings/:page", component: UserSettingsPageComponent, canActivate: [AuthenticationGuard] },
 	{ path: "user/:username", component: UserProfilePageComponent },
 	{ path: "user/:username/profile", component: UserProfilePageComponent },
 	{ path: "user/:username/lists", component: UserListPageComponent },
+	{
+		path: "admin",
+		loadChildren: () => import("./admin-pages/admin.module").then((m) => m.AdminModule)
+	},
 	{ path: "**", component: MissingPageComponent }
 ];
 

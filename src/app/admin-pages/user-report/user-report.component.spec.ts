@@ -1,19 +1,17 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { FaqPageComponent } from "./faq-page.component";
+import { UserReportComponent } from "./user-report.component";
 
-describe("FaqPageComponent", () => {
-	let component: FaqPageComponent;
-	let fixture: ComponentFixture<FaqPageComponent>;
+describe("UserReportComponent", () => {
+	let component: UserReportComponent;
+	let fixture: ComponentFixture<UserReportComponent>;
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [FaqPageComponent]
+			declarations: [UserReportComponent]
 		}).compileComponents();
-	});
 
-	beforeEach(() => {
-		fixture = TestBed.createComponent(FaqPageComponent);
+		fixture = TestBed.createComponent(UserReportComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});
