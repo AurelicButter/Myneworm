@@ -34,7 +34,7 @@ export const FAQData = {
 		],
 		[
 			"How can I contact you?",
-			"You can find all of the contact information on our support page <a href='/contact'>here</a>."
+			"If you have further questions or need support, please reach out to <a href='mailto:myneworm@katsurin.com'>myneworm@katsurin.com</a>, explaining your issue."
 		]
 	]
 };

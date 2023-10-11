@@ -15,7 +15,6 @@ import { MissingPageComponent } from "./missing-page/missing-page.component";
 import { SeriesPageModule } from "./series-page/series-page.module";
 import { SearchBarModule } from "./search-bar/search-bar.module";
 import { DataCorrectionFormComponent } from "./data-correction-form/data-correction-form.component";
-import { ContactPageComponent } from "./contact-page/contact-page.component";
 import { MatDialogModule } from "@angular/material/dialog";
 import { SearchPageModule } from "./search-page/search-page.module";
 import { LoginPageComponent } from "./login-page/login-page.component";
@@ -34,7 +33,6 @@ import { DeleteConfirmationComponent } from "./user-settings-page/delete-confirm
 		AppComponent,
 		MissingPageComponent,
 		DataCorrectionFormComponent,
-		ContactPageComponent,
 		LoginPageComponent,
 		UserNavMenuComponent,
 		UserSettingsPageComponent,
