@@ -29,3 +29,7 @@
     padding-bottom: 14px;
     display: block;
 }
+
+.btn-div:hover {
+    color: #ECEBF3;
+}

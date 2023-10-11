@@ -4,6 +4,5 @@ export class RegistrationData {
 	confirmed: string;
 	email: string | null;
 	birthday: Date;
-	accessCode: string;
 	acceptPolicy = false;
 }

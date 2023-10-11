@@ -50,15 +50,6 @@
                 </div>
             </div>       
             <br>
-            <div class="form-group group-margin">
-                <label for="accesscode">User Beta Access Code<span class="required-mark">*</span></label>
-                <input type="text" class="form-control" id="accesscode" name="accesscode"
-                    required [(ngModel)]="registrationForm.accessCode" #accessCode="ngModel">
-                <div [hidden]="accessCode.valid || accessCode.pristine" class="alert alert-danger form-alert">
-                    You must provide a valid access code to register.
-                </div>
-            </div>
-            <br>
             <div class="form-check group-margin">
                 <input type="checkbox" class="form-check-input" id="acceptpolicy" name="acceptpolicy" value="true" 
                     required [(ngModel)]="registrationForm.acceptPolicy">
