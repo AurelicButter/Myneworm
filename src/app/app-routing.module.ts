@@ -14,6 +14,7 @@ import { UserSettingsPageComponent } from "./user-settings-page/user-settings-pa
 import { UserListPageComponent } from "./user-list-page/user-list-page.component";
 import { UserProfilePageComponent } from "./user-profile-page/user-profile-page.component";
 import { RegistrationPageComponent } from "./registration-page/registration-page.component";
+import { WishlistComponent } from "./user-pages/wishlist/wishlist.component";
 
 const routes: Routes = [
 	{ path: "", component: HomePageComponent },
@@ -65,6 +66,7 @@ const routes: Routes = [
 	{ path: "user/:username", component: UserProfilePageComponent },
 	{ path: "user/:username/profile", component: UserProfilePageComponent },
 	{ path: "user/:username/lists", component: UserListPageComponent },
+	{ path: "user/:username/wishlist", component: WishlistComponent },
 	{
 		path: "admin",
 		loadChildren: () => import("./admin-pages/admin.module").then((m) => m.AdminModule)

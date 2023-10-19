@@ -1,0 +1,9 @@
+.wishlist-header {
+    text-align: center;
+}
+
+.wishlist-content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}

@@ -145,6 +145,10 @@ export class MynewormAPIService {
 		return this.http.get<ListEntry[]>(`${environment.API_ADDRESS}/lists/${userID}`);
 	}
 
+	getUserListByOwnership(userID: string, ownership: string) {
+		return this.http.get<ListEntry[]>(`${environment.API_ADDRESS}/lists/byOwnership/${userID}/${ownership}`);
+	}
+
 	updateAvatar(avatar: FormData) {
 		return this.http.post(`${environment.API_ADDRESS}/asset/user`, avatar);
 	}

@@ -1,0 +1,13 @@
+<div>
+    <div class="wishlist-header">
+        <h2>{{user.username}}'s Wishlist</h2>
+        <p>INSERT USER'S MESSAGE HERE</p>
+    </div>
+    <div class="wishlist-content">
+        <div *ngFor="let book of wishlist; let i = index">
+            <div class="wishlist-item">
+                <wishlist-display [book]="book"></wishlist-display>
+            </div>
+        </div>
+    </div>
+</div>

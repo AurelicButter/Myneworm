@@ -1,0 +1,8 @@
+<div class="book-display">
+    <img src='{{getCover()}}' alt="book cover" class="display-cover">
+    <div class="display-text">
+        <span>{{book.title}}</span>
+        <span>({{book.book_type_name}})</span>
+        <span>Release Date: {{this.utilities.dateReadable(extendedDetails.release_date)}}</span>
+    </div>
+</div>

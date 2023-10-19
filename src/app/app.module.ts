@@ -27,6 +27,7 @@ import { StatisticDisplayComponent } from "./user-profile-page/statistic-display
 import { RegistrationPageComponent } from "./registration-page/registration-page.component";
 import { SharedModule } from "./shared/shared.module";
 import { DeleteConfirmationComponent } from "./user-settings-page/delete-confirmation/delete-confirmation.component";
+import { WishlistModule } from "./user-pages/wishlist/wishlist.module";
 
 @NgModule({
 	declarations: [
@@ -57,6 +58,7 @@ import { DeleteConfirmationComponent } from "./user-settings-page/delete-confirm
 		SearchPageModule,
 		MatDialogModule,
 		UserListPageModule,
+		WishlistModule,
 		SharedModule
 	],
 	providers: [Title, LocalCookiesService],
