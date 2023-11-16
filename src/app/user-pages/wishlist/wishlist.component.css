@@ -2,6 +2,11 @@
     text-align: center;
 }
 
+.wishlist-sort {
+    display: flex;
+    justify-content: flex-end;
+}
+
 .wishlist-content {
     display: flex;
     justify-content: space-around;

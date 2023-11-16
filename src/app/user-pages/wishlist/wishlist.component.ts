@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { catchError } from "rxjs";
-import { ListEntry } from "src/app/models/ListEntry";
+import { WishlistEntry } from "src/app/models/WishlistEntry";
 import { UserData } from "src/app/models/userData";
 import { MetadataService } from "src/app/services/metadata.service";
 import { MynewormAPIService } from "src/app/services/myneworm-api.service";
@@ -14,7 +14,8 @@ import { UtilitiesService } from "src/app/services/utilities.service";
 })
 export class WishlistComponent {
 	user: UserData;
-	wishlist: ListEntry[];
+	wishlist: WishlistEntry[] = [];
+	selectedSort: string = "title_asc";
 
 	constructor(
 		private route: ActivatedRoute,
@@ -42,9 +43,9 @@ export class WishlistComponent {
 					);
 
 					this.service
-						.getUserListByOwnership(data.user_id.toString(), "wanting")
+						.getUserWishlist(data.user_id.toString())
 						.pipe(catchError((err) => this.utilities.catchAPIError(err)))
-						.subscribe((data: ListEntry[] | null) => {
+						.subscribe((data: WishlistEntry[] | null) => {
 							if (data === null) {
 								return;
 							}
@@ -53,5 +54,24 @@ export class WishlistComponent {
 						});
 				});
 		});
+	}
+
+	selectSort(input: string) {
+		this.selectedSort = input;
+		this.sort();
+	}
+
+	sort() {
+		if (this.selectedSort === "title_asc") {
+			this.wishlist.sort((a, b) => a.title.localeCompare(b.title));
+		} else if (this.selectedSort === "title_desc") {
+			this.wishlist.sort((a, b) => a.title.localeCompare(b.title) * -1);
+		} else if (this.selectedSort === "release_asc") {
+			this.wishlist.sort((a, b) => new Date(a.release_date).getTime() - new Date(b.release_date).getTime());
+		} else if (this.selectedSort === "release_desc") {
+			this.wishlist.sort(
+				(a, b) => (new Date(a.release_date).getTime() - new Date(b.release_date).getTime()) * -1
+			);
+		}
 	}
 }

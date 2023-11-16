@@ -3,6 +3,32 @@
         <h2>{{user.username}}'s Wishlist</h2>
         <p>INSERT USER'S MESSAGE HERE</p>
     </div>
+    <div class="wishlist-sort">
+        <div class="dropdown">
+            <button class="btn myneworm-btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Sort
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                    <button class="dropdown-item" [ngClass]="selectedSort == 'title_asc' ? 'active' : ''"
+                        [attr.aria-current]="selectedSort == 'title_asc'" (click)="selectSort('title_asc')">Title A-Z</button>
+                </li>
+                <li>
+                    <button class="dropdown-item" [ngClass]="selectedSort == 'title_desc' ? 'active' : ''"
+                        [attr.aria-current]="selectedSort == 'title_desc'" (click)="selectSort('title_desc')">Title Z-A</button>
+                </li>
+                <li>
+                    <button class="dropdown-item" [ngClass]="selectedSort == 'release_asc' ? 'active' : ''"
+                        [attr.aria-current]="selectedSort == 'release_asc'" (click)="selectSort('release_asc')">Release (Earliest)</button>
+                </li>
+                <li>
+                    <button class="dropdown-item" [ngClass]="selectedSort == 'release_desc' ? 'active' : ''"
+                        [attr.aria-current]="selectedSort == 'release_desc'" (click)="selectSort('release_desc')">Release (Latest)</button>
+                </li>
+            </ul>
+        </div>
+    </div>
     <div class="wishlist-content">
         <div *ngFor="let book of wishlist; let i = index">
             <div class="wishlist-item">

@@ -15,6 +15,7 @@ import { AccountUpdateData } from "../models/accountUpdateData";
 import { AssetSize } from "../models/AssetSize";
 import { BookFormat } from "../models/BookFormat";
 import { Params } from "@angular/router";
+import { WishlistEntry } from "../models/WishlistEntry";
 
 @Injectable({
 	providedIn: "root"
@@ -147,6 +148,10 @@ export class MynewormAPIService {
 
 	getUserListByOwnership(userID: string, ownership: string) {
 		return this.http.get<ListEntry[]>(`${environment.API_ADDRESS}/lists/byOwnership/${userID}/${ownership}`);
+	}
+
+	getUserWishlist(userID: string) {
+		return this.http.get<WishlistEntry[]>(`${environment.API_ADDRESS}/lists/wishlist/${userID}`);
 	}
 
 	updateAvatar(avatar: FormData) {
