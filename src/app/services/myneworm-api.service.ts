@@ -159,7 +159,7 @@ export class MynewormAPIService {
 	}
 
 	updateProfile(profileInfo: ProfileUpdateData) {
-		return this.http.patch(`${environment.API_ADDRESS}/user/profile`, { user: profileInfo });
+		return this.http.patch<UserData>(`${environment.API_ADDRESS}/user/profile`, { user: profileInfo });
 	}
 
 	updateAccount(accountInfo: AccountUpdateData) {
