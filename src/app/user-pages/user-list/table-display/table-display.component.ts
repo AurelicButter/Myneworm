@@ -105,7 +105,7 @@ export class TableDisplayComponent implements OnInit, OnChanges {
 	}
 
 	hasExpandedDetails(element: ListEntry) {
-		return element.start_date !== undefined || element.end_date !== undefined || element.notes !== undefined;
+		return element.start_date || element.end_date || element.notes;
 	}
 
 	updateListEntry(isbn: string, title: string): void {
