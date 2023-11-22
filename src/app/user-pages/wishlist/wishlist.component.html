@@ -1,7 +1,27 @@
 <div>
-    <div class="wishlist-header">
-        <h2>{{user.username}}'s Wishlist</h2>
-        <p>INSERT USER'S MESSAGE HERE</p>
+    <div *ngIf="!loading" class="wishlist-header">
+        <a href="./user/{{user.username}}"><img class="user-avatar" src='{{getAvatar()}}'></a>
+        <div class="text-wrapper">
+            <h2><a class="user-link" href="./user/{{user.username}}">{{user.display_name || user.username}}'s</a>
+                Wishlist</h2>
+            <div class="wishlist-msg">
+                <div *ngIf="!editMsg" class="user-wishlist-msg">
+                    <p *ngIf="user.wishlist_msg">{{user.wishlist_msg}}</p>
+                    <span *ngIf="!user.wishlist_msg && isAuthUser" style="color: grey"><i>You haven't set a wishlist
+                            message yet...</i></span>
+                </div>
+                <div *ngIf="editMsg" class="user-wishlist-msg">
+                    <textarea name="new_wishlist_msg" class="wishlist-msg-input" [(ngModel)]='updateMsg'></textarea>
+                </div>
+                <div *ngIf="isAuthUser" class="wishlist-msg-btn">
+                    <button *ngIf="!editMsg" class="btn myneworm-btn" (click)="editMessage()">
+                        {{ user.wishlist_msg ? 'Edit' : 'Add'}} Message
+                    </button>
+                    <button *ngIf="editMsg" class="btn myneworm-btn" (click)="saveMsg()">Save</button>
+                    <button *ngIf="editMsg" class="btn myneworm-btn" (click)="cancelMsg()">Cancel</button>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="wishlist-sort">
         <div class="dropdown">
@@ -12,28 +32,33 @@
             <ul class="dropdown-menu dropdown-menu-end">
                 <li>
                     <button class="dropdown-item" [ngClass]="selectedSort == 'title_asc' ? 'active' : ''"
-                        [attr.aria-current]="selectedSort == 'title_asc'" (click)="selectSort('title_asc')">Title A-Z</button>
+                        [attr.aria-current]="selectedSort == 'title_asc'" (click)="selectSort('title_asc')">Title
+                        A-Z</button>
                 </li>
                 <li>
                     <button class="dropdown-item" [ngClass]="selectedSort == 'title_desc' ? 'active' : ''"
-                        [attr.aria-current]="selectedSort == 'title_desc'" (click)="selectSort('title_desc')">Title Z-A</button>
+                        [attr.aria-current]="selectedSort == 'title_desc'" (click)="selectSort('title_desc')">Title
+                        Z-A</button>
                 </li>
                 <li>
                     <button class="dropdown-item" [ngClass]="selectedSort == 'release_asc' ? 'active' : ''"
-                        [attr.aria-current]="selectedSort == 'release_asc'" (click)="selectSort('release_asc')">Release (Earliest)</button>
+                        [attr.aria-current]="selectedSort == 'release_asc'" (click)="selectSort('release_asc')">Release
+                        (Earliest)</button>
                 </li>
                 <li>
                     <button class="dropdown-item" [ngClass]="selectedSort == 'release_desc' ? 'active' : ''"
-                        [attr.aria-current]="selectedSort == 'release_desc'" (click)="selectSort('release_desc')">Release (Latest)</button>
+                        [attr.aria-current]="selectedSort == 'release_desc'"
+                        (click)="selectSort('release_desc')">Release (Latest)</button>
                 </li>
             </ul>
         </div>
     </div>
     <div class="wishlist-content">
         <div *ngFor="let book of wishlist; let i = index">
-            <div class="wishlist-item">
-                <wishlist-display [book]="book"></wishlist-display>
-            </div>
+            <wishlist-display [book]="book"></wishlist-display>
         </div>
+        <p class="no-wishlist" *ngIf="wishlist.length === 0">
+            This user does not have anything set in their wishlist! Either they own it all or need to mark more entries with the "wanted" ownership status.
+        </p>
     </div>
 </div>

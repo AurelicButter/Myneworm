@@ -1,21 +1,21 @@
 import { Component } from "@angular/core";
 import { MatTableDataSource } from "@angular/material/table";
-import { MynewormAPIService } from "../services/myneworm-api.service";
-import { MetadataService } from "../services/metadata.service";
+import { MynewormAPIService } from "../../services/myneworm-api.service";
+import { MetadataService } from "../../services/metadata.service";
 import { ActivatedRoute } from "@angular/router";
 
-import { ListEntry } from "../models/ListEntry";
-import { UtilitiesService } from "../services/utilities.service";
+import { ListEntry } from "../../models/ListEntry";
+import { UtilitiesService } from "../../services/utilities.service";
 import { catchError } from "rxjs";
-import { UserData } from "../models/userData";
-import { LocalCookiesService } from "../services/authentication/local-cookies.service";
+import { UserData } from "../../models/userData";
+import { LocalCookiesService } from "../../services/authentication/local-cookies.service";
 
 @Component({
-	selector: "user-list-page",
-	templateUrl: "./user-list-page.component.html",
-	styleUrls: ["./user-list-page.component.css"]
+	selector: "user-list",
+	templateUrl: "./user-list.component.html",
+	styleUrls: ["./user-list.component.css"]
 })
-export class UserListPageComponent {
+export class UserListComponent {
 	public readingSource: MatTableDataSource<ListEntry> = new MatTableDataSource<ListEntry>();
 	public completedSource: MatTableDataSource<ListEntry> = new MatTableDataSource<ListEntry>();
 	public pausedSource: MatTableDataSource<ListEntry> = new MatTableDataSource<ListEntry>();

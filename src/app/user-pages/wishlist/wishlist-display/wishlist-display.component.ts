@@ -6,7 +6,7 @@ import { UtilitiesService } from "src/app/services/utilities.service";
 @Component({
 	selector: "wishlist-display",
 	templateUrl: "./wishlist-display.component.html",
-	styleUrls: ["./wishlist-display.component.css"]
+	styleUrls: ["../wishlist.component.css"]
 })
 export class WishlistDisplayComponent {
 	@Input() book: WishlistEntry;

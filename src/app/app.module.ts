@@ -21,13 +21,9 @@ import { LoginPageComponent } from "./login-page/login-page.component";
 import { UserNavMenuComponent } from "./user-nav-menu/user-nav-menu.component";
 import { LocalCookiesService } from "./services/authentication/local-cookies.service";
 import { UserSettingsPageComponent } from "./user-settings-page/user-settings-page.component";
-import { UserListPageModule } from "./user-list-page/user-list-page.module";
-import { UserProfilePageComponent } from "./user-profile-page/user-profile-page.component";
-import { StatisticDisplayComponent } from "./user-profile-page/statistic-display/statistic-display.component";
 import { RegistrationPageComponent } from "./registration-page/registration-page.component";
 import { SharedModule } from "./shared/shared.module";
 import { DeleteConfirmationComponent } from "./user-settings-page/delete-confirmation/delete-confirmation.component";
-import { WishlistModule } from "./user-pages/wishlist/wishlist.module";
 
 @NgModule({
 	declarations: [
@@ -37,8 +33,6 @@ import { WishlistModule } from "./user-pages/wishlist/wishlist.module";
 		LoginPageComponent,
 		UserNavMenuComponent,
 		UserSettingsPageComponent,
-		UserProfilePageComponent,
-		StatisticDisplayComponent,
 		RegistrationPageComponent,
 		DeleteConfirmationComponent
 	],
@@ -57,8 +51,6 @@ import { WishlistModule } from "./user-pages/wishlist/wishlist.module";
 		SearchBarModule,
 		SearchPageModule,
 		MatDialogModule,
-		UserListPageModule,
-		WishlistModule,
 		SharedModule
 	],
 	providers: [Title, LocalCookiesService],

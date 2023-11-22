@@ -10,6 +10,16 @@ aside > a {
     width: -webkit-fill-available;
 }
 
+.user-links {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-links > * {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
 .user-header {
     display: flex;
     align-items: flex-start;

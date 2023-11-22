@@ -6,7 +6,10 @@
         <p *ngIf="profileInfo.location"><b>Location:</b> {{profileInfo.location}}</p>
         <p *ngIf="profileInfo.birthday"><b>Birthday:</b> {{this.utilities.dateReadable(profileInfo.birthday)}}</p>
         <br>
-        <a class="btn btn-lg myneworm-btn" role="button" href="./user/{{profileInfo.username}}/lists">My List</a>
+        <div class="user-links">
+            <a class="btn btn-lg myneworm-btn" role="button" href="./user/{{profileInfo.username}}/lists">My List</a>
+            <a class="btn btn-lg myneworm-btn" role="button" href="./user/{{profileInfo.username}}/wishlist">Wishlist</a>
+        </div>        
     </aside>
     <div class="profile-container">
         <div class="user-header">
