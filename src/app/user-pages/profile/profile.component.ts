@@ -1,19 +1,19 @@
 import { Component } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { catchError } from "rxjs";
-import { MetadataService } from "../services/metadata.service";
-import { MynewormAPIService } from "../services/myneworm-api.service";
-import { UtilitiesService } from "../services/utilities.service";
-import { UserData } from "../models/userData";
+import { MetadataService } from "../../services/metadata.service";
+import { MynewormAPIService } from "../../services/myneworm-api.service";
+import { UtilitiesService } from "../../services/utilities.service";
+import { UserData } from "../../models/userData";
 import * as moment from "moment";
-import { UserStatisticsProfile } from "../models/userStatisticsData";
+import { UserStatisticsProfile } from "../../models/userStatisticsData";
 
 @Component({
-	selector: "user-profile-page",
-	templateUrl: "./user-profile-page.component.html",
-	styleUrls: ["./user-profile-page.component.css"]
+	selector: "profile",
+	templateUrl: "./profile.component.html",
+	styleUrls: ["./profile.component.css"]
 })
-export class UserProfilePageComponent {
+export class ProfileComponent {
 	profileInfo: UserData;
 	activeStatusCount = {
 		reading: 0,

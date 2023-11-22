@@ -3,4 +3,5 @@ export interface ProfileUpdateData {
 	about_me?: string | null;
 	location?: string | null;
 	displaybirthday?: boolean;
+	wishlist_msg?: string | null;
 }
