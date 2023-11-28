@@ -1,5 +1,4 @@
 .nav-main-div {
-    flex-wrap: nowrap;
     padding: 0;
 }
 
@@ -13,7 +12,7 @@
     color: #ECEBF3;
     padding-top: 0;
     padding-bottom: 0;
-    overflow: initial;
+    overflow: hidden;
 }
 
 .nav-list-ul {

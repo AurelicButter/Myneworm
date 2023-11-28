@@ -1,7 +1,7 @@
 <div class="book-display">
-    <img src='{{getCover()}}' alt="book cover" loading="lazy" class="display-cover">
+    <a href='/book/{{book.isbn}}' class="display-cover"><img src='{{getCover()}}' alt="book cover" loading="lazy"></a>
     <div class="display-text">
-        <span><b>{{book.title}}</b></span>
+        <span><a href='/book/{{book.isbn}}' class="aside-link"><b>{{book.title}}</b></a></span>
         <span><i>({{this.utilities.formatReadable(book.format_name)}}, {{this.utilities.formatReadable(book.book_type_name)}})</i></span>
         <span>Release: {{this.utilities.dateReadable(book.release_date)}}</span>
     </div>
