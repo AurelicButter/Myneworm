@@ -99,7 +99,6 @@ export class SearchPageComponent implements OnInit {
 	}
 
 	private searchBooks(queryParams: Params) {
-		console.log(queryParams);
 		if (!this.isFirstLoad && Object.keys(queryParams).length < 3) {
 			// Params only are page and limit counts
 			this.toastService.sendError("No parameters provided. Unable to search");
