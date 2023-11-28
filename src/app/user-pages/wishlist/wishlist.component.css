@@ -43,6 +43,11 @@
     height: 350px;
 }
 
+.display-cover > img {
+    width: inherit;
+    height: inherit;
+}
+
 .user-link {
     text-decoration: none;
     color: inherit;
