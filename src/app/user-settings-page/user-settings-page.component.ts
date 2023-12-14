@@ -204,23 +204,29 @@ export class UserSettingsPageComponent implements OnInit {
 			accountInfo.email = this.accountData.email;
 		}
 
-		if (Object.keys(accountInfo).length > 0) {
-			this.service
-				.updateAccount(accountInfo)
-				// eslint-disable-next-line @typescript-eslint/no-explicit-any
-				.pipe(
-					catchError((err: any) => {
-						this.toastService.sendError("Uncaught error. Unable to save profile");
-						return of(null);
-					})
-				)
-				.subscribe((data: any | null) => {
-					if (data === null) {
-						return;
-					}
-
-					this.toastService.sendSuccess("Saved account details");
-				});
+		if (Object.keys(accountInfo).length === 0) {
+			return;
 		}
+
+		this.service
+			.updateAccount(accountInfo)
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			.pipe(
+				catchError((err: any) => {
+					if (err.status === 403) {
+						this.toastService.sendError(err.error.errors);
+					} else {
+						this.toastService.sendError("Uncaught error. Unable to save profile");
+					}
+					return of(null);
+				})
+			)
+			.subscribe((data: any | null) => {
+				if (data === null) {
+					return;
+				}
+
+				this.toastService.sendSuccess("Saved account details");
+			});
 	}
 }
