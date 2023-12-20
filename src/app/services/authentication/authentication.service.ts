@@ -4,6 +4,7 @@ import { catchError, map, of } from "rxjs";
 import { environment } from "src/environments/environment";
 import { Buffer } from "buffer";
 import { LocalCookiesService } from "./local-cookies.service";
+import { ToastService } from "../toast.service";
 
 @Injectable({
 	providedIn: "root"
@@ -11,7 +12,8 @@ import { LocalCookiesService } from "./local-cookies.service";
 export class AuthenticationService {
 	constructor(
 		private http: HttpClient,
-		private cookieService: LocalCookiesService
+		private cookieService: LocalCookiesService,
+		private toastService: ToastService
 	) {}
 
 	login(username: string, password: string) {
@@ -135,7 +137,12 @@ export class AuthenticationService {
 
 	clearSessions() {
 		this.cookieService.deleteUser();
-		return this.http.post(`${environment.API_ADDRESS}/auth/clear`, {});
+		return this.http.post(`${environment.API_ADDRESS}/auth/clear`, {}).pipe(
+			catchError((err: any) => {
+				this.toastService.sendError(err.error.errors);
+				return of(null);
+			})
+		);
 	}
 
 	logout() {

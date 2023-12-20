@@ -2,8 +2,6 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MynewormAPIService } from "../services/myneworm-api.service";
 import { LocalCookiesService } from "../services/authentication/local-cookies.service";
-import { catchError, of } from "rxjs";
-import { UtilitiesService } from "../services/utilities.service";
 import { AccountData, UserData } from "../models/userData";
 import { AccountUpdateData } from "../models/accountUpdateData";
 import { ToastService } from "../services/toast.service";
@@ -37,7 +35,6 @@ export class UserSettingsPageComponent implements OnInit {
 		private service: MynewormAPIService,
 		private cookieService: LocalCookiesService,
 		private authService: AuthenticationService,
-		private utilities: UtilitiesService,
 		private toastService: ToastService,
 		private matDialog: MatDialog,
 		private router: Router
@@ -48,28 +45,22 @@ export class UserSettingsPageComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.service
-			.getAuthUser(this.user.user_id)
-			.pipe(catchError((err) => this.utilities.catchAPIError(err)))
-			.subscribe((data: UserData | null) => {
-				if (data === null) {
-					return;
-				}
+		this.service.getAuthUser(this.user.user_id).subscribe((data: UserData | null) => {
+			if (data === null) {
+				return;
+			}
 
-				this.profileData = data;
-				this.profileData.displaybirthday = data.birthday !== null;
-			});
-		this.service
-			.getAccount()
-			.pipe(catchError((err) => this.utilities.catchAPIError(err)))
-			.subscribe((data: AccountData | null) => {
-				if (data === null) {
-					return;
-				}
+			this.profileData = data;
+			this.profileData.displaybirthday = data.birthday !== null;
+		});
+		this.service.getAccount().subscribe((data: AccountData | null) => {
+			if (data === null) {
+				return;
+			}
 
-				this.accountData = data;
-				this.oldEmail = data.email;
-			});
+			this.accountData = data;
+			this.oldEmail = data.email;
+		});
 
 		this.route.params.subscribe((data) => {
 			this.currPage = data.page ? data.page.toUpperCase() : "PROFILE";
@@ -121,47 +112,25 @@ export class UserSettingsPageComponent implements OnInit {
 	}
 
 	clearSessions() {
-		this.authService
-			.clearSessions()
-			.pipe(
-				catchError((err: any) => {
-					this.toastService.sendError(err.error.errors);
-					return of(null);
-				})
-			)
-			.subscribe((data: any | null) => {
-				if (data === null) {
-					return;
-				}
+		this.authService.clearSessions().subscribe((data: any | null) => {
+			if (data === null) {
+				return;
+			}
 
-				this.toastService.sendSuccess("Sessions Cleared.");
-				this.router.navigate(["/"]);
-			});
+			this.toastService.sendSuccess("Sessions Cleared.");
+			this.router.navigate(["/"]);
+		});
 	}
 
 	submitProfile() {
 		if (this.url !== undefined && this.url !== null) {
-			this.service
-				.updateAvatar(this.avatarForm)
-				// eslint-disable-next-line @typescript-eslint/no-explicit-any
-				.pipe(
-					catchError((err: any) => {
-						if (err.status === 400) {
-							this.toastService.sendError("Failed to save avatar");
-						} else {
-							this.toastService.sendError("Uncaught error. Unable to save profile");
-						}
+			this.service.updateAvatar(this.avatarForm).subscribe((data: any | null) => {
+				if (data === null) {
+					return;
+				}
 
-						return of(null);
-					})
-				)
-				.subscribe((data: any | null) => {
-					if (data === null) {
-						return;
-					}
-
-					this.toastService.sendSuccess("Avatar saved");
-				});
+				this.toastService.sendSuccess("Avatar saved");
+			});
 		}
 
 		if (!this.profileForm.pristine) {
@@ -172,13 +141,6 @@ export class UserSettingsPageComponent implements OnInit {
 					location: this.profileData.location === "" ? null : this.profileData.location,
 					displaybirthday: this.profileData.displaybirthday
 				})
-				// eslint-disable-next-line @typescript-eslint/no-explicit-any
-				.pipe(
-					catchError((err: any) => {
-						this.toastService.sendError("Uncaught error. Unable to save profile");
-						return of(null);
-					})
-				)
 				.subscribe((data: any | null) => {
 					if (data === null) {
 						return;
@@ -208,25 +170,12 @@ export class UserSettingsPageComponent implements OnInit {
 			return;
 		}
 
-		this.service
-			.updateAccount(accountInfo)
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			.pipe(
-				catchError((err: any) => {
-					if (err.status === 403) {
-						this.toastService.sendError(err.error.errors);
-					} else {
-						this.toastService.sendError("Uncaught error. Unable to save profile");
-					}
-					return of(null);
-				})
-			)
-			.subscribe((data: any | null) => {
-				if (data === null) {
-					return;
-				}
+		this.service.updateAccount(accountInfo).subscribe((data: any | null) => {
+			if (data === null) {
+				return;
+			}
 
-				this.toastService.sendSuccess("Saved account details");
-			});
+			this.toastService.sendSuccess("Saved account details");
+		});
 	}
 }

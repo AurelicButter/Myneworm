@@ -5,8 +5,6 @@ import { MetadataService } from "../../services/metadata.service";
 import { ActivatedRoute } from "@angular/router";
 
 import { ListEntry } from "../../models/ListEntry";
-import { UtilitiesService } from "../../services/utilities.service";
-import { catchError } from "rxjs";
 import { UserData } from "../../models/userData";
 import { LocalCookiesService } from "../../services/authentication/local-cookies.service";
 
@@ -41,7 +39,6 @@ export class UserListComponent {
 		private route: ActivatedRoute,
 		private service: MynewormAPIService,
 		private metaService: MetadataService,
-		private utilities: UtilitiesService,
 		private cookieService: LocalCookiesService
 	) {
 		this.route.params.subscribe((data) => {
@@ -56,26 +53,20 @@ export class UserListComponent {
 
 	ngOnInit() {
 		this.route.params.subscribe((data) => {
-			this.service
-				.getUser(data.username)
-				.pipe(catchError((err) => this.utilities.catchAPIError(err)))
-				.subscribe((userData: UserData | null) => {
-					if (userData === null) {
+			this.service.getUser(data.username).subscribe((userData: UserData | null) => {
+				if (userData === null) {
+					return;
+				}
+
+				this.service.getUserList(userData.user_id.toString()).subscribe((listEntries: ListEntry[] | null) => {
+					if (listEntries === null) {
 						return;
 					}
 
-					this.service
-						.getUserList(userData.user_id.toString())
-						.pipe(catchError((err) => this.utilities.catchAPIError(err)))
-						.subscribe((listEntries: ListEntry[] | null) => {
-							if (listEntries === null) {
-								return;
-							}
-
-							this.hasEntries = true;
-							this.compileLists(listEntries);
-						});
+					this.hasEntries = true;
+					this.compileLists(listEntries);
 				});
+			});
 		});
 	}
 
