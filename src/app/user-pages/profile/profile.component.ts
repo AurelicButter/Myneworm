@@ -1,6 +1,5 @@
 import { Component } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { catchError } from "rxjs";
 import { MetadataService } from "../../services/metadata.service";
 import { MynewormAPIService } from "../../services/myneworm-api.service";
 import { UtilitiesService } from "../../services/utilities.service";
@@ -46,49 +45,43 @@ export class ProfileComponent {
 
 	ngOnInit() {
 		this.route.params.subscribe((data) => {
-			this.service
-				.getUser(data.username)
-				.pipe(catchError((err) => this.utilities.catchAPIError(err)))
-				.subscribe((data: UserData | null) => {
-					if (data === null) {
-						return;
-					}
+			this.service.getUser(data.username).subscribe((data: UserData | null) => {
+				if (data === null) {
+					return;
+				}
 
-					this.profileInfo = data;
-					this.metaService.updateMetaTags(
-						`${this.profileInfo.display_name || this.profileInfo.username}'s Profile`,
-						`/user/${this.profileInfo.username}`,
-						this.profileInfo.about_me || undefined,
-						this.service.getAsset(`/assets/user/${this.profileInfo.user_id}`)
-					);
-				});
-			this.service
-				.getUserStats(data.username)
-				.pipe(catchError((err) => this.utilities.catchAPIError(err)))
-				.subscribe((data: UserStatisticsProfile | null) => {
-					if (data === null) {
-						return;
-					}
+				this.profileInfo = data;
+				this.metaService.updateMetaTags(
+					`${this.profileInfo.display_name || this.profileInfo.username}'s Profile`,
+					`/user/${this.profileInfo.username}`,
+					this.profileInfo.about_me || undefined,
+					this.service.getAsset(`/assets/user/${this.profileInfo.user_id}`)
+				);
+			});
+			this.service.getUserStats(data.username).subscribe((data: UserStatisticsProfile | null) => {
+				if (data === null) {
+					return;
+				}
 
-					this.activeStatusCount.reading = data.active_reading;
-					this.activeStatusCount.completed = data.active_completed;
-					this.activeStatusCount.paused = data.active_paused;
-					this.activeStatusCount.dropped = data.active_dropped;
-					this.activeStatusCount.planning = data.active_planning;
+				this.activeStatusCount.reading = data.active_reading;
+				this.activeStatusCount.completed = data.active_completed;
+				this.activeStatusCount.paused = data.active_paused;
+				this.activeStatusCount.dropped = data.active_dropped;
+				this.activeStatusCount.planning = data.active_planning;
 
-					this.ownershipCount.owned = data.owner_owned;
-					this.ownershipCount.loaned = data.owner_loaned;
-					this.ownershipCount.previous_own = data.owner_previous;
-					this.ownershipCount.wanted = data.owner_wanting;
-					this.ownershipCount.ordered = data.owner_ordered;
+				this.ownershipCount.owned = data.owner_owned;
+				this.ownershipCount.loaned = data.owner_loaned;
+				this.ownershipCount.previous_own = data.owner_previous;
+				this.ownershipCount.wanted = data.owner_wanting;
+				this.ownershipCount.ordered = data.owner_ordered;
 
-					this.bookTypeCount.paperback = data.type_paperback;
-					this.bookTypeCount.ebook = data.type_ebook;
-					this.bookTypeCount.hardcover = data.type_hardcover;
-					this.bookTypeCount.audiobook = data.type_audiobook;
+				this.bookTypeCount.paperback = data.type_paperback;
+				this.bookTypeCount.ebook = data.type_ebook;
+				this.bookTypeCount.hardcover = data.type_hardcover;
+				this.bookTypeCount.audiobook = data.type_audiobook;
 
-					this.refreshComponent();
-				});
+				this.refreshComponent();
+			});
 		});
 	}
 

@@ -1,6 +1,5 @@
 import { Component } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { catchError } from "rxjs";
 import { WishlistEntry } from "src/app/models/WishlistEntry";
 import { UserData } from "src/app/models/userData";
 import { LocalCookiesService } from "src/app/services/authentication/local-cookies.service";
@@ -34,39 +33,33 @@ export class WishlistComponent {
 
 	ngOnInit() {
 		this.route.params.subscribe((data) => {
-			this.service
-				.getUser(data.username)
-				.pipe(catchError((err) => this.utilities.catchAPIError(err)))
-				.subscribe((data: UserData | null) => {
+			this.service.getUser(data.username).subscribe((data: UserData | null) => {
+				if (data === null) {
+					return;
+				}
+
+				this.user = data;
+				this.isAuthUser = this.cookieService.user.username === this.user.username;
+
+				if (!this.user.wishlist_msg) {
+					this.user.wishlist_msg = null;
+				}
+				this.metaService.updateMetaTags(
+					`${this.user.display_name || this.user.username}'s Wishlist`,
+					`/user/${this.user.username}/wishlist`,
+					this.user.about_me || undefined,
+					this.service.getAsset(`/assets/user/${this.user.user_id}`)
+				);
+
+				this.service.getUserWishlist(data.user_id.toString()).subscribe((data: WishlistEntry[] | null) => {
 					if (data === null) {
 						return;
 					}
 
-					this.user = data;
-					this.isAuthUser = this.cookieService.user.username === this.user.username;
-
-					if (!this.user.wishlist_msg) {
-						this.user.wishlist_msg = null;
-					}
-					this.metaService.updateMetaTags(
-						`${this.user.display_name || this.user.username}'s Wishlist`,
-						`/user/${this.user.username}/wishlist`,
-						this.user.about_me || undefined,
-						this.service.getAsset(`/assets/user/${this.user.user_id}`)
-					);
-
-					this.service
-						.getUserWishlist(data.user_id.toString())
-						.pipe(catchError((err) => this.utilities.catchAPIError(err)))
-						.subscribe((data: WishlistEntry[] | null) => {
-							if (data === null) {
-								return;
-							}
-
-							this.wishlist = data;
-							this.loading = false;
-						});
+					this.wishlist = data;
+					this.loading = false;
 				});
+			});
 		});
 	}
 
@@ -85,17 +78,14 @@ export class WishlistComponent {
 			return;
 		}
 
-		this.service
-			.updateProfile({ wishlist_msg: this.updateMsg })
-			.pipe(catchError((err) => this.utilities.catchAPIError(err)))
-			.subscribe((data: UserData | null) => {
-				if (data === null) {
-					return this.toastService.sendError("Failed to save wishlist message...");
-				}
-				this.editMsg = !this.editMsg;
-				this.user.wishlist_msg = data.wishlist_msg;
-				this.toastService.sendSuccess("Updated wishlist message!");
-			});
+		this.service.updateProfile({ wishlist_msg: this.updateMsg }).subscribe((data: UserData | null) => {
+			if (data === null) {
+				return this.toastService.sendError("Failed to save wishlist message...");
+			}
+			this.editMsg = !this.editMsg;
+			this.user.wishlist_msg = data.wishlist_msg;
+			this.toastService.sendSuccess("Updated wishlist message!");
+		});
 	}
 
 	cancelMsg() {
