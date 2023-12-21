@@ -1,6 +1,5 @@
 import { Component } from "@angular/core";
 import { MatDialogRef } from "@angular/material/dialog";
-import { catchError, of } from "rxjs";
 import { MynewormAPIService } from "src/app/services/myneworm-api.service";
 import { ToastService } from "src/app/services/toast.service";
 
@@ -17,32 +16,21 @@ export class DeleteConfirmationComponent {
 	) {}
 
 	deleteAccount() {
-		this.service
-			.deleteUser()
-			.pipe(
-				catchError((err) => {
-					console.error(err);
-					this.toastService.sendError("Failed to mark account for deletion. Server issue, try again later.");
-					return of(null);
-				})
-			)
-			.subscribe((data: object | null) => {
-				if (data === null) {
-					this.close();
-					return;
-				}
+		this.service.deleteUser().subscribe((data: object | null) => {
+			if (data === null) {
+				return this.close();
+			}
 
-				this.close(true);
-			});
+			this.close(true);
+		});
 	}
 
 	close(deleted = false) {
-		if (deleted) {
-			this.toastService.sendSuccess("Successfully marked your account for deletion.");
-			this.dialogRef.close(true);
-			return;
+		if (!deleted) {
+			return this.dialogRef.close(false);
 		}
 
-		this.dialogRef.close(false);
+		this.toastService.sendSuccess("Successfully marked your account for deletion.");
+		this.dialogRef.close(true);
 	}
 }

@@ -1,7 +1,7 @@
 pipeline {
     agent any
 
-    tools { nodejs "Node 16" }
+    tools { nodejs "Node 20" }
 
     options {
         buildDiscarder(logRotator(artifactNumToKeepStr: "5"))
