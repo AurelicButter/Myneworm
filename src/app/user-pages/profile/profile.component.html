@@ -14,7 +14,7 @@
     <div class="profile-container">
         <div class="user-header">
             <div class="username-display">
-                <h2 *ngIf="profileInfo.display_name" class="aside-offset">{{profileInfo.display_name}} (@{{profileInfo.username}})</h2>
+                <h2 *ngIf="profileInfo.display_name" class="aside-offset">{{profileInfo.display_name}} (&#64;{{profileInfo.username}})</h2>
                 <h2 *ngIf="profileInfo.display_name === null" class="aside-offset">{{profileInfo.username}}</h2>
             </div>
             <div class="user-about-me aside-offset">
