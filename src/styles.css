@@ -31,7 +31,7 @@ body {
  */
 .button-link, .button-link:visited,
 .btn-link, .btn-link:visited {
-    color: #ECEBF3;
+    color: #ECEBF3 !important;
     text-decoration: none;
 }
 
