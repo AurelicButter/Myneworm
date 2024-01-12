@@ -1,11 +1,21 @@
 <div class="row">
-    <aside class="col-3 admin-side-nav">
-        <a routerLink="./home">Dashboard</a>
-        <a routerLink="./data-correction" aria-disabled="true" tabindex="-1">Data Corrections</a>
-        <a routerLink="./user-management" aria-disabled="true" tabindex="-1">User Management</a>
-        <a routerLink="./user-report" aria-disabled="true" tabindex="-1">User Reports</a>
+    <aside class="col-2 admin-drawer">
+        <a routerLink="./home" [routerLinkActive]="['admin-drawer-item-active']">
+            <span class="admin-drawer-item">Dashboard</span>
+        </a>
+        <span class="admin-drawer-header">Data Corrections</span>
+        <a routerLink="./corrections/book" [routerLinkActive]="['admin-drawer-item-active']" aria-disabled="true" tabindex="-1">
+            <span class="admin-drawer-item">Books</span>
+        </a>
+        <a routerLink="./corrections/series" [routerLinkActive]="['admin-drawer-item-active']" aria-disabled="true" tabindex="-1">
+            <span class="admin-drawer-item">Series</span>
+        </a>
+        <span class="admin-drawer-header">User Management</span>
+        <a routerLink="./user-report" [routerLinkActive]="['admin-drawer-item-active']" aria-disabled="true" tabindex="-1">
+            <span class="admin-drawer-item">Reports</span>
+        </a>
     </aside>
-    <main class="col-9">
+    <main class="col-10">
         <div class="admin-content">
             <router-outlet></router-outlet>
         </div>        
