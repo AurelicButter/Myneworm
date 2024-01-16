@@ -8,6 +8,7 @@ import { DataCorrectionComponent } from "./data-correction/data-correction.compo
 import { UserReportComponent } from "./user-report/user-report.component";
 import { BookCorrectionLandingComponent } from "./book-correction-landing/book-correction-landing.component";
 import { MatTableModule } from "@angular/material/table";
+import { BookCorrectionComponent } from "./book-correction/book-correction.component";
 
 @NgModule({
 	declarations: [
@@ -16,7 +17,8 @@ import { MatTableModule } from "@angular/material/table";
 		UserManagementComponent,
 		DataCorrectionComponent,
 		UserReportComponent,
-		BookCorrectionLandingComponent
+		BookCorrectionLandingComponent,
+		BookCorrectionComponent
 	],
 	imports: [CommonModule, AdminRoutingModule, MatTableModule]
 })

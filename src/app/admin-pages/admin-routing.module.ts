@@ -6,6 +6,7 @@ import { HomePanelComponent } from "./home-panel/home-panel.component";
 import { UserReportComponent } from "./user-report/user-report.component";
 import { DataCorrectionComponent } from "./data-correction/data-correction.component";
 import { BookCorrectionLandingComponent } from "./book-correction-landing/book-correction-landing.component";
+import { BookCorrectionComponent } from "./book-correction/book-correction.component";
 
 const routes: Routes = [
 	{
@@ -20,6 +21,7 @@ const routes: Routes = [
 				path: "corrections",
 				children: [
 					{ path: "book", component: BookCorrectionLandingComponent },
+					{ path: "book/:isbn", component: BookCorrectionComponent },
 					{ path: "series", component: DataCorrectionComponent }
 				]
 			}
