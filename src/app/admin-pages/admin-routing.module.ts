@@ -21,7 +21,7 @@ const routes: Routes = [
 				path: "corrections",
 				children: [
 					{ path: "book", component: BookCorrectionLandingComponent },
-					{ path: "book/:correctionID/:isbn", component: BookCorrectionComponent },
+					{ path: "book/:isbn/:correctionID", component: BookCorrectionComponent },
 					{ path: "series", component: DataCorrectionComponent }
 				]
 			}
