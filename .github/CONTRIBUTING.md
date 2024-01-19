@@ -16,32 +16,21 @@ For bugs and issues, please use the bug report template and fill out as much use
 
 To setup Myneworm locally, please refer to the following steps in order to setup correctly.
 
-1. Verify API is running
-> When running Myneworm locally, your local machine will proxy your requests to a development version of the Myneworm API. For more information on this, see the API usage section further down below.
-2. Install dependancies
-3. Run `npm start` to build and launch the web app
-4. Visit the address given on successful launch
-
-### API Usage for Local Installs
-
-By default, the Myneworm website when run locally, uses the development version of the Myneworm API. This version of the API logs all requests for tracking and quality assurance. No identifiers are listed other than the request URLs made to the API and any errors that occur from bugs and issues. There is no `Do no track` functionality to blacklist certain IPs or users from being logged.
-
-However, if you do not wish to consent to the API logs, you can edit the `src/proxy.conf.json` file to use `https://myneworm.katsurin.com` instead of `https://myneworm.develop.katsurin.com` (aka the production version). You will be asked to revert your proxy changes on pull requests.
-
-By contributing, you are assumed to at least understand the API use case. For any questions on this matter, please contact us with the details in [Support and Contact](https://github.com/Butterstroke/Myneworm#support-and-contact) section of the README. 
+1. Install dependancies & verify that Myneworm's API is online
+2. Run `npm start` to build and launch the website
+3. Visit the address given on successful launch
 
 ## Developing the Website
 
 1. Fork & clone the repository. 
-2. Pick a branch to develop on. 
-   * Master branch is the current stable release.
-   * Development branch is the recommended branch to work on and merge into. All changes are staged here before release.
-3. Setup the website repository
+2. Create a new branch from development.
+3. Setup the website locally
 4. Develop your changes
 5. Test your changes
    * There is automated testing for code quality with ESLint and Prettier. You can check your status with these checks through the `npm run lint` command.
    * However, there is no automated testing for visuals or functionality with the site at the moment. You will need to manually verify your edits before making a PR.
-6. Commit your changes and submit a [Pull Request](https://github.com/Butterstroke/Myneworm/pulls).
+6. Commit your changes and submit a [Pull Request](https://github.com/Butterstroke/Myneworm/pulls). 
+> All changes are staged on the development branch. Please make sure you are merging there before submitting!
 
 ### Naming Conventions
 
