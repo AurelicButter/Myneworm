@@ -4,6 +4,7 @@ import { UtilitiesService } from "src/app/services/utilities.service";
 import { MynewormAPIService } from "src/app/services/myneworm-api.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BookCorrectionDisplayEntry } from "src/app/models/BookCorrection";
+import { MynewormAdminService } from "src/app/services/myneworm-admin.service";
 
 @Component({
 	selector: "book-correction-landing",
@@ -12,17 +13,19 @@ import { BookCorrectionDisplayEntry } from "src/app/models/BookCorrection";
 })
 export class BookCorrectionLandingComponent {
 	displayedColumns = ["isbn", "title", "create_date", "update_date", "approved"];
-	public dataSource: MatTableDataSource<BookCorrectionDisplayEntry> =
-		new MatTableDataSource<BookCorrectionDisplayEntry>();
+	public dataSource: MatTableDataSource<BookCorrectionDisplayEntry>;
 	bookInfoTitle: Map<number, string> = new Map<number, string>();
 
 	constructor(
 		public utilities: UtilitiesService,
 		private service: MynewormAPIService,
+		private adminService: MynewormAdminService,
 		private router: Router,
 		private route: ActivatedRoute
 	) {
-		this.dataSource = new MatTableDataSource<BookCorrectionDisplayEntry>();
+		this.adminService.getAllBookCorrections().subscribe((data) => {
+			this.dataSource = new MatTableDataSource<BookCorrectionDisplayEntry>(data);
+		});
 	}
 
 	getBookInfo(isbn: number) {
