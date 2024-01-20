@@ -4,6 +4,11 @@
     margin: 0% 20%;
 }
 
+.guidelines-component > h1 {
+    border-bottom: 2px black solid;
+    margin-bottom: 20px;
+}
+
 .guideline-section > h3 {
     margin-top: 20px;
     border-bottom: 2px black solid;
