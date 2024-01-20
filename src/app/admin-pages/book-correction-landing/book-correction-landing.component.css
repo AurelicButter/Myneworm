@@ -1,0 +1,56 @@
+.status-tag {
+    padding: 8px;
+    border-radius: 6px;
+    width: 90px;
+    display: block;
+    text-align: center;
+}
+
+.in-progress {
+    background-color: lightgray;
+}
+
+.approved {
+    background-color: green;
+    color: white;
+}
+
+.denied {
+    background-color: red;
+    color: white;
+}
+
+.result-table-header {
+    background-color: #ECEBF3;
+    border-bottom: 2px gray solid;
+}
+
+.result-row {
+    cursor: pointer;
+    background-color: #ECEBF3;
+}
+
+.result-row:nth-child(2n) {
+    background-color: #fff;
+}
+
+.result-row:hover {
+    background-color: #0D98BA;
+}
+
+.result-table-cell > p {
+    margin: 0;
+}
+
+.no-results-hover {
+    cursor: default;
+}
+
+.no-results-hover:hover {
+    background-color: #ECEBF3;
+}
+
+.no-results {
+    text-align: center;
+    padding: 100px;
+}

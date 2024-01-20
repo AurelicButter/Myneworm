@@ -6,6 +6,9 @@ import { HomePanelComponent } from "./home-panel/home-panel.component";
 import { UserManagementComponent } from "./user-management/user-management.component";
 import { DataCorrectionComponent } from "./data-correction/data-correction.component";
 import { UserReportComponent } from "./user-report/user-report.component";
+import { BookCorrectionLandingComponent } from "./book-correction-landing/book-correction-landing.component";
+import { MatTableModule } from "@angular/material/table";
+import { BookCorrectionComponent } from "./book-correction/book-correction.component";
 
 @NgModule({
 	declarations: [
@@ -13,8 +16,10 @@ import { UserReportComponent } from "./user-report/user-report.component";
 		HomePanelComponent,
 		UserManagementComponent,
 		DataCorrectionComponent,
-		UserReportComponent
+		UserReportComponent,
+		BookCorrectionLandingComponent,
+		BookCorrectionComponent
 	],
-	imports: [CommonModule, AdminRoutingModule]
+	imports: [CommonModule, AdminRoutingModule, MatTableModule]
 })
 export class AdminModule {}
