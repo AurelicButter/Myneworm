@@ -1,10 +1,11 @@
 import { Component } from "@angular/core";
-import { MetadataService } from "../services/metadata.service";
+import { MetadataService } from "../../services/metadata.service";
 
 @Component({
 	standalone: true,
 	selector: "database-guidelines",
-	templateUrl: "./database-guidelines.component.html"
+	templateUrl: "./database-guidelines.component.html",
+	styleUrl: "./database-guidelines.component.css"
 })
 export class DatabaseGuidelinesComponent {
 	constructor(private metaService: MetadataService) {

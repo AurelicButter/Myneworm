@@ -41,7 +41,9 @@ const routes: Routes = [
 	{
 		path: "guidelines",
 		loadComponent: () =>
-			import("./database-guidelines/database-guidelines.component").then((m) => m.DatabaseGuidelinesComponent)
+			import("./pages/database-guidelines/database-guidelines.component").then(
+				(m) => m.DatabaseGuidelinesComponent
+			)
 	},
 	{ path: "login", component: LoginPageComponent },
 	{ path: "register", component: RegistrationPageComponent },
