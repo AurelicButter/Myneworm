@@ -106,7 +106,10 @@ export class BookPageComponent implements OnInit {
 		const listDialog = this.matDialog.open(ListEntryModalComponent, dialogConfig);
 
 		listDialog.afterClosed().subscribe((result) => {
-			this.hasExistingEntry = result !== null && result !== undefined;
+			if (result === undefined) {
+				return;
+			}
+			this.hasExistingEntry = result !== null;
 		});
 	}
 }
