@@ -1,6 +1,5 @@
 import { Component, Inject } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
-import { catchError, of } from "rxjs";
 import { ListEntry, ListEntryClass } from "src/app/models/ListEntry";
 import { MynewormAPIService } from "src/app/services/myneworm-api.service";
 import { ToastService } from "src/app/services/toast.service";
@@ -32,35 +31,24 @@ export class ListEntryModalComponent {
 		this.cookieService.userEvent.subscribe((value) => {
 			this.user = value;
 
-			this.service
-				.getListEntry(bookData.isbn, this.user.user_id)
-				.pipe(
-					catchError((err) => {
-						if (err.status !== 404) {
-							this.toastService.sendError("Unknown error response");
-						}
+			this.service.getListEntry(bookData.isbn, this.user.user_id).subscribe((data: ListEntry | null) => {
+				if (data === null) {
+					return;
+				}
 
-						return of(null);
-					})
-				)
-				.subscribe((data: ListEntry | null) => {
-					if (data === null) {
-						return;
-					}
-
-					this.isUpdate = true;
-					this.listEntryForm.active_status = data.active_status;
-					this.listEntryForm.owner_status = data.owner_status;
-					this.listEntryForm.score = data.score;
-					this.listEntryForm.reread = data.reread;
-					this.listEntryForm.notes = data.notes;
-					if (data.start_date) {
-						this.listEntryForm.start_date = this.utilities.APIDateFormatter(new Date(data.start_date));
-					}
-					if (data.end_date) {
-						this.listEntryForm.end_date = this.utilities.APIDateFormatter(new Date(data.end_date));
-					}
-				});
+				this.isUpdate = true;
+				this.listEntryForm.active_status = data.active_status;
+				this.listEntryForm.owner_status = data.owner_status;
+				this.listEntryForm.score = data.score;
+				this.listEntryForm.reread = data.reread;
+				this.listEntryForm.notes = data.notes;
+				if (data.start_date) {
+					this.listEntryForm.start_date = this.utilities.APIDateFormatter(new Date(data.start_date));
+				}
+				if (data.end_date) {
+					this.listEntryForm.end_date = this.utilities.APIDateFormatter(new Date(data.end_date));
+				}
+			});
 		});
 	}
 
@@ -153,45 +141,30 @@ export class ListEntryModalComponent {
 		}
 
 		if (this.isUpdate) {
-			this.service
-				.updateListEntry(this.bookData.isbn, this.listEntryForm)
-				.pipe(
-					catchError(() => {
-						this.toastService.sendError("Unknown error response. Unable to update entry.");
-						return of(null);
-					})
-				)
-				.subscribe((data) => {
-					if (data === null) {
-						return;
-					}
-
-					this.toastService.sendSuccess("Updated entry!");
-					this.close();
-				});
-			return;
-		}
-
-		this.service
-			.addListEntry(this.bookData.isbn, this.listEntryForm)
-			.pipe(
-				catchError(() => {
-					this.toastService.sendError("Unknown error response. Unable to save entry.");
-					return of(null);
-				})
-			)
-			.subscribe((data) => {
+			this.service.updateListEntry(this.bookData.isbn, this.listEntryForm).subscribe((data) => {
 				if (data === null) {
 					return;
 				}
 
-				this.toastService.sendSuccess("Added entry!");
+				this.toastService.sendSuccess("Updated entry!");
 				this.close();
 			});
+			return;
+		}
+
+		this.service.addListEntry(this.bookData.isbn, this.listEntryForm).subscribe((data) => {
+			if (data === null) {
+				return;
+			}
+
+			this.toastService.sendSuccess("Added entry!");
+			this.isUpdate = true;
+			this.close();
+		});
 	}
 
-	close(isDeleted = false) {
-		if (isDeleted) {
+	close() {
+		if (!this.isUpdate) {
 			this.dialogRef.close(null);
 			return;
 		}
@@ -199,26 +172,14 @@ export class ListEntryModalComponent {
 	}
 
 	deleteEntry() {
-		this.service
-			.removeListEntry(this.bookData.isbn)
-			.pipe(
-				catchError((err) => {
-					if (err.status === 404) {
-						this.toastService.sendError("Entry does not exist");
-					} else {
-						this.toastService.sendError("Unknown error response");
-					}
+		this.service.removeListEntry(this.bookData.isbn).subscribe((data) => {
+			if (data === null) {
+				return;
+			}
 
-					return of(null);
-				})
-			)
-			.subscribe((data) => {
-				if (data === null) {
-					return;
-				}
-
-				this.toastService.sendSuccess("Entry removed from list");
-				this.close(true);
-			});
+			this.toastService.sendSuccess("Entry removed from list");
+			this.isUpdate = false;
+			this.close();
+		});
 	}
 }

@@ -1,19 +1,19 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { catchError, of } from "rxjs";
-import { BookData } from "../models/bookData";
-import { PublisherData } from "../models/publisherData";
-import { MetadataService } from "../services/metadata.service";
-import { MynewormAPIService } from "../services/myneworm-api.service";
-import { UtilitiesService } from "../services/utilities.service";
+import { BookData } from "../../models/bookData";
+import { PublisherData } from "../../models/publisherData";
+import { MetadataService } from "../../services/metadata.service";
+import { MynewormAPIService } from "../../services/myneworm-api.service";
+import { UtilitiesService } from "../../services/utilities.service";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
-import { ListEntryModalComponent } from "../shared/list-entry-modal/list-entry-modal.component";
-import { LocalCookiesService } from "../services/authentication/local-cookies.service";
-import { ListEntry } from "../models/ListEntry";
-import { ToastService } from "../services/toast.service";
+import { ListEntryModalComponent } from "../../shared/list-entry-modal/list-entry-modal.component";
+import { LocalCookiesService } from "../../services/authentication/local-cookies.service";
+import { ListEntry } from "../../models/ListEntry";
+import { ToastService } from "../../services/toast.service";
 
 @Component({
-	selector: "app-book-page",
+	selector: "book-page",
 	templateUrl: "./book-page.component.html",
 	styleUrls: ["./book-page.component.css"]
 })
@@ -106,7 +106,7 @@ export class BookPageComponent implements OnInit {
 		const listDialog = this.matDialog.open(ListEntryModalComponent, dialogConfig);
 
 		listDialog.afterClosed().subscribe((result) => {
-			this.hasExistingEntry = result !== null;
+			this.hasExistingEntry = result !== null && result !== undefined;
 		});
 	}
 }

@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { BookPageComponent } from "./book-page/book-page.component";
+import { BookPageComponent } from "./pages/book-page/book-page.component";
 import { HomePageComponent } from "./home-page/home-page.component";
 import { ImprintPageComponent } from "./imprint-page/imprint-page.component";
 import { ImprintIndexComponent } from "./imprint-index/imprint-index.component";

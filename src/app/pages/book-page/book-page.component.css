@@ -1,0 +1,82 @@
+.page-title {
+    border-bottom: 1px solid grey;
+    margin-bottom: 20px;
+}
+
+.book-cover {
+    width: 100%;
+}
+
+.aside-content {
+    margin-right: 2%;
+}
+
+.aside-btn-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 10px;
+    margin-bottom: 16px;
+}
+
+@media screen and (max-width: 1024px) {
+    .page-title {
+        text-align: center;
+    }
+    
+    .aside-btn-group {
+        flex-direction: column;
+    }
+
+    .aside-btn-group>.myneworm-btn:nth-child(n+2) {
+        margin-top: 10px;
+    }
+
+    .aside-content {
+        width: 25%;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .aside-content,
+    main {
+        width: 100%;
+    }
+
+    .aside-content {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        height: fit-content;
+    }
+
+    .book-cover {
+        width: 50%;
+    }
+
+    .aside-btn-group {
+        width: 48%;
+        margin-left: 1%;
+    }
+
+    .aside-info {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        border-bottom: 1px solid gray;
+    }
+
+    .format-label, .type-label {
+        width: 50%;
+    }
+
+    aside .myneworm-btn {
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+}
