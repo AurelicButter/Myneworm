@@ -1,4 +1,6 @@
 .list-entry-modal {
+    display: flex;
+    flex-direction: column;
     padding: 2% 3%;
     height: 100%;
     background-color: #ECEBF3;
@@ -7,6 +9,25 @@
 
 .modal-label {
     font-size: 0.941vw;
+}
+
+.close-wrapper {
+    height: inherit;
+}
+
+.modal-close {
+    font-size: larger;
+    color: gray;
+    transition: none;
+    border: 0;
+    padding: 0;
+    height: 36px;
+    width: 36px;
+}
+
+.modal-close:hover, .modal-close:active {
+    color: #ECEBF3 !important;
+    background-color: #0D98BA !important;
 }
 
 @media screen and (max-width: 1024px) {
@@ -109,4 +130,25 @@
 
 .modal-input-textarea {
     max-height: calc(46vh - 315px);
+}
+
+@media screen and (max-width: 768px) {
+    .col-6 {
+        width: 100%;
+    }
+    .modal-label {
+        font-size: medium;
+    }
+    .form-group:nth-child(n+2) {
+        margin-top: 0;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .modal-footer {
+        justify-content: space-evenly;
+    }
+    .modal-action {
+        margin-right: 0;
+    }    
 }

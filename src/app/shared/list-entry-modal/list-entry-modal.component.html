@@ -1,6 +1,9 @@
 <div class="list-entry-modal">
     <header class="modal-header">
         <h2>{{bookData.title}}</h2>
+        <div class="close-wrapper">
+            <button type="button" class="btn modal-close" (click)="close()">X</button>
+        </div>        
     </header>
     <div class="modal-content">
         <div class="row modal-row">
