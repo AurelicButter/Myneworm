@@ -1,6 +1,6 @@
 {
 	"/api/*": {
-		"target": "https://myneworm.develop.katsurin.com/",
+		"target": "https://myneworm.katsurin.com/",
 		"logLevel": "debug",
 		"changeOrigin": true,
 		"secure": true

@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { BookPageComponent } from "./book-page/book-page.component";
+import { BookPageComponent } from "./pages/book-page/book-page.component";
 import { HomePageComponent } from "./home-page/home-page.component";
 import { ImprintPageComponent } from "./imprint-page/imprint-page.component";
 import { ImprintIndexComponent } from "./imprint-index/imprint-index.component";
@@ -41,7 +41,9 @@ const routes: Routes = [
 	{
 		path: "guidelines",
 		loadComponent: () =>
-			import("./database-guidelines/database-guidelines.component").then((m) => m.DatabaseGuidelinesComponent)
+			import("./pages/database-guidelines/database-guidelines.component").then(
+				(m) => m.DatabaseGuidelinesComponent
+			)
 	},
 	{ path: "login", component: LoginPageComponent },
 	{ path: "register", component: RegistrationPageComponent },
@@ -72,7 +74,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-	imports: [RouterModule.forRoot(routes)],
+	imports: [RouterModule.forRoot(routes, { paramsInheritanceStrategy: "always" })],
 	exports: [RouterModule]
 })
 export class AppRoutingModule {}

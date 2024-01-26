@@ -8,5 +8,5 @@ function zeroAdder(value: number) {
 export function formatDateString(dateInput: string) {
 	const dateObj = new Date(dateInput);
 
-	return `${zeroAdder(dateObj.getDate())}-${zeroAdder(dateObj.getMonth())}-${dateObj.getFullYear()}`;
+	return `${zeroAdder(dateObj.getDate())}-${zeroAdder(dateObj.getMonth() + 1)}-${dateObj.getFullYear()}`;
 }

@@ -5,7 +5,7 @@ import { FormsModule } from "@angular/forms";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { HomePageModule } from "./home-page/home-page.module";
-import { BookPageModule } from "./book-page/book-page.module";
+import { BookPageModule } from "./pages/book-page/book-page.module";
 import { ImprintPageModule } from "./imprint-page/imprint-page.module";
 import { HttpClientModule } from "@angular/common/http";
 import { SupportPageModule } from "./support-page/support-page.module";

@@ -263,38 +263,72 @@ export class MynewormAPIService {
 	}
 
 	getListEntry(isbn: string, userID: string) {
-		return this.http.get<ListEntry>(`${environment.API_ADDRESS}/lists/${isbn}/${userID}`);
+		return this.http.get<ListEntry>(`${environment.API_ADDRESS}/lists/${isbn}/${userID}`).pipe(
+			catchError((err) => {
+				if (err.status !== 404) {
+					this.toastService.sendError("Unknown error response");
+				}
+
+				return of(null);
+			})
+		);
 	}
 
 	addListEntry(isbn: string, data: ListEntry) {
-		return this.http.post(
-			`${environment.API_ADDRESS}/lists/${isbn}`,
-			{ list: data },
-			{
-				withCredentials: true,
-				observe: "body",
-				responseType: "json"
-			}
-		);
+		return this.http
+			.post(
+				`${environment.API_ADDRESS}/lists/${isbn}`,
+				{ list: data },
+				{
+					withCredentials: true,
+					observe: "body",
+					responseType: "json"
+				}
+			)
+			.pipe(
+				catchError(() => {
+					this.toastService.sendError("Unknown error response. Unable to save entry.");
+					return of(null);
+				})
+			);
 	}
 
 	updateListEntry(isbn: string, data: ListEntry) {
-		return this.http.patch(
-			`${environment.API_ADDRESS}/lists/${isbn}`,
-			{ list: data },
-			{
-				withCredentials: true,
-				observe: "body",
-				responseType: "json"
-			}
-		);
+		return this.http
+			.patch(
+				`${environment.API_ADDRESS}/lists/${isbn}`,
+				{ list: data },
+				{
+					withCredentials: true,
+					observe: "body",
+					responseType: "json"
+				}
+			)
+			.pipe(
+				catchError(() => {
+					this.toastService.sendError("Unknown error response. Unable to update entry.");
+					return of(null);
+				})
+			);
 	}
 
 	removeListEntry(isbn: string) {
-		return this.http.delete(`${environment.API_ADDRESS}/lists/${isbn}`, {
-			withCredentials: true,
-			observe: "body",
-			responseType: "json"
-		});
+		return this.http
+			.delete(`${environment.API_ADDRESS}/lists/${isbn}`, {
+				withCredentials: true,
+				observe: "body",
+				responseType: "json"
+			})
+			.pipe(
+				catchError((err: any) => {
+					if (err.status === 404) {
+						this.toastService.sendError("Entry does not exist");
+					} else {
+						this.toastService.sendError("Unknown error response");
+					}
+
+					return of(null);
+				})
+			);
 	}
 }

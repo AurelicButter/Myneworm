@@ -11,18 +11,23 @@ export const FAQData = {
 	Database: [
 		[
 			"What is accepted in Myneworm's Database?",
-			`We currently accept any English translations for manga and light novels based on our database guidelines. You can find the details on
-			our guideline page <a href='/guidelines'>here</a>.`
+			`We accept any English translations for manga, light novels, and their adjacent book-based media that meets our database guidelines. Details on 
+			what we define as acceptable can be found on our <a href='/guidelines'>database guidelines</a> page.`
 		],
 		[
 			"Why can't I find X title?",
-			`As stated previously, we currently track English translations. If a title does not meet our guidelines, then we do not track it. However,
-			if the title meets our guidelines and isn't on the site yet, we might have missed it! You can submit a data correction form
-			<a href='/faq'>here</a>. A moderator will review and potentially approve your changes!`
+			`Depending on the title, we might have missed it! Please review our <a href='/guidelines'>database guidelines</a> to double check if 
+			it qualifies. If it does, <s>submit a data correction form</s> reach out to a Myneworm moderator to review and potentially approve your changes!`
 		],
 		[
 			"Why aren't J-Novel Club Parts tracked",
-			"While the J-Novel parts are English translated, they do not have ISBN numbers or a whole book. Thus don't meet the minimum requirements."
+			"J-Novel parts do not contain ISBN numbers or are an entire book and are ineligible."
+		]
+	],
+	Lists: [
+		[
+			"How do I add/remove books from my wishlist?",
+			"To add a book to your wishlist, you'll need to mark the book as 'Wanted' in the owner status. To remove the book, change the owner status so that 'Wanted' is not selected."
 		]
 	],
 	"Other Questions": [

@@ -1,0 +1,43 @@
+<table *ngIf="dataSource" mat-table [dataSource]="dataSource" multiTemplateDataRows class="search-results">
+    <ng-container matColumnDef="create_date">
+        <th mat-header-cell *matHeaderCellDef>Submitted</th>
+        <td class="result-table-cell" mat-cell *matCellDef="let element">
+            <p>{{dateFormat(element.create_date)}}</p>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="isbn">
+        <th mat-header-cell *matHeaderCellDef>ISBN</th>
+        <td class="result-table-cell" mat-cell *matCellDef="let element">
+            <p>{{element.isbn}}</p>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef>Book</th>
+        <td class="result-table-cell" mat-cell *matCellDef="let element">
+            <p>{{bookInfoTitle.get(element.isbn)}}</p>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="update_date">
+        <th mat-header-cell *matHeaderCellDef>Updated</th>
+        <td class="result-table-cell" mat-cell *matCellDef="let element">
+            <p>{{dateFormat(element.update_date)}}</p>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="approved">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td class="type-col" mat-cell *matCellDef="let element">
+            <span class="status-tag" [ngClass]="determineStatusCSS(element)">{{determineStatus(element)}}</span>
+        </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns" class="result-table-header"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns" class="result-row" (click)="goToCorrection(row.correction_id, row.isbn)"></tr>
+    <tr class="mat-row result-row no-results-hover" *matNoDataRow>
+        <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+            <strong>
+                <p class="no-results">
+                    No corrections availible to review...
+                </p>
+            </strong>
+        </td>
+    </tr>
+</table>
