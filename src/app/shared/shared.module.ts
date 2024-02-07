@@ -10,6 +10,7 @@ import { FormsModule } from "@angular/forms";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from "@angular/material/core";
 import { MatCardModule } from "@angular/material/card";
+import { UserActionDropdownComponent } from "./user-action-dropdown/user-action-dropdown.component";
 
 @NgModule({
 	imports: [
@@ -24,6 +25,6 @@ import { MatCardModule } from "@angular/material/card";
 	],
 	providers: [LazyLoadStyleService],
 	exports: [CalendarManagerModule, DatepickerModalModule, ToastMessagesComponent],
-	declarations: [ListEntryModalComponent]
+	declarations: [ListEntryModalComponent, UserActionDropdownComponent]
 })
 export class SharedModule {}
