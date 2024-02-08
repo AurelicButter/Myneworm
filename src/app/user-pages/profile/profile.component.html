@@ -1,4 +1,4 @@
-<div class="profile-flex">
+<div class="profile-flex" *ngIf="profileInfo !== undefined">
     <aside class="aside-width">
         <img src='{{getAvatar()}}'>
         <p><b>Last Online:</b> {{this.isOnlineText()}}</p>
@@ -14,8 +14,9 @@
     <div class="profile-container">
         <div class="user-header">
             <div class="username-display">
-                <h2 *ngIf="profileInfo.display_name" class="aside-offset">{{profileInfo.display_name}} (&#64;{{profileInfo.username}})</h2>
-                <h2 *ngIf="profileInfo.display_name === null" class="aside-offset">{{profileInfo.username}}</h2>
+                <h2 *ngIf="profileInfo.display_name" class="aside-offset display-name">{{profileInfo.display_name}} (&#64;{{profileInfo.username}})</h2>
+                <h2 *ngIf="profileInfo.display_name === null" class="aside-offset display-name">{{profileInfo.username}}</h2>
+                <user-action-dropdown class="action-drp-div"></user-action-dropdown>
             </div>
             <div class="user-about-me aside-offset">
                 <p *ngIf="profileInfo.about_me">{{profileInfo.about_me}}</p>

@@ -1,5 +1,4 @@
 import { NgModule } from "@angular/core";
-import { BrowserModule } from "@angular/platform-browser";
 import { LazyLoadStyleService } from "../services/lazy-load-style.service";
 
 import { CalendarManagerModule } from "./calendar-manager/calendar-manager.module";
@@ -11,20 +10,22 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from "@angular/material/core";
 import { MatCardModule } from "@angular/material/card";
 import { UserActionDropdownComponent } from "./user-action-dropdown/user-action-dropdown.component";
+import { CommonModule } from "@angular/common";
 
 @NgModule({
 	imports: [
-		BrowserModule,
+		CommonModule,
 		CalendarManagerModule,
 		DatepickerModalModule,
 		ToastMessagesComponent,
+		UserActionDropdownComponent,
 		FormsModule,
 		MatDatepickerModule,
 		MatNativeDateModule,
 		MatCardModule
 	],
 	providers: [LazyLoadStyleService],
-	exports: [CalendarManagerModule, DatepickerModalModule, ToastMessagesComponent],
-	declarations: [ListEntryModalComponent, UserActionDropdownComponent]
+	exports: [CalendarManagerModule, DatepickerModalModule, ToastMessagesComponent, UserActionDropdownComponent],
+	declarations: [ListEntryModalComponent]
 })
 export class SharedModule {}

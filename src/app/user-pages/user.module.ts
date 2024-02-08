@@ -12,6 +12,7 @@ import { UserListComponent } from "./user-list/user-list.component";
 import { TableDisplayComponent } from "./user-list/table-display/table-display.component";
 import { MatTableModule } from "@angular/material/table";
 import { MatSortModule } from "@angular/material/sort";
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
 	declarations: [
@@ -22,6 +23,6 @@ import { MatSortModule } from "@angular/material/sort";
 		UserListComponent,
 		TableDisplayComponent
 	],
-	imports: [CommonModule, RouterModule, FormsModule, MatTableModule, MatSortModule, UserRoutingModule]
+	imports: [CommonModule, RouterModule, FormsModule, MatTableModule, MatSortModule, UserRoutingModule, SharedModule]
 })
 export class UserModule {}

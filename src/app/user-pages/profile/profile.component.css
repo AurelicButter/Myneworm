@@ -2,6 +2,12 @@
     margin-left: 40px;
 }
 
+.display-name {
+    display: inline-flex;
+    align-items: flex-end;
+    height: inherit;
+}
+
 .aside-width {
     width: clamp(150px, 20%, 250px);
 }
@@ -35,10 +41,18 @@ aside > img {
 }
 
 .username-display {
-    margin-top: 30px;
+    margin-top: 20px;
     border-bottom: 2px solid gray;
-    width: -webkit-fill-available;
+    width: 100%;
     overflow-wrap: anywhere;
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    align-items: center;
+}
+
+.action-drp-div {
+    height: inherit;
 }
 
 .profile-container {
