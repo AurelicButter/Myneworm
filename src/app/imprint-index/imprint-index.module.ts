@@ -1,10 +1,10 @@
 import { NgModule } from "@angular/core";
-import { BrowserModule } from "@angular/platform-browser";
 import { ImprintIndexComponent } from "./imprint-index.component";
+import { CommonModule } from "@angular/common";
 
 @NgModule({
 	declarations: [ImprintIndexComponent],
-	imports: [BrowserModule],
+	imports: [CommonModule],
 	exports: [ImprintIndexComponent]
 })
 export class ImprintIndexModule {}
