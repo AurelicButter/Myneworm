@@ -1,11 +1,11 @@
 <!--
     Only appear when the user is a moderator+
 -->
-<button class="btn myneworm-btn action-drp-btn" id="action-drp-btn" data-toggle="dropdown" aria-haspopup="true"
-    aria-expanded="false">
+<button class="btn myneworm-btn action-drp-btn" [ngClass]="{'active': showMenu }" id="action-drp-btn" data-toggle="dropdown" aria-haspopup="true"
+    aria-expanded="false" (click)="changeMenuDisplay()">
     ...
 </button>
-<div class="action-drp-menu" aria-labelledby="action-drp-btn">
+<div class="action-drp-menu" [ngClass]="{'active': showMenu }" aria-labelledby="action-drp-btn">
     <ul>
         <li class="action-drp-item">
             Report User

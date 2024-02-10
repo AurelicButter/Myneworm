@@ -9,5 +9,11 @@ import { Component } from "@angular/core";
 	imports: [CommonModule]
 })
 export class UserActionDropdownComponent {
+	showMenu = false;
+
 	constructor() {}
+
+	changeMenuDisplay() {
+		this.showMenu = !this.showMenu;
+	}
 }
