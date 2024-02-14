@@ -157,6 +157,14 @@ export class MynewormAPIService {
 		);
 	}
 
+	getUserByID(userID: string) {
+		return this.http.get<UserData>(`${environment.API_ADDRESS}/user/byID/${userID}`).pipe(
+			catchError((err: any) => {
+				return this.catchCommonErrors(err);
+			})
+		);
+	}
+
 	getUser(username: string) {
 		return this.http.get<UserData>(`${environment.API_ADDRESS}/user/${username}`).pipe(
 			catchError((err: any) => {

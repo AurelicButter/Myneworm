@@ -9,6 +9,7 @@ import { UserReportComponent } from "./user-report/user-report.component";
 import { BookCorrectionLandingComponent } from "./book-correction-landing/book-correction-landing.component";
 import { MatTableModule } from "@angular/material/table";
 import { BookCorrectionComponent } from "./book-correction/book-correction.component";
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
 	declarations: [
@@ -20,6 +21,6 @@ import { BookCorrectionComponent } from "./book-correction/book-correction.compo
 		BookCorrectionLandingComponent,
 		BookCorrectionComponent
 	],
-	imports: [CommonModule, AdminRoutingModule, MatTableModule]
+	imports: [CommonModule, AdminRoutingModule, MatTableModule, FormsModule]
 })
 export class AdminModule {}

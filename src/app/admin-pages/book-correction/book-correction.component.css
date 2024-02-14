@@ -1,0 +1,100 @@
+.linked-user {
+    text-decoration: none;
+    color: #0D98BA;
+}
+
+.correction-description {
+    display: flex;
+    justify-content: space-around;
+}
+
+.correction-info {
+    width: 50%;
+}
+
+.correction-display {
+    margin-bottom: 20px;
+}
+
+.correction-title {
+    border-bottom: 2px solid grey;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    padding-bottom: 6px;
+}
+
+.correction-title > h2 {
+    margin: 0;
+}
+
+.correction-section {
+    margin-bottom: 10px;
+}
+
+.correction-comparison {
+    display: flex;
+    justify-content: space-around;
+}
+
+.correction-field {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.correction-label {
+    font-weight: bold;
+    font-size: larger;
+    border-bottom: 2px solid grey;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.correction-label-inner {
+    font-weight: 600;
+}
+
+.correction-input {
+    background-color: white;
+}
+
+textarea.correction-input {
+    min-height: 100px;
+}
+
+img.correction-input {
+    width: auto;
+    height: 450px;
+}
+
+.no-correction {
+    font-size: large;
+    font-weight: 400;
+    margin: 0;
+}
+
+.info-label {
+    font-weight: 500;
+}
+
+.status-tag {
+    padding: 8px;
+    border-radius: 6px;
+    margin-left: 25px;
+}
+
+.in-progress {
+    background-color: lightgray;
+}
+
+.approved {
+    background-color: green;
+    color: white;
+}
+
+.denied {
+    background-color: red;
+    color: white;
+}
