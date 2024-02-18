@@ -5,7 +5,6 @@
 
 .correction-description {
     display: flex;
-    justify-content: space-around;
 }
 
 .correction-info {
@@ -97,4 +96,13 @@ img.correction-input {
 .denied {
     background-color: red;
     color: white;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.button-container > .btn {
+    margin-left: 10px;
 }

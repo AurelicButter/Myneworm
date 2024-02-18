@@ -9,6 +9,8 @@ import { BookFormat } from "src/app/models/BookFormat";
 import { BookType } from "src/app/models/BookType";
 import { ImprintData } from "src/app/models/imprintData";
 import { UtilitiesService } from "src/app/services/utilities.service";
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
+import { ModeratorInputModalComponent } from "./moderator-input-modal/moderator-input-modal.component";
 
 @Component({
 	selector: "book-correction",
@@ -30,7 +32,8 @@ export class BookCorrectionComponent {
 		private route: ActivatedRoute,
 		private router: Router,
 		private adminService: MynewormAdminService,
-		public utilities: UtilitiesService
+		public utilities: UtilitiesService,
+		private matDialog: MatDialog
 	) {}
 
 	ngOnInit() {
@@ -90,5 +93,18 @@ export class BookCorrectionComponent {
 			return "denied";
 		}
 		return "in-progress";
+	}
+
+	openModeratorModal(action: string): void {
+		const dialogConfig = new MatDialogConfig();
+		dialogConfig.id = "moderator-input-modal";
+
+		dialogConfig.height = "60%";
+		dialogConfig.width = "55%";
+		dialogConfig.data = {
+			action: action
+		};
+
+		this.matDialog.open(ModeratorInputModalComponent, dialogConfig);
 	}
 }

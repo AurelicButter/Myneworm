@@ -13,26 +13,23 @@
             </p>
             <p>{{correctionData.comment}}</p>
         </div>
-        <div class="correction-info">
+        <div class="correction-info" *ngIf="correctionData.approved !== null">
             <p class="info-label">Reviewed by: </p>
             <p>{{correctionData.mod_note}}</p>
         </div>
     </div>
     <form>
-        <div class="correction-section">
+        <div class="correction-section" *ngIf="correctionData">
             <label class="correction-label">Title</label>
-            <div class="correction-comparison" *ngIf="correctionData.title">
+            <div class="correction-comparison">
                 <div class="correction-field">
                     <label class="correction-label-inner">New</label>
                     <input class="form-control correction-input" type="text" value="{{correctionData.title}}" disabled>
                 </div>
                 <div class="correction-field">
                     <label class="correction-label-inner">Old</label>
-                    <input class="form-control correction-input" type="text" value="{{bookData.title}}" disabled>
+                    <p class="correction-input">{{bookData.title}}</p>
                 </div>
-            </div>
-            <div class="correction-comparison" *ngIf="!correctionData.title">
-                <p class="no-correction">No correction</p>
             </div>
         </div>
         <div class="correction-section">
@@ -57,7 +54,8 @@
                 </div>
                 <div class="correction-field">
                     <label class="correction-label-inner">Old</label>
-                    <textarea class="form-control correction-input" value="{{bookData.description}}" disabled></textarea>
+                    <p *ngIf="bookData.description !== '' && bookData.description !== null" [innerHTML]="bookData.description"></p>
+                    <p *ngIf="bookData.description === '' || bookData.description === null">No description available.</p>
                 </div>
             </div>
         </div>
@@ -74,7 +72,7 @@
                 </div>
             </div>
         </div>
-        <div class="correction-section">
+        <div class="correction-section" *ngIf="correctionData.publisher_id">
             <label class="correction-label">Imprint</label>
             <div class="correction-comparison">
                 <div class="correction-field">
@@ -97,7 +95,7 @@
                 </div>
             </div>
         </div>
-        <div class="correction-section">
+        <div class="correction-section" *ngIf="correctionData.book_type">
             <label class="correction-label">Book Type</label>
             <div class="correction-comparison">
                 <div class="correction-field">
@@ -120,7 +118,7 @@
                 </div>
             </div>
         </div>
-        <div class="correction-section">
+        <div class="correction-section" *ngIf="correctionData.format_name">
             <label class="correction-label">Format</label>
             <div class="correction-comparison">
                 <div class="correction-field">
@@ -152,4 +150,8 @@
     </form>
 </div>
 
-<a class="btn btn-lg myneworm-btn" role="button" (click)="returnPrevPage()">Go Back</a>
+<div class="button-container">
+    <a class="btn btn-lg myneworm-btn" role="button" (click)="returnPrevPage()">Go Back</a>
+    <a class="btn btn-lg btn-danger" role="button" (click)="openModeratorModal('reject')">Reject</a>
+    <a class="btn btn-lg btn-success" role="button" (click)="openModeratorModal('approve')">Approve</a>
+</div>
