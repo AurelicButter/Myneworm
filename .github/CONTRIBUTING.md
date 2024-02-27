@@ -2,13 +2,13 @@
 
 ## Guidelines
 
-Contributions, wheither it is code, bug reporting, or documentation, is always welcome. Just fork, code, commit, and pull request!
+Contributions, whether it is code, bug reporting, or documentation, is always welcome. Just fork, code, commit, and pull request!
 
 For coding standards, we use ESLint and Prettier to ensure everything is good. While not required in your editor of choice, using ESLint while developing is highly recommended as Prettier will prevent any commit if it fails to fix/meet with the current code standards.
 
 ### Reporting Bugs and Issues
 
-Bug reporting is handled through the issue tracker on the [GitHub repository](https://github.com/Butterstroke/Myneworm/issues/new/choose) and fixes are tracked on the [Myneworm kanboard](https://kanboard.katsurin.com/?controller=BoardViewController&action=readonly&token=00ab148e01a355885744e79894b444bef14000e35e8459ec7e66848fa9fa).
+Bug reporting is handled through the issue tracker on the [GitHub repository](https://github.com/AurelicButter/Myneworm/issues/new/choose) and fixes are tracked on the [Myneworm kanboard](https://kanboard.katsurin.com/?controller=BoardViewController&action=readonly&token=00ab148e01a355885744e79894b444bef14000e35e8459ec7e66848fa9fa).
 
 For bugs and issues, please use the bug report template and fill out as much useful information as possible to help replicate and help fix the issues you have found.
 
@@ -16,7 +16,7 @@ For bugs and issues, please use the bug report template and fill out as much use
 
 To setup Myneworm locally, please refer to the following steps in order to setup correctly.
 
-1. Install dependancies & verify that Myneworm's API is online
+1. Install dependencies & verify that Myneworm's API is online
 2. Run `npm start` to build and launch the website
 3. Visit the address given on successful launch
 
@@ -29,7 +29,7 @@ To setup Myneworm locally, please refer to the following steps in order to setup
 5. Test your changes
    * There is automated testing for code quality with ESLint and Prettier. You can check your status with these checks through the `npm run lint` command.
    * However, there is no automated testing for visuals or functionality with the site at the moment. You will need to manually verify your edits before making a PR.
-6. Commit your changes and submit a [Pull Request](https://github.com/Butterstroke/Myneworm/pulls). 
+6. Commit your changes and submit a [Pull Request](https://github.com/AurelicButter/Myneworm/pulls). 
 > All changes are staged on the development branch. Please make sure you are merging there before submitting!
 
 ### Naming Conventions
@@ -54,4 +54,4 @@ Any pull request with the following is are acceptable contributions:
 
 Pull requests that just consist of the following will be automatically rejected unless with good reason:
 * Minor spelling mistakes or word changes
-* Dependancy updates
+* Dependency updates
