@@ -24,11 +24,11 @@
             <div class="correction-comparison">
                 <div class="correction-field">
                     <label class="correction-label-inner">New</label>
-                    <input class="form-control correction-input" type="text" value="{{correctionData.title}}" disabled>
+                    <input class="form-control correction-input title-input" type="text" name="title" [(ngModel)]="correctionData.title" disabled>
                 </div>
                 <div class="correction-field">
                     <label class="correction-label-inner">Old</label>
-                    <p class="correction-input">{{bookData.title}}</p>
+                    <input class="form-control correction-input title-input" type="text" value="{{bookData.title}}" disabled>
                 </div>
             </div>
         </div>
@@ -50,7 +50,7 @@
             <div class="correction-comparison">
                 <div class="correction-field">
                     <label class="correction-label-inner">New</label>
-                    <textarea class="form-control correction-input" value="{{correctionData.description}}" disabled></textarea>
+                    <textarea class="form-control correction-input" [formControl]="correctionDescription"></textarea>
                 </div>
                 <div class="correction-field">
                     <label class="correction-label-inner">Old</label>
@@ -58,17 +58,19 @@
                     <p *ngIf="bookData.description === '' || bookData.description === null">No description available.</p>
                 </div>
             </div>
+            <label class="correction-label">Description Preview</label>
+            <div [innerHTML]="correctionData.description"></div>
         </div>
         <div class="correction-section">
             <label class="correction-label">Release Date</label>
             <div class="correction-comparison">
                 <div class="correction-field">
                     <label class="correction-label-inner">New</label>
-                    <input class="form-control correction-input" type="text" value="{{correctionData.release_date}}" disabled>
+                    <input class="form-control correction-input" type="date" name="releaseDate" [(ngModel)]="correctionData.release_date">
                 </div>
                 <div class="correction-field">
                     <label class="correction-label-inner">Old</label>
-                    <input class="form-control correction-input" type="text" value="{{bookData.release_date}}" disabled>
+                    <input class="form-control correction-input" type="date" value="{{bookData.release_date.split('T')[0]}}" disabled>
                 </div>
             </div>
         </div>
@@ -76,7 +78,7 @@
             <label class="correction-label">Imprint</label>
             <div class="correction-comparison">
                 <div class="correction-field">
-                    <label class="correction-label-inner">New</label>
+                    <label class="correction-label-inner" for="new-imprint">New</label>
                     <select class="form-select correction-input" name="new-imprint" [(ngModel)]="correctionData.publisher_id" disabled>
                         <option value=""></option>
                         <option *ngFor="let publisher of publishers" [ngValue]="publisher.publisher_id">
@@ -85,7 +87,7 @@
                     </select> 
                 </div>
                 <div class="correction-field">
-                    <label class="correction-label-inner">Old</label>
+                    <label class="correction-label-inner" for="old-imprint">Old</label>
                     <select class="form-select correction-input" name="old-imprint" [(ngModel)]="bookData.publisher_id" disabled>
                         <option value=""></option>
                         <option *ngFor="let publisher of publishers" [ngValue]="publisher.publisher_id">
@@ -99,7 +101,7 @@
             <label class="correction-label">Book Type</label>
             <div class="correction-comparison">
                 <div class="correction-field">
-                    <label class="correction-label-inner">New</label>
+                    <label class="correction-label-inner" for="new-type">New</label>
                     <select class="form-select correction-input" name="new-type" [(ngModel)]="correctionData.book_type" disabled>
                         <option value=""></option>
                         <option *ngFor="let type of types" [ngValue]="type.book_type_name">
@@ -108,7 +110,7 @@
                     </select> 
                 </div>
                 <div class="correction-field">
-                    <label class="correction-label-inner">Old</label>
+                    <label class="correction-label-inner" for="old-type">Old</label>
                     <select class="form-select correction-input" name="old-type" [(ngModel)]="bookData.book_type_name" disabled>
                         <option value=""></option>
                         <option *ngFor="let type of types" [ngValue]="type.book_type_name">
@@ -122,7 +124,7 @@
             <label class="correction-label">Format</label>
             <div class="correction-comparison">
                 <div class="correction-field">
-                    <label class="correction-label-inner">New</label>
+                    <label class="correction-label-inner" for="new-format">New</label>
                     <select class="form-select correction-input" name="new-format" [(ngModel)]="correctionData.format_name" disabled>
                         <option value=""></option>
                         <option *ngFor="let format of formats" [ngValue]="format.format_name">
@@ -131,7 +133,7 @@
                     </select> 
                 </div>
                 <div class="correction-field">
-                    <label class="correction-label-inner">Old</label>
+                    <label class="correction-label-inner" for="old-format">Old</label>
                     <select class="form-select correction-input" name="old-format" [(ngModel)]="bookData.format_name" disabled>
                         <option value=""></option>
                         <option *ngFor="let format of formats" [ngValue]="format.format_name">

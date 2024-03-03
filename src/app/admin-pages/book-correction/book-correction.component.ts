@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, SecurityContext } from "@angular/core";
 import { Location } from "@angular/common";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MynewormAPIService } from "src/app/services/myneworm-api.service";
@@ -11,6 +11,8 @@ import { ImprintData } from "src/app/models/imprintData";
 import { UtilitiesService } from "src/app/services/utilities.service";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { ModeratorInputModalComponent } from "./moderator-input-modal/moderator-input-modal.component";
+import { FormControl } from "@angular/forms";
+import { DomSanitizer } from "@angular/platform-browser";
 
 @Component({
 	selector: "book-correction",
@@ -25,6 +27,7 @@ export class BookCorrectionComponent {
 	types: BookType[];
 	formats: BookFormat[];
 	publishers: ImprintData[];
+	correctionDescription = new FormControl("");
 
 	constructor(
 		private service: MynewormAPIService,
@@ -33,8 +36,14 @@ export class BookCorrectionComponent {
 		private router: Router,
 		private adminService: MynewormAdminService,
 		public utilities: UtilitiesService,
-		private matDialog: MatDialog
-	) {}
+		private matDialog: MatDialog,
+		private sanitizer: DomSanitizer
+	) {
+		this.correctionDescription.valueChanges.subscribe((value) => {
+			this.sanitizeInput(value);
+		});
+		this.correctionDescription.disable();
+	}
 
 	ngOnInit() {
 		this.route.params.subscribe((data) => {
@@ -44,6 +53,12 @@ export class BookCorrectionComponent {
 				}
 
 				this.correctionData = correction;
+				console.log(this.correctionData);
+
+				if (this.correctionData.description !== undefined) {
+					this.correctionDescription.setValue(this.correctionData.description);
+				}
+
 				this.service.getUserByID(correction.submitter_id.toString()).subscribe((user) => {
 					if (user === null) {
 						this.submitterUsername = `Removed User (ID:${correction.submitter_id})`;
@@ -59,6 +74,7 @@ export class BookCorrectionComponent {
 				}
 
 				this.bookData = bookInfo;
+				console.log(this.bookData);
 				this.isReady++;
 			});
 		});
@@ -106,5 +122,12 @@ export class BookCorrectionComponent {
 		};
 
 		this.matDialog.open(ModeratorInputModalComponent, dialogConfig);
+	}
+
+	sanitizeInput(value: any) {
+		if (this.correctionData) {
+			const sanitizedValue = this.sanitizer.sanitize(SecurityContext.HTML, value);
+			this.correctionData.description = sanitizedValue ? sanitizedValue.toString() : "";
+		}
 	}
 }

@@ -7,6 +7,10 @@
     display: flex;
 }
 
+.title-input {
+    text-align: center;
+}
+
 .correction-info {
     width: 50%;
 }
@@ -55,10 +59,6 @@
     font-weight: 600;
 }
 
-.correction-input {
-    background-color: white;
-}
-
 textarea.correction-input {
     min-height: 100px;
 }
@@ -66,6 +66,8 @@ textarea.correction-input {
 img.correction-input {
     width: auto;
     height: 450px;
+    background-color: transparent;
+    border: transparent;
 }
 
 .no-correction {
