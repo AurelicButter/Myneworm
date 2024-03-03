@@ -53,7 +53,6 @@ export class BookCorrectionComponent {
 				}
 
 				this.correctionData = correction;
-				console.log(this.correctionData);
 
 				if (this.correctionData.description !== undefined) {
 					this.correctionDescription.setValue(this.correctionData.description);
@@ -74,7 +73,6 @@ export class BookCorrectionComponent {
 				}
 
 				this.bookData = bookInfo;
-				console.log(this.bookData);
 				this.isReady++;
 			});
 		});
