@@ -13,6 +13,7 @@ import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { ModeratorInputModalComponent } from "./moderator-input-modal/moderator-input-modal.component";
 import { FormControl } from "@angular/forms";
 import { DomSanitizer } from "@angular/platform-browser";
+import * as moment from "moment";
 
 @Component({
 	selector: "book-correction",
@@ -24,6 +25,7 @@ export class BookCorrectionComponent {
 	correctionData: BookCorrectionEntry;
 	isReady = 0;
 	submitterUsername: string;
+	modUsername = "";
 	types: BookType[];
 	formats: BookFormat[];
 	publishers: ImprintData[];
@@ -66,6 +68,15 @@ export class BookCorrectionComponent {
 					}
 					this.isReady++;
 				});
+				if (correction.approver_id) {
+					this.service.getUserByID(correction.approver_id.toString()).subscribe((user) => {
+						if (user === null) {
+							this.modUsername = `Removed User (ID:${correction.approver_id})`;
+						} else {
+							this.modUsername = user?.username;
+						}
+					});
+				}
 			});
 			this.service.getByISBN(data.isbn).subscribe((bookInfo) => {
 				if (!bookInfo) {
@@ -73,6 +84,8 @@ export class BookCorrectionComponent {
 				}
 
 				this.bookData = bookInfo;
+				this.bookData.release_date = moment(this.bookData.release_date.split("T")[0]).format("MM/DD/YYYY");
+
 				this.isReady++;
 			});
 		});
@@ -113,13 +126,21 @@ export class BookCorrectionComponent {
 		const dialogConfig = new MatDialogConfig();
 		dialogConfig.id = "moderator-input-modal";
 
-		dialogConfig.height = "60%";
-		dialogConfig.width = "55%";
+		dialogConfig.height = "50%";
+		dialogConfig.width = "50%";
 		dialogConfig.data = {
-			action: action
+			action: action,
+			correctionID: this.correctionData.correction_id,
+			isbn: this.correctionData.isbn
 		};
 
-		this.matDialog.open(ModeratorInputModalComponent, dialogConfig);
+		const modConfirmation = this.matDialog.open(ModeratorInputModalComponent, dialogConfig);
+
+		modConfirmation.afterClosed().subscribe((check) => {
+			if (check) {
+				this.router.navigate(["/admin/corrections/book"]);
+			}
+		});
 	}
 
 	sanitizeInput(value: any) {

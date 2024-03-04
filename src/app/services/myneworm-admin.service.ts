@@ -22,21 +22,33 @@ export class MynewormAdminService {
 		return this.http.get<BookCorrectionEntry>(`${environment.API_ADDRESS}/corrections/book/${correctionID}`);
 	}
 
-	approveBookCorrection(correctionID: string) {
-		return this.http.patch(`${environment.API_ADDRESS}/corrections/book/approve/${correctionID}`, {}).pipe(
-			catchError((err: any) => {
-				this.toastService.sendError("Caught server error. API has logged the issue.");
-				return of(null);
-			})
-		);
+	approveBookCorrection(correctionID: string, modNotes?: string) {
+		return this.http
+			.patch(
+				`${environment.API_ADDRESS}/corrections/book/approve/${correctionID}`,
+				{ correction: { note: modNotes } },
+				{ responseType: "text" }
+			)
+			.pipe(
+				catchError((err: any) => {
+					this.toastService.sendError("Caught server error. API has logged the issue.");
+					return of(null);
+				})
+			);
 	}
 
-	denyBookCorrection(correctionID: string) {
-		return this.http.patch(`${environment.API_ADDRESS}/corrections/book/deny/${correctionID}`, {}).pipe(
-			catchError((err: any) => {
-				this.toastService.sendError("Caught server error. API has logged the issue.");
-				return of(null);
-			})
-		);
+	denyBookCorrection(correctionID: string, modNotes?: string) {
+		return this.http
+			.patch(
+				`${environment.API_ADDRESS}/corrections/book/deny/${correctionID}`,
+				{ correction: { note: modNotes } },
+				{ responseType: "text" }
+			)
+			.pipe(
+				catchError((err: any) => {
+					this.toastService.sendError("Caught server error. API has logged the issue.");
+					return of(null);
+				})
+			);
 	}
 }

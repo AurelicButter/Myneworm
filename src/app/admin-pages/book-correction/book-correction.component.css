@@ -3,6 +3,24 @@
     color: #0D98BA;
 }
 
+.old-data-display {
+    display: flex;
+    align-items: center;
+}
+
+.hidden-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.correction-input, .old-data-display {
+    height: 40px;
+}
+
+.old-data-display > p {
+    margin: 0;
+}
+
 .correction-description {
     display: flex;
 }

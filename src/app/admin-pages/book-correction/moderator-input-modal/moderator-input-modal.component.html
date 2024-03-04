@@ -1,1 +1,13 @@
-<p>moderator-input-modal works!</p>
+<div class="moderator-confirm-modal">
+    <h3 class="modal-header">{{inputStatus}} Confirmation for ISBN {{modData.isbn}}</h3>
+    <div class="notes-input">
+        <form>
+            <label class="modal-label">Moderator Notes</label>
+            <textarea class="form-control" name="modNotes" [(ngModel)]="modNotes"></textarea>
+        </form>
+        <div class="button-display">
+            <button class="btn btn-success" (click)="updateCorrection()">Confirm</button>
+            <button class="btn btn-danger" (click)="close()">Cancel</button>
+        </div>
+    </div>    
+</div>
