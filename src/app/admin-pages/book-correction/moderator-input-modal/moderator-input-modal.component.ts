@@ -31,7 +31,7 @@ export class ModeratorInputModalComponent {
 					return;
 				}
 
-				this.toastService.sendSuccess("Approved the correction");
+				this.toastService.sendSuccess("Correction approved");
 				this.close(true);
 			});
 		} else {
@@ -40,7 +40,7 @@ export class ModeratorInputModalComponent {
 					return;
 				}
 
-				this.toastService.sendSuccess("Rejected the correction");
+				this.toastService.sendSuccess("Correction rejected");
 				this.close(true);
 			});
 		}
