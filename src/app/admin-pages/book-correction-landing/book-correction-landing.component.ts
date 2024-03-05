@@ -14,7 +14,6 @@ import { MynewormAdminService } from "src/app/services/myneworm-admin.service";
 export class BookCorrectionLandingComponent {
 	displayedColumns = ["isbn", "title", "create_date", "update_date", "approved"];
 	public dataSource: MatTableDataSource<BookCorrectionDisplayEntry>;
-	bookInfoTitle: Map<number, string> = new Map<number, string>();
 
 	constructor(
 		public utilities: UtilitiesService,
@@ -24,22 +23,19 @@ export class BookCorrectionLandingComponent {
 		private route: ActivatedRoute
 	) {
 		this.adminService.getAllBookCorrections().subscribe((data) => {
-			this.dataSource = new MatTableDataSource<BookCorrectionDisplayEntry>(data);
-		});
-	}
+			data.forEach((correction) => {
+				this.service.getByISBN(correction.isbn.toString()).subscribe((data) => {
+					if (data === null) {
+						correction.title = "Unknown Entry";
+					} else {
+						correction.title = `${data.title} (${this.utilities.formatReadable(data.format_name)}, ${this.utilities.formatReadable(
+							data.book_type_name
+						)})`;
+					}
+				});
+			});
 
-	getBookInfo(isbn: number) {
-		this.service.getByISBN(isbn.toString()).subscribe((data) => {
-			if (data === null) {
-				this.bookInfoTitle.set(isbn, "Unknown Entry");
-			} else {
-				this.bookInfoTitle.set(
-					isbn,
-					`${data.title} (${this.utilities.formatReadable(data.format_name)}, ${this.utilities.formatReadable(
-						data.book_type_name
-					)})`
-				);
-			}
+			this.dataSource = new MatTableDataSource<BookCorrectionDisplayEntry>(data);
 		});
 	}
 

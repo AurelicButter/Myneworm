@@ -14,7 +14,7 @@
     <ng-container matColumnDef="title">
         <th mat-header-cell *matHeaderCellDef>Book</th>
         <td class="result-table-cell" mat-cell *matCellDef="let element">
-            <p>{{bookInfoTitle.get(element.isbn)}}</p>
+            <p>{{element.title}}</p>
         </td>
     </ng-container>
     <ng-container matColumnDef="update_date">
@@ -35,7 +35,7 @@
         <td class="mat-cell" [attr.colspan]="displayedColumns.length">
             <strong>
                 <p class="no-results">
-                    No corrections availible to review...
+                    No corrections available to review...
                 </p>
             </strong>
         </td>

@@ -1,0 +1,128 @@
+.linked-user {
+    text-decoration: none;
+    color: #0D98BA;
+}
+
+.old-data-display {
+    display: flex;
+    align-items: center;
+}
+
+.hidden-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.correction-input, .old-data-display {
+    height: 40px;
+}
+
+.old-data-display > p {
+    margin: 0;
+}
+
+.correction-description {
+    display: flex;
+}
+
+.title-input {
+    text-align: center;
+}
+
+.correction-info {
+    width: 50%;
+}
+
+.correction-display {
+    margin-bottom: 20px;
+}
+
+.correction-title {
+    border-bottom: 2px solid grey;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    padding-bottom: 6px;
+}
+
+.correction-title > h2 {
+    margin: 0;
+}
+
+.correction-section {
+    margin-bottom: 10px;
+}
+
+.correction-comparison {
+    display: flex;
+    justify-content: space-around;
+}
+
+.correction-field {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.correction-label {
+    font-weight: bold;
+    font-size: larger;
+    border-bottom: 2px solid grey;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.correction-label-inner {
+    font-weight: 600;
+}
+
+textarea.correction-input {
+    min-height: 100px;
+}
+
+img.correction-input {
+    width: auto;
+    height: 450px;
+    background-color: transparent;
+    border: transparent;
+}
+
+.no-correction {
+    font-size: large;
+    font-weight: 400;
+    margin: 0;
+}
+
+.info-label {
+    font-weight: 500;
+}
+
+.status-tag {
+    padding: 8px;
+    border-radius: 6px;
+    margin-left: 25px;
+}
+
+.in-progress {
+    background-color: lightgray;
+}
+
+.approved {
+    background-color: green;
+    color: white;
+}
+
+.denied {
+    background-color: red;
+    color: white;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.button-container > .btn {
+    margin-left: 10px;
+}
