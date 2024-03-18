@@ -53,6 +53,8 @@ export class SearchPageComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
+		this.metaService.updateMetaTags("Search", "/search");
+
 		this.route.queryParams.subscribe((params) => {
 			if (params === null) {
 				return;
