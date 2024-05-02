@@ -6,7 +6,7 @@ import { ImprintPageComponent } from "./imprint-page/imprint-page.component";
 import { ImprintIndexComponent } from "./imprint-index/imprint-index.component";
 import { MissingPageComponent } from "./missing-page/missing-page.component";
 import { SeriesPageComponent } from "./series-page/series-page.component";
-import { DataCorrectionFormComponent } from "./data-correction-form/data-correction-form.component";
+import { BookCorrectionFormComponent } from "./pages/book-correction-form/book-correction-form.component";
 import { SearchPageComponent } from "./search-page/search-page.component";
 import { LoginPageComponent } from "./login-page/login-page.component";
 import { AuthenticationGuard } from "./services/authentication/authentication.guard";
@@ -16,11 +16,22 @@ import { RegistrationPageComponent } from "./registration-page/registration-page
 const routes: Routes = [
 	{ path: "", component: HomePageComponent },
 	{ path: "home", pathMatch: "full", redirectTo: "" },
-	{ path: "book/:isbn", component: BookPageComponent },
-	{ path: "publisher", component: ImprintIndexComponent },
-	{ path: "publisher/:id", component: ImprintPageComponent },
 	{ path: "series/:id", component: SeriesPageComponent },
 	{ path: "search", component: SearchPageComponent },
+	{
+		path: "book",
+		children: [
+			{ path: "correction", component: BookCorrectionFormComponent },
+			{ path: ":isbn", component: BookPageComponent }
+		]
+	},
+	{
+		path: "publisher",
+		children: [
+			{ path: "", pathMatch: "full", component: ImprintIndexComponent },
+			{ path: ":id", component: ImprintPageComponent }
+		]
+	},
 	{
 		path: "about",
 		loadComponent: () => import("./about-page/about-page.component").then((m) => m.AboutPageComponent)
@@ -29,7 +40,6 @@ const routes: Routes = [
 		path: "faq",
 		loadComponent: () => import("./pages/faq/faq.component").then((m) => m.FaqComponent)
 	},
-	{ path: "correction", component: DataCorrectionFormComponent },
 	{
 		path: "support",
 		loadComponent: () => import("./pages/support/support.component").then((m) => m.SupportPageComponent)

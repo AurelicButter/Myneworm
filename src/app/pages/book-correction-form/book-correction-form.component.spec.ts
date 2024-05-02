@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { DataCorrectionFormComponent } from "./data-correction-form.component";
+import { BookCorrectionFormComponent } from "./book-correction-form.component";
 
 describe("DataCorrectionFormComponent", () => {
-	let component: DataCorrectionFormComponent;
-	let fixture: ComponentFixture<DataCorrectionFormComponent>;
+	let component: BookCorrectionFormComponent;
+	let fixture: ComponentFixture<BookCorrectionFormComponent>;
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [DataCorrectionFormComponent]
+			declarations: [BookCorrectionFormComponent]
 		}).compileComponents();
 	});
 
 	beforeEach(() => {
-		fixture = TestBed.createComponent(DataCorrectionFormComponent);
+		fixture = TestBed.createComponent(BookCorrectionFormComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});
