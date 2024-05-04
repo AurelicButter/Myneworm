@@ -21,19 +21,33 @@
     font-weight: 500;
 }
 
-button {
+.btn-nav-section {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-top: 10px;
+}
+
+.btn-nav-section > * {
     margin-right: 10px;
+}
+
+.description-display {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.description-display > * {
+    margin-bottom: 10px;
+}
+
+.description-display > .form-row {
+    width: 100%;
 }
 
 .form-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-}
-
-.form-header {
-    width: 100%;
-    text-align: center;
 }
 
 .form-row > label {
@@ -60,49 +74,32 @@ button {
     margin-right: 10px;
 }
 
-.form-display {
-    width: 800px;
-}
-
-.url-row {
+.section-divider {
+    border-bottom: 2px solid grey;
+    margin-bottom: 20px;
     display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-}
-
-.url-row > label {
-    height: 20px;
-    flex-basis: auto;
-    max-width: 800px;
-    min-width: 800px;
-    padding-bottom: 6px;
-}
-
-.url-list {
-    display: flex;
-    flex-direction: row;
     align-items: center;
-    min-width: 800px !important;
-    flex-basis: auto !important;
+    padding-bottom: 6px;
+    width: 100%;
 }
 
-.url-entry {
-    margin-left: 4%;
-    width: 800px;
-}
-
-.url-list-label, .url-list-value {
+.cover-display, .book-information {
+    max-width: 46vw;
+    margin-left: 2vw;
+    margin-right: 2vw;
     float: left;
 }
 
-.url-list-label {
-    width: 20%;
+.book-information {
+    width: 46vw;
 }
 
-.url-list-value {
-    width: 49%;
+.entry-cover {
+    min-width: 425px;
+    min-height: 500px;
+    max-height: 600px;
 }
 
-.url-list-input {
-    max-height: 30px;
+.hide-overflow {
+    overflow: hidden;
 }

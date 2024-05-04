@@ -8,7 +8,6 @@ import { HomePageModule } from "./home-page/home-page.module";
 import { BookPageModule } from "./pages/book-page/book-page.module";
 import { ImprintPageModule } from "./imprint-page/imprint-page.module";
 import { HttpClientModule } from "@angular/common/http";
-import { SupportPageModule } from "./support-page/support-page.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ImprintIndexModule } from "./imprint-index/imprint-index.module";
 import { MissingPageComponent } from "./missing-page/missing-page.component";
@@ -43,7 +42,6 @@ import { DeleteConfirmationComponent } from "./user-settings-page/delete-confirm
 		HomePageModule,
 		BookPageModule,
 		ImprintPageModule,
-		SupportPageModule,
 		BrowserAnimationsModule,
 		ImprintIndexModule,
 		SeriesPageModule,
