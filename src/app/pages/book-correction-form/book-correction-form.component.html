@@ -18,14 +18,15 @@
 
             <div class="form-row">
                 <label for="title" class="form-label">Title</label>
-                <input type="text" class="form-control" name="title" id="title" [(ngModel)]="correction.title" #title="ngModel" autocomplete="off" />
+                <input type="text" class="form-control" name="title" id="title" [(ngModel)]="correction.title" #title="ngModel" 
+                    autocomplete="off" (focusout)="correction.title = correction.title?.trim()" />
             </div>
 
             <div class="description-display">
                 <div class="form-row">
                     <label for="description" class="form-label">Description</label>
                     <textarea class="form-control" name="description" id="description" [(ngModel)]="correction.description"
-                        #description="ngModel" (input)="sanitizeInput()"></textarea>
+                        #description="ngModel" (input)="sanitizeInput()" (focusout)="correction.description = correction.description?.trim()"></textarea>
                 </div>
                 <button class="btn myneworm-btn" type="button" (click)="toggleDescPreview()">
                     {{ !showDescriptionPreview ? 'Show' : 'Hide' }} Formatted Description
@@ -88,7 +89,8 @@
             <div class="form-row">
                 <label for="extraNote" class="form-label">Submission Notes</label>
                 <textarea class="form-control" name="extraNote" id="extraNote" 
-                    [(ngModel)]="correction.comment" placeholder="(If you want to help approve your correction faster, place links to your sources here!)"></textarea>
+                    [(ngModel)]="correction.comment" placeholder="(If you want to help approve your correction faster, place links to your sources here!)"
+                    (focusout)="correction.comment = correction.comment?.trim()"></textarea>
             </div>
 
             <div class="btn-nav-section">

@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, SecurityContext, ViewChild } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { BookType } from "../../models/BookType";
 import { BookCorrectionForm } from "../../models/BookCorrectionForm";
 import { MetadataService } from "../../services/metadata.service";
@@ -13,6 +13,7 @@ import { ToastService } from "src/app/services/toast.service";
 import { BookFormat } from "src/app/models/BookFormat";
 import { ImprintData } from "src/app/models/imprintData";
 import { UtilitiesService } from "src/app/services/utilities.service";
+import { BookData } from "src/app/models/bookData";
 
 @Component({
 	selector: "book-correction-form",
@@ -52,6 +53,7 @@ export class BookCorrectionFormComponent implements OnInit {
 	showDescriptionPreview = false;
 	descriptionPreview = "";
 	coverPreview = "";
+	private existingData: BookData;
 
 	constructor(
 		private route: ActivatedRoute,
@@ -60,7 +62,8 @@ export class BookCorrectionFormComponent implements OnInit {
 		private location: Location,
 		private sanitizer: DomSanitizer,
 		private toastService: ToastService,
-		public utilities: UtilitiesService
+		public utilities: UtilitiesService,
+		public router: Router
 	) {
 		this.metaService.updateMetaTags("Book Correction", "/book/correction");
 
@@ -77,6 +80,7 @@ export class BookCorrectionFormComponent implements OnInit {
 					this.correction.format_name = bookData.format_name;
 					this.correction.publisher_id = bookData.publisher_id;
 					this.descriptionPreview = bookData.description;
+					this.existingData = bookData;
 				});
 			}
 
@@ -92,9 +96,57 @@ export class BookCorrectionFormComponent implements OnInit {
 
 	submit() {
 		this.correction.description = this.descriptionPreview;
-		// Implement form submission
 
-		this.toastService.sendSuccess("Submitted book correction!");
+		let forSubmission = new BookCorrectionForm();
+
+		if (!this.existingData) {
+			forSubmission = this.correction;
+		} else {
+			forSubmission.isbn = this.correction.isbn;
+
+			if (this.correction.title !== this.existingData.title) {
+				forSubmission.title = this.correction.title;
+			}
+			if (this.correction.description !== this.existingData.description) {
+				forSubmission.description = this.correction.description;
+			}
+			if (this.correction.cover_url) {
+				forSubmission.cover_url = this.correction.cover_url;
+			}
+			if (this.correction.release_date !== this.existingData.release_date.split("T")[0]) {
+				forSubmission.release_date = this.correction.release_date;
+			}
+			if (this.correction.publisher_id !== this.existingData.publisher_id) {
+				forSubmission.publisher_id = this.correction.publisher_id;
+			}
+			if (this.correction.book_type !== this.existingData.book_type_name) {
+				forSubmission.book_type = this.correction.book_type;
+			}
+			if (this.correction.format_name !== this.existingData.format_name) {
+				forSubmission.format_name = this.correction.format_name;
+			}
+			if (this.correction.comment) {
+				forSubmission.comment = this.correction.comment;
+			}
+		}
+
+		if (Object.keys(forSubmission).length === 0) {
+			this.toastService.sendError("Failed to submit! No changes detected in submission");
+			return;
+		}
+
+		this.service.submitBookCorrection(forSubmission).subscribe((data) => {
+			if (data === null) {
+				return;
+			}
+			this.toastService.sendSuccess("Submitted book correction!");
+
+			if (this.existingData) {
+				this.router.navigate([`/book/${this.correction.isbn}`]);
+			} else {
+				this.router.navigate(["/home"]);
+			}
+		});
 	}
 
 	backToPage() {

@@ -18,6 +18,7 @@ import { Params, Router } from "@angular/router";
 import { WishlistEntry } from "../models/WishlistEntry";
 import { ToastService } from "./toast.service";
 import { catchError, of } from "rxjs";
+import { BookCorrectionForm } from "../models/BookCorrectionForm";
 
 @Injectable({
 	providedIn: "root"
@@ -335,6 +336,25 @@ export class MynewormAPIService {
 						this.toastService.sendError("Unknown error response");
 					}
 
+					return of(null);
+				})
+			);
+	}
+
+	submitBookCorrection(data: BookCorrectionForm) {
+		return this.http
+			.post(
+				`${environment.API_ADDRESS}/corrections/book`,
+				{ correction: data },
+				{
+					withCredentials: true,
+					observe: "body",
+					responseType: "json"
+				}
+			)
+			.pipe(
+				catchError(() => {
+					this.toastService.sendError("Unknown error response. Unable to submit correction.");
 					return of(null);
 				})
 			);
