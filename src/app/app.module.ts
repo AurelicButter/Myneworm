@@ -13,7 +13,6 @@ import { ImprintIndexModule } from "./imprint-index/imprint-index.module";
 import { MissingPageComponent } from "./missing-page/missing-page.component";
 import { SeriesPageModule } from "./series-page/series-page.module";
 import { SearchBarModule } from "./search-bar/search-bar.module";
-import { BookCorrectionFormComponent } from "./pages/book-correction-form/book-correction-form.component";
 import { MatDialogModule } from "@angular/material/dialog";
 import { SearchPageModule } from "./search-page/search-page.module";
 import { LoginPageComponent } from "./login-page/login-page.component";
@@ -48,8 +47,7 @@ import { DeleteConfirmationComponent } from "./user-settings-page/delete-confirm
 		SearchBarModule,
 		SearchPageModule,
 		MatDialogModule,
-		SharedModule,
-		BookCorrectionFormComponent
+		SharedModule
 	],
 	providers: [Title, LocalCookiesService],
 	bootstrap: [AppComponent]

@@ -6,7 +6,6 @@ import { ImprintPageComponent } from "./imprint-page/imprint-page.component";
 import { ImprintIndexComponent } from "./imprint-index/imprint-index.component";
 import { MissingPageComponent } from "./missing-page/missing-page.component";
 import { SeriesPageComponent } from "./series-page/series-page.component";
-import { BookCorrectionFormComponent } from "./pages/book-correction-form/book-correction-form.component";
 import { SearchPageComponent } from "./search-page/search-page.component";
 import { LoginPageComponent } from "./login-page/login-page.component";
 import { AuthenticationGuard } from "./services/authentication/authentication.guard";
@@ -21,7 +20,14 @@ const routes: Routes = [
 	{
 		path: "book",
 		children: [
-			{ path: "correction", component: BookCorrectionFormComponent },
+			{
+				path: "correction",
+				canActivate: [AuthenticationGuard],
+				loadComponent: () =>
+					import("./pages/book-correction-form/book-correction-form.component").then(
+						(m) => m.BookCorrectionFormComponent
+					)
+			},
 			{ path: ":isbn", component: BookPageComponent }
 		]
 	},
