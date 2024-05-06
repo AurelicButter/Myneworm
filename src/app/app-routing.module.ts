@@ -4,13 +4,13 @@ import { BookPageComponent } from "./pages/book-page/book-page.component";
 import { HomePageComponent } from "./home-page/home-page.component";
 import { ImprintPageComponent } from "./imprint-page/imprint-page.component";
 import { ImprintIndexComponent } from "./imprint-index/imprint-index.component";
-import { MissingPageComponent } from "./missing-page/missing-page.component";
+import { MissingPageComponent } from "./pages/missing-page/missing-page.component";
 import { SeriesPageComponent } from "./series-page/series-page.component";
 import { SearchPageComponent } from "./search-page/search-page.component";
-import { LoginPageComponent } from "./login-page/login-page.component";
+import { LoginPageComponent } from "./pages/login/login.component";
 import { AuthenticationGuard } from "./services/authentication/authentication.guard";
 import { UserSettingsPageComponent } from "./user-settings-page/user-settings-page.component";
-import { RegistrationPageComponent } from "./registration-page/registration-page.component";
+import { RegistrationPageComponent } from "./pages/registration/registration.component";
 
 const routes: Routes = [
 	{ path: "", component: HomePageComponent },
@@ -52,7 +52,7 @@ const routes: Routes = [
 	},
 	{
 		path: "privacy",
-		loadComponent: () => import("./privacy-page/privacy-page.component").then((m) => m.PrivacyPageComponent)
+		loadComponent: () => import("./pages/privacy/privacy.component").then((m) => m.PrivacyPageComponent)
 	},
 	{
 		path: "guidelines",
