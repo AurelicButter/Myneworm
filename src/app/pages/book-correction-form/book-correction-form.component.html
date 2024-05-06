@@ -79,7 +79,7 @@
             <div class="form-row">
                 <label for="format" class="form-label">Format</label>
                 <select class="form-select" id="format" name="format" [(ngModel)]="correction.format_name" #formatName="ngModel" required>
-                    <option *ngFor="let formatType of formats" [ngValue]="formatType.format_name">{{this.utilities.formatReadable(formatType.format_name)}}</option>
+                    <option *ngFor="let formatType of formats" [ngValue]="formatType.format_name">{{formatType.format_name | bookFormat }}</option>
                 </select>
             </div>
             <div class="form-row form-feedback" *ngIf="formatName.errors && (formatName.dirty || formatName.touched)">

@@ -12,15 +12,15 @@ import { AUTO_STYLE, animate, state, style, transition, trigger } from "@angular
 import { ToastService } from "src/app/services/toast.service";
 import { BookFormat } from "src/app/models/BookFormat";
 import { ImprintData } from "src/app/models/imprintData";
-import { UtilitiesService } from "src/app/services/utilities.service";
 import { BookData } from "src/app/models/bookData";
+import { BookFormatPipe } from "src/app/pipes/BookFormat.pipe";
 
 @Component({
 	selector: "book-correction-form",
 	templateUrl: "./book-correction-form.component.html",
 	styleUrls: ["./book-correction-form.component.css"],
 	standalone: true,
-	imports: [CommonModule, FormsModule],
+	imports: [CommonModule, FormsModule, BookFormatPipe],
 	providers: [provideAnimations()],
 	animations: [
 		trigger("descPreview", [
@@ -62,7 +62,6 @@ export class BookCorrectionFormComponent implements OnInit {
 		private location: Location,
 		private sanitizer: DomSanitizer,
 		private toastService: ToastService,
-		public utilities: UtilitiesService,
 		public router: Router
 	) {
 		this.metaService.updateMetaTags("Book Correction", "/book/correction");
@@ -73,6 +72,10 @@ export class BookCorrectionFormComponent implements OnInit {
 			if (this.correction.isbn !== undefined) {
 				this.canUpdateISBN = false;
 				this.service.getByISBN(this.correction.isbn).subscribe((bookData) => {
+					if (bookData === null) {
+						return;
+					}
+
 					this.correction.book_type = bookData.book_type_name;
 					this.correction.description = bookData.description;
 					this.correction.release_date = bookData.release_date.split("T")[0];

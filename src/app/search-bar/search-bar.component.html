@@ -25,7 +25,7 @@
                     <strong *ngIf="element.title.length < 57">{{element.title}}</strong>
                 </p>
                 <br>
-                <p class="search-item-format"><em>({{this.utilities.formatReadable(element.format_name)}}, {{this.utilities.formatReadable(element.book_type_name)}})</em></p>
+                <p class="search-item-format"><em>({{element.format_name | bookFormat}}, {{element.book_type_name | titlecase}})</em></p>
             </td>
         </ng-container>
         <tr mat-row *matRowDef="let row; columns: displayedColumns" class="search-result-row" 

@@ -40,7 +40,14 @@ export class MynewormAPIService {
 	}
 
 	getByISBN(isbn: string) {
-		return this.http.get<BookData>(`${environment.API_ADDRESS}/book/byISBN/${isbn}`);
+		return this.http.get<BookData>(`${environment.API_ADDRESS}/book/byISBN/${isbn}`).pipe(
+			catchError((err: any) => {
+				if (err.status === 404) {
+					return of(null);
+				}
+				return this.catchCommonErrors(err);
+			})
+		);
 	}
 
 	getByPublisher(publisherId: string, page?: string) {

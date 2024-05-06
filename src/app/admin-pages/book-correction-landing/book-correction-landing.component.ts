@@ -5,6 +5,8 @@ import { MynewormAPIService } from "src/app/services/myneworm-api.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BookCorrectionDisplayEntry } from "src/app/models/BookCorrection";
 import { MynewormAdminService } from "src/app/services/myneworm-admin.service";
+import { BookFormatPipe } from "src/app/pipes/BookFormat.pipe";
+import { TitleCasePipe } from "@angular/common";
 
 @Component({
 	selector: "book-correction-landing",
@@ -26,9 +28,12 @@ export class BookCorrectionLandingComponent {
 			data.forEach((correction) => {
 				this.service.getByISBN(correction.isbn.toString()).subscribe((data) => {
 					if (data === null) {
-						correction.title = "Unknown Entry";
+						correction.title = "New Entry";
 					} else {
-						correction.title = `${data.title} (${this.utilities.formatReadable(data.format_name)}, ${this.utilities.formatReadable(
+						const formatPipe = new BookFormatPipe();
+						const titlecasePipe = new TitleCasePipe();
+
+						correction.title = `${data.title} (${formatPipe.transform(data.format_name)}, ${titlecasePipe.transform(
 							data.book_type_name
 						)})`;
 					}
