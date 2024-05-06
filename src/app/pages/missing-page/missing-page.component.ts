@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { MetadataService } from "../services/metadata.service";
+import { MetadataService } from "../../services/metadata.service";
 
 @Component({
 	selector: "app-missing-page",
