@@ -17,7 +17,7 @@ export const FAQData = {
 		[
 			"Why can't I find X title?",
 			`Depending on the title, we might have missed it! Please review our <a href='/guidelines'>database guidelines</a> to double check if 
-			it qualifies. If it does, <s>submit a data correction form</s> reach out to a Myneworm moderator to review and potentially approve your changes!`
+			it qualifies. If it does, fill out a <a href="/book/correction">blank correction form here</a>!`
 		],
 		[
 			"Why aren't J-Novel Club Parts tracked",
