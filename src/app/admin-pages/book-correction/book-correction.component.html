@@ -11,7 +11,7 @@
             <p class="info-label" *ngIf="submitterUsername.startsWith('Removed User')">
                 Submitted by: {{submitterUsername}}
             </p>
-            <p>{{correctionData.comment}}</p>
+            <p>{{correctionData.comment ? correctionData.comment : 'No comment provided' }}</p>
         </div>
         <div class="correction-info" *ngIf="correctionData.approved !== null">
             <p class="info-label">
@@ -19,8 +19,7 @@
                 <a *ngIf="!modUsername.startsWith('Removed User')" class="linked-user" href="/user/{{modUsername}}">{{modUsername}}</a>
                 <span *ngIf="modUsername.startsWith('Removed User')">{{modUsername}}</span>
             </p>
-            <p *ngIf="correctionData.mod_note">{{correctionData.mod_note}}</p>
-            <p *ngIf="!correctionData.mod_note">No note provided.</p>
+            <p>{{correctionData.mod_note ? correctionData.mod_note : 'No note provided' }}</p>
         </div>
     </div>
     <form>
@@ -31,7 +30,7 @@
                     <label class="correction-label-inner">New</label>
                     <input class="form-control correction-input title-input" type="text" name="title" [(ngModel)]="correctionData.title" disabled>
                 </div>
-                <div class="correction-field">
+                <div class="correction-field" *ngIf="bookData">
                     <label class="correction-label-inner">Current</label>
                     <div class="title-input old-data-display">
                         <p>{{bookData.title}}</p>
@@ -39,14 +38,14 @@
                 </div>
             </div>
         </div>
-        <div class="correction-section">
+        <div class="correction-section" *ngIf="correctionData.cover_image">
             <label class="correction-label">Cover Image</label>
             <div class="correction-comparison">
                 <div class="correction-field">
                     <label class="correction-label-inner">New</label>
-                    <img class="form-control correction-input" src="{{correctionData.cover_url}}" />
+                    <img class="form-control correction-input" src="{{correctionData.cover_image}}" />
                 </div>
-                <div class="correction-field">
+                <div class="correction-field" *ngIf="bookData">
                     <label class="correction-label-inner">Current</label>
                     <img class="form-control correction-input" src="{{getImage()}}" />
                 </div>
@@ -59,7 +58,7 @@
                     <label class="correction-label-inner">New</label>
                     <textarea class="form-control correction-input" [formControl]="correctionDescription"></textarea>
                 </div>
-                <div class="correction-field">
+                <div class="correction-field" *ngIf="bookData">
                     <label class="correction-label-inner">Current</label>
                     <p *ngIf="bookData.description !== '' && bookData.description !== null" [innerHTML]="bookData.description"></p>
                     <p *ngIf="bookData.description === '' || bookData.description === null">No description available.</p>
@@ -75,7 +74,7 @@
                     <label class="correction-label-inner">New</label>
                     <input class="form-control correction-input" type="date" name="releaseDate" [(ngModel)]="correctionData.release_date" disabled>
                 </div>
-                <div class="correction-field">
+                <div class="correction-field" *ngIf="bookData">
                     <label class="correction-label-inner">Current</label>
                     <div class="old-data-display">
                         <p>{{bookData.release_date}}</p>
@@ -89,13 +88,12 @@
                 <div class="correction-field">
                     <label class="correction-label-inner" for="new-imprint">New</label>
                     <select class="form-select correction-input" name="new-imprint" [(ngModel)]="correctionData.publisher_id" disabled>
-                        <option value=""></option>
                         <option *ngFor="let publisher of publishers" [ngValue]="publisher.publisher_id">
                             {{publisher.name}}
                         </option>
                     </select> 
                 </div>
-                <div class="correction-field">
+                <div class="correction-field" *ngIf="bookData">
                     <label class="correction-label-inner" for="old-imprint">Current</label>
                     <select class="form-select correction-input" name="old-imprint" value="bookData.publisher_id" disabled>
                         <option *ngFor="let publisher of publishers" [ngValue]="publisher.publisher_id">
@@ -111,17 +109,16 @@
                 <div class="correction-field">
                     <label class="correction-label-inner" for="new-type">New</label>
                     <select class="form-select correction-input" name="new-type" [(ngModel)]="correctionData.book_type" disabled>
-                        <option value=""></option>
                         <option *ngFor="let type of types" [ngValue]="type.book_type_name">
-                            {{this.utilities.toTitleCase(type.book_type_name)}}
+                            {{type.book_type_name | titlecase }}
                         </option>
                     </select> 
                 </div>
-                <div class="correction-field">
+                <div class="correction-field" *ngIf="bookData">
                     <label class="correction-label-inner" for="old-type">Current</label>
                     <select class="form-select correction-input" name="old-type" value="bookData.book_type_name" disabled>
                         <option *ngFor="let type of types" [ngValue]="type.book_type_name">
-                            {{this.utilities.toTitleCase(type.book_type_name)}}
+                            {{type.book_type_name | titlecase }}
                         </option>
                     </select> 
                 </div>
@@ -133,17 +130,16 @@
                 <div class="correction-field">
                     <label class="correction-label-inner" for="new-format">New</label>
                     <select class="form-select correction-input" name="new-format" [(ngModel)]="correctionData.format_name" disabled>
-                        <option value=""></option>
                         <option *ngFor="let format of formats" [ngValue]="format.format_name">
-                            {{this.utilities.formatReadable(format.format_name)}}
+                            {{format.format_name | bookFormat}}
                         </option>
                     </select> 
                 </div>
-                <div class="correction-field">
+                <div class="correction-field" *ngIf="bookData">
                     <label class="correction-label-inner" for="old-format">Current</label>
                     <select class="form-select correction-input" name="old-format" value="bookData.format_name" disabled>
                         <option *ngFor="let format of formats" [ngValue]="format.format_name">
-                            {{this.utilities.formatReadable(format.format_name)}}
+                            {{format.format_name | bookFormat}}
                         </option>
                     </select> 
                 </div>

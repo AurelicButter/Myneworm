@@ -4,23 +4,40 @@ import { BookPageComponent } from "./pages/book-page/book-page.component";
 import { HomePageComponent } from "./home-page/home-page.component";
 import { ImprintPageComponent } from "./imprint-page/imprint-page.component";
 import { ImprintIndexComponent } from "./imprint-index/imprint-index.component";
-import { MissingPageComponent } from "./missing-page/missing-page.component";
+import { MissingPageComponent } from "./pages/missing-page/missing-page.component";
 import { SeriesPageComponent } from "./series-page/series-page.component";
-import { DataCorrectionFormComponent } from "./data-correction-form/data-correction-form.component";
 import { SearchPageComponent } from "./search-page/search-page.component";
-import { LoginPageComponent } from "./login-page/login-page.component";
+import { LoginPageComponent } from "./pages/login/login.component";
 import { AuthenticationGuard } from "./services/authentication/authentication.guard";
 import { UserSettingsPageComponent } from "./user-settings-page/user-settings-page.component";
-import { RegistrationPageComponent } from "./registration-page/registration-page.component";
+import { RegistrationPageComponent } from "./pages/registration/registration.component";
 
 const routes: Routes = [
 	{ path: "", component: HomePageComponent },
 	{ path: "home", pathMatch: "full", redirectTo: "" },
-	{ path: "book/:isbn", component: BookPageComponent },
-	{ path: "publisher", component: ImprintIndexComponent },
-	{ path: "publisher/:id", component: ImprintPageComponent },
 	{ path: "series/:id", component: SeriesPageComponent },
 	{ path: "search", component: SearchPageComponent },
+	{
+		path: "book",
+		children: [
+			{
+				path: "correction",
+				canActivate: [AuthenticationGuard],
+				loadComponent: () =>
+					import("./pages/book-correction-form/book-correction-form.component").then(
+						(m) => m.BookCorrectionFormComponent
+					)
+			},
+			{ path: ":isbn", component: BookPageComponent }
+		]
+	},
+	{
+		path: "publisher",
+		children: [
+			{ path: "", pathMatch: "full", component: ImprintIndexComponent },
+			{ path: ":id", component: ImprintPageComponent }
+		]
+	},
 	{
 		path: "about",
 		loadComponent: () => import("./about-page/about-page.component").then((m) => m.AboutPageComponent)
@@ -29,14 +46,13 @@ const routes: Routes = [
 		path: "faq",
 		loadComponent: () => import("./pages/faq/faq.component").then((m) => m.FaqComponent)
 	},
-	{ path: "correction", component: DataCorrectionFormComponent },
 	{
 		path: "support",
 		loadComponent: () => import("./pages/support/support.component").then((m) => m.SupportPageComponent)
 	},
 	{
 		path: "privacy",
-		loadComponent: () => import("./privacy-page/privacy-page.component").then((m) => m.PrivacyPageComponent)
+		loadComponent: () => import("./pages/privacy/privacy.component").then((m) => m.PrivacyPageComponent)
 	},
 	{
 		path: "guidelines",

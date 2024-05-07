@@ -1,17 +1,17 @@
 import { Component } from "@angular/core";
-import { MynewormAPIService } from "../services/myneworm-api.service";
-import { MetadataService } from "../services/metadata.service";
-import { RegistrationData } from "../models/RegistrationData";
+import { MynewormAPIService } from "../../services/myneworm-api.service";
+import { MetadataService } from "../../services/metadata.service";
+import { RegistrationData } from "../../models/RegistrationData";
 import * as moment from "moment";
 import { catchError, of } from "rxjs";
 import { Router } from "@angular/router";
-import { ToastService } from "../services/toast.service";
-import { password, username, passwordHelp, email } from "../models/validationPatterns";
+import { ToastService } from "../../services/toast.service";
+import { password, username, passwordHelp, email } from "../../models/validationPatterns";
 
 @Component({
 	selector: "registration-page",
-	templateUrl: "./registration-page.component.html",
-	styleUrls: ["../shared/authentication-pages.css"]
+	templateUrl: "./registration.component.html",
+	styleUrls: ["../../shared/authentication-pages.css"]
 })
 export class RegistrationPageComponent {
 	registrationForm = new RegistrationData();

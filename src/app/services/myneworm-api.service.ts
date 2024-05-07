@@ -18,6 +18,7 @@ import { Params, Router } from "@angular/router";
 import { WishlistEntry } from "../models/WishlistEntry";
 import { ToastService } from "./toast.service";
 import { catchError, of } from "rxjs";
+import { BookCorrectionForm } from "../models/BookCorrectionForm";
 
 @Injectable({
 	providedIn: "root"
@@ -39,7 +40,14 @@ export class MynewormAPIService {
 	}
 
 	getByISBN(isbn: string) {
-		return this.http.get<BookData>(`${environment.API_ADDRESS}/book/byISBN/${isbn}`);
+		return this.http.get<BookData>(`${environment.API_ADDRESS}/book/byISBN/${isbn}`).pipe(
+			catchError((err: any) => {
+				if (err.status === 404) {
+					return of(null);
+				}
+				return this.catchCommonErrors(err);
+			})
+		);
 	}
 
 	getByPublisher(publisherId: string, page?: string) {
@@ -335,6 +343,25 @@ export class MynewormAPIService {
 						this.toastService.sendError("Unknown error response");
 					}
 
+					return of(null);
+				})
+			);
+	}
+
+	submitBookCorrection(data: BookCorrectionForm) {
+		return this.http
+			.post(
+				`${environment.API_ADDRESS}/corrections/book`,
+				{ correction: data },
+				{
+					withCredentials: true,
+					observe: "body",
+					responseType: "json"
+				}
+			)
+			.pipe(
+				catchError(() => {
+					this.toastService.sendError("Unknown error response. Unable to submit correction.");
 					return of(null);
 				})
 			);

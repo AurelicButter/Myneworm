@@ -1,5 +1,5 @@
-import { Component, SecurityContext } from "@angular/core";
-import { Location } from "@angular/common";
+import { Component, OnInit, SecurityContext } from "@angular/core";
+import { CommonModule, Location } from "@angular/common";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MynewormAPIService } from "src/app/services/myneworm-api.service";
 import { BookData } from "src/app/models/bookData";
@@ -8,19 +8,21 @@ import { MynewormAdminService } from "src/app/services/myneworm-admin.service";
 import { BookFormat } from "src/app/models/BookFormat";
 import { BookType } from "src/app/models/BookType";
 import { ImprintData } from "src/app/models/imprintData";
-import { UtilitiesService } from "src/app/services/utilities.service";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { ModeratorInputModalComponent } from "./moderator-input-modal/moderator-input-modal.component";
-import { FormControl } from "@angular/forms";
+import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { DomSanitizer } from "@angular/platform-browser";
 import * as moment from "moment";
+import { BookFormatPipe } from "src/app/pipes/BookFormat.pipe";
 
 @Component({
 	selector: "book-correction",
 	templateUrl: "./book-correction.component.html",
-	styleUrls: ["./book-correction.component.css"]
+	styleUrls: ["./book-correction.component.css"],
+	standalone: true,
+	imports: [CommonModule, FormsModule, ReactiveFormsModule, BookFormatPipe]
 })
-export class BookCorrectionComponent {
+export class BookCorrectionComponent implements OnInit {
 	bookData: BookData;
 	correctionData: BookCorrectionEntry;
 	isReady = 0;
@@ -37,7 +39,6 @@ export class BookCorrectionComponent {
 		private route: ActivatedRoute,
 		private router: Router,
 		private adminService: MynewormAdminService,
-		public utilities: UtilitiesService,
 		private matDialog: MatDialog,
 		private sanitizer: DomSanitizer
 	) {
@@ -80,12 +81,14 @@ export class BookCorrectionComponent {
 			});
 			this.service.getByISBN(data.isbn).subscribe((bookInfo) => {
 				if (!bookInfo) {
+					this.isReady++;
 					return;
 				}
 
 				this.bookData = bookInfo;
-				this.bookData.release_date = moment(this.bookData.release_date.split("T")[0]).format("MM/DD/YYYY");
-
+				if (this.bookData.release_date) {
+					this.bookData.release_date = moment(this.bookData.release_date.split("T")[0]).format("MM/DD/YYYY");
+				}
 				this.isReady++;
 			});
 		});

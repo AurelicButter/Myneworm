@@ -6,6 +6,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatTableModule } from "@angular/material/table";
+import { BookFormatPipe } from "../pipes/BookFormat.pipe";
 
 @NgModule({
 	declarations: [SearchBarComponent],
@@ -16,7 +17,8 @@ import { MatTableModule } from "@angular/material/table";
 		MatButtonModule,
 		MatFormFieldModule,
 		MatInputModule,
-		MatTableModule
+		MatTableModule,
+		BookFormatPipe
 	],
 	exports: [SearchBarComponent]
 })

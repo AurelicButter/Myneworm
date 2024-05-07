@@ -6,11 +6,11 @@
             <div class="aside-btn-group">
                 <a class="btn btn-lg myneworm-btn" role="button" (click)="updateListEntry()" [ngClass]="{ disabled: !isLoggedIn }"
                     [attr.aria-disabled]="!isLoggedIn" tabindex='{{isLoggedIn ? 0 : -1}}'>{{ hasExistingEntry ? 'Update List' : 'Add to List' }}</a>
-                <a [routerLink]="'/correction'" [queryParams]="{isbn: book.isbn}" class="btn btn-lg myneworm-btn disabled" tabindex="-1" role="button" aria-disabled="true">Edit Entry</a>
+                <a [routerLink]="'/book/correction'" [queryParams]="{isbn: book.isbn}" class="btn btn-lg myneworm-btn" role="button" [ngClass]="{ disabled: !isLoggedIn }">Edit Entry</a>
             </div>
             <div class="aside-info">
-                <p class="format-label"><strong>Format:</strong> {{this.utilities.formatReadable(book.format_name)}}</p>
-                <p class="type-label"><strong>Type:</strong> {{this.utilities.formatReadable(book.book_type_name)}}</p>
+                <p class="format-label"><strong>Format:</strong> {{book.format_name | bookFormat}}</p>
+                <p class="type-label"><strong>Type:</strong> {{book.book_type_name | titlecase}}</p>
                 <p><strong>Release:</strong> {{ book.release_date !== null ? this.utilities.dateReadable(book.release_date) : 'Unknown' }}</p>
                 <p *ngIf="publisher != undefined"><strong>Imprint: </strong><a
                         routerLink="/publisher/{{book.publisher_id}}" class="aside-link">{{publisher.name}}</a></p>

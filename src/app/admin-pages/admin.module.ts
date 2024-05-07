@@ -19,8 +19,7 @@ import { ModeratorInputModalComponent } from "./book-correction/moderator-input-
 		UserManagementComponent,
 		DataCorrectionComponent,
 		UserReportComponent,
-		BookCorrectionLandingComponent,
-		BookCorrectionComponent
+		BookCorrectionLandingComponent
 	],
 	imports: [
 		CommonModule,
@@ -28,7 +27,8 @@ import { ModeratorInputModalComponent } from "./book-correction/moderator-input-
 		MatTableModule,
 		FormsModule,
 		ReactiveFormsModule,
-		ModeratorInputModalComponent
+		ModeratorInputModalComponent,
+		BookCorrectionComponent
 	]
 })
 export class AdminModule {}

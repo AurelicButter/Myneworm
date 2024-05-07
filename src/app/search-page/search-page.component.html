@@ -104,7 +104,7 @@
             <select class="form-select" name="format" id="format" [(ngModel)]="advancedOptions.format">
                 <option value=""></option>
                 <option *ngFor="let format of formats" [ngValue]="format.format_name">
-                    {{this.utilities.formatReadable(format.format_name)}}
+                    {{format.format_name | bookFormat}}
                 </option>
             </select>
         </div>
@@ -115,7 +115,7 @@
             <select class="form-select" name="type" id="type" [(ngModel)]="advancedOptions.type">
                 <option value=""></option>
                 <option *ngFor="let type of types" [ngValue]="type.book_type_name">
-                    {{this.utilities.toTitleCase(type.book_type_name)}}
+                    {{type.book_type_name | titlecase}}
                 </option>
             </select>
         </div>
@@ -156,12 +156,12 @@
         </ng-container>
         <ng-container matColumnDef="format">
             <td class="search-format-col type-col" mat-cell *matCellDef="let element">
-                <p class="type-cell">{{this.utilities.formatReadable(element.format_name)}}</p>
+                <p class="type-cell">{{element.format_name | bookFormat}}</p>
             </td>
         </ng-container>
         <ng-container matColumnDef="type">
             <td class="type-col" mat-cell *matCellDef="let element">
-                <p class="type-cell">{{this.utilities.formatReadable(element.book_type_name)}}</p>
+                <p class="type-cell">{{element.book_type_name | titlecase}}</p>
             </td>
         </ng-container>
         <tr mat-row *matRowDef="let row; columns: displayedColumns" class="search-result-row"></tr>

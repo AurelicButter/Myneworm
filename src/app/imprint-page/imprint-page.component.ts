@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { MynewormAPIService } from "../services/myneworm-api.service";
 import { CalendarOptions } from "@fullcalendar/core";
 import { CalendarManagerComponent } from "../shared/calendar-manager/calendar-manager.component";
@@ -11,7 +11,7 @@ import { ImprintBookFetcher } from "../classes/ImprintBookFetcher.class";
 import interactionPlugin from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
 import { MetadataService } from "../services/metadata.service";
-import { catchError } from "rxjs";
+import { catchError, of } from "rxjs";
 
 /*
  * Global file values as CalendarOptions does not accept `this` keyword
@@ -38,7 +38,8 @@ export class ImprintPageComponent implements OnInit {
 		private service: MynewormAPIService,
 		public matDialog: MatDialog,
 		private metaService: MetadataService,
-		private utilities: UtilitiesService
+		private utilities: UtilitiesService,
+		private router: Router
 	) {
 		imprintFetcher = new ImprintBookFetcher(this.service, this.utilities);
 		UtilityService = this.utilities;
@@ -101,9 +102,10 @@ export class ImprintPageComponent implements OnInit {
 		this.route.params.subscribe((data) => {
 			this.service
 				.getImprintInfo(data.id)
-				.pipe(catchError((err) => this.utilities.catchAPIError(err)))
+				.pipe(catchError((err) => of(null)))
 				.subscribe((data: ImprintData | null) => {
 					if (data === null) {
+						this.router.navigate(["/404"]);
 						return;
 					}
 					this.imprint = data;
