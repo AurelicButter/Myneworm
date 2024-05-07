@@ -1,0 +1,103 @@
+<div class="form-container">
+    <h2 class="section-divider" *ngIf="correction.isbn && !isbn.errors">Book Correction for ISBN {{correction.isbn}}</h2>
+    <h2 class="section-divider" *ngIf="!correction.isbn || isbn.errors">Book Correction for New Entry</h2>
+    <form #dataCorrection="ngForm" (ngSubmit)="submit()">
+        <div class="cover-display">
+            <img class="entry-cover" src="{{coverPreview}}" (error)="imageFallback()">
+        </div>
+        <div class="book-information">
+            <div class="form-row">
+                <label for="isbn" class="form-label">ISBN-13</label>
+                <input type="text" class="form-control" id="isbn" name="isbn" required pattern="\d{13}"
+                    [(ngModel)]="correction.isbn" #isbn="ngModel" [disabled]="!canUpdateISBN" autocomplete="off" />
+            </div>
+            <div class="form-row form-feedback" *ngIf="isbn.errors && (isbn.dirty || isbn.touched)">
+                <p class="form-error" *ngIf="isbn.errors.required">ISBN number is required</p>
+                <p class="form-error" *ngIf="isbn.errors.pattern">ISBN number isn't a 13 digit number</p>
+            </div>
+
+            <div class="form-row">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" name="title" id="title" [(ngModel)]="correction.title" #title="ngModel" 
+                    autocomplete="off" (focusout)="correction.title = correction.title?.trim()" />
+            </div>
+
+            <div class="description-display">
+                <div class="form-row">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea class="form-control" name="description" id="description" [(ngModel)]="correction.description"
+                        #description="ngModel" (input)="sanitizeInput()" (focusout)="correction.description = correction.description?.trim()"></textarea>
+                </div>
+                <button class="btn myneworm-btn" type="button" (click)="toggleDescPreview()">
+                    {{ !showDescriptionPreview ? 'Show' : 'Hide' }} Formatted Description
+                </button>
+                <div [@descPreview]="showDescriptionPreview ? 'descPreviewShow' : 'descPreviewHide'" class="hide-overflow" [innerHTML]="descriptionPreview"></div>
+            </div>
+
+            <div class="form-row">
+                <label for="cover_image" class="form-label">Cover Image</label>
+                <input type="url" class="form-control" name="cover_image" id="cover_image" [(ngModel)]="correction.cover_image"
+                    #cover_image="ngModel" pattern="^http[s]{0,1}:\/\/\S{1,}.\S{1,}" (input)="updateImage()" 
+                    placeholder="(Leave blank to keep current image)" autocomplete="off" />
+            </div>
+            <div class="form-row form-feedback" *ngIf="cover_image.errors && (cover_image.dirty || cover_image.touched)">
+                <p class="form-error" *ngIf="cover_image.errors.pattern">Provided input is not a URL</p>
+            </div>
+
+            <div class="form-row">
+                <label for="release" class="form-label">Release Date</label>
+                <input type="date" class="form-control" name="release" id="release" [(ngModel)]="correction.release_date"
+                    #release="ngModel" pattern="^\d{4}-\d{2}-\d{2}$" placeholder="YYYY/MM/DD" />
+            </div>
+            <div class="form-row form-feedback" *ngIf="release.errors && (release.dirty || release.touched)">
+                <p class="form-error" *ngIf="release.errors.pattern">Date must be mm/dd/yyyy.</p>
+            </div>
+
+            <div class="form-row">
+                <label for="imprint" class="form-label">Imprint</label>
+                <select class="form-select" id="imprint" name="imprint" [(ngModel)]="correction.publisher_id" #imprint="ngModel" required>
+                    <option *ngFor="let imprint of imprints" [ngValue]="imprint.publisher_id">{{imprint.name}}</option>
+                </select>
+            </div>
+            <div class="form-row form-feedback" *ngIf="imprint.errors && (imprint.dirty || imprint.touched)">
+                <p class="form-error" *ngIf="imprint.errors.required">Imprint is required</p>
+            </div>
+
+            <div class="form-row">
+                <label for="bookType" class="form-label">Book Type</label>
+                <select class="form-select" id="bookType" name="bookType" [(ngModel)]="correction.book_type"
+                    #bookType="ngModel" required>
+                    <option *ngFor="let type of booktypes" [ngValue]="type.book_type_name">{{type.book_type_name |
+                        titlecase }}
+                    </option>
+                </select>
+            </div>
+            <div class="form-row form-feedback" *ngIf="bookType.errors && (bookType.dirty || bookType.touched)">
+                <p class="form-error" *ngIf="bookType.errors.required">Book type is required</p>
+            </div>
+
+            <div class="form-row">
+                <label for="format" class="form-label">Format</label>
+                <select class="form-select" id="format" name="format" [(ngModel)]="correction.format_name" #formatName="ngModel" required>
+                    <option *ngFor="let formatType of formats" [ngValue]="formatType.format_name">{{formatType.format_name | bookFormat }}</option>
+                </select>
+            </div>
+            <div class="form-row form-feedback" *ngIf="formatName.errors && (formatName.dirty || formatName.touched)">
+                <p class="form-error" *ngIf="formatName.errors.required">Format is required</p>
+            </div>
+
+            <div class="form-row">
+                <label for="extraNote" class="form-label">Submission Notes</label>
+                <textarea class="form-control" name="extraNote" id="extraNote" 
+                    [(ngModel)]="correction.comment" placeholder="(If you want to help approve your correction faster, place links to your sources here!)"
+                    (focusout)="correction.comment = correction.comment?.trim()"></textarea>
+            </div>
+
+            <div class="btn-nav-section">
+                <button class="btn btn-lg myneworm-btn" type="submit"
+                    [disabled]="dataCorrection.invalid">Submit</button>
+                <a class="btn btn-lg myneworm-btn" type="button" (click)="backToPage()">Return to Entry</a>
+            </div>
+        </div>
+    </form>
+</div>

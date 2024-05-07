@@ -1,7 +1,7 @@
 <!-- 
     Thank you for contributing! 
     If you have not already, please review the contribution guidelines before submitting:
-    https://github.com/Butterstroke/Myneworm/tree/master/.github/CONTRIBUTING.md
+    https://github.com/AurelicButter/Myneworm/tree/master/.github/CONTRIBUTING.md
 -->
 
 ## What Does This Do?

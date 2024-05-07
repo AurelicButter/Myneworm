@@ -37,7 +37,7 @@ aside > img {
 .username-display {
     margin-top: 30px;
     border-bottom: 2px solid gray;
-    width: -webkit-fill-available;
+    width: 100%;
     overflow-wrap: anywhere;
 }
 

@@ -5,6 +5,8 @@ import { MynewormAPIService } from "src/app/services/myneworm-api.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BookCorrectionDisplayEntry } from "src/app/models/BookCorrection";
 import { MynewormAdminService } from "src/app/services/myneworm-admin.service";
+import { BookFormatPipe } from "src/app/pipes/BookFormat.pipe";
+import { TitleCasePipe } from "@angular/common";
 
 @Component({
 	selector: "book-correction-landing",
@@ -14,7 +16,6 @@ import { MynewormAdminService } from "src/app/services/myneworm-admin.service";
 export class BookCorrectionLandingComponent {
 	displayedColumns = ["isbn", "title", "create_date", "update_date", "approved"];
 	public dataSource: MatTableDataSource<BookCorrectionDisplayEntry>;
-	bookInfoTitle: Map<number, string> = new Map<number, string>();
 
 	constructor(
 		public utilities: UtilitiesService,
@@ -24,22 +25,22 @@ export class BookCorrectionLandingComponent {
 		private route: ActivatedRoute
 	) {
 		this.adminService.getAllBookCorrections().subscribe((data) => {
-			this.dataSource = new MatTableDataSource<BookCorrectionDisplayEntry>(data);
-		});
-	}
+			data.forEach((correction) => {
+				this.service.getByISBN(correction.isbn.toString()).subscribe((data) => {
+					if (data === null) {
+						correction.title = "New Entry";
+					} else {
+						const formatPipe = new BookFormatPipe();
+						const titlecasePipe = new TitleCasePipe();
 
-	getBookInfo(isbn: number) {
-		this.service.getByISBN(isbn.toString()).subscribe((data) => {
-			if (data === null) {
-				this.bookInfoTitle.set(isbn, "Unknown Entry");
-			} else {
-				this.bookInfoTitle.set(
-					isbn,
-					`${data.title} (${this.utilities.formatReadable(data.format_name)}, ${this.utilities.formatReadable(
-						data.book_type_name
-					)})`
-				);
-			}
+						correction.title = `${data.title} (${formatPipe.transform(data.format_name)}, ${titlecasePipe.transform(
+							data.book_type_name
+						)})`;
+					}
+				});
+			});
+
+			this.dataSource = new MatTableDataSource<BookCorrectionDisplayEntry>(data);
 		});
 	}
 

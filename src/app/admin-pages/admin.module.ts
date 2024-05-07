@@ -9,6 +9,8 @@ import { UserReportComponent } from "./user-report/user-report.component";
 import { BookCorrectionLandingComponent } from "./book-correction-landing/book-correction-landing.component";
 import { MatTableModule } from "@angular/material/table";
 import { BookCorrectionComponent } from "./book-correction/book-correction.component";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ModeratorInputModalComponent } from "./book-correction/moderator-input-modal/moderator-input-modal.component";
 
 @NgModule({
 	declarations: [
@@ -17,9 +19,16 @@ import { BookCorrectionComponent } from "./book-correction/book-correction.compo
 		UserManagementComponent,
 		DataCorrectionComponent,
 		UserReportComponent,
-		BookCorrectionLandingComponent,
-		BookCorrectionComponent
+		BookCorrectionLandingComponent
 	],
-	imports: [CommonModule, AdminRoutingModule, MatTableModule]
+	imports: [
+		CommonModule,
+		AdminRoutingModule,
+		MatTableModule,
+		FormsModule,
+		ReactiveFormsModule,
+		ModeratorInputModalComponent,
+		BookCorrectionComponent
+	]
 })
 export class AdminModule {}

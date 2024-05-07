@@ -5,7 +5,6 @@ import { ActivatedRoute, Params, Router } from "@angular/router";
 import { BookData } from "../models/bookData";
 import { MetadataService } from "../services/metadata.service";
 import { MynewormAPIService } from "../services/myneworm-api.service";
-import { UtilitiesService } from "../services/utilities.service";
 import { SearchOptions } from "../models/SearchOptions";
 import { BookType } from "../models/BookType";
 import { BookFormat } from "../models/BookFormat";
@@ -44,7 +43,6 @@ export class SearchPageComponent implements OnInit {
 	constructor(
 		private route: ActivatedRoute,
 		private service: MynewormAPIService,
-		public utilities: UtilitiesService,
 		private metaService: MetadataService,
 		private router: Router,
 		private location: Location,
@@ -53,6 +51,8 @@ export class SearchPageComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
+		this.metaService.updateMetaTags("Search", "/search");
+
 		this.route.queryParams.subscribe((params) => {
 			if (params === null) {
 				return;

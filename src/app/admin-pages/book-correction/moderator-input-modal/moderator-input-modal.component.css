@@ -1,0 +1,41 @@
+.moderator-confirm-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.modal-header {
+    margin-top: 30px;
+}
+
+.modal-label {
+    font-weight: bold;
+    font-size: larger;
+    border-bottom: 2px solid grey;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.notes-input {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-around;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+.button-display {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.button-display > button {
+    margin-left: 20px;
+}

@@ -3,12 +3,12 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { loginForm } from "src/app/models/loginForm";
 import { AuthenticationService } from "src/app/services/authentication/authentication.service";
 import { MetadataService } from "src/app/services/metadata.service";
-import { ToastService } from "../services/toast.service";
+import { ToastService } from "../../services/toast.service";
 
 @Component({
 	selector: "login-page",
-	templateUrl: "./login-page.component.html",
-	styleUrls: ["../shared/authentication-pages.css"]
+	templateUrl: "./login.component.html",
+	styleUrls: ["../../shared/authentication-pages.css"]
 })
 export class LoginPageComponent {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any

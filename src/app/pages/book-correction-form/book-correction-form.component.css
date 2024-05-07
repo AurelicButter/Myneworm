@@ -1,0 +1,105 @@
+.support-component {
+    width: 98%;
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+.support-notice {
+    width: 25%;
+    float: left;
+    gap: 10px;
+}
+
+.form-selection {
+    width: 74%;
+    float: left;
+}
+
+.form-error {
+    font-style: italic;
+    color: red;
+    font-weight: 500;
+}
+
+.btn-nav-section {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-top: 10px;
+}
+
+.btn-nav-section > * {
+    margin-right: 10px;
+}
+
+.description-display {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.description-display > * {
+    margin-bottom: 10px;
+}
+
+.description-display > .form-row {
+    width: 100%;
+}
+
+.form-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.form-row > label {
+    flex: 1 0 150px;
+    min-width: 150px;
+    max-width: 200px;
+}
+
+.form-row {
+    display: flex;
+    padding: .5em;
+}
+
+.form-row > label + * {
+  flex: 1 0 230px;
+  min-width: 230px;
+}
+
+.form-feedback {
+    flex: 0 0 250px;
+}
+
+button {
+    margin-right: 10px;
+}
+
+.section-divider {
+    border-bottom: 2px solid grey;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    padding-bottom: 6px;
+    width: 100%;
+}
+
+.cover-display, .book-information {
+    max-width: 46vw;
+    margin-left: 2vw;
+    margin-right: 2vw;
+    float: left;
+}
+
+.book-information {
+    width: 46vw;
+}
+
+.entry-cover {
+    min-width: 425px;
+    min-height: 500px;
+    max-height: 600px;
+}
+
+.hide-overflow {
+    overflow: hidden;
+}
