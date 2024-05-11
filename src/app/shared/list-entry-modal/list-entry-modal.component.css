@@ -50,6 +50,7 @@
 .modal-header {
     font-size: 20px;
     height: 85px;
+    justify-content: space-between;
 }
 
 .modal-header>h1 {
