@@ -22,7 +22,7 @@
                         <span *ngIf="hoveredRow == null">{{element.title.substring(0, 57)}}...</span>
                         <span *ngIf="hoveredRow && element.isbn !== hoveredRow.isbn">{{element.title.substring(0, 57)}}...</span>
                     </strong>
-                    <strong *ngIf="element.title.length < 57">{{element.title}}</strong>
+                    <strong *ngIf="element.title.length < 57 || element.title.length === 57">{{element.title}}</strong>
                 </p>
                 <br>
                 <p class="search-item-format"><em>({{element.format_name | bookFormat}}, {{element.book_type_name | titlecase}})</em></p>
