@@ -113,8 +113,8 @@ export class BookCorrectionFormComponent implements OnInit {
 			if (this.correction.description !== this.existingData.description) {
 				forSubmission.description = this.correction.description;
 			}
-			if (this.correction.cover_url) {
-				forSubmission.cover_url = this.correction.cover_url;
+			if (this.correction.cover_image) {
+				forSubmission.cover_image = this.correction.cover_image;
 			}
 			if (this.correction.release_date !== this.existingData.release_date.split("T")[0]) {
 				forSubmission.release_date = this.correction.release_date;
