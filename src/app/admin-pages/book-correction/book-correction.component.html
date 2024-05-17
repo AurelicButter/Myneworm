@@ -72,7 +72,7 @@
             <div class="correction-comparison">
                 <div class="correction-field">
                     <label class="correction-label-inner">New</label>
-                    <input class="form-control correction-input" type="date" name="releaseDate" [(ngModel)]="correctionData.release_date" disabled>
+                    <input class="form-control correction-input center-text" type="date" name="releaseDate" [value]="releaseDateDisplay" [(ngModel)]="releaseDateDisplay" disabled>
                 </div>
                 <div class="correction-field" *ngIf="bookData">
                     <label class="correction-label-inner">Current</label>
