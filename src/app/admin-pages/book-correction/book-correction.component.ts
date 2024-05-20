@@ -58,11 +58,11 @@ export class BookCorrectionComponent implements OnInit {
 
 				this.correctionData = correction;
 
-				if (this.correctionData.description !== undefined) {
+				if (this.correctionData.description) {
 					this.correctionDescription.setValue(this.correctionData.description);
 				}
 
-				if (this.correctionData.release_date !== undefined) {
+				if (this.correctionData.release_date) {
 					this.releaseDateDisplay = moment(this.correctionData.release_date.split("T")[0]).format(
 						"YYYY-MM-DD"
 					);
