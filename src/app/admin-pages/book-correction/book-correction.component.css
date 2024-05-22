@@ -13,6 +13,10 @@
     color: inherit;
 }
 
+.center-text {
+    text-align: center;
+}
+
 .correction-input, .old-data-display {
     height: 40px;
 }

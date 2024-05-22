@@ -6,7 +6,7 @@ export interface BookCorrectionEntry {
 	cover_image?: string;
 	format_name?: string;
 	book_type?: string;
-	release_date?: Date;
+	release_date?: string;
 	publisher_id?: number;
 	series_id?: number;
 	comment?: string;

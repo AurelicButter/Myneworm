@@ -32,6 +32,7 @@ export class BookCorrectionComponent implements OnInit {
 	formats: BookFormat[];
 	publishers: ImprintData[];
 	correctionDescription = new FormControl("");
+	releaseDateDisplay: string;
 
 	constructor(
 		private service: MynewormAPIService,
@@ -57,8 +58,14 @@ export class BookCorrectionComponent implements OnInit {
 
 				this.correctionData = correction;
 
-				if (this.correctionData.description !== undefined) {
+				if (this.correctionData.description) {
 					this.correctionDescription.setValue(this.correctionData.description);
+				}
+
+				if (this.correctionData.release_date) {
+					this.releaseDateDisplay = moment(this.correctionData.release_date.split("T")[0]).format(
+						"YYYY-MM-DD"
+					);
 				}
 
 				this.service.getUserByID(correction.submitter_id.toString()).subscribe((user) => {
