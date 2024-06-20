@@ -26,6 +26,15 @@ body {
     text-align: center;
 }
 
+/**
+ * Headers
+ */
+
+.page-title {
+    border-bottom: 1px solid grey;
+    margin-bottom: 20px;
+}
+
 /*
  * Buttons
  */

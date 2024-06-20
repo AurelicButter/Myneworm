@@ -1,22 +1,63 @@
-.page-title {
-    border-bottom: 1px solid grey;
-    margin-bottom: 20px;
-}
-
 .book-cover {
     width: 100%;
 }
 
 .aside-content {
-    margin-right: 2%;
+    max-width: 300px;
 }
 
 .aside-btn-group {
     display: flex;
-    flex-direction: row;
     justify-content: space-evenly;
     margin-top: 10px;
     margin-bottom: 16px;
+}
+
+.release-date > p {
+    margin: 0;
+}
+
+.days-until-release {
+    font-style: italic;
+    padding: 8px 0px;
+    padding-right: 4px;
+    width: fit-content;
+}
+
+.aside-info {
+    display: inline-flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.aside-item {
+    display: inline-flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.aside-item-title {
+    font-weight: bold;
+    width: 25%;
+    min-width: fit-content;
+    margin-right: 6px;
+}
+
+.aside-item-value {
+    width: 70%;
+}
+
+@media screen and (min-width: 1024px) {
+    a.col-5 {
+        width: inherit;
+    }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1200px) {
+    a.col-5 {
+        font-size: 1.1rem;
+    }
 }
 
 @media screen and (max-width: 1024px) {
@@ -34,6 +75,16 @@
 
     .aside-content {
         width: 25%;
+    }
+
+    a.col-5 {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .aside-content {
+        width: 30%;
     }
 }
 
@@ -78,5 +129,13 @@
     aside .myneworm-btn {
         padding-top: 16px;
         padding-bottom: 16px;
+    }
+
+    .aside-item {
+        flex-direction: column;
+    }
+
+    .aside-item {
+        width: 50%;
     }
 }
