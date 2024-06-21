@@ -1,5 +1,4 @@
 import { NgModule } from "@angular/core";
-import { BrowserModule } from "@angular/platform-browser";
 import { SearchPageComponent } from "./search-page.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
@@ -8,11 +7,12 @@ import { MatInputModule } from "@angular/material/input";
 import { MatTableModule } from "@angular/material/table";
 import { RouterModule } from "@angular/router";
 import { BookFormatPipe } from "../pipes/BookFormat.pipe";
+import { CommonModule } from "@angular/common";
 
 @NgModule({
 	declarations: [SearchPageComponent],
 	imports: [
-		BrowserModule,
+		CommonModule,
 		FormsModule,
 		ReactiveFormsModule,
 		MatButtonModule,

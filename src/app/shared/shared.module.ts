@@ -1,5 +1,4 @@
 import { NgModule } from "@angular/core";
-import { BrowserModule } from "@angular/platform-browser";
 import { LazyLoadStyleService } from "../services/lazy-load-style.service";
 
 import { CalendarManagerModule } from "./calendar-manager/calendar-manager.module";
@@ -10,10 +9,11 @@ import { FormsModule } from "@angular/forms";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from "@angular/material/core";
 import { MatCardModule } from "@angular/material/card";
+import { CommonModule } from "@angular/common";
 
 @NgModule({
 	imports: [
-		BrowserModule,
+		CommonModule,
 		CalendarManagerModule,
 		DatepickerModalModule,
 		ToastMessagesComponent,

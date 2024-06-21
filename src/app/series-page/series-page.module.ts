@@ -1,10 +1,10 @@
 import { NgModule } from "@angular/core";
-import { BrowserModule } from "@angular/platform-browser";
 import { SeriesPageComponent } from "./series-page.component";
+import { CommonModule } from "@angular/common";
 
 @NgModule({
 	declarations: [SeriesPageComponent],
-	imports: [BrowserModule],
+	imports: [CommonModule],
 	exports: [SeriesPageComponent]
 })
 export class SeriesPageModule {}
