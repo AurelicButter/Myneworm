@@ -1,0 +1,15 @@
+<h3>{{title}}</h3>
+<div class="swiper-wrapper" (mouseenter)="onMouseHover()" (mouseleave)="onMouseHover()">
+    <swiper-container loop="true" [attr.slides-per-view]="slidePerView"
+        [attr.slides-per-group]="slidePerSkip" init="false">
+        <swiper-slide class="swiper-slide" *ngFor="let book of books; let i = index">
+            <a class="carousel-link" href="#">
+                <img class="carousel-cover" src="http://localhost:4200/local/api/asset/cover/9781638581307?size=small">
+                <div class="carousel-element-title">
+                    <span><b>Book title {{ i }}</b></span>
+                    <span>Release Date</span>
+                </div>
+            </a>
+        </swiper-slide>
+    </swiper-container>
+</div>
