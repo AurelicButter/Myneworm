@@ -59,6 +59,13 @@ export class MynewormAPIService {
 		return this.http.get<BookData>(`${environment.API_ADDRESS}/book/byId/${mynewormId}`);
 	}
 
+	getBySeriesID(seriesID: string, page?: string) {
+		if (page) {
+			return this.http.get<BookData[]>(`${environment.API_ADDRESS}/book/bySeries/${seriesID}/${page}`);
+		}
+		return this.http.get<BookData[]>(`${environment.API_ADDRESS}/book/bySeries/${seriesID}`);
+	}
+
 	getMonthData(month: string) {
 		return this.http.get<MonthReleaseData[]>(`${environment.API_ADDRESS}/book/date/${month}`);
 	}
