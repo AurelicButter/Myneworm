@@ -5,7 +5,7 @@ import { HomePageComponent } from "./home-page/home-page.component";
 import { ImprintPageComponent } from "./imprint-page/imprint-page.component";
 import { ImprintIndexComponent } from "./imprint-index/imprint-index.component";
 import { MissingPageComponent } from "./pages/missing-page/missing-page.component";
-import { SeriesPageComponent } from "./series-page/series-page.component";
+import { SeriesPageComponent } from "./pages/series-page/series-page.component";
 import { SearchPageComponent } from "./search-page/search-page.component";
 import { LoginPageComponent } from "./pages/login/login.component";
 import { AuthenticationGuard } from "./services/authentication/authentication.guard";
