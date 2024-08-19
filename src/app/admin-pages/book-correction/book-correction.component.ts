@@ -14,13 +14,14 @@ import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { DomSanitizer } from "@angular/platform-browser";
 import * as moment from "moment";
 import { BookFormatPipe } from "src/app/pipes/BookFormat.pipe";
+import { MarkdownModule } from "ngx-markdown";
 
 @Component({
 	selector: "book-correction",
 	templateUrl: "./book-correction.component.html",
 	styleUrls: ["./book-correction.component.css"],
 	standalone: true,
-	imports: [CommonModule, FormsModule, ReactiveFormsModule, BookFormatPipe]
+	imports: [CommonModule, FormsModule, ReactiveFormsModule, BookFormatPipe, MarkdownModule]
 })
 export class BookCorrectionComponent implements OnInit {
 	bookData: BookData;
