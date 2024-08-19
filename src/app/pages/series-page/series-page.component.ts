@@ -11,6 +11,7 @@ import { SeriesSummary } from "src/app/models/classes/SeriesSummary";
 import { DateReadablePipe } from "src/app/pipes/DateReadable.pipe";
 import { SanitizeURLPipe } from "src/app/pipes/SanitizeURL.pipe";
 import { BookData } from "src/app/models/bookData";
+import { MarkdownModule } from "ngx-markdown";
 
 interface SeriesCollection {
 	paperback: BookData[];
@@ -30,7 +31,8 @@ interface SeriesCollection {
 		BookCarouselComponent,
 		MatExpansionModule,
 		DateReadablePipe,
-		SanitizeURLPipe
+		SanitizeURLPipe,
+		MarkdownModule
 	]
 })
 export class SeriesPageComponent implements OnInit {

@@ -22,6 +22,7 @@ import { SharedModule } from "./shared/shared.module";
 import { DeleteConfirmationComponent } from "./user-settings-page/delete-confirmation/delete-confirmation.component";
 import { BookPageComponent } from "./pages/book-page/book-page.component";
 import { SeriesPageComponent } from "./pages/series-page/series-page.component";
+import { MarkdownModule } from "ngx-markdown";
 
 @NgModule({
 	declarations: [
@@ -34,6 +35,7 @@ import { SeriesPageComponent } from "./pages/series-page/series-page.component";
 		DeleteConfirmationComponent
 	],
 	imports: [
+		MarkdownModule.forRoot(),
 		BrowserModule,
 		HttpClientModule,
 		FormsModule,

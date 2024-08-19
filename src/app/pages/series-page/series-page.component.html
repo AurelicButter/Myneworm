@@ -11,23 +11,30 @@
                     </li>
                 </ul>
                 <div class="format-summary">
-                    <div class="format-summary-item">
-                        <p style="font-style: italic;">Number of Volumes &nbsp;</p>
-                        <p>{{ formatSummaries[focusedSummary].volumeCount }}</p>
+                    <div *ngIf="focusedSummary">
+                        <div class="format-summary-item">
+                            <p style="font-style: italic;">Number of Volumes &nbsp;</p>
+                            <p>{{ formatSummaries[focusedSummary].volumeCount }}</p>
+                        </div>
+                        <div class="format-summary-item flex-column">
+                            <h6>First Release</h6>
+                            <a href="{{formatSummaries[focusedSummary].firstEntry.isbn}}">
+                                {{formatSummaries[focusedSummary].firstEntry.title}}
+                            </a>
+                            <p>Released On {{formatSummaries[focusedSummary].firstEntry.releaseDate | DateReadable }}
+                            </p>
+                        </div>
+                        <div class="format-summary-item flex-column">
+                            <h6>Latest Release</h6>
+                            <a href="{{formatSummaries[focusedSummary].latestEntry.isbn}}">
+                                {{formatSummaries[focusedSummary].latestEntry.title}}
+                            </a>
+                            <p>Released On {{formatSummaries[focusedSummary].latestEntry.releaseDate | DateReadable }}
+                            </p>
+                        </div>
                     </div>
-                    <div class="format-summary-item flex-column">
-                        <h6>First Release</h6>
-                        <a href="{{formatSummaries[focusedSummary].firstEntry.isbn}}">
-                            {{formatSummaries[focusedSummary].firstEntry.title}}
-                        </a>
-                        <p>Released On {{formatSummaries[focusedSummary].firstEntry.releaseDate | DateReadable }}</p>
-                    </div>
-                    <div class="format-summary-item flex-column">
-                        <h6>Latest Release</h6>
-                        <a href="{{formatSummaries[focusedSummary].latestEntry.isbn}}">
-                            {{formatSummaries[focusedSummary].latestEntry.title}}
-                        </a>
-                        <p>Released On {{formatSummaries[focusedSummary].latestEntry.releaseDate | DateReadable }}</p>
+                    <div *ngIf="!focusedSummary">
+                        <p>No summaries available.</p>
                     </div>
                 </div>
             </div>
@@ -37,20 +44,24 @@
                     [href]="'https://anilist.co/manga/' + seriesData.anilist_id | sanitizeURL">AniList</a>
                 <a *ngIf="seriesData.mal_id" class="myneworm-btn btn btn-lg" target="_blank"
                     [href]="'https://myanimelist.net/manga/' + seriesData.mal_id | sanitizeURL">MyAnimeList</a>
-                <p *ngIf="!seriesData.anilist_id && !seriesData.mal_id" style="text-align: center;">No external links</p>
+                <p *ngIf="!seriesData.anilist_id && !seriesData.mal_id" style="text-align: center;">No external links
+                </p>
             </div>
         </aside>
         <div class="col-lg-9">
-            <div>
-                <p>{{ seriesData.description}}</p>
-            </div>
+            <markdown *ngIf="seriesData.description" [data]="seriesData.description" ngPreserveWhitespaces>
+            </markdown>
+            <p *ngIf="!seriesData.description">No description is provided.</p>
             <book-carousel title="Ebook" carouselIndex='1' [books]="this.seriesCollection.ebook"></book-carousel>
             <br>
-            <book-carousel title="Paperback" carouselIndex='2' [books]="this.seriesCollection.paperback"></book-carousel>
+            <book-carousel title="Paperback" carouselIndex='2'
+                [books]="this.seriesCollection.paperback"></book-carousel>
             <br>
-            <book-carousel title="Hardcover" carouselIndex='3' [books]="this.seriesCollection.hardcover"></book-carousel>
+            <book-carousel title="Hardcover" carouselIndex='3'
+                [books]="this.seriesCollection.hardcover"></book-carousel>
             <br>
-            <book-carousel title="Audiobook" carouselIndex='4' [books]="this.seriesCollection.audiobook"></book-carousel>
+            <book-carousel title="Audiobook" carouselIndex='4'
+                [books]="this.seriesCollection.audiobook"></book-carousel>
         </div>
     </div>
 </div>

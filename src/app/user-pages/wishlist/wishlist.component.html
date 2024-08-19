@@ -6,7 +6,8 @@
                 Wishlist</h2>
             <div class="wishlist-msg">
                 <div *ngIf="!editMsg" class="user-wishlist-msg">
-                    <p *ngIf="user.wishlist_msg">{{user.wishlist_msg}}</p>
+                    <markdown *ngIf="user.wishlist_msg" [data]="user.wishlist_msg" ngPreserveWhitespaces>
+                    </markdown>
                     <span *ngIf="!user.wishlist_msg && isAuthUser" style="color: grey"><i>You haven't set a wishlist
                             message yet...</i></span>
                 </div>
@@ -58,7 +59,8 @@
             <wishlist-display [book]="book"></wishlist-display>
         </div>
         <p class="no-wishlist" *ngIf="wishlist.length === 0">
-            This user does not have anything set in their wishlist! Either they own it all or need to mark more entries with the "wanted" ownership status.
+            This user does not have anything set in their wishlist! Either they own it all or need to mark more entries
+            with the "wanted" ownership status.
         </p>
     </div>
 </div>

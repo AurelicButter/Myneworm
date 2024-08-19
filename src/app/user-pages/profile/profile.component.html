@@ -18,7 +18,11 @@
                 <h2 *ngIf="profileInfo.display_name === null" class="aside-offset">{{profileInfo.username}}</h2>
             </div>
             <div class="user-about-me aside-offset">
-                <p *ngIf="profileInfo.about_me">{{profileInfo.about_me}}</p>
+                <markdown 
+                    *ngIf="profileInfo.about_me" 
+                    [data]="profileInfo.about_me"
+                    ngPreserveWhitespaces>
+                </markdown>
                 <p *ngIf="profileInfo.about_me === null">No about me section is provided! Perhaps one day, this user will choose to write this section instead of reading.</p>
             </div>
         </div>

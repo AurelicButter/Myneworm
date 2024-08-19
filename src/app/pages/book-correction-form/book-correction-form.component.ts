@@ -14,13 +14,14 @@ import { BookFormat } from "src/app/models/BookFormat";
 import { ImprintData } from "src/app/models/imprintData";
 import { BookData } from "src/app/models/bookData";
 import { BookFormatPipe } from "src/app/pipes/BookFormat.pipe";
+import { MarkdownModule } from "ngx-markdown";
 
 @Component({
 	selector: "book-correction-form",
 	templateUrl: "./book-correction-form.component.html",
 	styleUrls: ["./book-correction-form.component.css"],
 	standalone: true,
-	imports: [CommonModule, FormsModule, BookFormatPipe],
+	imports: [CommonModule, FormsModule, BookFormatPipe, MarkdownModule],
 	providers: [provideAnimations()],
 	animations: [
 		trigger("descPreview", [

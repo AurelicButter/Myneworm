@@ -31,7 +31,8 @@
                 <button class="btn myneworm-btn" type="button" (click)="toggleDescPreview()">
                     {{ !showDescriptionPreview ? 'Show' : 'Hide' }} Formatted Description
                 </button>
-                <div [@descPreview]="showDescriptionPreview ? 'descPreviewShow' : 'descPreviewHide'" class="hide-overflow" [innerHTML]="descriptionPreview"></div>
+                <markdown [@descPreview]="showDescriptionPreview ? 'descPreviewShow' : 'descPreviewHide'" class="hide-overflow" [data]="descriptionPreview" ngPreserveWhitespaces>
+                </markdown>   
             </div>
 
             <div class="form-row">

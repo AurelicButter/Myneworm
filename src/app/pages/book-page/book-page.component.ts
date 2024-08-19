@@ -15,13 +15,14 @@ import { DateReadablePipe } from "src/app/pipes/DateReadable.pipe";
 import { BookFormatPipe } from "src/app/pipes/BookFormat.pipe";
 import { SharedModule } from "src/app/shared/shared.module";
 import * as moment from "moment";
+import { MarkdownModule } from "ngx-markdown";
 
 @Component({
 	selector: "book-page",
 	templateUrl: "./book-page.component.html",
 	styleUrls: ["./book-page.component.css"],
 	standalone: true,
-	imports: [CommonModule, RouterModule, SharedModule, BookFormatPipe, DateReadablePipe]
+	imports: [CommonModule, RouterModule, SharedModule, MarkdownModule, BookFormatPipe, DateReadablePipe]
 })
 export class BookPageComponent implements OnInit {
 	book: BookData;
