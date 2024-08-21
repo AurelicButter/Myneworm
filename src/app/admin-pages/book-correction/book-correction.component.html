@@ -60,12 +60,12 @@
                 </div>
                 <div class="correction-field" *ngIf="bookData">
                     <label class="correction-label-inner">Current</label>
-                    <p *ngIf="bookData.description !== '' && bookData.description !== null" [innerHTML]="bookData.description"></p>
+                    <markdown *ngIf="bookData.description !== '' && bookData.description !== null" [data]="bookData.description" ngPreserveWhitespaces></markdown>
                     <p *ngIf="bookData.description === '' || bookData.description === null">No description available.</p>
                 </div>
             </div>
             <label class="correction-label">Description Preview</label>
-            <div [innerHTML]="correctionData.description"></div>
+            <markdown [data]="correctionData.description" ngPreserveWhitespaces></markdown>
         </div>
         <div class="correction-section" *ngIf="correctionData.release_date">
             <label class="correction-label">Release Date</label>

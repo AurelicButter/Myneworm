@@ -13,6 +13,7 @@ import { TableDisplayComponent } from "./user-list/table-display/table-display.c
 import { MatTableModule } from "@angular/material/table";
 import { MatSortModule } from "@angular/material/sort";
 import { BookFormatPipe } from "../pipes/BookFormat.pipe";
+import { MarkdownModule } from "ngx-markdown";
 
 @NgModule({
 	declarations: [
@@ -23,6 +24,15 @@ import { BookFormatPipe } from "../pipes/BookFormat.pipe";
 		UserListComponent,
 		TableDisplayComponent
 	],
-	imports: [CommonModule, RouterModule, FormsModule, MatTableModule, MatSortModule, UserRoutingModule, BookFormatPipe]
+	imports: [
+		MarkdownModule.forChild(),
+		CommonModule,
+		RouterModule,
+		FormsModule,
+		MatTableModule,
+		MatSortModule,
+		UserRoutingModule,
+		BookFormatPipe
+	]
 })
 export class UserModule {}

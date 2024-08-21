@@ -20,9 +20,8 @@
 						"outputPath": "dist/Myneworm",
 						"index": "src/index.html",
 						"main": "src/main.ts",
-						"polyfills": "src/polyfills.ts",
+						"polyfills": ["zone.js"],
 						"tsConfig": "tsconfig.app.json",
-						"aot": true,
 						"assets": ["src/favicon.ico", "src/robots.txt", "src/assets"],
 						"styles": [
 							"./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
@@ -106,21 +105,21 @@
 				"serve": {
 					"builder": "@angular-devkit/build-angular:dev-server",
 					"options": {
-						"browserTarget": "Myneworm:build"
+						"buildTarget": "Myneworm:build"
 					},
 					"configurations": {
 						"production": {
-							"browserTarget": "Myneworm:build:production"
+							"buildTarget": "Myneworm:build:production"
 						},
 						"staging": {
-							"browserTarget": "Myneworm:build:staging"
+							"buildTarget": "Myneworm:build:staging"
 						},
 						"testing": {
-							"browserTarget": "Myneworm:build:testing",
+							"buildTarget": "Myneworm:build:testing",
 							"proxyConfig": "src/proxy.conf.json"
 						},
 						"local": {
-							"browserTarget": "Myneworm:build:local",
+							"buildTarget": "Myneworm:build:local",
 							"proxyConfig": "src/proxy.conf.json"
 						}
 					}
@@ -135,27 +134,14 @@
 					"builder": "@angular-devkit/build-angular:karma",
 					"options": {
 						"main": "src/test.ts",
-						"polyfills": "src/polyfills.ts",
+						"polyfills": ["zone.js", "zone.js/testing"],
 						"tsConfig": "tsconfig.spec.json",
-						"karmaConfig": "karma.conf.js",
 						"assets": ["src/favicon.ico", "src/assets"],
 						"styles": [
 							"./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
 							"src/styles.css"
 						],
 						"scripts": []
-					}
-				},
-				"e2e": {
-					"builder": "@angular-devkit/build-angular:protractor",
-					"options": {
-						"protractorConfig": "e2e/protractor.conf.js",
-						"devServerTarget": "Myneworm:serve"
-					},
-					"configurations": {
-						"production": {
-							"devServerTarget": "Myneworm:serve:production"
-						}
 					}
 				}
 			}

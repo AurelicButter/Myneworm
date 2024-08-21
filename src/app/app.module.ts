@@ -10,7 +10,6 @@ import { HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ImprintIndexModule } from "./imprint-index/imprint-index.module";
 import { MissingPageComponent } from "./pages/missing-page/missing-page.component";
-import { SeriesPageModule } from "./series-page/series-page.module";
 import { SearchBarModule } from "./search-bar/search-bar.module";
 import { MatDialogModule } from "@angular/material/dialog";
 import { SearchPageModule } from "./search-page/search-page.module";
@@ -22,6 +21,8 @@ import { RegistrationPageComponent } from "./pages/registration/registration.com
 import { SharedModule } from "./shared/shared.module";
 import { DeleteConfirmationComponent } from "./user-settings-page/delete-confirmation/delete-confirmation.component";
 import { BookPageComponent } from "./pages/book-page/book-page.component";
+import { SeriesPageComponent } from "./pages/series-page/series-page.component";
+import { MarkdownModule } from "ngx-markdown";
 
 @NgModule({
 	declarations: [
@@ -34,6 +35,7 @@ import { BookPageComponent } from "./pages/book-page/book-page.component";
 		DeleteConfirmationComponent
 	],
 	imports: [
+		MarkdownModule.forRoot(),
 		BrowserModule,
 		HttpClientModule,
 		FormsModule,
@@ -42,12 +44,12 @@ import { BookPageComponent } from "./pages/book-page/book-page.component";
 		ImprintPageModule,
 		BrowserAnimationsModule,
 		ImprintIndexModule,
-		SeriesPageModule,
 		SearchBarModule,
 		SearchPageModule,
 		MatDialogModule,
 		SharedModule,
-		BookPageComponent
+		BookPageComponent,
+		SeriesPageComponent
 	],
 	providers: [Title, LocalCookiesService],
 	bootstrap: [AppComponent]

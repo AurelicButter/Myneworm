@@ -39,7 +39,8 @@
         </aside>
         <main class="col-7">
             <div class="book-description">
-                <p *ngIf="book.description; else noDescription" [innerHTML]="book.description"></p>
+                <markdown *ngIf="book.description; else noDescription" [data]="book.description" ngPreserveWhitespaces>
+                </markdown>                
                 <ng-template #noDescription>No description available.</ng-template>
             </div>
         </main>

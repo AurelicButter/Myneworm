@@ -16,7 +16,6 @@
 		"build:prod": "ng build --configuration production",
 		"lint": "eslint .",
 		"test": "ng test",
-		"e2e": "ng e2e",
 		"eslint": "eslint .",
 		"eslint:fix": "eslint . --fix",
 		"prettier": "prettier --write .",
@@ -38,10 +37,10 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Butterstroke/Myneworm.git"
+		"url": "https://github.com/AurelicButter/Myneworm.git"
 	},
 	"bugs": {
-		"url": "https://github.com/Butterstroke/Myneworm/issues",
+		"url": "https://github.com/AurelicButter/Myneworm/issues",
 		"email": "support@katsurin.com"
 	},
 	"lint-staged": {
@@ -62,40 +61,39 @@
 		"@angular/platform-browser": "^17.3.7",
 		"@angular/platform-browser-dynamic": "^17.3.7",
 		"@angular/router": "^17.3.7",
-		"@fullcalendar/angular": "^6.1.10",
-		"@fullcalendar/core": "^6.1.11",
-		"@fullcalendar/daygrid": "^6.1.11",
-		"@fullcalendar/interaction": "^6.1.11",
-		"@fullcalendar/list": "^6.1.11",
+		"@fullcalendar/angular": "^6.1.15",
+		"@fullcalendar/core": "^6.1.15",
+		"@fullcalendar/daygrid": "^6.1.15",
+		"@fullcalendar/interaction": "^6.1.15",
+		"@fullcalendar/list": "^6.1.15",
 		"bootstrap": "^5.3.3",
 		"jquery": "^3.7.1",
 		"moment": "^2.30.1",
+		"ngx-markdown": "^17.2.1",
 		"normalize.css": "^8.0.1",
 		"rxjs": "^7.8.1",
-		"tslib": "^2.6.2",
-		"zone.js": "^0.14.3"
+		"swiper": "^11.1.9",
+		"tslib": "^2.6.3",
+		"zone.js": "^0.14.8"
 	},
 	"devDependencies": {
 		"@angular-devkit/build-angular": "^17.3.6",
 		"@angular/compiler-cli": "^17.3.7",
 		"@types/jasmine": "^5.1.4",
-		"@types/node": "^20.12.12",
+		"@types/node": "^20.16.0",
 		"@typescript-eslint/eslint-plugin": "^6.21.0",
 		"@typescript-eslint/parser": "^6.21.0",
 		"eslint": "^8.57.0",
-		"eslint-plugin-prettier": "^5.1.3",
+		"eslint-plugin-prettier": "^5.2.1",
 		"husky": "^8.0.3",
-		"jasmine-core": "^5.1.2",
-		"jasmine-spec-reporter": "^7.0.0",
-		"karma": "^6.4.3",
+		"jasmine-core": "^5.2.0",
+		"karma": "^6.4.4",
 		"karma-chrome-launcher": "^3.2.0",
 		"karma-coverage": "^2.2.1",
 		"karma-jasmine": "^5.1.0",
 		"karma-jasmine-html-reporter": "^2.1.0",
-		"lint-staged": "^15.2.4",
-		"prettier": "^3.2.5",
-		"protractor": "~7.0.0",
-		"ts-node": "^10.9.2",
+		"lint-staged": "^15.2.9",
+		"prettier": "^3.3.3",
 		"typescript": "5.2.2"
 	}
 }

@@ -19,6 +19,7 @@ import { WishlistEntry } from "../models/WishlistEntry";
 import { ToastService } from "./toast.service";
 import { catchError, of } from "rxjs";
 import { BookCorrectionForm } from "../models/BookCorrectionForm";
+import { SeriesEntry } from "../models/SeriesEntry";
 
 @Injectable({
 	providedIn: "root"
@@ -58,6 +59,13 @@ export class MynewormAPIService {
 		return this.http.get<BookData>(`${environment.API_ADDRESS}/book/byId/${mynewormId}`);
 	}
 
+	getBySeriesID(seriesID: string, page?: string) {
+		if (page) {
+			return this.http.get<BookData[]>(`${environment.API_ADDRESS}/book/bySeries/${seriesID}/${page}`);
+		}
+		return this.http.get<BookData[]>(`${environment.API_ADDRESS}/book/bySeries/${seriesID}`);
+	}
+
 	getMonthData(month: string) {
 		return this.http.get<MonthReleaseData[]>(`${environment.API_ADDRESS}/book/date/${month}`);
 	}
@@ -88,6 +96,10 @@ export class MynewormAPIService {
 
 	getPublisher(publisherID: string) {
 		return this.http.get<PublisherData>(`${environment.API_ADDRESS}/publisher/${publisherID}`);
+	}
+
+	getSeries(seriesID: string) {
+		return this.http.get<SeriesEntry>(`${environment.API_ADDRESS}/series/${seriesID}`);
 	}
 
 	searchBookByTerm(term: string) {
