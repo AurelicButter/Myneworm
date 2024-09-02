@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { LocalCookiesService } from "./services/authentication/local-cookies.service";
 import { AuthenticationService } from "./services/authentication/authentication.service";
+import { AuthUserService } from "./services/authentication/auth-user.service";
 
 @Component({
 	selector: "app-root",
@@ -14,10 +14,10 @@ export class AppComponent implements OnInit {
 
 	constructor(
 		private authService: AuthenticationService,
-		private cookieService: LocalCookiesService
+		private AuthUser: AuthUserService
 	) {
-		this.cookieService.userEvent.subscribe((value) => {
-			this.isAuthenticated = Object.keys(value).length > 0;
+		this.AuthUser.userEvent.subscribe(() => {
+			this.isAuthenticated = this.AuthUser.isLoggedIn();
 		});
 	}
 

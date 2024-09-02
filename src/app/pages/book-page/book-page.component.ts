@@ -7,7 +7,6 @@ import { MetadataService } from "../../services/metadata.service";
 import { MynewormAPIService } from "../../services/myneworm-api.service";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { ListEntryModalComponent } from "../../shared/list-entry-modal/list-entry-modal.component";
-import { LocalCookiesService } from "../../services/authentication/local-cookies.service";
 import { ListEntry } from "../../models/ListEntry";
 import { ToastService } from "../../services/toast.service";
 import { CommonModule } from "@angular/common";
@@ -16,6 +15,7 @@ import { BookFormatPipe } from "src/app/pipes/BookFormat.pipe";
 import { SharedModule } from "src/app/shared/shared.module";
 import * as moment from "moment";
 import { MarkdownModule } from "ngx-markdown";
+import { AuthUserService } from "src/app/services/authentication/auth-user.service";
 
 @Component({
 	selector: "book-page",
@@ -28,7 +28,7 @@ export class BookPageComponent implements OnInit {
 	book: BookData;
 	publisher: PublisherData;
 	isLoggedIn = false;
-	private userID: string;
+	private userID: number;
 	hasExistingEntry = false;
 	remainingMsg: string;
 
@@ -37,14 +37,14 @@ export class BookPageComponent implements OnInit {
 		private service: MynewormAPIService,
 		private metaService: MetadataService,
 		private matDialog: MatDialog,
-		private cookieService: LocalCookiesService,
+		private AuthUser: AuthUserService,
 		private toastService: ToastService,
 		private router: Router
 	) {
-		this.cookieService.userEvent.subscribe((value) => {
-			this.isLoggedIn = Object.keys(value).length > 0;
+		this.AuthUser.userEvent.subscribe((value) => {
+			this.isLoggedIn = this.AuthUser.isLoggedIn();
 
-			if (this.isLoggedIn) {
+			if (this.isLoggedIn && value !== null) {
 				this.userID = value.user_id;
 			}
 		});
@@ -75,7 +75,7 @@ export class BookPageComponent implements OnInit {
 
 			if (this.isLoggedIn) {
 				this.service
-					.getListEntry(data.isbn, this.userID)
+					.getListEntry(data.isbn, this.userID.toString())
 					.pipe(
 						catchError((err) => {
 							if (err.status === 404) {

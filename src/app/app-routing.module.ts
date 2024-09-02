@@ -8,7 +8,7 @@ import { MissingPageComponent } from "./pages/missing-page/missing-page.componen
 import { SeriesPageComponent } from "./pages/series-page/series-page.component";
 import { SearchPageComponent } from "./search-page/search-page.component";
 import { LoginPageComponent } from "./pages/login/login.component";
-import { AuthenticationGuard } from "./services/authentication/authentication.guard";
+import { AuthenticationGuard } from "./guards/authentication.guard";
 import { UserSettingsPageComponent } from "./user-settings-page/user-settings-page.component";
 import { RegistrationPageComponent } from "./pages/registration/registration.component";
 

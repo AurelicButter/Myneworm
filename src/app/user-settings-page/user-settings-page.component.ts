@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MynewormAPIService } from "../services/myneworm-api.service";
-import { LocalCookiesService } from "../services/authentication/local-cookies.service";
 import { AccountData, UserData } from "../models/userData";
 import { AccountUpdateData } from "../models/accountUpdateData";
 import { ToastService } from "../services/toast.service";
@@ -9,6 +8,8 @@ import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { DeleteConfirmationComponent } from "./delete-confirmation/delete-confirmation.component";
 import { AuthenticationService } from "../services/authentication/authentication.service";
 import { email, password, username } from "../models/validationPatterns";
+import { AuthUserService } from "../services/authentication/auth-user.service";
+import { AuthUser } from "../models/AuthUser";
 
 @Component({
 	selector: "user-settings-page",
@@ -18,7 +19,7 @@ import { email, password, username } from "../models/validationPatterns";
 export class UserSettingsPageComponent implements OnInit {
 	currPage: string;
 	url: string | ArrayBuffer | null | undefined;
-	private user: any;
+	private user: AuthUser;
 	private oldEmail: string;
 	profileData: UserData;
 	accountData: AccountData;
@@ -33,19 +34,22 @@ export class UserSettingsPageComponent implements OnInit {
 	constructor(
 		private route: ActivatedRoute,
 		private service: MynewormAPIService,
-		private cookieService: LocalCookiesService,
 		private authService: AuthenticationService,
 		private toastService: ToastService,
 		private matDialog: MatDialog,
-		private router: Router
+		private router: Router,
+		private AuthUser: AuthUserService
 	) {
-		this.cookieService.userEvent.subscribe((value) => {
+		this.AuthUser.userEvent.subscribe((value) => {
+			if (value === null) {
+				return;
+			}
 			this.user = value;
 		});
 	}
 
 	ngOnInit() {
-		this.service.getAuthUser(this.user.user_id).subscribe((data: UserData | null) => {
+		this.service.getAuthUser(this.user.user_id.toString()).subscribe((data: UserData | null) => {
 			if (data === null) {
 				return;
 			}
