@@ -7,7 +7,7 @@ export const AuthenticationGuard = () => {
 	const router = inject(Router);
 	const authService = inject(AuthenticationService);
 
-	return authService.isLoggedIn().pipe(
+	return authService.validateCookies().pipe(
 		tap((value) => {
 			return value ? true : router.navigate(["/login"], { queryParams: { state: "expired" } });
 		})

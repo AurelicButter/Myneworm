@@ -54,7 +54,7 @@ export class AuthenticationService {
 	validateCookies() {
 		return this.http
 			.post(
-				`${environment.API_ADDRESS}/auth/validateCookies`,
+				`${environment.API_ADDRESS}/auth/validate`,
 				{},
 				{
 					withCredentials: true,
@@ -69,30 +69,6 @@ export class AuthenticationService {
 				catchError(() => {
 					this.AuthUserService.deleteUser();
 					return of(false);
-				})
-			);
-	}
-
-	isLoggedIn() {
-		return this.http
-			.post(
-				`${environment.API_ADDRESS}/auth/isAuthenticated`,
-				{},
-				{
-					withCredentials: true,
-					observe: "response"
-				}
-			)
-			.pipe(
-				map((data) => {
-					return data.status === 200;
-				}),
-				catchError((error) => {
-					if (error.status === 401) {
-						this.AuthUserService.deleteUser();
-						return of(false);
-					}
-					return of(`ERROR (${error.status}): ${error.statusText}`);
 				})
 			);
 	}

@@ -1,5 +1,5 @@
 <div class="profile-flex">
-    <aside class="aside-width">
+    <aside *ngIf="profileInfo" class="aside-width">
         <img src='{{getAvatar()}}'>
         <p><b>Last Online:</b> {{this.isOnlineText()}}</p>
         <p><b>Joined:</b> {{this.utilities.dateReadable(profileInfo.create_date)}}</p>
@@ -12,7 +12,7 @@
         </div>        
     </aside>
     <div class="profile-container">
-        <div class="user-header">
+        <div *ngIf="profileInfo" class="user-header">
             <div class="username-display">
                 <h2 *ngIf="profileInfo.display_name" class="aside-offset">{{profileInfo.display_name}} (&#64;{{profileInfo.username}})</h2>
                 <h2 *ngIf="profileInfo.display_name === null" class="aside-offset">{{profileInfo.username}}</h2>

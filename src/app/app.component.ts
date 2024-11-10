@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
 
 	ngOnInit(): void {
 		if (this.isAuthenticated) {
-			this.authService.isLoggedIn().subscribe((value) => {
+			this.authService.validateCookies().subscribe((value) => {
 				this.isAuthenticated = value ? true : false;
 			});
 		}
