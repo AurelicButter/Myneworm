@@ -29,7 +29,7 @@ export class AuthUserService {
 	}
 
 	isModerator() {
-		return this.user !== null && !this.user.role_name.includes("user");
+		return this.user !== null && this.userPermissions.includes(UserPermissions.STAFF);
 	}
 
 	isSameUser(username: string) {
