@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { WishlistEntry } from "src/app/models/WishlistEntry";
 import { UserData } from "src/app/models/userData";
-import { LocalCookiesService } from "src/app/services/authentication/local-cookies.service";
+import { AuthUserService } from "src/app/services/authentication/auth-user.service";
 import { MetadataService } from "src/app/services/metadata.service";
 import { MynewormAPIService } from "src/app/services/myneworm-api.service";
 import { ToastService } from "src/app/services/toast.service";
@@ -27,8 +27,8 @@ export class WishlistComponent {
 		private service: MynewormAPIService,
 		public utilities: UtilitiesService,
 		private metaService: MetadataService,
-		private cookieService: LocalCookiesService,
-		private toastService: ToastService
+		private toastService: ToastService,
+		private AuthUser: AuthUserService
 	) {}
 
 	ngOnInit() {
@@ -39,7 +39,7 @@ export class WishlistComponent {
 				}
 
 				this.user = data;
-				this.isAuthUser = this.cookieService.user.username === this.user.username;
+				this.isAuthUser = this.AuthUser.isSameUser(this.user.username);
 
 				if (!this.user.wishlist_msg) {
 					this.user.wishlist_msg = null;

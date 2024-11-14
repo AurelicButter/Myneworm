@@ -5,7 +5,8 @@ import { MynewormAPIService } from "src/app/services/myneworm-api.service";
 import { ToastService } from "src/app/services/toast.service";
 import { UtilitiesService } from "src/app/services/utilities.service";
 import { ActivityStatus, OwnershipStatus } from "src/app/models/ListEntryStatus";
-import { LocalCookiesService } from "src/app/services/authentication/local-cookies.service";
+import { AuthUserService } from "src/app/services/authentication/auth-user.service";
+import { AuthUser } from "src/app/models/AuthUser";
 
 @Component({
 	selector: "list-entry-modal",
@@ -18,37 +19,42 @@ export class ListEntryModalComponent {
 	showDatePicker = [false, false];
 	activityStatus = ActivityStatus;
 	ownershipStatus = OwnershipStatus;
-	private user: any;
+	private user: AuthUser;
 
 	constructor(
 		@Inject(MAT_DIALOG_DATA) public bookData: { isbn: string; cover: string; title: string },
 		private service: MynewormAPIService,
 		private toastService: ToastService,
 		private utilities: UtilitiesService,
-		private cookieService: LocalCookiesService,
+		private AuthUser: AuthUserService,
 		private dialogRef: MatDialogRef<ListEntryModalComponent>
 	) {
-		this.cookieService.userEvent.subscribe((value) => {
+		this.AuthUser.userEvent.subscribe((value) => {
+			if (value === null) {
+				return;
+			}
 			this.user = value;
 
-			this.service.getListEntry(bookData.isbn, this.user.user_id).subscribe((data: ListEntry | null) => {
-				if (data === null) {
-					return;
-				}
+			this.service
+				.getListEntry(bookData.isbn, this.user.user_id.toString())
+				.subscribe((data: ListEntry | null) => {
+					if (data === null) {
+						return;
+					}
 
-				this.isUpdate = true;
-				this.listEntryForm.active_status = data.active_status;
-				this.listEntryForm.owner_status = data.owner_status;
-				this.listEntryForm.score = data.score;
-				this.listEntryForm.reread = data.reread;
-				this.listEntryForm.notes = data.notes;
-				if (data.start_date) {
-					this.listEntryForm.start_date = this.utilities.APIDateFormatter(new Date(data.start_date));
-				}
-				if (data.end_date) {
-					this.listEntryForm.end_date = this.utilities.APIDateFormatter(new Date(data.end_date));
-				}
-			});
+					this.isUpdate = true;
+					this.listEntryForm.active_status = data.active_status;
+					this.listEntryForm.owner_status = data.owner_status;
+					this.listEntryForm.score = data.score;
+					this.listEntryForm.reread = data.reread;
+					this.listEntryForm.notes = data.notes;
+					if (data.start_date) {
+						this.listEntryForm.start_date = this.utilities.APIDateFormatter(new Date(data.start_date));
+					}
+					if (data.end_date) {
+						this.listEntryForm.end_date = this.utilities.APIDateFormatter(new Date(data.end_date));
+					}
+				});
 		});
 	}
 

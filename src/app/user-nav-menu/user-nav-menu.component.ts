@@ -1,7 +1,8 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthenticationService } from "../services/authentication/authentication.service";
-import { LocalCookiesService } from "../services/authentication/local-cookies.service";
+import { AuthUser } from "../models/AuthUser";
+import { AuthUserService } from "../services/authentication/auth-user.service";
 
 @Component({
 	selector: "user-nav-menu",
@@ -9,17 +10,17 @@ import { LocalCookiesService } from "../services/authentication/local-cookies.se
 	styleUrls: ["./user-nav-menu.component.css", "../shared/navigation-bar.css"]
 })
 export class UserNavMenuComponent {
-	user: any;
+	user: AuthUser | null;
 	isModerator = false;
 
 	constructor(
 		private router: Router,
 		private authService: AuthenticationService,
-		private cookieService: LocalCookiesService
+		private AuthUser: AuthUserService
 	) {
-		this.cookieService.userEvent.subscribe((value) => {
+		this.AuthUser.userEvent.subscribe((value) => {
 			this.user = value;
-			this.isModerator = !this.user.role_id.includes("user");
+			this.isModerator = this.AuthUser.isModerator();
 		});
 	}
 

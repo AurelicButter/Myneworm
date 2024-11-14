@@ -15,7 +15,6 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { SearchPageModule } from "./search-page/search-page.module";
 import { LoginPageComponent } from "./pages/login/login.component";
 import { UserNavMenuComponent } from "./user-nav-menu/user-nav-menu.component";
-import { LocalCookiesService } from "./services/authentication/local-cookies.service";
 import { UserSettingsPageComponent } from "./user-settings-page/user-settings-page.component";
 import { RegistrationPageComponent } from "./pages/registration/registration.component";
 import { SharedModule } from "./shared/shared.module";
@@ -23,6 +22,7 @@ import { DeleteConfirmationComponent } from "./user-settings-page/delete-confirm
 import { BookPageComponent } from "./pages/book-page/book-page.component";
 import { SeriesPageComponent } from "./pages/series-page/series-page.component";
 import { MarkdownModule } from "ngx-markdown";
+import { AuthUserService } from "./services/authentication/auth-user.service";
 
 @NgModule({
 	declarations: [
@@ -51,7 +51,7 @@ import { MarkdownModule } from "ngx-markdown";
 		BookPageComponent,
 		SeriesPageComponent
 	],
-	providers: [Title, LocalCookiesService],
+	providers: [Title, AuthUserService],
 	bootstrap: [AppComponent]
 })
 export class AppModule {}

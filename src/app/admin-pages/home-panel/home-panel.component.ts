@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
-import { LocalCookiesService } from "src/app/services/authentication/local-cookies.service";
+import { AuthUser } from "src/app/models/AuthUser";
+import { AuthUserService } from "src/app/services/authentication/auth-user.service";
 
 @Component({
 	selector: "home-panel",
@@ -7,11 +8,13 @@ import { LocalCookiesService } from "src/app/services/authentication/local-cooki
 	styleUrls: ["./home-panel.component.css"]
 })
 export class HomePanelComponent {
-	user: any;
+	user: AuthUser;
 
-	constructor(private cookieService: LocalCookiesService) {
-		this.cookieService.userEvent.subscribe((value) => {
-			this.user = value;
+	constructor(private AuthUser: AuthUserService) {
+		this.AuthUser.userEvent.subscribe((value) => {
+			if (value !== null) {
+				this.user = value;
+			}
 		});
 	}
 }

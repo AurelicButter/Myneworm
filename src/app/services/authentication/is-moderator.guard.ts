@@ -1,27 +1,20 @@
 import { inject } from "@angular/core";
 import { Router } from "@angular/router";
-import { tap } from "rxjs";
-import { AuthenticationService } from "./authentication.service";
-import { LocalCookiesService } from "./local-cookies.service";
+import { AuthUserService } from "./auth-user.service";
 
 export const IsModeratorGuard = () => {
 	const router = inject(Router);
-	const authService = inject(AuthenticationService);
-	const cookieService = inject(LocalCookiesService);
+	const AuthUser = inject(AuthUserService);
 
-	if (!cookieService.user) {
+	if (!AuthUser.user) {
 		router.navigate(["/"]);
 		return;
 	}
 
-	return authService.validateCookies().pipe(
-		tap((value) => {
-			if (!value || cookieService.user.role_id.includes("user")) {
-				router.navigate(["/login"]);
-				return;
-			}
+	if (!AuthUser.isModerator()) {
+		router.navigate(["/login"]);
+		return;
+	}
 
-			return true;
-		})
-	);
+	return true;
 };

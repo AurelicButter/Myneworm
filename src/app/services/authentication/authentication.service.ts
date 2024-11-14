@@ -3,8 +3,8 @@ import { Injectable } from "@angular/core";
 import { catchError, map, of } from "rxjs";
 import { environment } from "src/environments/environment";
 import { Buffer } from "buffer";
-import { LocalCookiesService } from "./local-cookies.service";
 import { ToastService } from "../toast.service";
+import { AuthUserService } from "./auth-user.service";
 
 @Injectable({
 	providedIn: "root"
@@ -12,8 +12,8 @@ import { ToastService } from "../toast.service";
 export class AuthenticationService {
 	constructor(
 		private http: HttpClient,
-		private cookieService: LocalCookiesService,
-		private toastService: ToastService
+		private toastService: ToastService,
+		private AuthUserService: AuthUserService
 	) {}
 
 	login(username: string, password: string) {
@@ -36,7 +36,7 @@ export class AuthenticationService {
 					if (data.body !== null) {
 						// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 						// @ts-ignore
-						this.cookieService.updateUser(data.body.user);
+						this.AuthUserService.updateUser(data.body.user);
 						return true;
 					}
 
@@ -54,7 +54,7 @@ export class AuthenticationService {
 	validateCookies() {
 		return this.http
 			.post(
-				`${environment.API_ADDRESS}/auth/validateCookies`,
+				`${environment.API_ADDRESS}/auth/validate`,
 				{},
 				{
 					withCredentials: true,
@@ -63,36 +63,12 @@ export class AuthenticationService {
 			)
 			.pipe(
 				map((data) => {
-					this.cookieService.updateUser(data.body);
+					this.AuthUserService.updateUser(data.body);
 					return true;
 				}),
 				catchError(() => {
-					this.cookieService.deleteUser();
+					this.AuthUserService.deleteUser();
 					return of(false);
-				})
-			);
-	}
-
-	isLoggedIn() {
-		return this.http
-			.post(
-				`${environment.API_ADDRESS}/auth/isAuthenticated`,
-				{},
-				{
-					withCredentials: true,
-					observe: "response"
-				}
-			)
-			.pipe(
-				map((data) => {
-					return data.status === 200;
-				}),
-				catchError((error) => {
-					if (error.status === 401) {
-						this.cookieService.deleteUser();
-						return of(false);
-					}
-					return of(`ERROR (${error.status}): ${error.statusText}`);
 				})
 			);
 	}
@@ -136,7 +112,7 @@ export class AuthenticationService {
 	}
 
 	clearSessions() {
-		this.cookieService.deleteUser();
+		this.AuthUserService.deleteUser();
 		return this.http.post(`${environment.API_ADDRESS}/auth/clear`, {}).pipe(
 			catchError((err: any) => {
 				this.toastService.sendError(err.error.errors);
@@ -157,12 +133,12 @@ export class AuthenticationService {
 			)
 			.pipe(
 				map((data) => {
-					this.cookieService.deleteUser();
+					this.AuthUserService.deleteUser();
 					return data.status === 200;
 				}),
 				catchError((error) => {
 					if (error.status === 401) {
-						this.cookieService.deleteUser();
+						this.AuthUserService.deleteUser();
 						return of(false);
 					}
 					return of(`ERROR (${error.status}): ${error.statusText}`);

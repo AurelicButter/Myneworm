@@ -6,7 +6,7 @@ import { ActivatedRoute } from "@angular/router";
 
 import { ListEntry } from "../../models/ListEntry";
 import { UserData } from "../../models/userData";
-import { LocalCookiesService } from "../../services/authentication/local-cookies.service";
+import { AuthUserService } from "src/app/services/authentication/auth-user.service";
 
 @Component({
 	selector: "user-list",
@@ -39,14 +39,14 @@ export class UserListComponent {
 		private route: ActivatedRoute,
 		private service: MynewormAPIService,
 		private metaService: MetadataService,
-		private cookieService: LocalCookiesService
+		private AuthUser: AuthUserService
 	) {
 		this.route.params.subscribe((data) => {
 			this.metaService.updateMetaTags(`${data.username}'s List`, `/user/${data.username}/lists`);
 			this.listUser = data.username;
 
-			this.cookieService.userEvent.subscribe((value) => {
-				this.isAuthUser = value.username === this.listUser;
+			this.AuthUser.userEvent.subscribe((value) => {
+				this.isAuthUser = this.AuthUser.isSameUser(this.listUser);
 			});
 		});
 	}

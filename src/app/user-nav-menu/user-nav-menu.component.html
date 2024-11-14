@@ -1,4 +1,4 @@
-<div class="user-menu-wrap">
+<div class="user-menu-wrap" *ngIf="user !== null">
     <span class="nav-item nav-link nav-user-menu-preview">{{user.username}}</span>
     <div class="user-menu">
         <a class="btn-link btn-div" href="/user/{{user.username}}">Profile</a>
