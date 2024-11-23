@@ -11,6 +11,9 @@ import { LoginPageComponent } from "./pages/login/login.component";
 import { AuthenticationGuard } from "./guards/authentication.guard";
 import { UserSettingsPageComponent } from "./user-settings-page/user-settings-page.component";
 import { RegistrationPageComponent } from "./pages/registration/registration.component";
+import { DatabaseGuidelinesComponent } from "./pages/database-guidelines/database-guidelines.component";
+import { PrivacyPageComponent } from "./pages/privacy/privacy.component";
+import { FaqComponent } from "./pages/faq/faq.component";
 
 const routes: Routes = [
 	{ path: "", component: HomePageComponent },
@@ -43,24 +46,12 @@ const routes: Routes = [
 		loadComponent: () => import("./about-page/about-page.component").then((m) => m.AboutPageComponent)
 	},
 	{
-		path: "faq",
-		loadComponent: () => import("./pages/faq/faq.component").then((m) => m.FaqComponent)
-	},
-	{
 		path: "support",
 		loadComponent: () => import("./pages/support/support.component").then((m) => m.SupportPageComponent)
 	},
-	{
-		path: "privacy",
-		loadComponent: () => import("./pages/privacy/privacy.component").then((m) => m.PrivacyPageComponent)
-	},
-	{
-		path: "guidelines",
-		loadComponent: () =>
-			import("./pages/database-guidelines/database-guidelines.component").then(
-				(m) => m.DatabaseGuidelinesComponent
-			)
-	},
+	{ path: "faq", component: FaqComponent },
+	{ path: "privacy", component: PrivacyPageComponent },
+	{ path: "guidelines", component: DatabaseGuidelinesComponent },
 	{ path: "login", component: LoginPageComponent },
 	{ path: "register", component: RegistrationPageComponent },
 	{

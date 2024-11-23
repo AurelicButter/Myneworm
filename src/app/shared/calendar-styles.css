@@ -10,6 +10,10 @@
     box-shadow: none !important;
 }
 
+.fc-scroller {
+    overflow: hidden;
+}
+
 .imprint-calendar .fc-toolbar {
     justify-content: inherit;
 }
