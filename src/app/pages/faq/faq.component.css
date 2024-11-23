@@ -1,11 +1,11 @@
-.faq-header {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border-bottom: 2px black solid;
-}
-
 .faq-component {
     display: flex;
     flex-direction: column;
     margin: 0% 20%;
+}
+
+.faq-component ::ng-deep h3 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-bottom: 2px black solid;
 }

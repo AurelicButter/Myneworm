@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { NgModule, SecurityContext } from "@angular/core";
 import { BrowserModule, Title } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 
@@ -27,7 +27,6 @@ import { AuthUserService } from "./services/authentication/auth-user.service";
 @NgModule({
 	declarations: [
 		AppComponent,
-		MissingPageComponent,
 		LoginPageComponent,
 		UserNavMenuComponent,
 		UserSettingsPageComponent,
@@ -35,7 +34,7 @@ import { AuthUserService } from "./services/authentication/auth-user.service";
 		DeleteConfirmationComponent
 	],
 	imports: [
-		MarkdownModule.forRoot(),
+		MarkdownModule.forRoot({ sanitize: SecurityContext.NONE }),
 		BrowserModule,
 		HttpClientModule,
 		FormsModule,
@@ -49,7 +48,8 @@ import { AuthUserService } from "./services/authentication/auth-user.service";
 		MatDialogModule,
 		SharedModule,
 		BookPageComponent,
-		SeriesPageComponent
+		SeriesPageComponent,
+		MissingPageComponent
 	],
 	providers: [Title, AuthUserService],
 	bootstrap: [AppComponent]
