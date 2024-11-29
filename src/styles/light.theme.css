@@ -1,0 +1,53 @@
+:root {
+    --mw-white: #ECEBF3;
+    --mw-black: #1F2232;
+    --mw-highlight: #0D98BA;
+    --mw-highlight-bright: #2DC9F0;
+    --mw-font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+[data-bs-theme="mw-light"] {
+    --bs-body-font-family: var(--mw-font-family);
+    --bs-body-color: var(--mw-black);
+    --bs-body-bg: var(--mw-white);
+
+    a:not(.btn, .nav-link, .fc-col-header-cell-cushion, .fc-daygrid-day-number) {
+        color: var(--mw-highlight);
+    }
+
+    .btn:not(.modal-close, .btn-danger) {
+        --bs-btn-color: var(--mw-white);
+        --bs-btn-bg: var(--mw-black);
+        --bs-btn-hover-bg: var(--mw-highlight);
+        --bs-btn-hover-color: var(--mw-white);
+        --bs-btn-disabled-bg: var(--mw-black);
+        --bs-btn-disabled-color: var(--mw-white);
+        --bs-btn-active-bg: var(--mw-highlight);
+        --bs-btn-active-color: var(--mw-white);
+    }
+
+    .btn-danger {
+        --bs-btn-color: #fff;
+        --bs-btn-bg: #dc3545;
+        --bs-btn-hover-color: #fff;
+        --bs-btn-hover-bg: #bb2d3b;
+        --bs-btn-active-color: #fff;
+        --bs-btn-active-bg: #b02a37;
+        --bs-btn-disabled-color: #fff;
+        --bs-btn-disabled-bg: #dc3545;
+    }
+
+    .form-control, .form-control:focus,
+    .form-select, .form-select:focus {
+        background-color: #fff;
+    }
+
+    .form-control:disabled, .form-select:disabled {
+        background-color: var(--bs-secondary-bg);
+    }
+
+    .footer-link,
+    .footer-link:hover {
+        color: var(--mw-white) !important;
+    }
+}

@@ -83,7 +83,7 @@
             </form>
         </div>
         <footer class="modal-footer">
-            <button type="submit" mat-raised-button class="modal-action btn btn-lg myneworm-btn" [disabled]="entryForm.invalid"
+            <button type="submit" mat-raised-button class="modal-action btn btn-lg" [disabled]="entryForm.invalid"
                 [attr.aria-disabled]="entryForm.invalid" tabindex='{{entryForm.invalid ? -1 : 0 }}' (click)="submit()">Save</button>
             <button mat-raised-button class="btn-danger btn btn-lg" [disabled]="!isUpdate" [attr.aria-disabled]="!isUpdate"
                 tabindex='{{isUpdate ? 0 : -1 }}' (click)="deleteEntry()">Delete</button>

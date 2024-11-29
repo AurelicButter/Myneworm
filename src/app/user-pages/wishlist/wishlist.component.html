@@ -15,18 +15,18 @@
                     <textarea name="new_wishlist_msg" class="wishlist-msg-input" [(ngModel)]='updateMsg'></textarea>
                 </div>
                 <div *ngIf="isAuthUser" class="wishlist-msg-btn">
-                    <button *ngIf="!editMsg" class="btn myneworm-btn" (click)="editMessage()">
+                    <button *ngIf="!editMsg" class="btn" (click)="editMessage()">
                         {{ user.wishlist_msg ? 'Edit' : 'Add'}} Message
                     </button>
-                    <button *ngIf="editMsg" class="btn myneworm-btn" (click)="saveMsg()">Save</button>
-                    <button *ngIf="editMsg" class="btn myneworm-btn" (click)="cancelMsg()">Cancel</button>
+                    <button *ngIf="editMsg" class="btn" (click)="saveMsg()">Save</button>
+                    <button *ngIf="editMsg" class="btn" (click)="cancelMsg()">Cancel</button>
                 </div>
             </div>
         </div>
     </div>
     <div class="wishlist-sort">
         <div class="dropdown">
-            <button class="btn myneworm-btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
+            <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
                 Sort
             </button>

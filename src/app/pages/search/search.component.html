@@ -9,7 +9,7 @@
                 </button>
             </form>
             <div class="advanced-options-button">
-                <button class="btn myneworm-btn" (click)="onAdvOptionsClick()">
+                <button class="btn" (click)="onAdvOptionsClick()">
                     {{ !showAdvancedOptions ? 'Show Filters' : 'Hide Filters' }}
                 </button>
             </div>
@@ -120,8 +120,8 @@
             </select>
         </div>
         <div class="form-buttons">
-            <button class="btn myneworm-btn" type="reset" (click)="clearFilters()">Clear Filters</button>
-            <button class="btn myneworm-btn" type="submit">Search with Filters</button>
+            <button class="btn" type="reset" (click)="clearFilters()">Clear Filters</button>
+            <button class="btn" type="submit">Search with Filters</button>
         </div>
     </form>
     </div>
@@ -130,9 +130,9 @@
     <h3 class="search-page-header">Search Results</h3>
     <hr class="search-page-line">
     <div class="search-pagination">
-        <button class="btn myneworm-btn" [ngClass]="this.pageNumber == 1 ? 'no-page' : ''" (click)="prevPage()">&lt;
+        <button class="btn" [ngClass]="this.pageNumber == 1 ? 'no-page' : ''" (click)="prevPage()">&lt;
             Previous</button>
-        <button class="btn myneworm-btn"
+        <button class="btn"
             [ngClass]="this.dataSource.filteredData.length === 0 || this.dataSource.filteredData.length < 25 ? 'no-page' : ''"
             (click)="nextPage()">Next &gt;</button>
     </div>
@@ -176,9 +176,9 @@
         </tr>
     </table>
     <div class="search-pagination">
-        <button class="btn myneworm-btn" [ngClass]="this.pageNumber == 1 ? 'no-page' : ''" (click)="prevPage()">&lt;
+        <button class="btn" [ngClass]="this.pageNumber == 1 ? 'no-page' : ''" (click)="prevPage()">&lt;
             Previous</button>
-        <button class="btn myneworm-btn"
+        <button class="btn"
             [ngClass]="this.dataSource.filteredData.length === 0 || this.dataSource.filteredData.length < 25 ? 'no-page' : ''"
             (click)="nextPage()">Next &gt;</button>
     </div>

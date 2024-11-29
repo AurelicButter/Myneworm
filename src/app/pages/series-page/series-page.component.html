@@ -40,9 +40,9 @@
             </div>
             <h5>External Links</h5>
             <div class="series-links">
-                <a *ngIf="seriesData.anilist_id" class="myneworm-btn btn btn-lg" target="_blank"
+                <a *ngIf="seriesData.anilist_id" class="btn btn-lg" target="_blank"
                     [href]="'https://anilist.co/manga/' + seriesData.anilist_id | sanitizeURL">AniList</a>
-                <a *ngIf="seriesData.mal_id" class="myneworm-btn btn btn-lg" target="_blank"
+                <a *ngIf="seriesData.mal_id" class="btn btn-lg" target="_blank"
                     [href]="'https://myanimelist.net/manga/' + seriesData.mal_id | sanitizeURL">MyAnimeList</a>
                 <p *ngIf="!seriesData.anilist_id && !seriesData.mal_id" style="text-align: center;">No external links
                 </p>

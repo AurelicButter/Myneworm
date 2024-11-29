@@ -1,0 +1,16 @@
+<div class="swiper-wrapper" (mouseenter)="onMouseHover()" (mouseleave)="onMouseHover()">
+    <swiper-container loop="true" [attr.slides-per-view]="slidePerView" [attr.slides-per-group]="slidePerSkip"
+        init="false">
+        <swiper-slide class="swiper-slide" *ngFor="let book of bookList;">
+            <a class="carousel-link" routerLink="/book/{{book.isbn}}">
+                <div class="carousel-item-content" style="display: inline-flex; align-items: center; flex-direction: column; position: relative">
+                    <img class="carousel-cover" src="{{getCover(book.isbn)}}">
+                    <div class="carousel-element-title">
+                        <span>{{ book.title }}</span>
+                        <span><i>({{book.format_name | bookFormat}}, {{book.book_type_name | titlecase}})</i></span>
+                    </div>
+                </div>
+            </a>
+        </swiper-slide>
+    </swiper-container>
+</div>

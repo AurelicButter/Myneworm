@@ -50,8 +50,8 @@
             <th mat-header-cell *matHeaderCellDef scope="col" [attr.role]="null"></th>
             <td mat-cell *matCellDef="let element" class="col-1-half">
                 <div class="more-col">
-                    <button *ngIf="isAuthUser" class="btn myneworm-btn" (click)="updateListEntry(element.isbn, element.title)">Edit</button>
-                    <button *ngIf="hasExpandedDetails(element)" class="btn myneworm-btn more-btn"
+                    <button *ngIf="isAuthUser" class="btn" (click)="updateListEntry(element.isbn, element.title)">Edit</button>
+                    <button *ngIf="hasExpandedDetails(element)" class="btn more-btn"
                         (click)="expandedDetails(element)"><span>...</span></button>
                 </div>                
             </td>

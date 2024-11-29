@@ -7,8 +7,8 @@
         <p *ngIf="profileInfo.birthday"><b>Birthday:</b> {{this.utilities.dateReadable(profileInfo.birthday)}}</p>
         <br>
         <div class="user-links">
-            <a class="btn btn-lg myneworm-btn" role="button" href="./user/{{profileInfo.username}}/lists">My List</a>
-            <a class="btn btn-lg myneworm-btn" role="button" href="./user/{{profileInfo.username}}/wishlist">Wishlist</a>
+            <a class="btn btn-lg" role="button" href="./user/{{profileInfo.username}}/lists">My List</a>
+            <a class="btn btn-lg" role="button" href="./user/{{profileInfo.username}}/wishlist">Wishlist</a>
         </div>        
     </aside>
     <div class="profile-container">
@@ -33,6 +33,10 @@
                 <statistic-display displayTitle="Ownership" [displayObj]="ownershipCount" [triggerUpdate]="triggerUpdate"></statistic-display>
                 <statistic-display displayTitle="Book Type" [displayObj]="bookTypeCount" [triggerUpdate]="triggerUpdate"></statistic-display>
             </div>
+        </div>
+        <div *ngIf="profileInfo" class="profile-content aside-offset">
+            <h3 id="favourites" class="list-display-header">Favourites</h3>
+            <favourites-display [user_id]="profileInfo.user_id"></favourites-display>
         </div>
     </div>
 </div>

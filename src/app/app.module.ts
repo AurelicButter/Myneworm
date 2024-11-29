@@ -12,7 +12,6 @@ import { ImprintIndexModule } from "./imprint-index/imprint-index.module";
 import { MissingPageComponent } from "./pages/missing-page/missing-page.component";
 import { SearchBarModule } from "./search-bar/search-bar.module";
 import { MatDialogModule } from "@angular/material/dialog";
-import { SearchPageModule } from "./search-page/search-page.module";
 import { LoginPageComponent } from "./pages/login/login.component";
 import { UserNavMenuComponent } from "./user-nav-menu/user-nav-menu.component";
 import { UserSettingsPageComponent } from "./user-settings-page/user-settings-page.component";
@@ -23,6 +22,7 @@ import { BookPageComponent } from "./pages/book-page/book-page.component";
 import { SeriesPageComponent } from "./pages/series-page/series-page.component";
 import { MarkdownModule } from "ngx-markdown";
 import { AuthUserService } from "./services/authentication/auth-user.service";
+import { SearchPageComponent } from "./pages/search/search.component";
 
 @NgModule({
 	declarations: [
@@ -44,12 +44,12 @@ import { AuthUserService } from "./services/authentication/auth-user.service";
 		BrowserAnimationsModule,
 		ImprintIndexModule,
 		SearchBarModule,
-		SearchPageModule,
 		MatDialogModule,
 		SharedModule,
 		BookPageComponent,
 		SeriesPageComponent,
-		MissingPageComponent
+		MissingPageComponent,
+		SearchPageComponent
 	],
 	providers: [Title, AuthUserService],
 	bootstrap: [AppComponent]

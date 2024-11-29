@@ -52,17 +52,17 @@
                         No image uploaded
                     </div>
                     <div class="button-group">
-                        <div class="btn btn-lg myneworm-btn settings-button avatar-upload-btn">
+                        <div class="btn btn-lg settings-button avatar-upload-btn">
                             <input type="file" id="avatarFile" name="avatar" class="custom-file-input"
                                 accept="image/jpeg" (change)="onFileChanged($event)">
                             <label for="avatarFile" class="custom-file-label">Upload File</label>
                         </div>
-                        <button class="btn btn-lg myneworm-btn settings-button" name="clearAvatar"
+                        <button class="btn btn-lg settings-button" name="clearAvatar"
                             (click)="resetAvatar()">Clear</button>
                     </div>
                 </div>
                 <br>
-                <button class="btn btn-lg myneworm-btn settings-button" type="submit">Save</button>
+                <button class="btn btn-lg settings-button" type="submit">Save</button>
             </form>
         </div>
         <div *ngIf="currPage === 'ACCOUNT' && accountData !== undefined">
@@ -92,7 +92,7 @@
                         [pattern]="passwordPattern" placeholder="Confirm Password" aria-placeholder="Confirm Password"
                         [(ngModel)]="accountData.confirm">
                 </div>
-                <button class="btn btn-lg myneworm-btn settings-button" type="submit">Save</button>
+                <button class="btn btn-lg settings-button" type="submit">Save</button>
             </form>
             <br><br>
             <h3>Request Your Data</h3>
@@ -103,7 +103,7 @@
                     from the email linked to your account, requesting your data. A human will respond to you in a timely
                     manner.
                 </p>
-                <button class="btn btn-lg myneworm-btn settings-button disabled" aria-disabled="true"
+                <button class="btn btn-lg settings-button disabled" aria-disabled="true"
                     tabindex="-1">Request Data</button>
             </div>
             <br>
@@ -114,7 +114,7 @@
                     By clicking this button, all authenticated sessions will be invalidated and will need to be relogged
                     into.
                 </p>
-                <button class="btn btn-lg myneworm-btn settings-button" (click)="clearSessions()">Clear Sessions</button>
+                <button class="btn btn-lg settings-button" (click)="clearSessions()">Clear Sessions</button>
             </div>
             <br>
             <h3>Delete Your Account</h3>
@@ -127,7 +127,7 @@
                     account
                     is deleted, there is no data recovery.
                 </p>
-                <button class="btn btn-lg btn-danger settings-button delete-button"
+                <button class="btn btn-lg btn-danger settings-button"
                     (click)="deleteAccount()">Delete</button>
             </div>
         </div>

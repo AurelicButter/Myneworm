@@ -1,10 +1,8 @@
 <div class="imprint-index">
-    <div *ngFor="let item of imprints; let i = index">
-        <div class="imprint-item">
-            <a class="imprint-link button-link" href="/publisher/{{item.publisher_id}}">
-                <img class="imprint-logo" src='{{getImprintAsset(item.publisher_id)}}' alt='{{item.name}}'>
-                <h4 class="imprint-text-header myneworm-btn">{{item.name}}</h4>
-            </a>
-        </div>
+    <div class="imprint-item" *ngFor="let item of imprints">
+        <a class="imprint-link" href="/publisher/{{item.publisher_id}}">
+            <img class="imprint-logo" src='{{getImprintAsset(item.publisher_id)}}' alt='{{item.name}}'>
+            <div class="btn imprint-text-header">{{item.name}}</div>
+        </a>
     </div>
 </div>

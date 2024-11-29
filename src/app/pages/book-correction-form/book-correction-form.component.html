@@ -28,7 +28,7 @@
                     <textarea class="form-control" name="description" id="description" [(ngModel)]="correction.description"
                         #description="ngModel" (input)="sanitizeInput()" (focusout)="correction.description = correction.description?.trim()"></textarea>
                 </div>
-                <button class="btn myneworm-btn" type="button" (click)="toggleDescPreview()">
+                <button class="btn" type="button" (click)="toggleDescPreview()">
                     {{ !showDescriptionPreview ? 'Show' : 'Hide' }} Formatted Description
                 </button>
                 <markdown [@descPreview]="showDescriptionPreview ? 'descPreviewShow' : 'descPreviewHide'" class="hide-overflow" [data]="descriptionPreview" ngPreserveWhitespaces>
@@ -95,9 +95,9 @@
             </div>
 
             <div class="btn-nav-section">
-                <button class="btn btn-lg myneworm-btn" type="submit"
+                <button class="btn btn-lg" type="submit"
                     [disabled]="dataCorrection.invalid">Submit</button>
-                <a class="btn btn-lg myneworm-btn" type="button" (click)="backToPage()">Return to Entry</a>
+                <a class="btn btn-lg" type="button" (click)="backToPage()">Return to Entry</a>
             </div>
         </div>
     </form>

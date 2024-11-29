@@ -378,4 +378,8 @@ export class MynewormAPIService {
 				})
 			);
 	}
+
+	getBookFavourites(userID: number) {
+		return this.http.get(`${environment.API_ADDRESS}/user/favourites/books/${userID}`);
+	}
 }

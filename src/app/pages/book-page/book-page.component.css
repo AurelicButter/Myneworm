@@ -69,7 +69,7 @@
         flex-direction: column;
     }
 
-    .aside-btn-group>.myneworm-btn:nth-child(n+2) {
+    .aside-btn-group>.btn:nth-child(n+2) {
         margin-top: 10px;
     }
 
@@ -126,7 +126,7 @@
         width: 50%;
     }
 
-    aside .myneworm-btn {
+    aside .btn {
         padding-top: 16px;
         padding-bottom: 16px;
     }
