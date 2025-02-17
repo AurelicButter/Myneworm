@@ -1,6 +1,7 @@
 :root {
     --mw-white: #ECEBF3;
     --mw-black: #1F2232;
+    --mw-faded-black: #1F223299; /* Opacity set at 60% */
     --mw-highlight: #0D98BA;
     --mw-highlight-bright: #2DC9F0;
     --mw-font-family: Roboto, "Helvetica Neue", sans-serif;

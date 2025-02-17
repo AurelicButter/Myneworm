@@ -31,6 +31,7 @@ export class BookPageComponent implements OnInit {
 	private userID: number;
 	hasExistingEntry = false;
 	remainingMsg: string;
+	isFavourite = false;
 
 	constructor(
 		private route: ActivatedRoute,
@@ -90,6 +91,7 @@ export class BookPageComponent implements OnInit {
 							return;
 						}
 
+						this.isFavourite = data.isFavourite;
 						this.hasExistingEntry = true;
 					});
 			}
@@ -98,6 +100,16 @@ export class BookPageComponent implements OnInit {
 
 	getCover() {
 		return this.service.getCover(this.book.isbn, "large");
+	}
+
+	favouriteEntry() {
+		if (this.isFavourite) {
+			this.service.removeFavourite(Number(this.book.isbn)).subscribe();
+		} else {
+			this.service.addFavourite(Number(this.book.isbn)).subscribe();
+		}
+
+		this.isFavourite = !this.isFavourite;
 	}
 
 	updateListEntry(): void {

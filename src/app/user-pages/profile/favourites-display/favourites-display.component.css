@@ -23,6 +23,7 @@
     color: #ECEBF3;
     padding-left: 4px;
     padding-right: 4px;
+    background-color: var(--mw-faded-black);
 }
 
 .swiper-slide {

@@ -382,4 +382,12 @@ export class MynewormAPIService {
 	getBookFavourites(userID: number) {
 		return this.http.get(`${environment.API_ADDRESS}/user/favourites/books/${userID}`);
 	}
+
+	addFavourite(isbn: number) {
+		return this.http.post(`${environment.API_ADDRESS}/user/favourites/books/add/${isbn}`, null);
+	}
+
+	removeFavourite(isbn: number) {
+		return this.http.delete(`${environment.API_ADDRESS}/user/favourites/books/remove/${isbn}`);
+	}
 }

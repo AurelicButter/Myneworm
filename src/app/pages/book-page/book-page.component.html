@@ -4,10 +4,19 @@
         <aside class="col-3 aside-content">
             <img class="book-cover" src='{{getCover()}}' alt='Cover for {{book.title}}'>
             <div class="aside-btn-group">
-                <a class="btn btn-lg col-5" role="button" (click)="updateListEntry()" [ngClass]="{ disabled: !isLoggedIn }"
-                    [attr.aria-disabled]="!isLoggedIn" tabindex='{{isLoggedIn ? 0 : -1}}'>{{ hasExistingEntry ? 'Update List' : 'Add to List' }}</a>
-                <a [routerLink]="'/book/correction'" [queryParams]="{isbn: book.isbn}" class="btn btn-lg col-5" 
-                    role="button" [ngClass]="{ disabled: !isLoggedIn }">Edit Entry</a>
+                <button class="btn btn-lg" (click)="updateListEntry()" [ngClass]="{ disabled: !isLoggedIn }" [attr.aria-disabled]="!isLoggedIn"
+                    tabindex='{{isLoggedIn ? 0 : -1}}'>{{ hasExistingEntry ? 'Update List' : 'Add to List' }}</button>
+                <div class="col-5" style="display: flex; justify-content: flex-end;">
+                    <a class="btn btn-lg col-5 favourite-btn" role="button" [ngClass]="{ 'disabled': !isLoggedIn, 'btn-danger': isFavourite }" 
+                        title="Favourite Entry" (click)="favouriteEntry()">
+                        <img attr.src='{{ isFavourite ? "../../../assets/fa-heart.svg" : "../../../assets/fa-heart-outline.svg" }}'
+                            class="aside-img-icon" alt="Favourite Entry"/>
+                    </a>
+                    <a [routerLink]="'/book/correction'" [queryParams]="{isbn: book.isbn}" class="btn btn-lg col-5" style="padding-left: 6px; padding-right: 6px;"
+                        role="button" [ngClass]="{ disabled: !isLoggedIn }" title="Edit Entry">
+                        <img src="../../../assets/fa-pen.svg" class="aside-img-icon" alt="Edit Entry" />
+                    </a>
+                </div>
             </div>
             <div class="aside-info">
                 <div class="aside-item">
@@ -32,15 +41,16 @@
                 <div class="aside-item">
                     <span class="aside-item-title">Imprint</span>
                     <span class="aside-item-value">
-                        <a routerLink="/publisher/{{book.publisher_id}}" class="aside-link" *ngIf="publisher">{{publisher.name}}</a>
+                        <a routerLink="/publisher/{{book.publisher_id}}" class="aside-link"
+                            *ngIf="publisher">{{publisher.name}}</a>
                     </span>
                 </div>
             </div>
         </aside>
-        <main class="col-7">
+        <main class="col-10">
             <div class="book-description">
                 <markdown *ngIf="book.description; else noDescription" [data]="book.description" ngPreserveWhitespaces>
-                </markdown>                
+                </markdown>
                 <ng-template #noDescription>No description available.</ng-template>
             </div>
         </main>

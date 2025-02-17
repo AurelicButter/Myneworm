@@ -8,7 +8,7 @@
 
 .aside-btn-group {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     margin-top: 10px;
     margin-bottom: 16px;
 }
@@ -46,6 +46,20 @@
 
 .aside-item-value {
     width: 70%;
+}
+
+.aside-img-icon {
+    height: 30px;
+    width: 30px;
+}
+
+.favourite-btn {
+    padding-left: 6px; 
+    padding-right: 6px; 
+    margin-right: 10px; 
+    display: inline-flex; 
+    justify-content: center; 
+    align-items: center;
 }
 
 @media screen and (min-width: 1024px) {

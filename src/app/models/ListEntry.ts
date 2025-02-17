@@ -12,6 +12,7 @@ export interface ListEntry {
 	owner_status: string;
 	notes?: string;
 	isExpanded?: boolean;
+	isFavourite: boolean;
 }
 
 export class ListEntryClass implements ListEntry {
@@ -28,4 +29,5 @@ export class ListEntryClass implements ListEntry {
 	owner_status: string;
 	notes?: string;
 	isExpanded?: boolean;
+	isFavourite: boolean;
 }
