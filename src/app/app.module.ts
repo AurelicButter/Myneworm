@@ -5,10 +5,8 @@ import { FormsModule } from "@angular/forms";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { HomePageModule } from "./home-page/home-page.module";
-import { ImprintPageModule } from "./imprint-page/imprint-page.module";
 import { HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { ImprintIndexModule } from "./imprint-index/imprint-index.module";
 import { SeriesPageModule } from "./series-page/series-page.module";
 import { MatDialogModule } from "@angular/material/dialog";
 import { SearchPageModule } from "./search-page/search-page.module";
@@ -39,9 +37,7 @@ import { BookPageComponent } from "./pages/book-page/book-page.component";
 		FormsModule,
 		AppRoutingModule,
 		HomePageModule,
-		ImprintPageModule,
 		BrowserAnimationsModule,
-		ImprintIndexModule,
 		SeriesPageModule,
 		SearchBarComponent,
 		SearchPageModule,

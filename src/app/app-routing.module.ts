@@ -2,8 +2,8 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { BookPageComponent } from "./pages/book-page/book-page.component";
 import { HomePageComponent } from "./home-page/home-page.component";
-import { ImprintPageComponent } from "./imprint-page/imprint-page.component";
-import { ImprintIndexComponent } from "./imprint-index/imprint-index.component";
+import { ImprintPageComponent } from "./pages/imprint-page/imprint-page.component";
+import { ImprintIndexComponent } from "./pages/imprint-index/imprint-index.component";
 import { MissingPageComponent } from "./pages/missing-page/missing-page.component";
 import { SeriesPageComponent } from "./series-page/series-page.component";
 import { SearchPageComponent } from "./search-page/search-page.component";
@@ -20,6 +20,11 @@ const routes: Routes = [
 	{ path: "home", pathMatch: "full", redirectTo: "" },
 	{ path: "series/:id", component: SeriesPageComponent },
 	{ path: "search", component: SearchPageComponent },
+	{ path: "faq", component: FaqComponent },
+	{ path: "privacy", component: PrivacyPageComponent },
+	{ path: "guidelines", component: DatabaseGuidelinesComponent },
+	{ path: "login", component: LoginPageComponent },
+	{ path: "register", component: RegistrationPageComponent },
 	{
 		path: "book",
 		children: [
@@ -45,15 +50,10 @@ const routes: Routes = [
 		path: "about",
 		loadComponent: () => import("./about-page/about-page.component").then((m) => m.AboutPageComponent)
 	},
-	{ path: "faq", component: FaqComponent },
 	{
 		path: "support",
 		loadComponent: () => import("./pages/support/support.component").then((m) => m.SupportPageComponent)
 	},
-	{ path: "privacy", component: PrivacyPageComponent },
-	{ path: "guidelines", component: DatabaseGuidelinesComponent },
-	{ path: "login", component: LoginPageComponent },
-	{ path: "register", component: RegistrationPageComponent },
 	{
 		path: "reset",
 		pathMatch: "full",

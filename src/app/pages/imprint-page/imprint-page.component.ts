@@ -1,17 +1,19 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { MynewormAPIService } from "../services/myneworm-api.service";
+import { MynewormAPIService } from "../../services/myneworm-api.service";
 import { CalendarOptions } from "@fullcalendar/core";
-import { CalendarManagerComponent } from "../shared/calendar-manager/calendar-manager.component";
+import { CalendarManagerComponent } from "../../shared/calendar-manager/calendar-manager.component";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
-import { DatepickerModalComponent } from "../shared/datepicker-modal/datepicker-modal.component";
-import { ImprintData } from "../models/imprintData";
-import { UtilitiesService } from "../services/utilities.service";
-import { ImprintBookFetcher } from "../classes/ImprintBookFetcher.class";
+import { DatepickerModalComponent } from "../../shared/datepicker-modal/datepicker-modal.component";
+import { ImprintData } from "../../models/imprintData";
+import { UtilitiesService } from "../../services/utilities.service";
+import { ImprintBookFetcher } from "../../classes/ImprintBookFetcher.class";
 import interactionPlugin from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
-import { MetadataService } from "../services/metadata.service";
+import { MetadataService } from "../../services/metadata.service";
 import { catchError, of } from "rxjs";
+import { CommonModule } from "@angular/common";
+import { SharedModule } from "../../shared/shared.module";
 
 /*
  * Global file values as CalendarOptions does not accept `this` keyword
@@ -24,7 +26,9 @@ let UtilityService: UtilitiesService;
 @Component({
 	selector: "app-imprint-page",
 	templateUrl: "./imprint-page.component.html",
-	styleUrls: ["./imprint-page.component.css"]
+	styleUrls: ["./imprint-page.component.css"],
+	standalone: true,
+	imports: [CommonModule, SharedModule]
 })
 export class ImprintPageComponent implements OnInit {
 	calendarVisible = false;

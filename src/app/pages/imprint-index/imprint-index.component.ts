@@ -1,19 +1,20 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { MynewormAPIService } from "../services/myneworm-api.service";
-import { ImprintData } from "../models/imprintData";
-import { MetadataService } from "../services/metadata.service";
+import { MynewormAPIService } from "../../services/myneworm-api.service";
+import { ImprintData } from "../../models/imprintData";
+import { MetadataService } from "../../services/metadata.service";
+import { CommonModule } from "@angular/common";
 
 @Component({
 	selector: "app-imprint-index",
 	templateUrl: "./imprint-index.component.html",
-	styleUrls: ["./imprint-index.component.css"]
+	styleUrls: ["./imprint-index.component.css"],
+	standalone: true,
+	imports: [CommonModule]
 })
 export class ImprintIndexComponent implements OnInit {
 	imprints: ImprintData[];
 
 	constructor(
-		private route: ActivatedRoute,
 		private service: MynewormAPIService,
 		private metaService: MetadataService
 	) {
