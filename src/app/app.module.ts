@@ -9,7 +9,6 @@ import { HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { SeriesPageModule } from "./series-page/series-page.module";
 import { MatDialogModule } from "@angular/material/dialog";
-import { SearchPageModule } from "./search-page/search-page.module";
 import { LoginPageComponent } from "./pages/login/login.component";
 import { UserNavMenuComponent } from "./user-nav-menu/user-nav-menu.component";
 import { LocalCookiesService } from "./services/authentication/local-cookies.service";
@@ -40,7 +39,6 @@ import { BookPageComponent } from "./pages/book-page/book-page.component";
 		BrowserAnimationsModule,
 		SeriesPageModule,
 		SearchBarComponent,
-		SearchPageModule,
 		MatDialogModule,
 		SharedModule,
 		BookPageComponent

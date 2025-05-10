@@ -1,21 +1,38 @@
 import { Component, OnInit } from "@angular/core";
-import { Location, ViewportScroller } from "@angular/common";
-import { MatTableDataSource } from "@angular/material/table";
-import { ActivatedRoute, Params, Router } from "@angular/router";
-import { BookData } from "../models/bookData";
-import { MetadataService } from "../services/metadata.service";
-import { MynewormAPIService } from "../services/myneworm-api.service";
-import { SearchOptions } from "../models/SearchOptions";
-import { BookType } from "../models/BookType";
-import { BookFormat } from "../models/BookFormat";
-import { ImprintData } from "../models/imprintData";
+import { CommonModule, Location, ViewportScroller } from "@angular/common";
+import { MatTableDataSource, MatTableModule } from "@angular/material/table";
+import { ActivatedRoute, Params, Router, RouterModule } from "@angular/router";
+import { BookData } from "../../models/bookData";
+import { MetadataService } from "../../services/metadata.service";
+import { MynewormAPIService } from "../../services/myneworm-api.service";
+import { SearchOptions } from "../../models/SearchOptions";
+import { BookType } from "../../models/BookType";
+import { BookFormat } from "../../models/BookFormat";
+import { ImprintData } from "../../models/imprintData";
 import * as moment from "moment";
-import { ToastService } from "../services/toast.service";
+import { ToastService } from "../../services/toast.service";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { BookFormatPipe } from "../../pipes/BookFormat.pipe";
 
 @Component({
 	selector: "search-page",
 	templateUrl: "./search-page.component.html",
-	styleUrls: ["./search-page.component.css"]
+	styleUrls: ["./search-page.component.css"],
+	standalone: true,
+	imports: [
+		CommonModule,
+		FormsModule,
+		ReactiveFormsModule,
+		MatButtonModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatTableModule,
+		RouterModule,
+		BookFormatPipe
+	]
 })
 export class SearchPageComponent implements OnInit {
 	displayedColumns = ["cover", "title", "format", "type"];
