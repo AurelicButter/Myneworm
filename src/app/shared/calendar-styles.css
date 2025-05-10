@@ -2,7 +2,7 @@
 * Image icon override
 */
 .fc-icon-calendar {
-    content: url("../../assets/fa-calendar.svg");
+    content: url("/assets/fa-calendar.svg");
 }
 
 .fc-button:focus {

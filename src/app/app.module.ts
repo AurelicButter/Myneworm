@@ -5,14 +5,11 @@ import { FormsModule } from "@angular/forms";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { HomePageModule } from "./home-page/home-page.module";
-import { BookPageModule } from "./pages/book-page/book-page.module";
 import { ImprintPageModule } from "./imprint-page/imprint-page.module";
 import { HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ImprintIndexModule } from "./imprint-index/imprint-index.module";
-import { MissingPageComponent } from "./pages/missing-page/missing-page.component";
 import { SeriesPageModule } from "./series-page/series-page.module";
-import { SearchBarModule } from "./search-bar/search-bar.module";
 import { MatDialogModule } from "@angular/material/dialog";
 import { SearchPageModule } from "./search-page/search-page.module";
 import { LoginPageComponent } from "./pages/login/login.component";
@@ -22,11 +19,13 @@ import { UserSettingsPageComponent } from "./user-settings-page/user-settings-pa
 import { RegistrationPageComponent } from "./pages/registration/registration.component";
 import { SharedModule } from "./shared/shared.module";
 import { DeleteConfirmationComponent } from "./user-settings-page/delete-confirmation/delete-confirmation.component";
+import { MarkdownModule } from "ngx-markdown";
+import { SearchBarComponent } from "./search-bar/search-bar.component";
+import { BookPageComponent } from "./pages/book-page/book-page.component";
 
 @NgModule({
 	declarations: [
 		AppComponent,
-		MissingPageComponent,
 		LoginPageComponent,
 		UserNavMenuComponent,
 		UserSettingsPageComponent,
@@ -34,20 +33,21 @@ import { DeleteConfirmationComponent } from "./user-settings-page/delete-confirm
 		DeleteConfirmationComponent
 	],
 	imports: [
+		MarkdownModule.forRoot(),
 		BrowserModule,
 		HttpClientModule,
 		FormsModule,
 		AppRoutingModule,
 		HomePageModule,
-		BookPageModule,
 		ImprintPageModule,
 		BrowserAnimationsModule,
 		ImprintIndexModule,
 		SeriesPageModule,
-		SearchBarModule,
+		SearchBarComponent,
 		SearchPageModule,
 		MatDialogModule,
-		SharedModule
+		SharedModule,
+		BookPageComponent
 	],
 	providers: [Title, LocalCookiesService],
 	bootstrap: [AppComponent]

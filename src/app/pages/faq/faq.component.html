@@ -1,9 +1,3 @@
 <div class="faq-component">
-    <div *ngFor="let section of faqData | keyvalue">
-        <h3 class="faq-header">{{section.key}}</h3>
-        <div *ngFor="let question of section.value; let i = index">
-            <h4>{{question[0]}}</h4>
-            <p><span [innerHTML]="question[1]"></span></p>
-        </div>
-    </div>
+    <markdown [src]="'../../assets/markdown/FAQ.md'" ngPreserveWhitespaces></markdown>
 </div>

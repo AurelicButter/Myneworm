@@ -1,14 +1,31 @@
 import { Component } from "@angular/core";
-import { MatTableDataSource } from "@angular/material/table";
+import { MatTableDataSource, MatTableModule } from "@angular/material/table";
 import { MynewormAPIService } from "../services/myneworm-api.service";
 import { BookData } from "../models/bookData";
 import { UtilitiesService } from "../services/utilities.service";
 import { Router } from "@angular/router";
+import { CommonModule } from "@angular/common";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { BookFormatPipe } from "../pipes/BookFormat.pipe";
 
 @Component({
 	selector: "search-bar",
 	templateUrl: "./search-bar.component.html",
-	styleUrls: ["./search-bar.component.css"]
+	styleUrls: ["./search-bar.component.css"],
+	standalone: true,
+	imports: [
+		CommonModule,
+		FormsModule,
+		ReactiveFormsModule,
+		MatButtonModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatTableModule,
+		BookFormatPipe
+	]
 })
 export class SearchBarComponent {
 	displayedColumns = ["cover", "title"];

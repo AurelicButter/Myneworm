@@ -1,25 +1,50 @@
 <div *ngIf="book != undefined">
     <h2 class="page-title">{{book.title}}</h2>
     <div class="row">
-        <aside class="col-2 aside-content">
+        <aside class="col-3 aside-content">
             <img class="book-cover" src='{{getCover()}}' alt='Cover for {{book.title}}'>
             <div class="aside-btn-group">
-                <a class="btn btn-lg myneworm-btn" role="button" (click)="updateListEntry()" [ngClass]="{ disabled: !isLoggedIn }"
-                    [attr.aria-disabled]="!isLoggedIn" tabindex='{{isLoggedIn ? 0 : -1}}'>{{ hasExistingEntry ? 'Update List' : 'Add to List' }}</a>
-                <a [routerLink]="'/book/correction'" [queryParams]="{isbn: book.isbn}" class="btn btn-lg myneworm-btn" role="button" [ngClass]="{ disabled: !isLoggedIn }">Edit Entry</a>
+                <a class="btn btn-lg col-5 myneworm-btn" role="button" (click)="updateListEntry()"
+                    [ngClass]="{ disabled: !isLoggedIn }" [attr.aria-disabled]="!isLoggedIn"
+                    tabindex='{{isLoggedIn ? 0 : -1}}'>{{ hasExistingEntry ? 'Update List' : 'Add to List' }}</a>
+                <a [routerLink]="'/book/correction'" [queryParams]="{isbn: book.isbn}"
+                    class="btn btn-lg col-5 myneworm-btn" role="button" [ngClass]="{ disabled: !isLoggedIn }">Edit
+                    Entry</a>
             </div>
             <div class="aside-info">
-                <p class="format-label"><strong>Format:</strong> {{book.format_name | bookFormat}}</p>
-                <p class="type-label"><strong>Type:</strong> {{book.book_type_name | titlecase}}</p>
-                <p><strong>Release:</strong> {{ book.release_date !== null ? this.utilities.dateReadable(book.release_date) : 'Unknown' }}</p>
-                <p *ngIf="publisher != undefined"><strong>Imprint: </strong><a
-                        routerLink="/publisher/{{book.publisher_id}}" class="aside-link">{{publisher.name}}</a></p>
+                <div class="aside-item">
+                    <span class="aside-item-title">Format</span>
+                    <span class="aside-item-value">{{book.format_name | bookFormat}}</span>
+                </div>
+                <div class="aside-item">
+                    <span class="aside-item-title">Type</span>
+                    <span class="aside-item-value">{{book.book_type_name | titlecase}}</span>
+                </div>
+                <div class="aside-item">
+                    <span class="aside-item-title">Release</span>
+                    <div class="aside-item-value release-date" *ngIf="book.release_date; else noRelease">
+                        <p>{{ book.release_date | DateReadable }}</p>
+                        <p class="days-until-release" *ngIf="remainingMsg">{{ remainingMsg }}</p>
+                    </div>
+
+                    <ng-template #noRelease>
+                        Unknown
+                    </ng-template>
+                </div>
+                <div class="aside-item">
+                    <span class="aside-item-title">Imprint</span>
+                    <span class="aside-item-value">
+                        <a routerLink="/publisher/{{book.publisher_id}}" class="aside-link"
+                            *ngIf="publisher">{{publisher.name}}</a>
+                    </span>
+                </div>
             </div>
         </aside>
-        <main class="col-8">
+        <main class="col-7">
             <div class="book-description">
-                <p *ngIf="book.description !== '' && book.description !== null" [innerHTML]="book.description"></p>
-                <p *ngIf="book.description === '' || book.description === null">No description available.</p>
+                <markdown *ngIf="book.description; else noDescription" [data]="book.description" ngPreserveWhitespaces>
+                </markdown>
+                <ng-template #noDescription>No description available.</ng-template>
             </div>
         </main>
     </div>
