@@ -75,3 +75,12 @@ body {
     flex: 0 0 auto;
     width: 37.5%;
 }
+
+/**
+ * Headers
+ */
+
+.page-title {
+    border-bottom: 1px solid grey;
+    margin-bottom: 20px;
+}

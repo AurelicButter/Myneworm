@@ -2,21 +2,29 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { BookPageComponent } from "./pages/book-page/book-page.component";
 import { HomePageComponent } from "./home-page/home-page.component";
-import { ImprintPageComponent } from "./imprint-page/imprint-page.component";
-import { ImprintIndexComponent } from "./imprint-index/imprint-index.component";
+import { ImprintPageComponent } from "./pages/imprint-page/imprint-page.component";
+import { ImprintIndexComponent } from "./pages/imprint-index/imprint-index.component";
 import { MissingPageComponent } from "./pages/missing-page/missing-page.component";
 import { SeriesPageComponent } from "./series-page/series-page.component";
-import { SearchPageComponent } from "./search-page/search-page.component";
+import { SearchPageComponent } from "./pages/search-page/search-page.component";
 import { LoginPageComponent } from "./pages/login/login.component";
 import { AuthenticationGuard } from "./services/authentication/authentication.guard";
 import { UserSettingsPageComponent } from "./user-settings-page/user-settings-page.component";
 import { RegistrationPageComponent } from "./pages/registration/registration.component";
+import { FaqComponent } from "./pages/faq/faq.component";
+import { PrivacyPageComponent } from "./pages/privacy/privacy.component";
+import { DatabaseGuidelinesComponent } from "./pages/database-guidelines/database-guidelines.component";
 
 const routes: Routes = [
 	{ path: "", component: HomePageComponent },
 	{ path: "home", pathMatch: "full", redirectTo: "" },
 	{ path: "series/:id", component: SeriesPageComponent },
 	{ path: "search", component: SearchPageComponent },
+	{ path: "faq", component: FaqComponent },
+	{ path: "privacy", component: PrivacyPageComponent },
+	{ path: "guidelines", component: DatabaseGuidelinesComponent },
+	{ path: "login", component: LoginPageComponent },
+	{ path: "register", component: RegistrationPageComponent },
 	{
 		path: "book",
 		children: [
@@ -43,26 +51,9 @@ const routes: Routes = [
 		loadComponent: () => import("./about-page/about-page.component").then((m) => m.AboutPageComponent)
 	},
 	{
-		path: "faq",
-		loadComponent: () => import("./pages/faq/faq.component").then((m) => m.FaqComponent)
-	},
-	{
 		path: "support",
 		loadComponent: () => import("./pages/support/support.component").then((m) => m.SupportPageComponent)
 	},
-	{
-		path: "privacy",
-		loadComponent: () => import("./pages/privacy/privacy.component").then((m) => m.PrivacyPageComponent)
-	},
-	{
-		path: "guidelines",
-		loadComponent: () =>
-			import("./pages/database-guidelines/database-guidelines.component").then(
-				(m) => m.DatabaseGuidelinesComponent
-			)
-	},
-	{ path: "login", component: LoginPageComponent },
-	{ path: "register", component: RegistrationPageComponent },
 	{
 		path: "reset",
 		pathMatch: "full",

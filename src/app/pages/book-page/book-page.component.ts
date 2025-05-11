@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Router, RouterModule } from "@angular/router";
 import { catchError, of } from "rxjs";
 import { BookData } from "../../models/bookData";
 import { PublisherData } from "../../models/publisherData";
@@ -11,11 +11,19 @@ import { ListEntryModalComponent } from "../../shared/list-entry-modal/list-entr
 import { LocalCookiesService } from "../../services/authentication/local-cookies.service";
 import { ListEntry } from "../../models/ListEntry";
 import { ToastService } from "../../services/toast.service";
+import * as moment from "moment";
+import { CommonModule } from "@angular/common";
+import { BookFormatPipe } from "src/app/pipes/BookFormat.pipe";
+import { DateReadablePipe } from "src/app/pipes/DateReadable.pipe";
+import { SharedModule } from "src/app/shared/shared.module";
+import { MarkdownModule } from "ngx-markdown";
 
 @Component({
 	selector: "book-page",
 	templateUrl: "./book-page.component.html",
-	styleUrls: ["./book-page.component.css"]
+	styleUrls: ["./book-page.component.css"],
+	standalone: true,
+	imports: [CommonModule, MarkdownModule, RouterModule, SharedModule, BookFormatPipe, DateReadablePipe]
 })
 export class BookPageComponent implements OnInit {
 	book: BookData;
@@ -23,6 +31,7 @@ export class BookPageComponent implements OnInit {
 	isLoggedIn = false;
 	private userID: string;
 	hasExistingEntry = false;
+	remainingMsg: string;
 
 	constructor(
 		private route: ActivatedRoute,
@@ -56,12 +65,14 @@ export class BookPageComponent implements OnInit {
 					this.book.title,
 					`/book/${this.book.isbn}`,
 					this.book.description,
-					this.service.getAsset(`${this.book.isbn}`)
+					this.service.getAsset(this.book.isbn)
 				);
 
 				this.service.getPublisher(data.publisher_id.toString()).subscribe((pubData: PublisherData) => {
 					this.publisher = pubData;
 				});
+
+				this.calculateDaysLeft();
 			});
 
 			if (this.isLoggedIn) {
@@ -110,5 +121,23 @@ export class BookPageComponent implements OnInit {
 			}
 			this.hasExistingEntry = result !== null;
 		});
+	}
+
+	calculateDaysLeft() {
+		const release = moment(this.book.release_date).startOf("day");
+		const today = moment().startOf("day");
+
+		if (today.isBefore(release)) {
+			const diff = release.diff(today, "day");
+			if (diff > 1) {
+				this.remainingMsg = "Releasing " + release.fromNow() + "!";
+			} else {
+				this.remainingMsg = "Releasing tomorrow!";
+			}
+		} else if (today.isSame(release, "day")) {
+			this.remainingMsg = "Releasing today!";
+		} else {
+			this.remainingMsg = "";
+		}
 	}
 }
