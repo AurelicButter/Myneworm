@@ -39,7 +39,12 @@ pipeline {
         }
         stage('Build: Development') {
             when { 
-                expression { BRANCH_NAME != /(master|development)/ }
+                not {
+                    anyOf {
+                        branch 'master'
+                        branch 'development'
+                    }
+                }
             }
             steps {
                 sh 'npm run build:test'
