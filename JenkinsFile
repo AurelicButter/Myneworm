@@ -26,7 +26,7 @@ pipeline {
             }
         }
         stage ('Build: Stable') {
-            when { branch 'stable' }
+            when { branch 'master' }
             steps { 
                 sh 'npm run build:prod'
             }
@@ -39,7 +39,7 @@ pipeline {
         }
         stage('Build: Development') {
             when { 
-                expression { BRANCH_NAME != /(stable|development)/ }
+                expression { BRANCH_NAME != /(master|development)/ }
             }
             steps {
                 sh 'npm run build:test'
