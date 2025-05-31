@@ -1,20 +1,24 @@
 import { CalendarApi } from "@fullcalendar/core";
 import { MynewormAPIService } from "../services/myneworm-api.service";
 import { UtilitiesService } from "../services/utilities.service";
+import { MonthReleaseData } from "../models/monthReleaseData";
 
 export class ImprintBookFetcher {
 	dateCache: string[] = [];
 
-	constructor(private service: MynewormAPIService, private utilities: UtilitiesService) {}
+	constructor(
+		private service: MynewormAPIService,
+		private utilities: UtilitiesService
+	) {}
 
 	getBooks(calendar: CalendarApi, publisherID: number, targetDate: Date): void {
-		const currDate = this.utilities.APIDateFormatter(targetDate);
+		const currDate = `${targetDate.getFullYear()}${targetDate.getMonth() + 1}`;
 
 		if (this.dateCache.includes(currDate)) {
 			return;
 		}
 
-		this.service.searchBooks(publisherID.toString(), currDate).subscribe((data) => {
+		this.service.getMonthData(currDate, publisherID.toString()).subscribe((data: MonthReleaseData[]) => {
 			this.dateCache.push(currDate);
 
 			data.forEach((entry) => {

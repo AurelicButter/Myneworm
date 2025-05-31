@@ -1,9 +1,9 @@
 <div class="search-bar">
     <form #searchInput="ngForm" (ngSubmit)="submit()">
-        <input type="text" class="search-input" placeholder="Search" [(ngModel)]="searchTerm" #userInput="ngModel" [ngModelOptions]="{standalone: true}"
-            [ngClass]="{'no-radius-bottom-left' : this.dataSource.data.length > 0 || (this.dataSource.data.length === 0 && this.searchTerm !== '')}" (input)="onChange()" />
+        <input type="text" class="search-input" placeholder="Search" [(ngModel)]="searchOptions.term" #userInput="ngModel" [ngModelOptions]="{standalone: true}"
+            [ngClass]="{'no-radius-bottom-left' : this.dataSource.data.length > 0 || (this.dataSource.data.length === 0 && this.searchOptions.term)}" (input)="onChange()" />
         <button type="submit" class="search-submit" (click)="onButtonClick()"
-            [ngClass]="{'no-radius-bottom-right' : this.dataSource.data.length > 0 || (this.dataSource.data.length === 0 && this.searchTerm !== '')}"
+            [ngClass]="{'no-radius-bottom-right' : this.dataSource.data.length > 0 || (this.dataSource.data.length === 0 && this.searchOptions.term)}"
             aria-label="Search">
                 <img class="search-btn-icon" src="../../assets/fa-search.svg" alt="Search icon"/>
         </button>
@@ -30,7 +30,7 @@
         </ng-container>
         <tr mat-row *matRowDef="let row; columns: displayedColumns" class="search-result-row" 
             (click)="onClick(row.isbn)" (mouseenter)="mouseOverRow(row)" (mouseleave)="mouseLeaveRow()"></tr>
-        <tr class="mat-row search-result-row" *matNoDataRow [ngClass]="this.searchTerm !== '' ? '' : 'hide-no-result'">
+        <tr class="mat-row search-result-row" *matNoDataRow [ngClass]="this.searchOptions.term ? '' : 'hide-no-result'">
             <td class="mat-cell" [attr.colspan]="displayedColumns.length">
                 <strong>
                     <p class="search-message" *ngIf="this.loading === false">No results found...</p>

@@ -3,7 +3,7 @@
         <div class="search-inner-div">
             <form #searchInput="ngForm" (ngSubmit)="submit()" class="search-form">
                 <input type="text" class="search-input-long no-radius-bottom-left" placeholder="Search"
-                    [(ngModel)]="searchTerm" #userInput="ngModel" [ngModelOptions]="{standalone: true}" />
+                    [(ngModel)]="searchOptions.term" #userInput="ngModel" [ngModelOptions]="{standalone: true}" />
                 <button type="submit" class="search-submit-long no-radius-bottom-right" aria-label="Search">
                     <img class="search-btn-icon-long" src="../../assets/fa-search.svg" alt="Search icon" />
                 </button>
@@ -90,7 +90,7 @@
                 <h5>Imprint</h5>
             </label>
             <select class="form-select" name="publisher_id" id="publisher_id"
-                [(ngModel)]="advancedOptions.publisher_id">
+                [(ngModel)]="searchOptions.publisher_id">
                 <option value=""></option>
                 <option *ngFor="let publisher of publishers" [ngValue]="publisher.publisher_id">
                     {{publisher.name}}
@@ -101,7 +101,7 @@
             <label for="format">
                 <h5>Format</h5>
             </label>
-            <select class="form-select" name="format" id="format" [(ngModel)]="advancedOptions.format">
+            <select class="form-select" name="format" id="format" [(ngModel)]="searchOptions.format">
                 <option value=""></option>
                 <option *ngFor="let format of formats" [ngValue]="format.format_name">
                     {{format.format_name | bookFormat}}
@@ -112,7 +112,7 @@
             <label for="type">
                 <h5>Type</h5>
             </label>
-            <select class="form-select" name="type" id="type" [(ngModel)]="advancedOptions.type">
+            <select class="form-select" name="type" id="type" [(ngModel)]="searchOptions.type">
                 <option value=""></option>
                 <option *ngFor="let type of types" [ngValue]="type.book_type_name">
                     {{type.book_type_name | titlecase}}
@@ -130,11 +130,9 @@
     <h3 class="search-page-header">Search Results</h3>
     <hr class="search-page-line">
     <div class="search-pagination">
-        <button class="btn myneworm-btn" [ngClass]="this.pageNumber == 1 ? 'no-page' : ''" (click)="prevPage()">&lt;
+        <button class="btn myneworm-btn" [ngClass]="this.searchOptions.page == 1 ? 'no-page' : ''" (click)="prevPage()">&lt;
             Previous</button>
-        <button class="btn myneworm-btn"
-            [ngClass]="this.dataSource.filteredData.length === 0 || this.dataSource.filteredData.length < 25 ? 'no-page' : ''"
-            (click)="nextPage()">Next &gt;</button>
+        <button class="btn myneworm-btn" [ngClass]="!hasNextPage ? 'no-page' : ''" (click)="nextPage()">Next &gt;</button>
     </div>
     <table *ngIf="dataSource" mat-table [dataSource]="dataSource" multiTemplateDataRows class="search-results">
         <ng-container matColumnDef="cover">
@@ -147,11 +145,12 @@
             <td class="search-text-row" mat-cell *matCellDef="let element">
                 <h5 class="search-item-title"><strong><a routerLink="/book/{{element.isbn}}"
                             class="search-link">{{element.title}}</a></strong></h5>
-                <p *ngIf="element.description" class="search-item-desc line-clamp" [innerHTML]="element.description">
-                </p>
-                <p *ngIf="!element.description" class="search-item-desc line-clamp">No description provided...</p>
-                <span *ngIf="element.description" class="more"><a routerLink="/book/{{element.isbn}}"
-                        class="search-link">Read more</a></span>
+                @if (element.description) {
+                    <markdown class="search-item-desc line-clamp" [data]="element.description" ngPreserveWhitespaces></markdown>
+                    <span class="more"><a routerLink="/book/{{element.isbn}}" class="search-link">Read more</a></span>
+                } @else {
+                    <p class="search-item-desc line-clamp">No description provided...</p>
+                }                
             </td>
         </ng-container>
         <ng-container matColumnDef="format">
@@ -165,21 +164,19 @@
             </td>
         </ng-container>
         <tr mat-row *matRowDef="let row; columns: displayedColumns" class="search-result-row"></tr>
-        <tr class="mat-row search-result-row" *matNoDataRow [ngClass]="this.searchTerm ? '' : 'hide-no-result'">
+        <tr class="mat-row search-result-row" *matNoDataRow [ngClass]="this.searchOptions.term ? '' : 'hide-no-result'">
             <td class="mat-cell" [attr.colspan]="displayedColumns.length">
                 <strong>
                     <p class="search-page-message">
-                        No results{{ lastSearchedTerm ? ' found for ' + lastSearchedTerm : '' }}...
+                        No results{{ lastSearchedTerm ? ' found for ' + lastSearchedTerm : '' }}{{ showAdvancedOptions ? " with filters" : ""}}...
                     </p>
                 </strong>
             </td>
         </tr>
     </table>
     <div class="search-pagination">
-        <button class="btn myneworm-btn" [ngClass]="this.pageNumber == 1 ? 'no-page' : ''" (click)="prevPage()">&lt;
+        <button class="btn myneworm-btn" [ngClass]="this.searchOptions.page == 1 ? 'no-page' : ''" (click)="prevPage()">&lt;
             Previous</button>
-        <button class="btn myneworm-btn"
-            [ngClass]="this.dataSource.filteredData.length === 0 || this.dataSource.filteredData.length < 25 ? 'no-page' : ''"
-            (click)="nextPage()">Next &gt;</button>
+        <button class="btn myneworm-btn" [ngClass]="!hasNextPage ? 'no-page' : ''" (click)="nextPage()">Next &gt;</button>
     </div>
 </div>
