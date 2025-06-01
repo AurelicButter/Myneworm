@@ -14,6 +14,7 @@ import { MatTableModule } from "@angular/material/table";
 import { MatSortModule } from "@angular/material/sort";
 import { BookFormatPipe } from "../pipes/BookFormat.pipe";
 import { MarkdownModule } from "ngx-markdown";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 @NgModule({
 	declarations: [
@@ -32,7 +33,8 @@ import { MarkdownModule } from "ngx-markdown";
 		MatTableModule,
 		MatSortModule,
 		UserRoutingModule,
-		BookFormatPipe
+		BookFormatPipe,
+		FontAwesomeModule
 	]
 })
 export class UserModule {}

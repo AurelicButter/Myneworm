@@ -111,4 +111,12 @@ export class WishlistComponent {
 			);
 		}
 	}
+
+	updateWishlist(eventData: boolean, index: number) {
+		if (!eventData) {
+			return; // No updates to ownership status. Ignore other edits.
+		}
+
+		this.wishlist.splice(index, 1);
+	}
 }

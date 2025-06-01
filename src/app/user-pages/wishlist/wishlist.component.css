@@ -38,9 +38,41 @@
     text-align: center;
 }
 
+.button-wrapper {
+    position: relative;
+    width: 250px;
+    height: 350px;
+    display: inline-flex;
+    justify-content: center;
+}
+
+.display-btn-updater {
+    position: absolute;
+    z-index: 10;
+    right: 4px;
+    bottom: 4px;
+    padding: 14px;
+    border-radius: 100%;
+    display: none;
+
+}
+
+.button-wrapper:hover > .display-btn-updater {
+    display: inline-flex;
+}
+
+fa-icon {
+    padding: 0;
+    margin: 0;
+    width: 20px;
+    height: 20px;
+}
+
 .display-cover {
     max-width: 250px;
     height: 350px;
+    position: absolute;
+    z-index: 0;
 }
 
 .display-cover > img {

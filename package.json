@@ -60,6 +60,8 @@
 		"@angular/platform-browser": "^17.3.7",
 		"@angular/platform-browser-dynamic": "^17.3.7",
 		"@angular/router": "^17.3.7",
+		"@fortawesome/angular-fontawesome": "^0.14.1",
+		"@fortawesome/free-solid-svg-icons": "^6.7.2",
 		"@fullcalendar/angular": "^6.1.17",
 		"@fullcalendar/core": "^6.1.17",
 		"@fullcalendar/daygrid": "^6.1.17",
