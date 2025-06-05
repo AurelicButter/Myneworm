@@ -2,13 +2,12 @@
     align-items: center;
     display: flex;
     flex-direction: column;
-    margin-left: 5%;
-    margin-right: 5%;
     font-size: x-large;
+    max-width: 300px;
 }
 
 .settings-menu > a, .settings-menu > a:visited, .settings-menu > a:hover {
-    width: 100%;
+    width: 90%;
     text-align: center;
     text-decoration: none;
     margin-top: 12px;
@@ -90,11 +89,6 @@
     width: 50%;
 }
 
-.settings-textarea {
-    resize: none;
-    width: 50%;
-}
-
 .missing-avatar {
     display: flex;
     align-items: center;
@@ -104,4 +98,27 @@
 
 .pad-form-div {
     margin-top: 20px;
+}
+
+.avatar-container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.avatar-container > *:not(:first-child) {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.error-msg {
+    color: red;
+}
+
+.btn-astext {
+    background:none;
+    border:none;
+    margin:0;
+    padding:0;
+    cursor: pointer;
 }

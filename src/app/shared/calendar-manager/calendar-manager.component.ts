@@ -1,11 +1,14 @@
+import { CommonModule } from "@angular/common";
 import { Component, Input, OnInit, ViewChild } from "@angular/core";
-import { FullCalendarComponent } from "@fullcalendar/angular";
+import { FullCalendarComponent, FullCalendarModule } from "@fullcalendar/angular";
 import { CalendarOptions } from "@fullcalendar/core";
 import { LazyLoadStyleService } from "src/app/services/lazy-load-style.service";
 
 @Component({
 	selector: "calendar-manager",
-	templateUrl: "./calendar-manager.component.html"
+	templateUrl: "./calendar-manager.component.html",
+	standalone: true,
+	imports: [CommonModule, FullCalendarModule]
 })
 export class CalendarManagerComponent implements OnInit {
 	@Input() options: CalendarOptions | undefined;

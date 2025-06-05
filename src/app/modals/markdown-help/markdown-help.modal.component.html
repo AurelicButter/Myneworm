@@ -1,0 +1,11 @@
+<div class="modal-overlay">
+    <header class="modal-header">
+        <h1>Markdown Help</h1>
+        <div class="close-wrapper">
+            <button type="button" class="btn modal-close" (click)="close()">X</button>
+        </div>        
+    </header>
+    <div class="modal-content">
+        <markdown [src]="'../../../assets/markdown/Markdown-Guide.md'" ngPreserveWhitespaces></markdown>
+    </div>
+</div>

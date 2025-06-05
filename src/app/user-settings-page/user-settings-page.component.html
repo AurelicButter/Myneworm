@@ -1,18 +1,24 @@
 <div class="row">
-    <aside class="settings-menu col-2">
-        <h2 style="font-size: xx-large;">Settings</h2>
+    <aside class="settings-menu col-3">
+        <h2>Settings</h2>
         <a routerLink="/settings/profile" [ngClass]="{current: currPage === 'PROFILE'}">Profile</a>
         <a routerLink="/settings/account" [ngClass]="{current: currPage === 'ACCOUNT'}">Account</a>
     </aside>
-    <div class="col-8">
+    <div class="col-9">
         <div *ngIf="currPage === 'PROFILE' && profileData !== undefined">
             <form (ngSubmit)="submitProfile()" #profileForm="ngForm">
                 <div class="form-group">
                     <label for="aboutMe">
                         <h3>About Me</h3>
                     </label>
-                    <textarea name="aboutMe" autocomplete="off" class="form-control settings-textarea" rows="3"
-                        [(ngModel)]="profileData.about_me"></textarea>
+                    <textarea name="aboutMe" autocomplete="off" class="form-control" rows="3"
+                        [(ngModel)]="profileData.about_me" maxlength="2000"></textarea>
+                    <small id="aboutMeHelp" class="form-text">
+                        Descriptions support markdown formatting (<button class="btn-astext aside-link" (click)="openMarkdownGuide()">Markdown Guide</button>).
+                    </small>
+                    <small id="aboutMeLength" class="form-text" [ngClass]="profileData.about_me?.length === 2000 ? 'error-msg' : 'text-muted'">
+                        Remaining characters: {{profileData.about_me?.length}}/2000 characters
+                    </small>
                 </div>
                 <div class="form-group pad-form-div">
                     <label for="location">
@@ -42,19 +48,32 @@
                     </small>
                 </div>
                 <div class="form-group pad-form-div">
-                    <label for="avatarFile" class="avatar-label">
-                        <h3>Avatar</h3>
+                    <label for="avatarFile">
+                        <h3 style="margin-bottom: 4px;">Avatar</h3>
                     </label>
-                    <div class="avatar-display" *ngIf="url !== undefined">
-                        <img class="avatar-display" src={{url}}>
+                    <br>
+                    <small id="avatarFileHelp" class="form-text text-muted">
+                        Accepted formats: JPEG & PNG. Max size: 3MB. Optimal dimensions: 250x250px
+                    </small>
+
+                    <div class="avatar-container">
+                        @if (url === undefined) {
+                            <div class="avatar-display missing-avatar">
+                                No image uploaded
+                            </div>
+                        } @else {
+                            <div class="avatar-display">
+                                <img class="avatar-display" src={{url}}>
+                            </div>
+                        }
+
+                        <img class="avatar-display" src={{getCurrAvatar()}}>
                     </div>
-                    <div class="avatar-display missing-avatar" *ngIf="url === undefined">
-                        No image uploaded
-                    </div>
+
                     <div class="button-group">
                         <div class="btn btn-lg myneworm-btn settings-button avatar-upload-btn">
                             <input type="file" id="avatarFile" name="avatar" class="custom-file-input"
-                                accept="image/jpeg" (change)="onFileChanged($event)">
+                                accept="image/png, image/jpeg" (change)="onFileChanged($event)">
                             <label for="avatarFile" class="custom-file-label">Upload File</label>
                         </div>
                         <button class="btn btn-lg myneworm-btn settings-button" name="clearAvatar"
@@ -114,7 +133,8 @@
                     By clicking this button, all authenticated sessions will be invalidated and will need to be relogged
                     into.
                 </p>
-                <button class="btn btn-lg myneworm-btn settings-button" (click)="clearSessions()">Clear Sessions</button>
+                <button class="btn btn-lg myneworm-btn settings-button" (click)="clearSessions()">Clear
+                    Sessions</button>
             </div>
             <br>
             <h3>Delete Your Account</h3>

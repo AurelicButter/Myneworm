@@ -9,6 +9,7 @@ import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { DeleteConfirmationComponent } from "./delete-confirmation/delete-confirmation.component";
 import { AuthenticationService } from "../services/authentication/authentication.service";
 import { email, password, username } from "../models/validationPatterns";
+import { MarkdownHelpModalComponent } from "../modals/markdown-help/markdown-help.modal.component";
 
 @Component({
 	selector: "user-settings-page",
@@ -78,15 +79,22 @@ export class UserSettingsPageComponent implements OnInit {
 			return;
 		}
 
-		if (files[0].type.match(/image\/*/) === null) {
-			return this.toastService.sendError("Only images are supported");
+		const file = files[0];
+
+		if (file.type !== "image/jpeg" && file.type !== "image/png") {
+			return this.toastService.sendError("Avatar must be in a PNG or JPEG file format");
+		}
+
+		// Check file size. Reject if more than 3MB
+		if (file.size / 1048576 > 3) {
+			return this.toastService.sendError("Image must be 3MB or less");
 		}
 
 		this.avatarForm.delete("KS-Myneworm");
-		this.avatarForm.append("KS-Myneworm", files[0]);
+		this.avatarForm.append("KS-Myneworm", file);
 
 		const reader = new FileReader();
-		reader.readAsDataURL(files[0]);
+		reader.readAsDataURL(file);
 		reader.onload = () => {
 			this.url = reader.result;
 		};
@@ -176,6 +184,16 @@ export class UserSettingsPageComponent implements OnInit {
 			}
 
 			this.toastService.sendSuccess("Saved account details");
+		});
+	}
+
+	getCurrAvatar() {
+		return this.service.getAsset(`user/${this.user.user_id}`);
+	}
+
+	openMarkdownGuide() {
+		this.matDialog.open(MarkdownHelpModalComponent, {
+			id: "markdown-help"
 		});
 	}
 }

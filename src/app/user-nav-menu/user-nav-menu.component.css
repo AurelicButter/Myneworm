@@ -33,3 +33,11 @@
 .btn-div:hover {
     color: #ECEBF3;
 }
+
+.avatar {
+    height: 60px;
+    width: 60px;
+    border-radius: 60px;
+    margin-left: 22px;
+    margin-right: 6px;
+}
