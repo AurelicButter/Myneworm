@@ -18,6 +18,8 @@ import { MatInputModule } from "@angular/material/input";
 import { BookFormatPipe } from "../../pipes/BookFormat.pipe";
 import { MarkdownModule } from "ngx-markdown";
 import SearchResults from "src/app/models/SearchResults";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
 	selector: "search-page",
@@ -34,10 +36,12 @@ import SearchResults from "src/app/models/SearchResults";
 		MatTableModule,
 		RouterModule,
 		BookFormatPipe,
-		MarkdownModule
+		MarkdownModule,
+		FontAwesomeModule
 	]
 })
 export class SearchPageComponent implements OnInit {
+	faMagnifyingGlass = faMagnifyingGlass;
 	displayedColumns = ["cover", "title", "format", "type"];
 	public dataSource: MatTableDataSource<BookData> = new MatTableDataSource<BookData>();
 	showAdvancedOptions = false;

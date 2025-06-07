@@ -12,6 +12,8 @@ import { MatInputModule } from "@angular/material/input";
 import { BookFormatPipe } from "../pipes/BookFormat.pipe";
 import SearchOptions from "../classes/SearchOptions.class";
 import SearchResults from "../models/SearchResults";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
 	selector: "search-bar",
@@ -26,10 +28,12 @@ import SearchResults from "../models/SearchResults";
 		MatFormFieldModule,
 		MatInputModule,
 		MatTableModule,
-		BookFormatPipe
+		BookFormatPipe,
+		FontAwesomeModule
 	]
 })
 export class SearchBarComponent {
+	faMagnifyingGlass = faMagnifyingGlass;
 	displayedColumns = ["cover", "title"];
 	public dataSource: MatTableDataSource<BookData> = new MatTableDataSource<BookData>();
 	loading = false;

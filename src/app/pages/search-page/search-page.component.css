@@ -75,6 +75,8 @@
 }
 
 .search-submit-long {
+    display: inline-flex;
+    align-items: center;
     padding: 1px 4px 0 6px;
     background-color: #fff;
     border: solid;
@@ -87,10 +89,6 @@
 .search-pagination {
     display: flex;
     justify-content: flex-end;
-}
-
-.search-btn-icon-long {
-    height: 44px;
 }
 
 .search-page-header {

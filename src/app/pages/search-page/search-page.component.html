@@ -5,7 +5,7 @@
                 <input type="text" class="search-input-long no-radius-bottom-left" placeholder="Search"
                     [(ngModel)]="searchOptions.term" #userInput="ngModel" [ngModelOptions]="{standalone: true}" />
                 <button type="submit" class="search-submit-long no-radius-bottom-right" aria-label="Search">
-                    <img class="search-btn-icon-long" src="../../assets/fa-search.svg" alt="Search icon" />
+                    <fa-icon style="width: 44px; height: 44px;" [icon]="faMagnifyingGlass" [styles]="{ height: '44px', width: '44px'}"></fa-icon>
                 </button>
             </form>
             <div class="advanced-options-button">

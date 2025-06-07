@@ -5,7 +5,7 @@
         <button type="submit" class="search-submit" (click)="onButtonClick()"
             [ngClass]="{'no-radius-bottom-right' : this.dataSource.data.length > 0 || (this.dataSource.data.length === 0 && this.searchOptions.term)}"
             aria-label="Search">
-                <img class="search-btn-icon" src="../../assets/fa-search.svg" alt="Search icon"/>
+            <fa-icon style="width: 30px; height: 30px; display: inline-block;" [icon]="faMagnifyingGlass" [styles]="{ height: '30px', width: '30px'}"></fa-icon>
         </button>
     </form>
     <table *ngIf="dataSource" mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8 search-table" cellspacing="0">

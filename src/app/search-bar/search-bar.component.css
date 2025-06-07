@@ -88,10 +88,6 @@ div.search-bar:hover > form > button.no-radius-bottom-right {
     width: 254px;
 }
 
-.search-btn-icon {
-    height: 30px;
-}
-
 .search-submit {
     background-color: #fff;
     border: solid;
