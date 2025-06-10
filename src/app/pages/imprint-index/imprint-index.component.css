@@ -5,27 +5,41 @@
 }
 
 .imprint-item {
+    display: flex;
     width: 25em;
+    min-height: 250px;
     margin-right: 2em;
     margin-bottom: 1em;
     margin-left: 2em;
     margin-top: 1em;
 }
 
-.imprint-text-header {
-    text-align: center;
+.imprint-btn {
     padding: .5em;
     border-radius: 6px;
+    font-size: 1.5rem;
+    font-weight: 500;
 }
 
 .imprint-link {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-end;
+    flex-grow: 1;
 }
 
-.imprint-logo {
+.imprint-img-link {
+    margin-bottom: 16px;
+}
+
+.imprint-img-link>img {
     max-width: 25em;
     max-height: 200px;
-    margin-bottom: 16px;
+}
+
+.imprint-img-flex {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
 }

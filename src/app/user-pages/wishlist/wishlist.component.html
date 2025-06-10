@@ -56,7 +56,7 @@
     </div>
     <div class="wishlist-content">
         <div *ngFor="let book of wishlist; let i = index">
-            <wishlist-display [book]="book"></wishlist-display>
+            <wishlist-display [book]="book" [isUser]="isAuthUser" (entryUpdated)="updateWishlist($event, i)"></wishlist-display>
         </div>
         <p class="no-wishlist" *ngIf="wishlist.length === 0">
             This user does not have anything set in their wishlist! Either they own it all or need to mark more entries

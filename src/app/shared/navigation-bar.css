@@ -60,10 +60,10 @@
     width: 200px;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .nav-user-menu-preview {
-    width: -webkit-fill-available;
     justify-content: center;
 }
 

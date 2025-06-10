@@ -24,14 +24,14 @@ See what's next in the pipeline by viewing the [Myneworm Kanboard](https://kanbo
 
 ## Contributing
 
-Please refer to the repository's <a href="https://github.com/Butterstroke/Myneworm/blob/master/.github/CONTRIBUTING.md">CONTRIBUTING.md</a> for details.
+Please refer to the repository's <a href="https://github.com/AurelicButter/Myneworm/blob/master/.github/CONTRIBUTING.md">CONTRIBUTING.md</a> for details.
 
 ## Licensing
 
-Myneworm's website code is licensed through [GPL-3.0 License](https://github.com/Butterstroke/Myneworm/blob/master/LICENSE). Please refer to the license terms for specific use cases. 
+Myneworm's website code is licensed through [GPL-3.0 License](https://github.com/AurelicButter/Myneworm/blob/master/LICENSE). Please refer to the license terms for specific use cases. 
 
 ## Support and Contact
-Issues and Bug Reports: Please submit them to the <a href="https://github.com/Butterstroke/Myneworm/issues/new/choose">issue board</a> on this repository.
+Issues and Bug Reports: Please submit them to the <a href="https://github.com/AurelicButter/Myneworm/issues/new/choose">issue board</a> on this repository.
 
 For data corrections on the site, please refer to our support page <a href="https://myneworm.katsurin.com/support">here</a>.
 

@@ -14,11 +14,13 @@ import { ProfileUpdateData } from "../models/profileUpdateData";
 import { AccountUpdateData } from "../models/accountUpdateData";
 import { AssetSize } from "../models/AssetSize";
 import { BookFormat } from "../models/BookFormat";
-import { Params, Router } from "@angular/router";
+import { Router } from "@angular/router";
 import { WishlistEntry } from "../models/WishlistEntry";
 import { ToastService } from "./toast.service";
 import { catchError, of } from "rxjs";
 import { BookCorrectionForm } from "../models/BookCorrectionForm";
+import SearchOptions from "../classes/SearchOptions.class";
+import SearchResults from "../models/SearchResults";
 
 @Injectable({
 	providedIn: "root"
@@ -58,7 +60,10 @@ export class MynewormAPIService {
 		return this.http.get<BookData>(`${environment.API_ADDRESS}/book/byId/${mynewormId}`);
 	}
 
-	getMonthData(month: string) {
+	getMonthData(month: string, publisherID?: string) {
+		if (publisherID) {
+			return this.http.get<MonthReleaseData[]>(`${environment.API_ADDRESS}/book/date/${month}/${publisherID}`);
+		}
 		return this.http.get<MonthReleaseData[]>(`${environment.API_ADDRESS}/book/date/${month}`);
 	}
 
@@ -90,55 +95,12 @@ export class MynewormAPIService {
 		return this.http.get<PublisherData>(`${environment.API_ADDRESS}/publisher/${publisherID}`);
 	}
 
-	searchBookByTerm(term: string) {
-		return this.http.get<BookData[]>(`${environment.API_ADDRESS}/book/search?term=${term}&limit=10`);
-	}
-
-	searchBooksWithLimit(term: string, limit: number, page?: number) {
-		if (page === undefined || page < 1) {
-			page = 1;
-		}
-		if (limit === undefined || limit < 1) {
-			limit = 10;
-		}
-
-		return this.http.get<BookData[]>(`${environment.API_ADDRESS}/book/search/${page}?term=${term}&limit=${limit}`);
-	}
-
-	searchBooksWithFilter(queryParams: Params) {
-		return this.http.get<BookData[]>(
-			`${environment.API_ADDRESS}/book/search/${queryParams["page"]}?${new HttpParams({
-				fromObject: queryParams
+	searchBooks(queryParams: SearchOptions) {
+		return this.http.get<SearchResults<BookData>>(
+			`${environment.API_ADDRESS}/book/search/${queryParams.page}?${new HttpParams({
+				fromObject: queryParams.generateParams()
 			}).toString()}`
 		);
-	}
-
-	searchBooks(publisherID?: string, startDate?: string, endDate?: string) {
-		let params = "";
-		let multipleParams = false;
-
-		if (publisherID) {
-			params += `publisher=${publisherID}`;
-			multipleParams = true;
-		}
-
-		if (startDate) {
-			if (multipleParams) {
-				params += "&";
-			}
-			params += `start=${startDate}`;
-			multipleParams = true;
-		}
-
-		if (endDate) {
-			if (multipleParams) {
-				params += "&";
-			}
-			params += `end=${endDate}`;
-			multipleParams = true;
-		}
-
-		return this.http.get<BookData[]>(`${environment.API_ADDRESS}/book/search?${params}`);
 	}
 
 	getBookTypes() {

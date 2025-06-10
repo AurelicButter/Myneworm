@@ -139,12 +139,14 @@ export class UserListComponent {
 
 	addOwnership(status: string) {
 		const index = this.ownershipFilter.indexOf(status);
+		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 		index !== -1 ? this.ownershipFilter.splice(index, 1) : this.ownershipFilter.push(status);
 		this.refreshTables();
 	}
 
 	addBooktype(booktype: string) {
 		const index = this.booktypeFilter.indexOf(booktype);
+		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 		index !== -1 ? this.booktypeFilter.splice(index, 1) : this.booktypeFilter.push(booktype);
 		this.refreshTables();
 	}

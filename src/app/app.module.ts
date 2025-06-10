@@ -4,7 +4,6 @@ import { FormsModule } from "@angular/forms";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { HomePageModule } from "./home-page/home-page.module";
 import { HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { SeriesPageModule } from "./series-page/series-page.module";
@@ -19,12 +18,12 @@ import { DeleteConfirmationComponent } from "./user-settings-page/delete-confirm
 import { MarkdownModule } from "ngx-markdown";
 import { SearchBarComponent } from "./search-bar/search-bar.component";
 import { BookPageComponent } from "./pages/book-page/book-page.component";
+import { HomePageComponent } from "./home-page/home-page.component";
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		LoginPageComponent,
-		UserNavMenuComponent,
 		UserSettingsPageComponent,
 		RegistrationPageComponent,
 		DeleteConfirmationComponent
@@ -35,13 +34,14 @@ import { BookPageComponent } from "./pages/book-page/book-page.component";
 		HttpClientModule,
 		FormsModule,
 		AppRoutingModule,
-		HomePageModule,
 		BrowserAnimationsModule,
 		SeriesPageModule,
 		SearchBarComponent,
 		MatDialogModule,
 		SharedModule,
-		BookPageComponent
+		BookPageComponent,
+		HomePageComponent,
+		UserNavMenuComponent
 	],
 	providers: [Title, LocalCookiesService],
 	bootstrap: [AppComponent]

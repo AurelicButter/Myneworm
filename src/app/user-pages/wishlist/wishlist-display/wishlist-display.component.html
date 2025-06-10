@@ -1,5 +1,12 @@
 <div class="book-display">
-    <a href='/book/{{book.isbn}}' class="display-cover"><img src='{{getCover()}}' alt="book cover" loading="lazy"></a>
+    <div class="button-wrapper">
+        <a href='/book/{{book.isbn}}' class="display-cover"><img src='{{getCover()}}' alt="book cover" loading="lazy"></a>
+        @if (isUser) {
+            <button class="btn myneworm-btn display-btn-updater" (click)="updateListEntry()">
+                <fa-icon [icon]="faPen" [styles]="{height: '20px', width: '20px'}"></fa-icon>
+            </button>
+        }
+    </div>
     <div class="display-text">
         <span><a href='/book/{{book.isbn}}' class="aside-link"><b>{{book.title}}</b></a></span>
         <span><i>({{book.format_name | bookFormat}}, {{book.book_type_name | titlecase}})</i></span>

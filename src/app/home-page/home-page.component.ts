@@ -11,6 +11,8 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
 import { MetadataService } from "../services/metadata.service";
+import { CommonModule } from "@angular/common";
+import { SharedModule } from "../shared/shared.module";
 
 /*
  * Global file values as CalendarOptions does not accept `this` keyword
@@ -23,7 +25,9 @@ let dateFetcher: MonthDateFetcher;
 @Component({
 	selector: "app-home-page",
 	templateUrl: "./home-page.component.html",
-	styleUrls: ["./home-page.component.css"]
+	styleUrls: ["./home-page.component.css"],
+	standalone: true,
+	imports: [CommonModule, SharedModule]
 })
 export class HomePageComponent implements OnInit {
 	calendarVisible = false;

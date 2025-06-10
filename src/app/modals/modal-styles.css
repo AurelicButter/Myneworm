@@ -1,0 +1,38 @@
+.modal-overlay {
+    display: flex;
+    flex-direction: column;
+    padding: 2% 3%;
+}
+
+.modal-header {
+    font-size: 20px;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0;
+    border: 0;
+}
+
+.modal-content {
+    border: 0;
+    overflow-y: scroll;
+    height: 80vh;
+}
+
+.close-wrapper {
+    height: inherit;
+}
+
+.modal-close {
+    font-size: larger;
+    color: gray;
+    transition: none;
+    border: 0;
+    padding: 0;
+    height: 36px;
+    width: 36px;
+}
+
+.modal-close:hover, .modal-close:active {
+    color: #ECEBF3 !important;
+    background-color: #0D98BA !important;
+}

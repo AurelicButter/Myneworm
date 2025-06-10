@@ -1,5 +1,8 @@
 <div class="user-menu-wrap">
-    <span class="nav-item nav-link nav-user-menu-preview">{{user.username}}</span>
+    <span class="nav-item nav-user-menu-preview">
+        <img src="{{getAvatar()}}" class="avatar">
+        <fa-icon [icon]="faChevronDown" [styles]="{ height: '20px', width: '20px', color: '#808080'}"></fa-icon>
+    </span>
     <div class="user-menu">
         <a class="btn-link btn-div" href="/user/{{user.username}}">Profile</a>
         <a class="btn-link btn-div" href="/user/{{user.username}}/lists">My List</a>
